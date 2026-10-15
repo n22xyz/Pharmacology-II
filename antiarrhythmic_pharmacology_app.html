@@ -1,0 +1,2389 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد تعاملی فارماکولوژی داروهای ضدآریتمی | دکتر قلی‌بیکی</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vazirmatn Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    },
+                    colors: {
+                        cardio: {
+                            bg: '#090d16',
+                            panel: '#111827',
+                            border: '#1f2937',
+                            cyan: '#06b6d4',
+                            emerald: '#10b981',
+                            rose: '#f43f5e',
+                            amber: '#f59e0b',
+                            purple: '#8b5cf6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #090d16;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+
+        /* Custom Range Slider for Time Scrubber */
+        input[type=range].scrubber-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range].scrubber-slider:focus {
+            outline: none;
+        }
+        input[type=range].scrubber-slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 12px;
+            cursor: pointer;
+            background: linear-gradient(90deg, 
+                #3b82f6 0%, 
+                #ef4444 10%, 
+                #f59e0b 20%, 
+                #10b981 55%, 
+                #8b5cf6 78%, 
+                #3b82f6 100%
+            );
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        input[type=range].scrubber-slider::-webkit-slider-thumb {
+            height: 26px;
+            width: 26px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 4px solid #06b6d4;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.9);
+            cursor: grab;
+            -webkit-appearance: none;
+            margin-top: -8px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        input[type=range].scrubber-slider::-webkit-slider-thumb:active {
+            cursor: grabbing;
+            transform: scale(1.15);
+            box-shadow: 0 0 25px rgba(244, 63, 94, 1);
+            border-color: #f43f5e;
+        }
+
+        .ecg-grid {
+            background-image: 
+                linear-gradient(to right, rgba(244, 63, 94, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(244, 63, 94, 0.08) 1px, transparent 1px),
+                linear-gradient(to right, rgba(244, 63, 94, 0.18) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(244, 63, 94, 0.18) 1px, transparent 1px);
+            background-size: 10px 10px, 10px 10px, 50px 50px, 50px 50px;
+        }
+
+        .glow-cyan {
+            box-shadow: 0 0 20px -5px rgba(6, 182, 212, 0.4);
+        }
+        .glow-rose {
+            box-shadow: 0 0 20px -5px rgba(244, 63, 94, 0.4);
+        }
+        .pulse-node {
+            animation: nodePulse 1.5s infinite ease-in-out;
+        }
+        @keyframes nodePulse {
+            0%, 100% { filter: drop-shadow(0 0 4px #06b6d4); }
+            50% { filter: drop-shadow(0 0 14px #f43f5e); }
+        }
+        .ltr-num {
+            direction: ltr;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-cyan-500 selection:text-white">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-rose-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-rose-500/20">
+                    <i class="fa-solid fa-heart-pulse text-white text-xl animate-pulse"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-lg md:text-xl font-black tracking-tight text-white">فارماکولوژی جامع داروهای ضدآریتمی</h1>
+                        <span class="px-2.5 py-0.5 text-xs font-bold rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">ویژه داروسازی</span>
+                    </div>
+                    <p class="text-xs text-slate-400">مرور تعاملی و بصری بر اساس جزوه دکتر افروز قلی‌بیکی (PharmD, PhD) - گروه فارماکولوژی</p>
+                </div>
+            </div>
+
+            <!-- Main Section Navigation Tabs -->
+            <nav class="flex flex-wrap items-center gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800">
+                <button onclick="switchMainTab('scrubber')" id="tab-btn-scrubber" class="main-tab-btn px-3.5 py-2 rounded-lg text-xs md:text-sm font-bold transition-all bg-cyan-600 text-white shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>آزمایشگاه اسکرابر زمان (AP & ECG)</span>
+                </button>
+                <button onclick="switchMainTab('concepts')" id="tab-btn-concepts" class="main-tab-btn px-3.5 py-2 rounded-lg text-xs md:text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>پاتوفیزیولوژی و مفاهیم پایه</span>
+                </button>
+                <button onclick="switchMainTab('drugs')" id="tab-btn-drugs" class="main-tab-btn px-3.5 py-2 rounded-lg text-xs md:text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-capsules"></i>
+                    <span>بانک جامع داروها و نکات بالینی</span>
+                </button>
+                <button onclick="switchMainTab('strips')" id="tab-btn-strips" class="main-tab-btn px-3.5 py-2 rounded-lg text-xs md:text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-wave-square"></i>
+                    <span>شبیه‌ساز Torsades و آزمون</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6 space-y-8">
+
+        <!-- ===================================================================== -->
+        <!-- SECTION 1: INTERACTIVE TIME SCRUBBER LAB (DEFAULT ACTIVE)             -->
+        <!-- ===================================================================== -->
+        <section id="section-scrubber" class="space-y-6">
+            
+            <!-- Top Drug & Condition Selector Bar -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3 pb-3 border-b border-slate-800">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+                        <h2 class="text-sm md:text-base font-bold text-slate-200">۱. انتخاب کلاس دارویی یا شرایط پاتولوژیک جهت مقایسه زنده روی منحنی:</h2>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs">
+                        <span class="flex items-center gap-1.5 text-slate-300">
+                            <span class="w-4 h-1 bg-slate-400 inline-block rounded"></span> منحنی پایه (نرمال)
+                        </span>
+                        <span class="flex items-center gap-1.5 text-rose-400 font-bold">
+                            <span class="w-4 h-1 bg-rose-500 inline-block rounded shadow-sm shadow-rose-500"></span> منحنی تحت تأثیر دارو / وضعیت انتخابی
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Preset Buttons Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2" id="condition-buttons">
+                    <button onclick="selectCondition('normal')" data-cond="normal" class="cond-btn active-cond px-3 py-2.5 rounded-xl border text-right transition-all bg-cyan-500/20 border-cyan-400 text-white shadow-lg shadow-cyan-500/10">
+                        <div class="text-xs font-black text-cyan-300">حالت نرمال</div>
+                        <div class="text-[11px] text-slate-300 truncate">ریتم سینوسی پایه</div>
+                    </button>
+                    <button onclick="selectCondition('class1a')" data-cond="class1a" class="cond-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-rose-400">کلاس IA</div>
+                        <div class="text-[11px] text-slate-400 truncate">کینیدین، پروکائین‌آماید</div>
+                    </button>
+                    <button onclick="selectCondition('class1b')" data-cond="class1b" class="cond-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-sky-400">کلاس IB</div>
+                        <div class="text-[11px] text-slate-400 truncate">لیدوکائین، مگزیلتین</div>
+                    </button>
+                    <button onclick="selectCondition('class1c')" data-cond="class1c" class="cond-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-emerald-400">کلاس IC</div>
+                        <div class="text-[11px] text-slate-400 truncate">فلکاینید، پروپافنون</div>
+                    </button>
+                    <button onclick="selectCondition('class2')" data-cond="class2" class="cond-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-amber-400">کلاس II (بتابلاکر)</div>
+                        <div class="text-[11px] text-slate-400 truncate">پروپرانولول، اسمولول</div>
+                    </button>
+                    <button onclick="selectCondition('class3')" data-cond="class3" class="cond-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-purple-400">کلاس III (پتاسیم)</div>
+                        <div class="text-[11px] text-slate-400 truncate">آمیودارون، سوتالول</div>
+                    </button>
+                    <button onclick="selectCondition('class4')" data-cond="class4" class="cond-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-pink-400">کلاس IV (کلسیم)</div>
+                        <div class="text-[11px] text-slate-400 truncate">وراپامیل، دیلتیازم</div>
+                    </button>
+                    <button onclick="selectCondition('hyperkalemia')" data-cond="hyperkalemia" class="cond-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-orange-400">هایپرکالمی / ایسکمی</div>
+                        <div class="text-[11px] text-slate-400 truncate">پتانسیل استراحت ۶۰-</div>
+                    </button>
+                    <button onclick="selectCondition('hypokalemia')" data-cond="hypokalemia" class="cond-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-teal-400">هیپوکالمی</div>
+                        <div class="text-[11px] text-slate-400 truncate">هایپرپلاریزاسیون</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Master Time Scrubber Control Bar -->
+            <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 border-2 border-cyan-500/40 rounded-2xl p-4 md:p-5 shadow-2xl glow-cyan">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                    <div class="flex items-center gap-3">
+                        <button id="play-pause-btn" onclick="togglePlay()" class="w-12 h-12 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black flex items-center justify-center shadow-lg shadow-cyan-500/30 transition-transform active:scale-95">
+                            <i id="play-icon" class="fa-solid fa-play text-lg"></i>
+                        </button>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-cyan-400">اسکرابر لحظه‌به‌لحظه چرخه الکتریکی قلب</span>
+                                <span id="current-phase-badge" class="px-2.5 py-0.5 text-xs font-extrabold rounded-md bg-rose-500/20 text-rose-300 border border-rose-500/40">فاز ۰: دپلاریزاسیون سریع</span>
+                            </div>
+                            <div class="text-xs text-slate-400 mt-0.5">
+                                نوار لغزنده زیر را بکشید تا حرکت یون‌ها، باز و بسته شدن دریچه‌های <span class="ltr-num font-mono text-cyan-300">m / h</span> و رسم هم‌زمان ECG را ببینید!
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Time Readout & Speed Controls -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <div class="bg-slate-950 border border-slate-800 px-3.5 py-1.5 rounded-xl flex items-center gap-2">
+                            <span class="text-xs text-slate-400">زمان چرخه:</span>
+                            <span id="time-readout" class="font-mono text-base font-black text-cyan-400 ltr-num">0 ms</span>
+                            <span class="text-xs text-slate-600">/ 400 ms</span>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 p-1 rounded-xl flex items-center gap-1 text-xs">
+                            <span class="px-2 text-slate-400">سرعت:</span>
+                            <button onclick="setSpeed(0.4)" id="speed-0.4" class="speed-btn px-2 py-1 rounded bg-cyan-500/20 text-cyan-300 font-bold">آهسته ( آموزشی)</button>
+                            <button onclick="setSpeed(1)" id="speed-1" class="speed-btn px-2 py-1 rounded text-slate-400 hover:text-white">عادی (1x)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- The Scrubber Slider -->
+                <div class="relative py-2 px-1">
+                    <input type="range" id="time-scrubber" class="scrubber-slider" min="0" max="400" step="1" value="65" oninput="onScrub(this.value)">
+                </div>
+
+                <!-- Quick Jump Phase Markers -->
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-3 pt-3 border-t border-slate-800/80">
+                    <button onclick="jumpToTime(20)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-blue-400 group-hover:text-blue-300">۱. استراحت و موج P</span>
+                        <span class="ltr-num font-mono text-[11px] text-slate-500">0-50 ms</span>
+                    </button>
+                    <button onclick="jumpToTime(62)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-rose-400 group-hover:text-rose-300">۲. فاز ۰ (ورود سریع Na⁺)</span>
+                        <span class="ltr-num font-mono text-[11px] text-slate-500">55-75 ms</span>
+                    </button>
+                    <button onclick="jumpToTime(92)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-amber-400 group-hover:text-amber-300">۳. فاز ۱ (رپلاریزاسیون اولیه)</span>
+                        <span class="ltr-num font-mono text-[11px] text-slate-500">80-105 ms</span>
+                    </button>
+                    <button onclick="jumpToTime(165)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-emerald-400 group-hover:text-emerald-300">۴. فاز ۲ (کفه / ورود Ca²⁺)</span>
+                        <span class="ltr-num font-mono text-[11px] text-slate-500">110-220 ms</span>
+                    </button>
+                    <button onclick="jumpToTime(265)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-purple-400 group-hover:text-purple-300">۵. فاز ۳ (خروج K⁺ و موج T)</span>
+                        <span class="ltr-num font-mono text-[11px] text-slate-500">225-320 ms</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Interactive Visualizers Grid (AP + ECG on Right, Ion Channels + Heart Conduction on Left) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <!-- Right Column (7 cols): Action Potential & Synchronized ECG -->
+                <div class="lg:col-span-7 space-y-6">
+                    
+                    <!-- Canvas 1: Action Potential Curve (Ventricular Fast Response + Nodal Slow Response Toggle) -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl relative overflow-hidden">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                            <div>
+                                <h3 class="text-sm md:text-base font-extrabold text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-chart-line text-cyan-400"></i>
+                                    <span>منحنی پتانسیل عمل غشا (Cardiac Action Potential)</span>
+                                </h3>
+                                <p id="ap-subtitle" class="text-xs text-slate-400">مقایسه هم‌زمان شیب فاز ۰، طول پتانسیل عمل (APD) و دوره تحریک‌ناپذیری مؤثر (ERP)</p>
+                            </div>
+                            <!-- Cell Type Switcher -->
+                            <div class="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs">
+                                <button onclick="setCellType('fast')" id="cell-fast-btn" class="px-3 py-1 rounded-lg font-bold bg-cyan-600 text-white transition-all">
+                                    پاسخ سریع (بطن و پورکنژ)
+                                </button>
+                                <button onclick="setCellType('slow')" id="cell-slow-btn" class="px-3 py-1 rounded-lg font-bold text-slate-400 hover:text-white transition-all">
+                                    پاسخ آهسته (گره SA / AV)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Action Potential Canvas Container -->
+                        <div class="relative w-full h-64 md:h-72 bg-slate-950 rounded-xl border border-slate-800/90 overflow-hidden ecg-grid">
+                            <canvas id="ap-canvas" class="w-full h-full block"></canvas>
+                        </div>
+
+                        <!-- Live Telemetry Badges under AP -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-3">
+                            <div class="bg-slate-950/90 border border-slate-800/80 rounded-xl p-2.5">
+                                <div class="text-[11px] text-slate-400">پتانسیل غشا در این لحظه</div>
+                                <div id="metric-vm" class="text-sm md:text-base font-black text-cyan-400 font-mono ltr-num">-85 mV</div>
+                            </div>
+                            <div class="bg-slate-950/90 border border-slate-800/80 rounded-xl p-2.5">
+                                <div class="text-[11px] text-slate-400">شیب فاز ۰ (سرعت هدایت)</div>
+                                <div id="metric-phase0" class="text-sm font-extrabold text-emerald-400">نرمال (سریع)</div>
+                            </div>
+                            <div class="bg-slate-950/90 border border-slate-800/80 rounded-xl p-2.5">
+                                <div class="text-[11px] text-slate-400">دوره تحریک‌ناپذیری (ERP)</div>
+                                <div id="metric-erp" class="text-sm font-extrabold text-amber-400">نرمال (۲۰۰ ms)</div>
+                            </div>
+                            <div class="bg-slate-950/90 border border-slate-800/80 rounded-xl p-2.5">
+                                <div class="text-[11px] text-slate-400">سینتیک بازیابی ($\tau_{recovery}$)</div>
+                                <div id="metric-tau" class="text-sm font-extrabold text-purple-400">بدون بلوک دارویی</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Canvas 2: Synchronized Surface ECG Curve -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                            <div>
+                                <h3 class="text-sm md:text-base font-extrabold text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-heart-circle-bolt text-rose-500"></i>
+                                    <span>نوار قلب سطحی همگام (Synchronized Surface ECG)</span>
+                                </h3>
+                                <p class="text-xs text-slate-400">موج P (دپلاریزاسیون دهلیز) | کمپلکس QRS (دپلاریزاسیون بطن) | موج T (رپلاریزاسیون بطن)</p>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs">
+                                <span id="ecg-interval-badge" class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-emerald-400 font-bold">
+                                    PR و QRS و QT نرمال
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- ECG Canvas Container -->
+                        <div class="relative w-full h-48 bg-slate-950 rounded-xl border border-slate-800/90 overflow-hidden ecg-grid">
+                            <canvas id="ecg-canvas" class="w-full h-full block"></canvas>
+                        </div>
+
+                        <!-- ECG Intervals Explanation Strip -->
+                        <div class="grid grid-cols-3 gap-2 mt-3 text-xs">
+                            <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex items-center justify-between">
+                                <span class="text-slate-400">فاصله PR (هدایت دهلیز به بطن):</span>
+                                <span id="ecg-pr-status" class="font-bold text-cyan-400">نرمال (۰.۱۶ ثانیه)</span>
+                            </div>
+                            <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex items-center justify-between">
+                                <span class="text-slate-400">مدت QRS (هدایت داخل بطنی):</span>
+                                <span id="ecg-qrs-status" class="font-bold text-emerald-400">نرمال (باریک)</span>
+                            </div>
+                            <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex items-center justify-between">
+                                <span class="text-slate-400">فاصله QT (طول پتانسیل عمل بطن):</span>
+                                <span id="ecg-qt-status" class="font-bold text-amber-400">نرمال</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Left Column (5 cols): Ion Channel Membrane Animation + Conduction Map + Live Explanation -->
+                <div class="lg:col-span-5 space-y-6">
+                    
+                    <!-- Animated Cell Membrane & Ion Channels (m & h gates, Ca2+, K+, Na/K Pump) -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-sm md:text-base font-extrabold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-microscope text-emerald-400"></i>
+                                <span>غشای سلول قلبی و دریچه‌های یونی در این لحظه</span>
+                            </h3>
+                            <span class="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300">K⁺ داخل: ۱۴۰ | خارج: ۴ mM</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-3">وضعیت دریچه‌های حساس به ولتاژ <span class="text-cyan-300 font-bold">m (فعال‌سازی)</span> و <span class="text-amber-300 font-bold">h (غیرفعال‌سازی)</span> کانال سدیم:</p>
+
+                        <!-- Interactive SVG Membrane & Channels -->
+                        <div class="bg-slate-950 rounded-xl border border-slate-800 p-2 relative overflow-hidden">
+                            <svg id="membrane-svg" viewBox="0 0 500 240" class="w-full h-auto">
+                                <defs>
+                                    <linearGradient id="naGrad" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#06b6d4"/>
+                                        <stop offset="100%" stop-color="#0284c7"/>
+                                    </linearGradient>
+                                    <linearGradient id="caGrad" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#10b981"/>
+                                        <stop offset="100%" stop-color="#059669"/>
+                                    </linearGradient>
+                                    <linearGradient id="kGrad" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#8b5cf6"/>
+                                        <stop offset="100%" stop-color="#6d28d9"/>
+                                    </linearGradient>
+                                </defs>
+
+                                <!-- Extracellular Space Label -->
+                                <rect x="0" y="0" width="500" height="75" fill="#0f172a" opacity="0.7"/>
+                                <text x="485" y="20" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="start">خارج سلول (Extracellular) - غلظت بالای Na⁺ و Ca²⁺</text>
+
+                                <!-- Intracellular Space Label -->
+                                <rect x="0" y="155" width="500" height="85" fill="#090d16" opacity="0.9"/>
+                                <text x="485" y="228" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="start">داخل سلول (Intracellular) - غلظت بالای K⁺ (۱۴۰ میلی‌مولار)</text>
+
+                                <!-- Phospholipid Bilayer Membrane -->
+                                <rect x="0" y="75" width="500" height="80" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+                                <line x1="0" y1="115" x2="500" y2="115" stroke="#0f172a" stroke-width="2" stroke-dasharray="6,6"/>
+
+                                <!-- ================= 1. Na+ CHANNEL (With m & h gates) ================= -->
+                                <g transform="translate(45, 55)">
+                                    <text x="45" y="-12" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">کانال Na⁺</text>
+                                    <!-- Channel Walls -->
+                                    <rect x="5" y="10" width="24" height="100" rx="8" fill="url(#naGrad)" stroke="#bae6fd" stroke-width="1.5"/>
+                                    <rect x="61" y="10" width="24" height="100" rx="8" fill="url(#naGrad)" stroke="#bae6fd" stroke-width="1.5"/>
+                                    <!-- Pore Background -->
+                                    <rect x="29" y="12" width="32" height="96" fill="#090d16"/>
+                                    
+                                    <!-- m-gate (Activation Gate - Upper/Middle) -->
+                                    <g id="svg-m-gate-left" style="transition: transform 0.2s ease;">
+                                        <circle cx="35" cy="45" r="10" fill="#facc15" stroke="#ca8a04" stroke-width="2"/>
+                                        <text x="35" y="49" fill="#000" font-size="10" font-weight="bold" text-anchor="middle">m</text>
+                                    </g>
+                                    <g id="svg-m-gate-right" style="transition: transform 0.2s ease;">
+                                        <circle cx="55" cy="45" r="10" fill="#facc15" stroke="#ca8a04" stroke-width="2"/>
+                                        <text x="55" y="49" fill="#000" font-size="10" font-weight="bold" text-anchor="middle">m</text>
+                                    </g>
+
+                                    <!-- h-gate (Inactivation Ball & Chain - Bottom) -->
+                                    <path d="M 20 110 Q 25 130 40 125" stroke="#f97316" stroke-width="3" fill="none"/>
+                                    <g id="svg-h-gate" style="transition: transform 0.2s ease;">
+                                        <circle cx="45" cy="128" r="12" fill="#fb923c" stroke="#ea580c" stroke-width="2"/>
+                                        <text x="45" y="132" fill="#000" font-size="11" font-weight="bold" text-anchor="middle">h</text>
+                                    </g>
+
+                                    <!-- Drug Block Plug on Na Channel -->
+                                    <g id="svg-na-drug-block" opacity="0" style="transition: opacity 0.2s ease;">
+                                        <rect x="27" y="64" width="36" height="22" rx="5" fill="#f43f5e" stroke="#fff" stroke-width="1.5"/>
+                                        <text x="45" y="79" fill="#fff" font-size="9" font-weight="bold" text-anchor="middle">مهار دارو</text>
+                                    </g>
+
+                                    <!-- Animated Na+ Ions -->
+                                    <g id="svg-na-ions" opacity="0">
+                                        <circle cx="45" cy="20" r="6" fill="#38bdf8"/>
+                                        <circle cx="45" cy="60" r="6" fill="#38bdf8"/>
+                                        <circle cx="45" cy="95" r="6" fill="#38bdf8"/>
+                                        <path d="M 45 5 L 45 115" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="4,4"/>
+                                    </g>
+
+                                    <text id="na-state-label" x="45" y="158" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">Resting (بسته)</text>
+                                </g>
+
+                                <!-- ================= 2. Ca2+ CHANNEL (L-Type) ================= -->
+                                <g transform="translate(195, 55)">
+                                    <text x="40" y="-12" fill="#34d399" font-size="12" font-weight="bold" text-anchor="middle">کانال Ca²⁺</text>
+                                    <rect x="5" y="10" width="22" height="100" rx="8" fill="url(#caGrad)" stroke="#a7f3d0" stroke-width="1.5"/>
+                                    <rect x="53" y="10" width="22" height="100" rx="8" fill="url(#caGrad)" stroke="#a7f3d0" stroke-width="1.5"/>
+                                    <rect x="27" y="12" width="26" height="96" fill="#090d16"/>
+
+                                    <!-- Ca Gate -->
+                                    <rect id="svg-ca-gate" x="27" y="45" width="26" height="14" rx="4" fill="#10b981" stroke="#064e3b" stroke-width="1.5" style="transition: all 0.2s ease;"/>
+
+                                    <!-- Drug Block Plug on Ca Channel -->
+                                    <g id="svg-ca-drug-block" opacity="0" style="transition: opacity 0.2s ease;">
+                                        <rect x="24" y="64" width="32" height="22" rx="5" fill="#ec4899" stroke="#fff" stroke-width="1.5"/>
+                                        <text x="40" y="79" fill="#fff" font-size="9" font-weight="bold" text-anchor="middle">کلاس IV</text>
+                                    </g>
+
+                                    <!-- Animated Ca2+ Ions -->
+                                    <g id="svg-ca-ions" opacity="0">
+                                        <circle cx="40" cy="25" r="6" fill="#34d399"/>
+                                        <circle cx="40" cy="70" r="6" fill="#34d399"/>
+                                        <path d="M 40 5 L 40 115" stroke="#34d399" stroke-width="2.5" stroke-dasharray="4,4"/>
+                                    </g>
+
+                                    <text id="ca-state-label" x="40" y="158" fill="#34d399" font-size="11" font-weight="bold" text-anchor="middle">بسته</text>
+                                </g>
+
+                                <!-- ================= 3. K+ CHANNEL (IKr / IKs / IK1) ================= -->
+                                <g transform="translate(335, 55)">
+                                    <text x="40" y="-12" fill="#a78bfa" font-size="12" font-weight="bold" text-anchor="middle">کانال K⁺ (خروجی)</text>
+                                    <rect x="5" y="10" width="22" height="100" rx="8" fill="url(#kGrad)" stroke="#ddd6fe" stroke-width="1.5"/>
+                                    <rect x="53" y="10" width="22" height="100" rx="8" fill="url(#kGrad)" stroke="#ddd6fe" stroke-width="1.5"/>
+                                    <rect x="27" y="12" width="26" height="96" fill="#090d16"/>
+
+                                    <!-- K Gate -->
+                                    <rect id="svg-k-gate" x="27" y="45" width="26" height="14" rx="4" fill="#8b5cf6" stroke="#4c1d95" stroke-width="1.5" style="transition: all 0.2s ease;"/>
+
+                                    <!-- Drug Block Plug on K Channel -->
+                                    <g id="svg-k-drug-block" opacity="0" style="transition: opacity 0.2s ease;">
+                                        <rect x="24" y="34" width="32" height="22" rx="5" fill="#a855f7" stroke="#fff" stroke-width="1.5"/>
+                                        <text x="40" y="49" fill="#fff" font-size="9" font-weight="bold" text-anchor="middle">بلوک K⁺</text>
+                                    </g>
+
+                                    <!-- Animated K+ Ions (Moving UP / Outward) -->
+                                    <g id="svg-k-ions" opacity="0">
+                                        <circle cx="40" cy="90" r="6" fill="#c084fc"/>
+                                        <circle cx="40" cy="40" r="6" fill="#c084fc"/>
+                                        <path d="M 40 115 L 40 5" stroke="#c084fc" stroke-width="2.5" stroke-dasharray="4,4"/>
+                                    </g>
+
+                                    <text id="k-state-label" x="40" y="158" fill="#c084fc" font-size="11" font-weight="bold" text-anchor="middle">نشتی استراحت (IK1)</text>
+                                </g>
+                            </svg>
+                        </div>
+
+                        <!-- Dynamic Mechanism & Pharmacology Box for Current State -->
+                        <div class="mt-3 bg-gradient-to-br from-slate-950 to-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span id="explain-drug-title" class="text-xs md:text-sm font-black text-cyan-400">وضعیت فعلی: ریتم سینوسی و پتانسیل عمل نرمال</span>
+                                <span id="explain-phase-tag" class="text-[11px] px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">فاز ۰</span>
+                            </div>
+                            <p id="explain-instant-text" class="text-xs text-slate-300 leading-relaxed">
+                                در فاز ۰، با رسیدن غشا به پتانسیل آستانه، دریچه‌های فعال‌سازی (m) کانال سدیم به سرعت باز شده و یون‌های Na⁺ به داخل سلول هجوم می‌آورند.
+                            </p>
+                            <div id="explain-drug-note" class="text-xs text-rose-300 bg-rose-500/10 border border-rose-500/20 rounded-lg p-2.5 leading-relaxed">
+                                نکته دارویی: یکی از کلاس‌های دارویی بالا را انتخاب کنید تا مکانیسم دقیق اثر آن بر این فاز را مشاهده کنید.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Synchronized Cardiac Conduction System Diagram (Page 5 & 6 of PDF) -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-sm font-extrabold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-network-wired text-amber-400"></i>
+                                <span>سیستم هدایت الکتریکی قلب (همگام با اسکرابر)</span>
+                            </h3>
+                            <span class="text-[11px] text-slate-400">HR نرمال: ۶۰ تا ۱۰۰ ضربان/دقیقه</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center bg-slate-950 rounded-xl p-3 border border-slate-800">
+                            <!-- Schematic Conduction Tree SVG -->
+                            <div class="sm:col-span-7">
+                                <svg viewBox="0 0 320 210" class="w-full h-auto">
+                                    <!-- Heart Outline Silhouette -->
+                                    <path d="M 160 25 C 100 5, 35 55, 65 125 C 90 175, 160 200, 185 200 C 215 200, 275 155, 285 100 C 295 45, 220 5, 160 25 Z" fill="#0f172a" stroke="#1e293b" stroke-width="2"/>
+                                    
+                                    <!-- Internodal Pathways (SA to AV) -->
+                                    <path id="cond-internodal" d="M 95 55 Q 130 65 145 95 M 95 55 Q 105 90 145 95 M 95 55 Q 145 45 145 95" fill="none" stroke="#334155" stroke-width="3" stroke-linecap="round"/>
+                                    
+                                    <!-- Bachmann's Bundle (to Left Atrium) -->
+                                    <path id="cond-bachmann" d="M 95 55 Q 165 25 225 55" fill="none" stroke="#334155" stroke-width="3" stroke-linecap="round"/>
+
+                                    <!-- His Bundle -->
+                                    <path id="cond-his" d="M 145 95 L 165 118" fill="none" stroke="#334155" stroke-width="4.5" stroke-linecap="round"/>
+
+                                    <!-- Right & Left Bundle Branches & Purkinje Fibers -->
+                                    <path id="cond-purkinje" d="M 165 118 Q 145 155 120 175 C 95 185, 80 155, 85 135 M 165 118 Q 195 145 215 170 C 240 175, 260 140, 250 110 M 185 135 L 225 135 M 195 150 L 235 150" fill="none" stroke="#334155" stroke-width="3" stroke-linecap="round"/>
+
+                                    <!-- SA Node -->
+                                    <ellipse id="cond-sa" cx="92" cy="54" rx="14" ry="8" transform="rotate(-25 92 54)" fill="#475569" stroke="#94a3b8" stroke-width="1.5"/>
+                                    <text x="52" y="38" fill="#cbd5e1" font-size="10" font-weight="bold">گره SA (ضربان‌ساز)</text>
+
+                                    <!-- Bachmann Label -->
+                                    <text x="235" y="42" fill="#94a3b8" font-size="9" font-weight="bold">دسته باخمن</text>
+
+                                    <!-- AV Node -->
+                                    <circle id="cond-av" cx="145" cy="95" r="9" fill="#475569" stroke="#94a3b8" stroke-width="1.5"/>
+                                    <text x="102" y="108" fill="#cbd5e1" font-size="10" font-weight="bold">گره AV</text>
+
+                                    <!-- His & Purkinje Labels -->
+                                    <text x="195" y="114" fill="#94a3b8" font-size="9" font-weight="bold">دسته هیس</text>
+                                    <text x="200" y="192" fill="#cbd5e1" font-size="10" font-weight="bold">رشته‌های پورکنژ</text>
+                                </svg>
+                            </div>
+
+                            <!-- Active Conduction Stage Description -->
+                            <div class="sm:col-span-5 space-y-2 text-xs">
+                                <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+                                    <div class="text-slate-400 text-[11px]">مکان فعلی ایمپالس در قلب:</div>
+                                    <div id="conduction-active-title" class="font-black text-amber-400 mt-0.5">ککل عضله بطن و پورکنژ</div>
+                                </div>
+                                <ul class="space-y-1.5 text-[11px] text-slate-300 leading-relaxed">
+                                    <li class="flex items-start gap-1.5">
+                                        <i class="fa-solid fa-circle-check text-cyan-400 mt-1"></i>
+                                        <span>شروع طبیعی باید از <strong>گره SA</strong> با سرعت ۶۰ تا ۱۰۰ باشد.</span>
+                                    </li>
+                                    <li class="flex items-start gap-1.5">
+                                        <i class="fa-solid fa-circle-check text-emerald-400 mt-1"></i>
+                                        <span><strong>گره AV</strong> وابسته به کلسیم است (محل اثر بتابلاکر، بلوکر کلسیم، آدنوزین و دیگوکسین).</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- SECTION 2: PATHOPHYSIOLOGY & CORE CONCEPTS (HIDDEN BY DEFAULT)        -->
+        <!-- ===================================================================== -->
+        <section id="section-concepts" class="hidden space-y-6">
+            
+            <!-- Row 1: Epidemiology & When/Why to Treat (Pages 2-4) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: Epidemiology -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center font-black">
+                            <i class="fa-solid fa-chart-pie text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-white text-base">اپیدمیولوژی و اهمیت بالینی</h3>
+                            <p class="text-xs text-slate-400">اسلاید ۲ جزوه دکتر قلی‌بیکی</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                        هر ریتمی غیر از ریتم سینوسی طبیعی (NSR)، <strong>آریتمی</strong> محسوب می‌شود. آریتمی شایع‌ترین علت مرگ در بیماران مبتلا به <strong>انفارکتوس میوکارد (MI)</strong> یا نارسایی قلبی پیشرفته (Terminal HF) است.
+                    </p>
+                    <div class="space-y-2.5 text-xs">
+                        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex items-center justify-between">
+                            <span class="text-slate-300">بیماران دچار انفارکتوس حاد (AMI):</span>
+                            <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 font-black">بیش از ۸۰٪</span>
+                        </div>
+                        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex items-center justify-between">
+                            <span class="text-slate-300">بیماران تحت بیهوشی عمومی:</span>
+                            <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-black">۵۰٪</span>
+                        </div>
+                        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 flex items-center justify-between">
+                            <span class="text-slate-300">بیماران تحت درمان با دیژیتال (دیگوکسین):</span>
+                            <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-400 font-black">تا ۲۵٪</span>
+                        </div>
+                        <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800 text-slate-400">
+                            سایر علل مهم: <strong class="text-white">پرکاری تیروئید (Hyperthyroidism)</strong> و <strong class="text-white">اختلالات الکترولیتی</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Why & When to Treat -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black">
+                            <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-white text-base">چرا و چه زمانی آریتمی را درمان کنیم؟</h3>
+                            <p class="text-xs text-slate-400">اسلایدهای ۳ و ۴ جزوه</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-xs leading-relaxed">
+                        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                            <div class="font-bold text-cyan-400 mb-1">چرا نیاز به درمان دارند؟</div>
+                            <ol class="list-decimal list-inside space-y-1 text-slate-300">
+                                <li><strong>کاهش برون‌ده قلبی (Reduced CO):</strong> ریتم‌های بسیار تند، بسیار کند یا نامتقارن (Asynchronous).</li>
+                                <li><strong>ایجاد آریتمی‌های خطرناک‌تر یا کشنده:</strong> برخی آریتمی‌ها پیش‌زمینه آریتمی‌های کشنده مانند VF می‌شوند.</li>
+                            </ol>
+                        </div>
+                        <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30">
+                            <div class="font-bold text-rose-400 mb-1">هشدار طلایی امتحان (کی درمان کنیم؟):</div>
+                            <p class="text-slate-300">
+                                داروهای ضدآریتمی خود می‌توانند در برخی بیماران <strong>آریتمی‌های کشنده ایجاد کنند (اثر پروآریتمیک)</strong>؛ بنابراین:
+                            </p>
+                            <ul class="mt-1.5 space-y-1 text-rose-200 font-medium">
+                                <li>• از درمان آریتمی‌های بدون علامت (Asymptomatic) یا با علائم جزئی باید <strong>خودداری شود</strong>!</li>
+                                <li>• درمان‌های غیردارویی (پیس‌میکر، کاردیوورژن، ابلیشن با کاتتر و جراحی) جایگزین‌های مهمی هستند.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: State-Dependent / Use-Dependent Block -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black">
+                            <i class="fa-solid fa-lock text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-white text-base">مهار وابسته به حالت و فرکانس</h3>
+                            <p class="text-xs text-slate-400">State-Dependent / Use-Dependent Block</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-xs leading-relaxed text-slate-300">
+                        <p>
+                            داروهای مفید مسدودکننده کانال سدیم، تمایل (Affinity) <strong>بسیار بالایی به کانال‌های فعال (Activated/Open) و یا غیرفعال (Inactivated)</strong> دارند، اما تمایل آن‌ها به کانال‌های در حال استراحت (Rested) بسیار کم است.
+                        </p>
+                        <div class="bg-emerald-950/30 border border-emerald-500/30 rounded-xl p-3 space-y-2">
+                            <div class="font-bold text-emerald-400">نتیجه بالینی این ویژگی چیست؟</div>
+                            <p>
+                                ۱. این داروها کانال‌های موجود در <strong>بافت غیرطبیعی و ایسکمیک (دپلاریزه)</strong> را بسیار مؤثرتر از بافت سالم مهار می‌کنند.
+                            </p>
+                            <p>
+                                ۲. بافت‌هایی را که با سرعت بالا در حال دپلاریزه شدن هستند (مثلاً در حین <strong>تاکی‌کاردی سریع</strong>) به صورت انتخابی سرکوب می‌کنند.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: Interactive Visual Explorer for "4 Ways to Reduce Spontaneous Discharge" & "2 Ways to Increase ERP" -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- 4 Ways to Reduce Spontaneous Discharge (Page 23) -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                    <h3 class="text-base font-extrabold text-white mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-gauge-simple-low text-cyan-400"></i>
+                        <span>۴ روش کاهش سرعت تخلیه خودبه‌خودی (کاهش اتوماتیسیته نابجا)</span>
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-4">بر اساس اسلاید ۲۳: روی هر مکانیسم کلیک کنید تا تغییر منحنی پتانسیل عمل پیس‌میکر را ببینید:</p>
+
+                    <div class="grid grid-cols-2 gap-2 mb-4">
+                        <button onclick="setPacemakerMech('slope4')" id="pm-btn-slope4" class="pm-mech-btn px-3 py-2 rounded-xl border border-cyan-500 bg-cyan-500/20 text-white text-xs font-bold text-right">
+                            A) کاهش شیب فاز ۴ (Phase 4 Slope)
+                        </button>
+                        <button onclick="setPacemakerMech('threshold')" id="pm-btn-threshold" class="pm-mech-btn px-3 py-2 rounded-xl border border-slate-800 bg-slate-950 text-slate-300 hover:bg-slate-800 text-xs font-bold text-right">
+                            B) بالا بردن آستانه تحریک (Threshold)
+                        </button>
+                        <button onclick="setPacemakerMech('mdp')" id="pm-btn-mdp" class="pm-mech-btn px-3 py-2 rounded-xl border border-slate-800 bg-slate-950 text-slate-300 hover:bg-slate-800 text-xs font-bold text-right">
+                            C) افزایش حداکثر پتانسیل دیاستولی (منفی‌تر شدن)
+                        </button>
+                        <button onclick="setPacemakerMech('apd')" id="pm-btn-apd" class="pm-mech-btn px-3 py-2 rounded-xl border border-slate-800 bg-slate-950 text-slate-300 hover:bg-slate-800 text-xs font-bold text-right">
+                            D) افزایش طول پتانسیل عمل (APD)
+                        </button>
+                    </div>
+
+                    <div class="bg-slate-950 rounded-xl border border-slate-800 p-3">
+                        <svg id="pacemaker-svg" viewBox="0 0 450 160" class="w-full h-40">
+                            <!-- Threshold Line -->
+                            <line id="pm-thresh-base" x1="20" y1="85" x2="430" y2="85" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4"/>
+                            <text x="35" y="80" fill="#94a3b8" font-size="10">Threshold (آستانه پایه)</text>
+                            <line id="pm-thresh-drug" x1="20" y1="85" x2="430" y2="85" stroke="#f43f5e" stroke-width="2" stroke-dasharray="3,3" opacity="0"/>
+
+                            <!-- Baseline Pacemaker Curve (Black/Slate) -->
+                            <path d="M 30 120 L 30 20 Q 55 25 75 50 L 105 125 L 220 85 L 220 20 Q 245 25 265 50 L 295 125" fill="none" stroke="#94a3b8" stroke-width="2.5"/>
+
+                            <!-- Drug Effect Pacemaker Curve (Rose) -->
+                            <path id="pm-drug-path" d="M 30 120 L 30 20 Q 55 25 75 50 L 105 125 L 315 85 L 315 20 Q 340 25 360 50 L 390 125" fill="none" stroke="#f43f5e" stroke-width="3"/>
+                        </svg>
+                        <p id="pm-mech-desc" class="text-xs text-cyan-300 mt-2 font-medium">
+                            A) کاهش شیب فاز ۴ (توسط بتابلاکرها و بلوکرهای کلسیم): زمان رسیدن به آستانه طولانی‌تر شده و سرعت ضربان‌سازی کاهش می‌یابد.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2 Ways to Increase Refractoriness + Hyperkalemia vs Hypokalemia (Pages 18-20) -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl flex flex-col justify-between space-y-4">
+                    <div>
+                        <h3 class="text-base font-extrabold text-white mb-1 flex items-center gap-2">
+                            <i class="fa-solid fa-shield-heart text-rose-400"></i>
+                            <span>۲ روش افزایش دوره تحریک‌ناپذیری (ERP) و نقش پتاسیم</span>
+                        </h3>
+                        <p class="text-xs text-slate-400 mb-3">اسلایدهای ۱۸ تا ۲۰ جزوه دکتر قلی‌بیکی</p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <div class="font-bold text-rose-400 mb-1">۱. مهار بازیابی کانال‌های Na⁺</div>
+                                <p class="text-slate-300 leading-relaxed">
+                                    بلوکرهای کانال سدیم منحنی بازیابی کانال‌های سدیم را به سمت پتانسیل‌های منفی‌تر شیفت می‌دهند؛ بنابراین حتی پس از رپلاریزاسیون کامل نیز ERP طولانی می‌شود.
+                                </p>
+                            </div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <div class="font-bold text-purple-400 mb-1">۲. افزایش طول پتانسیل عمل (APD)</div>
+                                <p class="text-slate-300 leading-relaxed">
+                                    بلوکرهای کانال پتاسیم (کلاس III و IA) با کند کردن رپلاریزاسیون فاز ۳، زمان ماندن سلول در ولتاژ بالا را بیشتر کرده و ERP را افزایش می‌دهند.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Table: Hyperkalemia vs Hypokalemia -->
+                    <div class="bg-slate-950 rounded-xl border border-slate-800 overflow-hidden">
+                        <div class="bg-slate-800/70 px-3 py-2 text-xs font-extrabold text-white flex justify-between">
+                            <span>مقایسه امتحانی اثرات پتاسیم خارج سلولی (اسلاید ۱۴ و ۲۰)</span>
+                            <span class="text-cyan-400">نرمال خارج سلول: ۴ mM</span>
+                        </div>
+                        <div class="grid grid-cols-2 divide-x divide-x-reverse divide-slate-800 text-xs">
+                            <div class="p-3 space-y-1.5">
+                                <div class="font-black text-orange-400">هایپرکالمی (Hyperkalemia)</div>
+                                <ul class="space-y-1 text-slate-300 text-[11px]">
+                                    <li>• <strong>دپلاریزه کردن</strong> پتانسیل استراحت (مثلاً به ۶۰- میلی‌ولت)</li>
+                                    <li>• کاهش طول پتانسیل عمل (APD)</li>
+                                    <li>• غیرفعال شدن بخشی از کانال‌های سدیمی</li>
+                                    <li>• کاهش سرعت فاز ۰، کندی هدایت و افزایش ERP</li>
+                                    <li>• سرکوب پیس‌میکرهای نابجا (کاربرد در مسمومیت دیژیتال)</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 space-y-1.5">
+                                <div class="font-black text-teal-400">هیپوکالمی (Hypokalemia)</div>
+                                <ul class="space-y-1 text-slate-300 text-[11px]">
+                                    <li>• <strong>هایپرپلاریزه کردن</strong> پتانسیل استراحت غشا</li>
+                                    <li>• <strong>طولانی کردن</strong> طول پتانسیل عمل (Prolong APD)</li>
+                                    <li>• افزایش فعالیت پیس‌میکری به علت فعال‌سازی بیشتر کانال‌های ضربان‌ساز، به‌ویژه در پیس‌میکرهای نهفته (مثل <strong>سلول‌های پورکنژ</strong>)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- SECTION 3: COMPREHENSIVE DRUG DATABASE FOR PHARMACY EXAMS             -->
+        <!-- ===================================================================== -->
+        <section id="section-drugs" class="hidden space-y-6">
+            
+            <!-- Filter Bar -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-base font-extrabold text-white">بانک جامع داروهای ضدآریتمی (Vaughan-Williams و داروهای متفرقه)</h2>
+                    <p class="text-xs text-slate-400">تمامی نکات فارماکوکینتیک، متابولیت‌ها، عوارض اختصاصی و کاربردهای بالینی ذکر شده در اسلایدهای دکتر قلی‌بیکی</p>
+                </div>
+                <div class="flex flex-wrap gap-1.5" id="drug-filter-btns">
+                    <button onclick="filterDrugs('all')" data-filter="all" class="drug-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-cyan-600 text-white">همه داروها (۱۴ مورد)</button>
+                    <button onclick="filterDrugs('1A')" data-filter="1A" class="drug-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-rose-400 border border-slate-800 hover:bg-slate-800">کلاس IA</button>
+                    <button onclick="filterDrugs('1B')" data-filter="1B" class="drug-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-sky-400 border border-slate-800 hover:bg-slate-800">کلاس IB</button>
+                    <button onclick="filterDrugs('1C')" data-filter="1C" class="drug-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-emerald-400 border border-slate-800 hover:bg-slate-800">کلاس IC</button>
+                    <button onclick="filterDrugs('II')" data-filter="II" class="drug-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-amber-400 border border-slate-800 hover:bg-slate-800">کلاس II</button>
+                    <button onclick="filterDrugs('III')" data-filter="III" class="drug-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-purple-400 border border-slate-800 hover:bg-slate-800">کلاس III</button>
+                    <button onclick="filterDrugs('IV')" data-filter="IV" class="drug-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-pink-400 border border-slate-800 hover:bg-slate-800">کلاس IV</button>
+                    <button onclick="filterDrugs('MISC')" data-filter="MISC" class="drug-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-teal-400 border border-slate-800 hover:bg-slate-800">متفرقه (Misc)</button>
+                </div>
+            </div>
+
+            <!-- Summary Comparison Table (Slide 55) -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+                <div class="px-4 py-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+                    <span class="text-xs md:text-sm font-extrabold text-cyan-400">جدول طلایی جمع‌بندی کلاس‌های دارویی (اسلایدهای ۲۷ تا ۲۹ و ۵۵)</span>
+                    <span class="text-xs text-slate-400">برای مشاهده انیمیشن هر کلاس روی دکمه «مشاهده در اسکرابر» کلیک کنید</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right text-xs">
+                        <thead class="bg-slate-950/60 text-slate-400 border-b border-slate-800">
+                            <tr>
+                                <th class="p-3">کلاس دارویی</th>
+                                <th class="p-3">مکانیسم و سینتیک ($\tau_{recovery}$)</th>
+                                <th class="p-3">تأثیر بر شیب فاز ۰ و هدایت</th>
+                                <th class="p-3">تأثیر بر APD و ERP</th>
+                                <th class="p-3">تغییرات ECG</th>
+                                <th class="p-3">داروهای شاخص</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/70 text-slate-200">
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-black text-rose-400">کلاس IA</td>
+                                <td class="p-3">مهار متوسط Na⁺ (سینتیک متوسط: ۱ تا ۱۰ ثانیه) + مهار K⁺</td>
+                                <td class="p-3">کاهش متوسط (2+)</td>
+                                <td class="p-3 text-rose-300 font-bold">↑ ERP و ↑ APD</td>
+                                <td class="p-3 font-bold">↑ QRS و ↑ QT</td>
+                                <td class="p-3">کینیدین، پروکائین‌آماید، دیزوپرامید</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-black text-sky-400">کلاس IB</td>
+                                <td class="p-3">مهار ضعیف Na⁺ (سینتیک سریع: $\tau < 1$ ثانیه) - بافت ایسکمیک</td>
+                                <td class="p-3">حداقل اثر در بافت سالم (0-1+)</td>
+                                <td class="p-3 text-sky-300 font-bold">↓ ERP و ↓ APD (کوتاه شدن کفه)</td>
+                                <td class="p-3 font-bold">↓ جزئی QT (اثر ناچیز)</td>
+                                <td class="p-3">لیدوکائین، مگزیلتین، فنی‌توئین</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-black text-emerald-400">کلاس IC</td>
+                                <td class="p-3">مهار قوی Na⁺ (سینتیک آهسته: $\tau > 10$ ثانیه)</td>
+                                <td class="p-3">کاهش شدید شیب فاز ۰ (4+)</td>
+                                <td class="p-3 text-emerald-300 font-bold">بدون تغییر (نرمال)</td>
+                                <td class="p-3 font-bold">↑↑ شدید QRS</td>
+                                <td class="p-3">فلکاینید، پروپافنون</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-black text-amber-400">کلاس II</td>
+                                <td class="p-3">بلوک گیرنده $\beta$ قلبی $\leftarrow$ کاهش cAMP $\leftarrow$ کاهش جریان Na⁺ و Ca²⁺</td>
+                                <td class="p-3">کاهش هدایت در گره AV و کاهش شیب فاز ۴</td>
+                                <td class="p-3">افزایش ERP در گره AV</td>
+                                <td class="p-3 font-bold">↑ فاصله PR و ↓ HR</td>
+                                <td class="p-3">پروپرانولول، اسمولول، سوتالول</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-black text-purple-400">کلاس III</td>
+                                <td class="p-3">مهار کانال‌های پتاسیم ($I_{Kr}$ / hERG) در فاز ۳</td>
+                                <td class="p-3">بدون اثر مستقیم (به‌جز آمیودارون)</td>
+                                <td class="p-3 text-purple-300 font-bold">↑↑ شدید APD و ERP</td>
+                                <td class="p-3 font-bold">↑↑ فاصله QT</td>
+                                <td class="p-3">آمیودارون، سوتالول، دوفتیلید، ایبوتیلید، دروندارون</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-black text-pink-400">کلاس IV</td>
+                                <td class="p-3">مهار کانال کلسیم در بافت‌های وابسته به کلسیم (گره AV)</td>
+                                <td class="p-3">کاهش سرعت هدایت AV</td>
+                                <td class="p-3">افزایش ERP در گره AV</td>
+                                <td class="p-3 font-bold">↑ فاصله PR</td>
+                                <td class="p-3">وراپامیل، دیلتیازم</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Dynamic Drug Cards Container -->
+            <div id="drugs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- SECTION 4: TORSADES DE POINTES SIMULATOR & SELF-TEST QUIZ             -->
+        <!-- ===================================================================== -->
+        <section id="section-strips" class="hidden space-y-6">
+            
+            <!-- Live Arrhythmia & Torsades de Pointes Strip Visualizer (Page 32) -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                    <div>
+                        <h2 class="text-base md:text-lg font-black text-white flex items-center gap-2">
+                            <i class="fa-solid fa-wave-square text-rose-500"></i>
+                            <span>مانیتور زنده آریتمی‌ها و Torsades de Pointes (اسلاید ۳۲)</span>
+                        </h2>
+                        <p class="text-xs text-slate-400">مقایسه نوار قلب طبیعی با تاکی‌کاردی بطنی چندشکلی چرخشی (Torsades de Pointes) ناشی از طولانی شدن فاصله QT</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="setRhythmStrip('nsr')" id="strip-btn-nsr" class="strip-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-slate-300 border border-slate-800">
+                            ریتم سینوسی نرمال (NSR)
+                        </button>
+                        <button onclick="setRhythmStrip('tdp')" id="strip-btn-tdp" class="strip-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-600 text-white shadow-lg shadow-rose-600/30">
+                            Torsades de Pointes (چرخشی)
+                        </button>
+                        <button onclick="setRhythmStrip('afib')" id="strip-btn-afib" class="strip-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-slate-300 border border-slate-800">
+                            فیبریلاسیون دهلیزی (AFib)
+                        </button>
+                        <button onclick="setRhythmStrip('vt')" id="strip-btn-vt" class="strip-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-slate-300 border border-slate-800">
+                            تاکی‌کاردی بطنی (VT)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="w-full h-44 bg-slate-950 rounded-xl border border-slate-800 overflow-hidden ecg-grid relative">
+                    <canvas id="rhythm-strip-canvas" class="w-full h-full block"></canvas>
+                </div>
+
+                <div id="strip-info-box" class="mt-3 p-3.5 rounded-xl bg-rose-950/30 border border-rose-500/30 text-xs text-slate-200 leading-relaxed">
+                    <strong class="text-rose-400">Torsades de Pointes (اسلایدهای ۳۱، ۳۲ و ۵۳):</strong> یک تاکی‌کاردی بطنی پلی‌مورفیک (چندشکلی) که با سرگیجه، سنکوپ (از دست دادن گذرای هوشیاری) و خطر مرگ ناگهانی همراه است. ناشی از طولانی شدن فاصله QT توسط داروهای کلاس IA (کینیدین، پروکائین‌آماید در استیلاتورهای سریع) و کلاس III (به‌جز آمیودارون که به ندرت ایجاد می‌کند). <strong>درمان انتخابی: منیزیم (Magnesium).</strong>
+                </div>
+            </div>
+
+            <!-- Interactive Pharmacy Exam Quiz -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-800">
+                    <div>
+                        <h3 class="text-base font-extrabold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-graduation-cap text-cyan-400"></i>
+                            <span>آزمون خودسنجی فارماکولوژی داروهای ضدآریتمی (۱۰ سؤال کلیدی امتحانی)</span>
+                        </h3>
+                        <p class="text-xs text-slate-400">طراحی شده دقیقاً بر اساس نکات بولد شده و مقایسه‌ای اسلایدهای دکتر قلی‌بیکی</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span id="quiz-score-badge" class="px-3 py-1 rounded-xl bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-xs font-black">
+                            امتیاز: ۰ از ۱۰
+                        </span>
+                        <button onclick="resetQuiz()" class="px-3 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-bold">
+                            شروع مجدد آزمون
+                        </button>
+                    </div>
+                </div>
+
+                <div id="quiz-container" class="space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-900 py-4 px-4 text-center text-xs text-slate-500">
+        طراحی شده برای مرور تعاملی و بصری دانشجویان داروسازی | منبع علمی: اسلایدهای آموزشی فارماکولوژی داروهای ضدآریتمی - دکتر افروز قلی‌بیکی
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- APPLICATION JAVASCRIPT LOGIC                                          -->
+    <!-- ===================================================================== -->
+    <script>
+        // ---------------------------------------------------------------------
+        // 1. STATE & CONDITION DEFINITIONS (Strictly from Dr. Gholibeiki's PDF)
+        // ---------------------------------------------------------------------
+        let currentTime = 65; // 0 to 400 ms
+        let isPlaying = true;
+        let playSpeed = 0.4; // Slow educational default
+        let currentCondition = 'normal';
+        let currentCellType = 'fast'; // 'fast' (Ventricular/Purkinje) or 'slow' (SA/AV Node)
+        let activeMainTab = 'scrubber';
+
+        const conditionsData = {
+            normal: {
+                name: 'حالت پایه (ریتم سینوسی نرمال)',
+                badgeColor: 'text-cyan-400',
+                phase0Text: 'نرمال (شیب تند)',
+                erpText: 'نرمال (~۲۰۰ ms)',
+                tauText: 'بدون دارو',
+                prStatus: 'نرمال (۰.۱۶ ثانیه)',
+                qrsStatus: 'نرمال (باریک)',
+                qtStatus: 'نرمال',
+                ecgSummary: 'PR، QRS و QT کاملاً نرمال',
+                drugNote: 'در حالت طبیعی، ایمپالس در گره SA تولید شده (۶۰ تا ۱۰۰ ضربان در دقیقه) و پس از عبور از دهلیزها و تأخیر فیزیولوژیک در گره AV، از طریق سیستم هیس-پورکنژ با سرعت بالا کل بطن‌ها را دپلاریزه می‌کند.'
+            },
+            class1a: {
+                name: 'کلاس IA (کینیدین، پروکائین‌آماید، دیزوپرامید)',
+                badgeColor: 'text-rose-400',
+                phase0Text: 'کاهش متوسط شیب فاز ۰ (2+)',
+                erpText: '↑ افزایش ERP و ↑ APD',
+                tauText: 'متوسط (۱ تا ۱۰ ثانیه)',
+                prStatus: 'نرمال یا تغییر جزئی',
+                qrsStatus: '↑ پهن شدن QRS',
+                qtStatus: '↑ طولانی شدن QT',
+                ecgSummary: '↑ QRS و ↑ فاصله QT (خطر Torsades)',
+                drugNote: 'داروهای کلاس IA علاوه بر مهار متوسط کانال‌های سدیمی فعال (کاهش شیب فاز ۰ و پهن شدن QRS)، کانال‌های پتاسیمی رپلاریزه‌کننده را نیز مهار می‌کنند و باعث افزایش طول پتانسیل عمل (APD)، افزایش ERP و طولانی شدن QT می‌شوند (خطر ایجاد Torsades de pointes).'
+            },
+            class1b: {
+                name: 'کلاس IB (لیدوکائین، مگزیلتین، فنی‌توئین)',
+                badgeColor: 'text-sky-400',
+                phase0Text: 'اثر ناچیز در بافت سالم (مهار در ایسکمی)',
+                erpText: '↓ کاهش ERP و ↓ APD',
+                tauText: 'سریع (کمتر از ۱ ثانیه)',
+                prStatus: 'بدون تغییر',
+                qrsStatus: 'نرمال (اثر ناچیز)',
+                qtStatus: '↓ کوتاه شدن جزئی QT',
+                ecgSummary: 'کوتاه شدن کفه و ↓ جزئی QT',
+                drugNote: 'کلاس IB با سینتیک بسیار سریع (کمتر از ۱ ثانیه) به کانال‌های سدیمی فعال و غیرفعال متصل می‌شوند. در بافت سالم به سرعت جدا شده و اثری روی هدایت ندارند، اما در بافت بطنی ایسکمیک/دپلاریزه مؤثرند. فاز کفه (فاز ۲) را کوتاه کرده و تنها در آریتمی‌های بطنی کاربرد دارند.'
+            },
+            class1c: {
+                name: 'کلاس IC (فلکاینید، پروپافنون)',
+                badgeColor: 'text-emerald-400',
+                phase0Text: '↓↓ کاهش بسیار شدید شیب فاز ۰ (4+)',
+                erpText: 'بدون تغییر (ERP و APD نرمال)',
+                tauText: 'بسیار آهسته (بیش از ۱۰ ثانیه)',
+                prStatus: 'کمی افزایش',
+                qrsStatus: '↑↑ پهن شدن شدید QRS',
+                qtStatus: 'بدون تغییر (نرمال)',
+                ecgSummary: '↑↑ شدید مدت QRS (بدون تغییر QT)',
+                drugNote: 'کلاس IC قوی‌ترین مهارکننده‌های کانال سدیم با سینتیک جدایی بسیار آهسته (>۱۰ ثانیه) هستند. شیب فاز ۰ و سرعت هدایت را به شدت کاهش داده و QRS را به وضوح پهن می‌کنند، اما هیچ اثری بر طول پتانسیل عمل (APD) یا فاصله QT ندارند. فلکاینید بیشترین خطر پروآریتمیک (خط آخر) را دارد.'
+            },
+            class2: {
+                name: 'کلاس II: بتابلاکرها (پروپرانولول، اسمولول)',
+                badgeColor: 'text-amber-400',
+                phase0Text: 'کاهش شیب فاز ۰ و ۴ در گره AV/SA',
+                erpText: '↑ افزایش ERP در گره AV',
+                tauText: 'کاهش cAMP داخل سلولی',
+                prStatus: '↑ افزایش فاصله PR',
+                qrsStatus: 'نرمال',
+                qtStatus: 'نرمال (به‌جز سوتالول)',
+                ecgSummary: '↓ ضربان قلب و ↑ فاصله PR',
+                drugNote: 'بتابلاکرها با مهار گیرنده بتا-آدرنرژیک و کاهش cAMP، هر دو جریان سدیم و کلسیم را کاهش داده و شیب فاز ۴ پیس‌میکرهای نابجا را سرکوب می‌کنند. گره AV به شدت به بتابلاکرها حساس است (افزایش PR). اسمولول وریدی بسیار کوتاه‌اثر بوده و در آریتمی حاد حین جراحی استفاده می‌شود.'
+            },
+            class3: {
+                name: 'کلاس III: بلوکرهای پتاسیم (آمیودارون، سوتالول، دوفتیلید، ایبوتیلید)',
+                badgeColor: 'text-purple-400',
+                phase0Text: 'نرمال (آمیودارون فاز ۰ را هم کم می‌کند)',
+                erpText: '↑↑ افزایش شدید ERP و APD',
+                tauText: 'مهار کانال پتاسیمی IKr (hERG)',
+                prStatus: 'در آمیودارون ↑ PR',
+                qrsStatus: 'نرمال (در آمیودارون ↑ QRS)',
+                qtStatus: '↑↑ طولانی شدن شدید QT',
+                ecgSummary: '↑↑ شدید فاصله QT و تأخیر فاز ۳',
+                drugNote: 'مشخصه اصلی کلاس III طولانی کردن بارز پتانسیل عمل (APD) و ERP از طریق مهار کانال‌های پتاسیمی (IKr) مسئول رپلاریزاسیون فاز ۳ است. آمیودارون یک استثنای مهم است که ویژگی هر ۴ کلاس را دارد و با وجود طولانی کردن QT، به ندرت ایجاد Torsades می‌کند.'
+            },
+            class4: {
+                name: 'کلاس IV: بلوکرهای کانال کلسیم (وراپامیل، دیلتیازم)',
+                badgeColor: 'text-pink-400',
+                phase0Text: 'کاهش شیب فاز ۰ در گره AV و SA',
+                erpText: '↑ افزایش ERP در گره AV',
+                tauText: 'مهار کانال کلسیمی نوع L',
+                prStatus: '↑↑ افزایش واضح فاصله PR',
+                qrsStatus: 'نرمال',
+                qtStatus: 'نرمال',
+                ecgSummary: 'کند شدن هدایت گره AV و ↑ فاصله PR',
+                drugNote: 'وراپامیل و دیلتیازم در آریتمی‌هایی مؤثرند که باید از بافت‌های وابسته به کلسیم (مانند گره AV) عبور کنند. سرعت هدایت AV را کاهش و فاصله PR را افزایش می‌دهند و تاکی‌کاردی گره AV (AVNRT) را به ریتم نرمال تبدیل می‌کنند.'
+            },
+            hyperkalemia: {
+                name: 'هایپرکالمی و ایسکمی قلبی (اسلاید ۱۷ و ۲۰)',
+                badgeColor: 'text-orange-400',
+                phase0Text: '↓↓ کاهش شدید شیب و دامنه فاز ۰',
+                erpText: '↑ دوره تحریک‌ناپذیری و ↓ APD',
+                tauText: 'غیرفعال شدن کانال‌های Na⁺ در استراحت',
+                prStatus: 'طولانی شدن',
+                qrsStatus: '↑ پهن شدن QRS (کندی هدایت)',
+                qtStatus: '↓ کوتاه شدن QT (موج T بلند)',
+                ecgSummary: 'دپلاریزاسیون استراحت (-60mV) و کندی هدایت',
+                drugNote: 'در هایپرکالمی یا ایسکمی/MI، پتانسیل استراحت غشا کمتر منفی می‌شود (مثلاً ۶۰- به جای ۹۰- میلی‌ولت). در نتیجه بخشی از کانال‌های سدیمی در حالت استراحت غیرفعال شده و تعداد کانال‌های در دسترس کاهش می‌یابد: ۱) کاهش تحریک‌پذیری، ۲) کاهش سرعت فاز ۰، ۳) کاهش دامنه AP و ۴) کاهش سرعت هدایت.'
+            },
+            hypokalemia: {
+                name: 'هیپوکالمی (کاهش پتاسیم خارج سلول - اسلاید ۲۰)',
+                badgeColor: 'text-teal-400',
+                phase0Text: 'نرمال',
+                erpText: '↑ طولانی شدن پتانسیل عمل (APD)',
+                tauText: 'فعال‌سازی کانال‌های پیس‌میکر نهفته',
+                prStatus: 'نرمال',
+                qrsStatus: 'نرمال',
+                qtStatus: '↑ طولانی شدن فاصله QT',
+                ecgSummary: 'هایپرپلاریزاسیون غشا + طولانی شدن APD + اکتوپی پورکنژ',
+                drugNote: 'در هیپوکالمی، غشا هایپرپلاریزه (منفی‌تر) شده، طول پتانسیل عمل (APD) افزایش می‌یابد و فعالیت ضربان‌سازهای نهفته (به‌ویژه سلول‌های پورکنژ) تشدید می‌گردد که خطر آریتمی‌های بطنی و مسمومیت دیگوکسین را بالا می‌برد.'
+            }
+        };
+
+        // ---------------------------------------------------------------------
+        // 2. MATHEMATICAL MODELS FOR ACTION POTENTIAL & ECG CURVES
+        // ---------------------------------------------------------------------
+        function sigmoid(x) {
+            return 1 / (1 + Math.exp(-x));
+        }
+
+        // Compute Ventricular (Fast) or Nodal (Slow) Action Potential Voltage (in mV) at time t (0..400 ms)
+        function getAPVoltage(t, cond, cellType) {
+            // If Nodal / Slow Response selected (SA / AV Node)
+            if (cellType === 'slow') {
+                let vRest = -65;
+                let slope4 = 0.22;
+                let upstrokeTime = 95;
+                let upstrokeSlope = 0.14;
+                let peak = 10;
+                let repolTime = 215;
+
+                if (cond === 'class2' || cond === 'class4') {
+                    slope4 = 0.11; // Decreased phase 4 depolarization
+                    upstrokeTime = 130;
+                    upstrokeSlope = 0.08; // Slower Ca2+ mediated phase 0
+                    peak = 0;
+                    repolTime = 250;
+                } else if (cond === 'hyperkalemia') {
+                    vRest = -55;
+                    peak = -2;
+                } else if (cond === 'hypokalemia') {
+                    vRest = -75;
+                    slope4 = 0.30; // Increased pacemaker activity
+                    upstrokeTime = 80;
+                }
+
+                if (t < upstrokeTime) {
+                    return vRest + (t * slope4);
+                }
+                let up = sigmoid((t - upstrokeTime) * upstrokeSlope);
+                let down = sigmoid((t - repolTime) * 0.07);
+                let v = (vRest + upstrokeTime * slope4) + (peak - (vRest + upstrokeTime * slope4)) * up * (1 - down);
+                if (t > repolTime) {
+                    let post = (t - repolTime) / (400 - repolTime);
+                    v = v * (1 - post) + (vRest + post * 12) * post;
+                }
+                return v;
+            }
+
+            // Fast Response (Ventricular Myocyte / Purkinje Cell)
+            let vRest = -85;
+            let tUp = 60;
+            let kUp = 0.85; // Fast Na+ upstroke slope
+            let vPeak = 25;
+            let vPlateau = 12;
+            let tRepol = 250; // Phase 3 center time
+            let kRepol = 0.075; // Phase 3 slope
+            let phase4Slope = 0;
+
+            if (cond === 'class1a') {
+                kUp = 0.22; // Moderate Na block
+                tUp = 66;
+                vPeak = 18;
+                tRepol = 295; // Prolonged APD & QT (K+ block)
+                kRepol = 0.055;
+            } else if (cond === 'class1b') {
+                kUp = 0.72; // Minimal effect on normal phase 0
+                tUp = 61;
+                vPeak = 23;
+                tRepol = 218; // Shortened plateau & APD
+                kRepol = 0.085;
+            } else if (cond === 'class1c') {
+                kUp = 0.11; // Marked phase 0 depression
+                tUp = 75;
+                vPeak = 12;
+                tRepol = 252; // Unchanged APD
+            } else if (cond === 'class2') {
+                phase4Slope = -0.01;
+                tRepol = 250;
+            } else if (cond === 'class3') {
+                kUp = 0.65;
+                tRepol = 320; // Markedly prolonged phase 3 & APD
+                kRepol = 0.048;
+            } else if (cond === 'class4') {
+                vPlateau = 4; // Slightly depressed plateau due to Ca2+ block
+                tRepol = 242;
+            } else if (cond === 'hyperkalemia') {
+                vRest = -62; // Less negative resting potential (-60mV instead of -90mV)
+                kUp = 0.14; // Reduced upstroke velocity
+                tUp = 70;
+                vPeak = 5; // Reduced AP amplitude
+                vPlateau = -2;
+                tRepol = 225; // Shortened APD
+            } else if (cond === 'hypokalemia') {
+                vRest = -95; // Hyperpolarized resting potential
+                tRepol = 290; // Prolonged APD
+                kRepol = 0.055;
+            }
+
+            if (t < tUp - 12) {
+                return vRest;
+            }
+
+            // Smooth mathematical synthesis of Phases 0, 1, 2, 3, 4
+            let s0 = sigmoid((t - tUp) * kUp);
+            // Phase 1 notch
+            let notch = 14 * Math.exp(-Math.pow((t - (tUp + 8)) / 10, 2)) * (kUp > 0.3 ? 1 : 0.3);
+            // Plateau decay
+            let plat = vPlateau - (t - tUp) * 0.045;
+            // Phase 3 repolarization
+            let s3 = sigmoid((t - tRepol) * kRepol);
+
+            let activeV = plat + notch;
+            let v = vRest + (activeV - vRest) * s0 * (1 - s3);
+            return Math.max(-98, Math.min(35, v));
+        }
+
+        // Compute Synchronized ECG Voltage at time t (0..400 ms)
+        function getECGVoltage(t, cond) {
+            let pCenter = 28;
+            let qrsShift = 0;
+            let qrsWidth = 6.5;
+            let tCenter = 255;
+            let tWidth = 22;
+            let tAmp = 0.32;
+
+            if (cond === 'class1a') {
+                qrsShift = 6;
+                qrsWidth = 10.5; // Widened QRS
+                tCenter = 300;   // Prolonged QT
+                tWidth = 28;
+            } else if (cond === 'class1b') {
+                tCenter = 222;   // Shortened QT
+            } else if (cond === 'class1c') {
+                qrsShift = 12;
+                qrsWidth = 15.5; // Markedly widened QRS
+                tCenter = 262;
+            } else if (cond === 'class2' || cond === 'class4') {
+                pCenter = 16;    // Prolonged PR interval (AV node delay)
+                qrsShift = 10;
+            } else if (cond === 'class3') {
+                qrsShift = 3;
+                qrsWidth = 8;
+                tCenter = 322;   // Markedly prolonged QT
+                tWidth = 32;
+            } else if (cond === 'hyperkalemia') {
+                pCenter = 24;
+                qrsShift = 10;
+                qrsWidth = 13.5; // Slowed conduction
+                tCenter = 230;
+                tAmp = 0.52;     // Tall peaked T wave
+                tWidth = 15;
+            } else if (cond === 'hypokalemia') {
+                tCenter = 292;
+                tAmp = 0.18;     // Flattened/prolonged repolarization
+                tWidth = 30;
+            }
+
+            let qrsC = 64 + qrsShift;
+            // P wave
+            let pWave = 0.18 * Math.exp(-Math.pow((t - pCenter) / 9, 2));
+            // Q wave
+            let qWave = -0.16 * Math.exp(-Math.pow((t - (qrsC - qrsWidth * 0.9)) / (qrsWidth * 0.45), 2));
+            // R wave
+            let rWave = 1.05 * Math.exp(-Math.pow((t - qrsC) / (qrsWidth * 0.65), 2));
+            // S wave
+            let sWave = -0.26 * Math.exp(-Math.pow((t - (qrsC + qrsWidth * 0.95)) / (qrsWidth * 0.5), 2));
+            // T wave
+            let tWave = tAmp * Math.exp(-Math.pow((t - tCenter) / tWidth, 2));
+
+            return pWave + qWave + rWave + sWave + tWave;
+        }
+
+        // ---------------------------------------------------------------------
+        // 3. RENDER ACTION POTENTIAL & ECG CANVASES + ION GATES
+        // ---------------------------------------------------------------------
+        function drawActionPotentialCanvas() {
+            const canvas = document.getElementById('ap-canvas');
+            if (!canvas) return;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width * window.devicePixelRatio;
+            canvas.height = rect.height * window.devicePixelRatio;
+            const ctx = canvas.getContext('2d');
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+            const w = rect.width;
+            const h = rect.height;
+            ctx.clearRect(0, 0, w, h);
+
+            const padL = 48, padR = 20, padT = 22, padB = 34;
+            const plotW = w - padL - padR;
+            const plotH = h - padT - padB;
+
+            const timeToX = (t) => padL + (t / 400) * plotW;
+            const mvToY = (mv) => padT + ((35 - mv) / (35 - (-100))) * plotH;
+
+            // Draw Reference Voltage Lines (0 mV, -60 mV Threshold, -85 mV Resting)
+            ctx.font = '11px Vazirmatn, monospace';
+            ctx.textAlign = 'right';
+
+            const refLines = [
+                { mv: 0, label: '0 mV', color: 'rgba(148, 163, 184, 0.35)', dash: [4, 4] },
+                { mv: -60, label: '-60 mV', color: 'rgba(245, 158, 11, 0.3)', dash: [3, 3] },
+                { mv: -85, label: '-85 mV', color: 'rgba(56, 189, 248, 0.3)', dash: [] }
+            ];
+
+            refLines.forEach(ref => {
+                const y = mvToY(ref.mv);
+                ctx.beginPath();
+                ctx.setLineDash(ref.dash);
+                ctx.strokeStyle = ref.color;
+                ctx.lineWidth = 1;
+                ctx.moveTo(padL, y);
+                ctx.lineTo(w - padR, y);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                ctx.fillStyle = '#94a3b8';
+                ctx.fillText(ref.label, padL - 6, y + 4);
+            });
+
+            // Draw Dynamic ERP Bracket (Effective Refractory Period: Phase 0 to ~-60mV in Phase 3)
+            let erpStart = 60;
+            let erpEnd = 258;
+            if (currentCondition === 'class1a') erpEnd = 308;
+            if (currentCondition === 'class1b') erpEnd = 224;
+            if (currentCondition === 'class3') erpEnd = 335;
+            if (currentCondition === 'hyperkalemia') erpEnd = 290;
+
+            const erpY = mvToY(-48);
+            ctx.fillStyle = 'rgba(245, 158, 11, 0.10)';
+            ctx.fillRect(timeToX(erpStart), padT, timeToX(erpEnd) - timeToX(erpStart), plotH);
+
+            ctx.beginPath();
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 2;
+            ctx.moveTo(timeToX(erpStart), erpY);
+            ctx.lineTo(timeToX(erpEnd), erpY);
+            ctx.stroke();
+
+            ctx.fillStyle = '#fbbf24';
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 11px Vazirmatn';
+            ctx.fillText(`دوره تحریک‌ناپذیری مؤثر (ERP)`, (timeToX(erpStart) + timeToX(erpEnd)) / 2, erpY - 6);
+
+            // 1. Draw Baseline Normal Curve (Dashed Slate/Cyan)
+            ctx.beginPath();
+            ctx.setLineDash([5, 4]);
+            ctx.strokeStyle = currentCondition === 'normal' ? 'rgba(6, 182, 212, 0.35)' : 'rgba(148, 163, 184, 0.65)';
+            ctx.lineWidth = 2.2;
+            for (let t = 0; t <= 400; t += 2) {
+                const x = timeToX(t);
+                const y = mvToY(getAPVoltage(t, 'normal', currentCellType));
+                if (t === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // 2. Draw Selected Condition Full Ghost Curve (Faint)
+            if (currentCondition !== 'normal') {
+                ctx.beginPath();
+                ctx.strokeStyle = 'rgba(244, 63, 94, 0.25)';
+                ctx.lineWidth = 2.5;
+                for (let t = 0; t <= 400; t += 2) {
+                    const x = timeToX(t);
+                    const y = mvToY(getAPVoltage(t, currentCondition, currentCellType));
+                    if (t === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+            }
+
+            // 3. Draw Active Scrubbed Curve (0 to currentTime) with Neon Glow
+            ctx.save();
+            ctx.beginPath();
+            const activeColor = currentCondition === 'normal' ? '#06b6d4' : '#f43f5e';
+            ctx.strokeStyle = activeColor;
+            ctx.shadowColor = activeColor;
+            ctx.shadowBlur = 12;
+            ctx.lineWidth = 3.8;
+            for (let t = 0; t <= currentTime; t += 1) {
+                const x = timeToX(t);
+                const y = mvToY(getAPVoltage(t, currentCondition, currentCellType));
+                if (t === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.restore();
+
+            // 4. Draw Vertical Scrubber Cursor Line & Glowing Dot
+            const curX = timeToX(currentTime);
+            const curVm = getAPVoltage(currentTime, currentCondition, currentCellType);
+            const curY = mvToY(curVm);
+
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.lineWidth = 1.5;
+            ctx.moveTo(curX, padT);
+            ctx.lineTo(curX, h - padB);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(curX, curY, 7, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = activeColor;
+            ctx.stroke();
+
+            // Phase Labels on Curve
+            ctx.fillStyle = '#cbd5e1';
+            ctx.font = 'bold 11px Vazirmatn';
+            if (currentCellType === 'fast') {
+                ctx.fillText('فاز ۴', timeToX(25), mvToY(-75));
+                ctx.fillText('فاز ۰', timeToX(52), mvToY(-20));
+                ctx.fillText('فاز ۱', timeToX(82), mvToY(24));
+                ctx.fillText('فاز ۲ (کفه)', timeToX(155), mvToY(18));
+                ctx.fillText('فاز ۳', timeToX(265), mvToY(-25));
+                ctx.fillText('فاز ۴', timeToX(365), mvToY(-75));
+            } else {
+                ctx.fillText('فاز ۴ (ضربان‌ساز)', timeToX(45), mvToY(-50));
+                ctx.fillText('فاز ۰ (کلسیمی)', timeToX(110), mvToY(-10));
+                ctx.fillText('فاز ۳', timeToX(225), mvToY(-15));
+            }
+        }
+
+        function drawECGCanvas() {
+            const canvas = document.getElementById('ecg-canvas');
+            if (!canvas) return;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width * window.devicePixelRatio;
+            canvas.height = rect.height * window.devicePixelRatio;
+            const ctx = canvas.getContext('2d');
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+            const w = rect.width;
+            const h = rect.height;
+            ctx.clearRect(0, 0, w, h);
+
+            const padL = 48, padR = 20;
+            const plotW = w - padL - padR;
+            const baseLineY = h * 0.65;
+            const scaleY = h * 0.45;
+
+            const timeToX = (t) => padL + (t / 400) * plotW;
+            const vToY = (v) => baseLineY - v * scaleY;
+
+            // Baseline Normal ECG (Dashed)
+            ctx.beginPath();
+            ctx.setLineDash([4, 4]);
+            ctx.strokeStyle = 'rgba(148, 163, 184, 0.5)';
+            ctx.lineWidth = 2;
+            for (let t = 0; t <= 400; t += 2) {
+                const x = timeToX(t);
+                const y = vToY(getECGVoltage(t, 'normal'));
+                if (t === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Active Scrubbed ECG Curve
+            ctx.save();
+            ctx.beginPath();
+            const ecgColor = currentCondition === 'normal' ? '#10b981' : '#f43f5e';
+            ctx.strokeStyle = ecgColor;
+            ctx.shadowColor = ecgColor;
+            ctx.shadowBlur = 10;
+            ctx.lineWidth = 3.2;
+            for (let t = 0; t <= currentTime; t += 1) {
+                const x = timeToX(t);
+                const y = vToY(getECGVoltage(t, currentCondition));
+                if (t === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.restore();
+
+            // Scrubber Playhead on ECG
+            const curX = timeToX(currentTime);
+            const curY = vToY(getECGVoltage(currentTime, currentCondition));
+
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.lineWidth = 1.5;
+            ctx.moveTo(curX, 10);
+            ctx.lineTo(curX, h - 10);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(curX, curY, 6, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            ctx.strokeStyle = ecgColor;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // Wave Labels (P, QRS, T)
+            ctx.fillStyle = '#e2e8f0';
+            ctx.font = 'bold 12px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('P', timeToX(28), baseLineY - 26);
+            ctx.fillText('QRS', timeToX(68), baseLineY - scaleY - 6);
+            let tLabelX = currentCondition === 'class3' ? 320 : (currentCondition === 'class1a' ? 300 : 255);
+            ctx.fillText('T', timeToX(tLabelX), baseLineY - 40);
+        }
+
+        // ---------------------------------------------------------------------
+        // 4. SYNCHRONIZE ION CHANNELS, HEART CONDUCTION & TELEMETRY
+        // ---------------------------------------------------------------------
+        function updateVisualsForTime(t) {
+            currentTime = Number(t);
+            document.getElementById('time-scrubber').value = currentTime;
+            document.getElementById('time-readout').textContent = `${Math.round(currentTime)} ms`;
+
+            const vm = Math.round(getAPVoltage(currentTime, currentCondition, currentCellType));
+            document.getElementById('metric-vm').textContent = `${vm} mV`;
+
+            const condInfo = conditionsData[currentCondition];
+            document.getElementById('metric-phase0').textContent = condInfo.phase0Text;
+            document.getElementById('metric-erp').textContent = condInfo.erpText;
+            document.getElementById('metric-tau').textContent = condInfo.tauText;
+            document.getElementById('ecg-pr-status').textContent = condInfo.prStatus;
+            document.getElementById('ecg-qrs-status').textContent = condInfo.qrsStatus;
+            document.getElementById('ecg-qt-status').textContent = condInfo.qtStatus;
+            document.getElementById('ecg-interval-badge').textContent = condInfo.ecgSummary;
+            document.getElementById('explain-drug-title').textContent = condInfo.name;
+            document.getElementById('explain-drug-note').textContent = condInfo.drugNote;
+
+            // Determine Current Phase & Gate Positions
+            const mGateL = document.getElementById('svg-m-gate-left');
+            const mGateR = document.getElementById('svg-m-gate-right');
+            const hGate = document.getElementById('svg-h-gate');
+            const naIons = document.getElementById('svg-na-ions');
+            const caGate = document.getElementById('svg-ca-gate');
+            const caIons = document.getElementById('svg-ca-ions');
+            const kGate = document.getElementById('svg-k-gate');
+            const kIons = document.getElementById('svg-k-ions');
+
+            const naBlock = document.getElementById('svg-na-drug-block');
+            const caBlock = document.getElementById('svg-ca-drug-block');
+            const kBlock = document.getElementById('svg-k-drug-block');
+
+            // Reset drug block badges
+            naBlock.setAttribute('opacity', '0');
+            caBlock.setAttribute('opacity', '0');
+            kBlock.setAttribute('opacity', '0');
+
+            let phaseTitle = '';
+            let instantDesc = '';
+
+            if (currentTime < 55) {
+                // Phase 4 (Early): Resting Membrane Potential & Atrial/AV Conduction
+                phaseTitle = 'فاز ۴ (استراحت بطن) | موج P و هدایت گره AV';
+                instantDesc = 'در حالت استراحت، غشای سلول بطنی فقط به یون پتاسیم از طریق کانال‌های نشتی (IK1) تراوایی دارد (پتانسیل ۸۵- میلی‌ولت). در کانال سدیم، دریچه m بسته و دریچه h باز است (حالت Resting).';
+                
+                // m closed, h open
+                mGateL.style.transform = 'translateX(0px)';
+                mGateR.style.transform = 'translateX(0px)';
+                hGate.style.transform = 'translateY(0px)';
+                naIons.setAttribute('opacity', '0');
+                caGate.setAttribute('width', '26');
+                caIons.setAttribute('opacity', '0');
+                kGate.setAttribute('width', '16');
+                kIons.setAttribute('opacity', '0.35');
+
+                document.getElementById('na-state-label').textContent = currentCondition === 'hyperkalemia' ? 'بخشی غیرفعال (-60mV)' : 'Resting (m بسته، h باز)';
+                document.getElementById('ca-state-label').textContent = 'بسته';
+                document.getElementById('k-state-label').textContent = 'کانال نشتی (IK1) باز';
+
+            } else if (currentTime >= 55 && currentTime < 82) {
+                // Phase 0: Rapid Depolarization (Upstroke) & QRS Complex
+                phaseTitle = 'فاز ۰: دپلاریزاسیون سریع (هجوم Na⁺) و ثبت کمپلکس QRS';
+                instantDesc = 'با رسیدن به آستانه، دریچه‌های فعال‌سازی m باز شده و یون‌های سدیم با سرعت به داخل سلول هجوم می‌آورند (Activated). داروهای کلاس I با اتصال به کانال‌های باز/غیرفعال، شیب فاز ۰ را کم کرده و QRS را پهن می‌کنند.';
+
+                // m open, h open
+                mGateL.style.transform = 'translateX(-11px)';
+                mGateR.style.transform = 'translateX(11px)';
+                hGate.style.transform = 'translateY(0px)';
+                naIons.setAttribute('opacity', '1');
+                caGate.setAttribute('width', '26');
+                caIons.setAttribute('opacity', '0');
+                kGate.setAttribute('width', '26');
+                kIons.setAttribute('opacity', '0');
+
+                if (['class1a', 'class1b', 'class1c'].includes(currentCondition)) {
+                    naBlock.setAttribute('opacity', '1');
+                }
+                document.getElementById('na-state-label').textContent = 'Activated (باز - ورود Na⁺)';
+                document.getElementById('ca-state-label').textContent = 'در آستانه باز شدن';
+                document.getElementById('k-state-label').textContent = 'بسته';
+
+            } else if (currentTime >= 82 && currentTime < 110) {
+                // Phase 1: Early Fast Repolarization
+                phaseTitle = 'فاز ۱: رپلاریزاسیون سریع اولیه (بسته شدن دریچه h سدیم)';
+                instantDesc = 'دریچه غیرفعال‌سازی (h) کانال سدیم از داخل منفذ را می‌بندد (Inactivated) و خروج گذرای پتاسیم باعث ایجاد بریدگی (Notch) فاز ۱ می‌شود.';
+
+                // m open, h closed (plugged up!)
+                mGateL.style.transform = 'translateX(-11px)';
+                mGateR.style.transform = 'translateX(11px)';
+                hGate.style.transform = 'translateY(-24px)';
+                naIons.setAttribute('opacity', '0');
+                caGate.setAttribute('width', '14');
+                caIons.setAttribute('opacity', '0.4');
+                kGate.setAttribute('width', '12');
+                kIons.setAttribute('opacity', '0.5');
+
+                if (['class1a', 'class1b', 'class1c'].includes(currentCondition)) {
+                    naBlock.setAttribute('opacity', '1');
+                }
+                document.getElementById('na-state-label').textContent = 'Inactivated (دریچه h بسته)';
+                document.getElementById('ca-state-label').textContent = 'شروع باز شدن';
+                document.getElementById('k-state-label').textContent = 'خروج گذرای K⁺ (Ito)';
+
+            } else if (currentTime >= 110 && currentTime < 220) {
+                // Phase 2: Plateau Phase (Ca2+ influx balances K+ efflux)
+                phaseTitle = 'فاز ۲ (فاز کفه / Plateau): تعادل ورود Ca²⁺ و خروج K⁺ (قطعه ST)';
+                instantDesc = 'ورود یون کلسیم (Ca²⁺) از کانال‌های نوع L با خروج پتاسیم در تعادل است. در این زمان کانال‌های سدیمی کاملاً غیرفعال‌اند (دوره تحریک‌ناپذیری مطلق / ERP). لیدوکائین (IB) این فاز را کوتاه می‌کند.';
+
+                mGateL.style.transform = 'translateX(-8px)';
+                mGateR.style.transform = 'translateX(8px)';
+                hGate.style.transform = 'translateY(-24px)';
+                naIons.setAttribute('opacity', '0');
+                caGate.setAttribute('width', '4');
+                caIons.setAttribute('opacity', '1');
+                kGate.setAttribute('width', '12');
+                kIons.setAttribute('opacity', '0.5');
+
+                if (['class1a', 'class1b', 'class1c'].includes(currentCondition)) naBlock.setAttribute('opacity', '1');
+                if (currentCondition === 'class4') caBlock.setAttribute('opacity', '1');
+
+                document.getElementById('na-state-label').textContent = 'Inactivated (ERP مطلق)';
+                document.getElementById('ca-state-label').textContent = 'باز (ورود Ca²⁺ و انقباض)';
+                document.getElementById('k-state-label').textContent = 'نیمه‌باز';
+
+            } else if (currentTime >= 220 && currentTime < 330) {
+                // Phase 3: Final Rapid Repolarization & T Wave
+                phaseTitle = 'فاز ۳: رپلاریزاسیون نهایی (خروج K⁺) و ثبت موج T در ECG';
+                instantDesc = 'کانال‌های کلسیم بسته شده و کانال‌های پتاسیمی (IKr / hERG) به طور کامل باز می‌شوند تا سلول به پتانسیل استراحت برگردد. داروهای کلاس III و IA با مهار این کانال، فاز ۳ و فاصله QT را طولانی می‌کنند.';
+
+                mGateL.style.transform = 'translateX(-2px)';
+                mGateR.style.transform = 'translateX(2px)';
+                hGate.style.transform = 'translateY(-12px)';
+                naIons.setAttribute('opacity', '0');
+                caGate.setAttribute('width', '26');
+                caIons.setAttribute('opacity', '0');
+                kGate.setAttribute('width', '4');
+                kIons.setAttribute('opacity', '1');
+
+                if (['class3', 'class1a'].includes(currentCondition)) {
+                    kBlock.setAttribute('opacity', '1');
+                }
+                if (currentCondition === 'class1c') {
+                    naBlock.setAttribute('opacity', '1'); // Slow recovery > 10s
+                }
+
+                document.getElementById('na-state-label').textContent = 'در حال بازیابی (Recovery)';
+                document.getElementById('ca-state-label').textContent = 'بسته';
+                document.getElementById('k-state-label').textContent = 'باز (خروج سریع K⁺ - IKr)';
+
+            } else {
+                // Phase 4 (Late Diastole): Recovery & Na+/K+ ATPase
+                phaseTitle = 'فاز ۴ (دیاستول): بازگشت به استراحت و فعالیت پمپ Na⁺/K⁺ ATPase';
+                instantDesc = 'سلول به پتانسیل استراحت بازگشته است. پمپ سدیم-پتاسیم و مبدل Na⁺/Ca²⁺ تعادل یونی را برقرار می‌کنند. داروهای کلاس IC به دلیل سینتیک کند (>۱۰ ثانیه) حتی در فاز ۴ نیز از کانال سدیم جدا نمی‌شوند!';
+
+                mGateL.style.transform = 'translateX(0px)';
+                mGateR.style.transform = 'translateX(0px)';
+                hGate.style.transform = 'translateY(0px)';
+                naIons.setAttribute('opacity', '0');
+                caGate.setAttribute('width', '26');
+                caIons.setAttribute('opacity', '0');
+                kGate.setAttribute('width', '16');
+                kIons.setAttribute('opacity', '0.3');
+
+                if (currentCondition === 'class1c') naBlock.setAttribute('opacity', '1');
+
+                document.getElementById('na-state-label').textContent = currentCondition === 'class1c' ? 'هنوز مهار شده (τ > 10s)' : 'Resting (آماده تحریک بعدی)';
+                document.getElementById('ca-state-label').textContent = 'بسته';
+                document.getElementById('k-state-label').textContent = 'کانال نشتی استراحت (IK1)';
+            }
+
+            document.getElementById('current-phase-badge').textContent = phaseTitle;
+            document.getElementById('explain-phase-tag').textContent = `${Math.round(currentTime)} ms`;
+            document.getElementById('explain-instant-text').textContent = instantDesc;
+
+            // Update Heart Conduction System SVG Highlighting
+            updateConductionMap(currentTime);
+
+            // Redraw Canvases
+            drawActionPotentialCanvas();
+            drawECGCanvas();
+        }
+
+        function updateConductionMap(t) {
+            const sa = document.getElementById('cond-sa');
+            const internodal = document.getElementById('cond-internodal');
+            const bachmann = document.getElementById('cond-bachmann');
+            const av = document.getElementById('cond-av');
+            const his = document.getElementById('cond-his');
+            const purkinje = document.getElementById('cond-purkinje');
+            const titleEl = document.getElementById('conduction-active-title');
+
+            // Reset styles
+            sa.setAttribute('fill', '#334155');
+            av.setAttribute('fill', '#334155');
+            internodal.setAttribute('stroke', '#334155');
+            bachmann.setAttribute('stroke', '#334155');
+            his.setAttribute('stroke', '#334155');
+            purkinje.setAttribute('stroke', '#334155');
+
+            if (t < 22) {
+                sa.setAttribute('fill', '#06b6d4');
+                titleEl.textContent = '۱. گره سینوسی-دهلیزی (SA Node): تولید ایمپالس';
+            } else if (t < 42) {
+                sa.setAttribute('fill', '#06b6d4');
+                internodal.setAttribute('stroke', '#06b6d4');
+                bachmann.setAttribute('stroke', '#06b6d4');
+                titleEl.textContent = '۲. دهلیزها و دسته باخمن (ثبت موج P)';
+            } else if (t < 60) {
+                av.setAttribute('fill', '#f59e0b');
+                titleEl.textContent = '۳. گره دهلیزی-بطنی (AV Node): تأخیر فیزیولوژیک (فاصله PR)';
+            } else if (t < 90) {
+                his.setAttribute('stroke', '#f43f5e');
+                purkinje.setAttribute('stroke', '#f43f5e');
+                titleEl.textContent = '۴. دسته هیس و پورکنژ: دپلاریزاسیون سریع بطن (QRS)';
+            } else if (t < 220) {
+                purkinje.setAttribute('stroke', '#10b981');
+                titleEl.textContent = '۵. انقباض عضله بطن (فاز کفه / قطعه ST)';
+            } else if (t < 330) {
+                purkinje.setAttribute('stroke', '#a855f7');
+                titleEl.textContent = '۶. رپلاریزاسیون بطن‌ها (ثبت موج T)';
+            } else {
+                titleEl.textContent = '۷. استراحت دیاستولی قلب (فاز ۴)';
+            }
+        }
+
+        // ---------------------------------------------------------------------
+        // 5. ANIMATION LOOP & CONTROLS
+        // ---------------------------------------------------------------------
+        function animateScrubber() {
+            if (isPlaying && activeMainTab === 'scrubber') {
+                currentTime += playSpeed;
+                if (currentTime > 400) currentTime = 0;
+                updateVisualsForTime(currentTime);
+            }
+            requestAnimationFrame(animateScrubber);
+        }
+
+        function onScrub(val) {
+            if (isPlaying) togglePlay(false);
+            updateVisualsForTime(val);
+        }
+
+        function togglePlay(forceState) {
+            isPlaying = typeof forceState === 'boolean' ? forceState : !isPlaying;
+            const icon = document.getElementById('play-icon');
+            icon.className = isPlaying ? 'fa-solid fa-pause text-lg' : 'fa-solid fa-play text-lg';
+        }
+
+        function setSpeed(spd) {
+            playSpeed = spd;
+            document.querySelectorAll('.speed-btn').forEach(btn => {
+                btn.className = 'speed-btn px-2 py-1 rounded text-slate-400 hover:text-white';
+            });
+            const activeBtn = document.getElementById(`speed-${spd}`);
+            if (activeBtn) activeBtn.className = 'speed-btn px-2 py-1 rounded bg-cyan-500/20 text-cyan-300 font-bold';
+        }
+
+        function jumpToTime(t) {
+            togglePlay(false);
+            updateVisualsForTime(t);
+        }
+
+        function selectCondition(cond) {
+            currentCondition = cond;
+            document.querySelectorAll('.cond-btn').forEach(btn => {
+                if (btn.dataset.cond === cond) {
+                    btn.className = 'cond-btn px-3 py-2.5 rounded-xl border text-right transition-all bg-cyan-500/20 border-cyan-400 text-white shadow-lg shadow-cyan-500/10';
+                } else {
+                    btn.className = 'cond-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all';
+                }
+            });
+
+            // Automatically switch to Slow Response if Class II or IV selected to highlight AV node, or allow user toggle
+            updateVisualsForTime(currentTime);
+        }
+
+        function setCellType(type) {
+            currentCellType = type;
+            const fastBtn = document.getElementById('cell-fast-btn');
+            const slowBtn = document.getElementById('cell-slow-btn');
+            if (type === 'fast') {
+                fastBtn.className = 'px-3 py-1 rounded-lg font-bold bg-cyan-600 text-white transition-all';
+                slowBtn.className = 'px-3 py-1 rounded-lg font-bold text-slate-400 hover:text-white transition-all';
+            } else {
+                slowBtn.className = 'px-3 py-1 rounded-lg font-bold bg-cyan-600 text-white transition-all';
+                fastBtn.className = 'px-3 py-1 rounded-lg font-bold text-slate-400 hover:text-white transition-all';
+            }
+            updateVisualsForTime(currentTime);
+        }
+
+        // ---------------------------------------------------------------------
+        // 6. PACEMAKER 4 MECHANISMS INTERACTIVE DIAGRAM (SLIDE 23)
+        // ---------------------------------------------------------------------
+        function setPacemakerMech(mech) {
+            document.querySelectorAll('.pm-mech-btn').forEach(b => {
+                b.className = 'pm-mech-btn px-3 py-2 rounded-xl border border-slate-800 bg-slate-950 text-slate-300 hover:bg-slate-800 text-xs font-bold text-right';
+            });
+            document.getElementById(`pm-btn-${mech}`).className = 'pm-mech-btn px-3 py-2 rounded-xl border border-cyan-500 bg-cyan-500/20 text-white text-xs font-bold text-right';
+
+            const drugPath = document.getElementById('pm-drug-path');
+            const threshDrug = document.getElementById('pm-thresh-drug');
+            const desc = document.getElementById('pm-mech-desc');
+            threshDrug.setAttribute('opacity', '0');
+
+            if (mech === 'slope4') {
+                drugPath.setAttribute('d', 'M 30 120 L 30 20 Q 55 25 75 50 L 105 125 L 315 85 L 315 20 Q 340 25 360 50 L 390 125');
+                desc.textContent = 'A) کاهش شیب فاز ۴ (Decreased phase 4 slope): مانند بتابلاکرها و بلوکرهای کانال کلسیم؛ زمان رسیدن به آستانه طولانی‌تر می‌شود.';
+            } else if (mech === 'threshold') {
+                threshDrug.setAttribute('y1', '68');
+                threshDrug.setAttribute('y2', '68');
+                threshDrug.setAttribute('opacity', '1');
+                drugPath.setAttribute('d', 'M 30 120 L 30 20 Q 55 25 75 50 L 105 125 L 285 68 L 285 20 Q 310 25 330 50 L 360 125');
+                desc.textContent = 'B) بالا بردن آستانه تحریک (Increased threshold): پتانسیل آستانه به سمت ولتاژهای مثبت‌تر می‌رود (بلوکرهای کانال سدیم و کلسیم).';
+            } else if (mech === 'mdp') {
+                drugPath.setAttribute('d', 'M 30 120 L 30 20 Q 55 25 75 50 L 112 146 L 295 85 L 295 20 Q 320 25 340 50 L 370 146');
+                desc.textContent = 'C) افزایش حداکثر پتانسیل دیاستولی (منفی‌تر شدن MDP - مثلاً با آدنوزین و فعال‌سازی جریان پتاسیم حساس به استیل‌کولین): شروع فاز ۴ از نقطه پایین‌تری آغاز می‌شود.';
+            } else if (mech === 'apd') {
+                drugPath.setAttribute('d', 'M 30 120 L 30 20 Q 85 25 125 50 L 165 125 L 280 85 L 280 20 Q 335 25 375 50 L 415 125');
+                desc.textContent = 'D) افزایش طول پتانسیل عمل (Increased APD): با طولانی شدن خود پتانسیل عمل (کلاس III و IA)، ضربان بعدی به تأخیر می‌افتد.';
+            }
+        }
+
+        // ---------------------------------------------------------------------
+        // 7. COMPREHENSIVE DRUG DATABASE (SLIDES 30-54)
+        // ---------------------------------------------------------------------
+        const drugsCatalog = [
+            {
+                name: 'پروکائین‌آماید (Procainamide)',
+                classTag: '1A',
+                classLabel: 'کلاس IA',
+                color: 'rose',
+                simCond: 'class1a',
+                mechanism: 'مهار کانال‌های سدیم فعال (کاهش شیب فاز ۰ و پهن شدن QRS) + مهار کانال‌های پتاسیم (افزایش APD و QT) + خواص گانگلیون‌بلاکر.',
+                kinetics: 'متابولیسم از طریق کونژوگاسیون و استیلاسیون (پلی‌مورفیسم ژنتیکی). متابولیت فعال آن N-acetylprocainamide (NAPA) دارای اثر کلاس III (مهار کانال پتاسیم) است!',
+                uses: 'مؤثر بر هر دو آریتمی‌های دهلیزی (فوق‌بطنی) و بطنی.',
+                adverse: [
+                    'افت فشار خون (Hypotension) در تزریق وریدی به علت خاصیت گانگلیون‌بلاکر',
+                    'در استیلاتورهای سریع (Fast acetylators): تجمع NAPA ← طولانی شدن QT، ایجاد Torsades de pointes و سنکوپ',
+                    'در استیلاتورهای آهسته (Slow acetylators): سندرم لوپوس ناشی از دارو (Drug-induced lupus)، پریکاردیت و افزایش تیتر آنتی‌بادی ضد هسته (ANA) در تقریباً تمام بیماران در مصرف طولانی‌مدت'
+                ]
+            },
+            {
+                name: 'کینیدین (Quinidine)',
+                classTag: '1A',
+                classLabel: 'کلاس IA',
+                color: 'rose',
+                simCond: 'class1a',
+                mechanism: 'مهار کانال‌های Na⁺ و K⁺ (کاهش شیب فاز ۰ و افزایش APD) + اثرات آنتی‌موسکارینی در قلب + مهارکننده گیرنده آلفا (α-blocker).',
+                kinetics: 'به دلیل عوارض قلبی و خارج‌قلبی متعدد، امروزه به ندرت استفاده می‌شود.',
+                uses: 'آریتمی‌های فوق‌بطنی و بطنی.',
+                adverse: [
+                    'آریتمی Torsades de pointes (به علت طولانی شدن فاصله QT)',
+                    'سینکونیسم (Cinchonism): سردرد، سرگیجه و وزوز گوش (Tinnitus)',
+                    'افت فشار خون (به علت مهار آلفا-آدرنرژیک) و عوارض گوارشی',
+                    'واکنش‌های ایمونولوژیک از جمله ترومبوسیتوپنی (کاهش پلاکت)'
+                ]
+            },
+            {
+                name: 'دیزوپرامید (Disopyramide)',
+                classTag: '1A',
+                classLabel: 'کلاس IA',
+                color: 'rose',
+                simCond: 'class1a',
+                mechanism: 'مهار کانال Na⁺ و K⁺ + اثر اینوتروپ منفی قوی + اثرات آنتی‌موسکارینی (شبه آتروپین) بسیار قوی‌تر از کینیدین بر روی قلب.',
+                kinetics: 'نکته کلیدی: به دلیل اثر آنتی‌موسکارینی قوی، هنگام درمان فلاتر یا فیبریلاسیون دهلیزی باید حتماً همراه با یک داروی کاهنده هدایت گره AV تجویز شود.',
+                uses: 'اگرچه در آریتمی‌های فوق‌بطنی هم مؤثر است، اما فقط برای آریتمی‌های بطنی تایید (Approve) شده است.',
+                adverse: [
+                    'بروز یا تشدید نارسایی قلبی (Heart Failure) به علت اثر اینوتروپ منفی قوی',
+                    'عوارض آنتی‌موسکارینی (شبه آتروپین): خشکی دهان، احتباس ادراری، تاری دید',
+                    'طولانی شدن QT و خطر Torsades de pointes'
+                ]
+            },
+            {
+                name: 'لیدوکائین (Lidocaine)',
+                classTag: '1B',
+                classLabel: 'کلاس IB',
+                color: 'sky',
+                simCond: 'class1b',
+                mechanism: 'مهار کانال‌های سدیمی فعال و غیرفعال با سینتیک بسیار سریع (τ < 1s). بدون اثر بر کانال K⁺. کوتاه کردن فاز کفه (فاز ۲). اثر انتخابی بر بافت بطنی و پورکنژ ایسکمیک/دپلاریزه.',
+                kinetics: 'فقط به صورت تزریقی (وریدی IV یا عضلانی IM) مصرف می‌شود. تداخل دارویی مهم با پروپرانولول و سایمتیدین (کاهش متابولیسم لیدوکائین).',
+                uses: 'داروی انتخابی (Agent of choice) برای ختم آریتمی‌های بطنی حاد ناشی از انفارکتوس میوکارد (AMI). در آریتمی‌های دهلیزی هیچ کاربردی ندارد!',
+                adverse: [
+                    'کمترین اثر روی سلول‌های نرمال قلب و نوار قلب (کمترین عارضه قلبی)',
+                    'عوارض نورولوژیک (مشابه سایر بی‌حس‌کننده‌های موضعی): پارستزی، ترمور (لرزش)، تهوع با منشأ مرکزی و تشنج (Convulsions)'
+                ]
+            },
+            {
+                name: 'مگزیلتین (Mexiletine)',
+                classTag: '1B',
+                classLabel: 'کلاس IB',
+                color: 'sky',
+                simCond: 'class1b',
+                mechanism: 'آنالوگ خوراکی لیدوکائین با مکانیسم کلاس IB (مهار سریع کانال‌های سدیم در بافت بطنی).',
+                kinetics: 'فعال از راه خوراکی (Orally active).',
+                uses: 'درمان خوراکی آریتمی‌های بطنی و درمان دردهای نوروپاتیک (Neuropathic pain).',
+                adverse: [
+                    'عوارض CNS (ترمور، سرگیجه) و گوارشی'
+                ]
+            },
+            {
+                name: 'فنی‌توئین (Phenytoin)',
+                classTag: '1B',
+                classLabel: 'کلاس IB',
+                color: 'sky',
+                simCond: 'class1b',
+                mechanism: 'داروی ضدتشنج (یک بی‌حس‌کننده موضعی واقعی نیست) اما به دلیل ویژگی‌های الکتروفیزیولوژیک در گروه IB دسته‌بندی می‌شود.',
+                kinetics: 'تجربه بالینی ویژه در مسمومیت گلیکوزیدهای قلبی.',
+                uses: 'کاربرد اختصاصی برای معکوس کردن آریتمی‌های ناشی از مسمومیت با دیژیتال / دیگوکسین (Digitalis-induced arrhythmias).',
+                adverse: [
+                    'عوارض سیستم عصبی مرکزی در دوزهای بالا'
+                ]
+            },
+            {
+                name: 'فلکاینید (Flecainide)',
+                classTag: '1C',
+                classLabel: 'کلاس IC',
+                color: 'emerald',
+                simCond: 'class1c',
+                mechanism: 'مهارکننده بسیار قوی کانال سدیم با سینتیک جدایی آهسته (τ > 10s). کاهش شدید شیب فاز ۰ و سرعت هدایت در دهلیز و بطن. افزایش بارز مدت QRS بدون هیچ اثری بر طول پتانسیل عمل (APD) یا فاصله QT.',
+                kinetics: 'خط آخر درمان (Last choice) به دلیل بیشترین احتمال تشدید یا ایجاد آریتمی جدید (اثر پروآریتمیک).',
+                uses: 'تایید شده فقط برای تاکی‌کاردی‌های بطنی مقاوم (Refractory VT) و آریتمی‌های فوق‌بطنی خاص.',
+                adverse: [
+                    'بیشترین خطر پروآریتمیک (تشدید آریتمی‌های کشنده)',
+                    'سمیت CNS مشابه بی‌حس‌کننده‌های موضعی'
+                ]
+            },
+            {
+                name: 'پروپافنون (Propafenone)',
+                classTag: '1C',
+                classLabel: 'کلاس IC',
+                color: 'emerald',
+                simCond: 'class1c',
+                mechanism: 'بسیار مشابه فلکاینید (مهار قوی کانال سدیم با سینتیک کند و کاهش شیب فاز ۰).',
+                kinetics: 'ساختار مشابه بتابلاکرها.',
+                uses: 'حفظ ریتم سینوسی در بیماران مبتلا به تاکی‌کاردی‌های فوق‌بطنی از جمله فیبریلاسیون دهلیزی (AF).',
+                adverse: [
+                    'پهن شدن QRS و خطر پروآریتمی در بیماران با بیماری ساختاری قلب'
+                ]
+            },
+            {
+                name: 'پروپرانولول و اسمولول (Class II)',
+                classTag: 'II',
+                classLabel: 'کلاس II',
+                color: 'amber',
+                simCond: 'class2',
+                mechanism: 'مهار گیرنده‌های بتا-آدرنرژیک قلبی و کاهش cAMP ← کاهش هر دو جریان سدیم و کلسیم و سرکوب پیس‌میکرهای غیرطبیعی. گره AV به شدت به بتابلاکرها حساس است.',
+                kinetics: 'اسمولول (Esmolol) یک بتابلاکر وریدی بسیار کوتاه‌اثر است.',
+                uses: 'کنترل ریتم و سرعت بطنی؛ اسمولول منحصراً در آریتمی‌های حاد و آریتمی‌های حین جراحی استفاده می‌شود.',
+                adverse: [
+                    'برادی‌کاردی، بلوک گره AV، افت فشار خون و برونکواسپاسم (در انواع غیرانتخابی)'
+                ]
+            },
+            {
+                name: 'آمیودارون (Amiodarone) و دروندارون',
+                classTag: 'III',
+                classLabel: 'کلاس III (چندکاناله)',
+                color: 'purple',
+                simCond: 'class3',
+                mechanism: 'برهم زدن محیط لیپیدی کانال‌های یونی. دارای اثرات هر ۴ کلاس: مهار کانال پتاسیم (افزایش شدید APD)، مهار کانال سدیم غیرفعال، کاهش جریان کلسیم و مهار بتا-آدرنرژیک.',
+                kinetics: 'مؤثرترین داروی ضدآریتمی! عدم افزایش مرگ‌ومیر در بیماران CAD یا نارسایی قلبی (CHF). دروندارون (Dronedarone): مشتق بدون ید آمیودارون است که عوارض بسیار کمتری دارد اما در حفظ ریتم سینوسی کم‌اثرتر است.',
+                uses: 'در فرم تزریقی (IV): خط اول درمان VT یا VF منجر به ایست قلبی. در فرم خوراکی: VT/VF راجعه مقاوم به سایر داروها و درمان رایج فیبریلاسیون دهلیزی (AF).',
+                adverse: [
+                    'کمترین احتمال ایجاد Torsades de pointes (به علت مهار هم‌زمان کلسیم و بتا)',
+                    'فیبروز ریوی (Pulmonary fibrosis)',
+                    'اختلال عملکرد تیروئید (کم‌کاری یا پرکاری تیروئید - به علت داشتن ید)',
+                    'رسوبات میکروکریستالی در قرنیه و پوست، پارستزی و ترمور'
+                ]
+            },
+            {
+                name: 'سوتالول، دوفتیلید و ایبوتیلید (Class III)',
+                classTag: 'III',
+                classLabel: 'کلاس III',
+                color: 'purple',
+                simCond: 'class3',
+                mechanism: 'مهار کانال‌های پتاسیمی IKr (مسئول رپلاریزاسیون فاز ۳) ← طولانی شدن شدید پتانسیل عمل (APD) و فاصله QT. سوتالول علاوه بر اثر کلاس III، دارای اثر بتابلاکری (کلاس II) نیز هست.',
+                kinetics: 'دوفتیلید و ایبوتیلید داروهای تیپیک و خالص گروه ۳ هستند.',
+                uses: 'آریتمی‌های فوق‌بطنی (مانند فلاتر و فیبریلاسیون دهلیزی) و بطنی.',
+                adverse: [
+                    'طولانی شدن وابسته به دوز فاصله QT و خطر بالای ایجاد Torsades de pointes'
+                ]
+            },
+            {
+                name: 'وراپامیل و دیلتیازم (Verapamil & Diltiazem)',
+                classTag: 'IV',
+                classLabel: 'کلاس IV',
+                color: 'pink',
+                simCond: 'class4',
+                mechanism: 'مهار کانال‌های کلسیمی در بافت‌های قلبی وابسته به کلسیم (مانند گره AV). کاهش سرعت هدایت AV و افزایش فاصله PR.',
+                kinetics: 'هم به صورت خوراکی و هم تزریقی (Parenteral) در دسترس هستند.',
+                uses: 'بسیار مؤثر برای تبدیل تاکی‌کاردی گره دهلیزی-بطنی (AV nodal tachycardia) به ریتم نرمال و کنترل پاسخ بطنی.',
+                adverse: [
+                    'تضعیف بیش‌ازحد انقباض قلب (Negative inotrope)',
+                    'تضعیف شدید هدایت گره AV (بلوک قلبی) و افت فشار خون'
+                ]
+            },
+            {
+                name: 'آدنوزین (Adenosine)',
+                classTag: 'MISC',
+                classLabel: 'متفرقه (خط اول گره AV)',
+                color: 'teal',
+                simCond: 'class4',
+                mechanism: '۱) فعال‌سازی جریان پتاسیم حساس به استیل‌کولین (هایپرپلاریزاسیون) و ۲) مهار جریان کلسیم ← در دوز بالا (۶ تا ۱۲ میلی‌گرم) هدایت در گره AV را به شدت کند یا کاملاً مسدود می‌کند.',
+                kinetics: 'نیمه‌عمر (t1/2) در خون کمتر از ۱۰ ثانیه است! (تزریق سریع وریدی).',
+                uses: 'داروی انتخابی (Drug of choice) برای آریتمی‌های گره AV (تبدیل فوری PSVT).',
+                adverse: [
+                    'عوارض بسیار گذرا (چند ثانیه‌ای): گرگرفتگی، تنگی نفس و احساس ایست موقت قلبی'
+                ]
+            },
+            {
+                name: 'پتاسیم، منیزیم و دیژیتال (Misc)',
+                classTag: 'MISC',
+                classLabel: 'متفرقه (الکترولیت‌ها و دیگوکسین)',
+                color: 'teal',
+                simCond: 'hyperkalemia',
+                mechanism: '• پتاسیم: دپلاریزه کردن پتانسیل استراحت و تثبیت پتانسیل غشا (سرکوب پیس‌میکرهای نابجا).\n• منیزیم: اثر بر پمپ Na⁺/K⁺ ATPase و کانال‌های یونی.\n• دیژیتال: افزایش غیرمستقیم فعالیت کولینرژیک (واگ) و کاهش سرعت هدایت AV.',
+                kinetics: 'تنظیم دقیق الکترولیت‌ها خط اول مدیریت مسمومیت‌های آریتمی‌زا است.',
+                uses: '• پتاسیم: اندیکاسیون در مسمومیت با دیژیتال (Digitalis toxicity).\n• منیزیم: ۱) آریتمی ناشی از دیژیتال (در صورت وجود هیپومنیزمی) و ۲) درمان انتخابی Torsades de pointes.',
+                adverse: [
+                    'مسمومیت با دیژیتال خود در ۲۵٪ بیماران باعث آریتمی می‌شود که با پتاسیم، منیزیم یا فنی‌توئین درمان می‌گردد.'
+                ]
+            }
+        ];
+
+        function renderDrugCards(filter = 'all') {
+            const container = document.getElementById('drugs-grid');
+            container.innerHTML = '';
+
+            const colorMap = {
+                rose: 'border-rose-500/40 bg-rose-500/10 text-rose-300',
+                sky: 'border-sky-500/40 bg-sky-500/10 text-sky-300',
+                emerald: 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300',
+                amber: 'border-amber-500/40 bg-amber-500/10 text-amber-300',
+                purple: 'border-purple-500/40 bg-purple-500/10 text-purple-300',
+                pink: 'border-pink-500/40 bg-pink-500/10 text-pink-300',
+                teal: 'border-teal-500/40 bg-teal-500/10 text-teal-300'
+            };
+
+            const filtered = filter === 'all' ? drugsCatalog : drugsCatalog.filter(d => d.classTag === filter);
+
+            filtered.forEach(drug => {
+                const badgeCls = colorMap[drug.color] || colorMap.teal;
+                const advList = drug.adverse.map(a => `<li class="flex items-start gap-1.5"><span class="text-rose-400 mt-0.5">•</span><span>${a}</span></li>`).join('');
+
+                const card = document.createElement('div');
+                card.className = 'bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-5 shadow-xl flex flex-col justify-between transition-all';
+                card.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2 border-b border-slate-800 pb-3">
+                            <h3 class="text-base font-black text-white">${drug.name}</h3>
+                            <span class="px-2.5 py-1 rounded-lg text-xs font-extrabold border ${badgeCls} shrink-0">${drug.classLabel}</span>
+                        </div>
+                        <div class="text-xs space-y-2 leading-relaxed">
+                            <div>
+                                <span class="font-bold text-cyan-400">مکانیسم اثر: </span>
+                                <span class="text-slate-300 whitespace-pre-line">${drug.mechanism}</span>
+                            </div>
+                            <div>
+                                <span class="font-bold text-amber-400">فارماکوکینتیک و نکته طلایی: </span>
+                                <span class="text-slate-300">${drug.kinetics}</span>
+                            </div>
+                            <div>
+                                <span class="font-bold text-emerald-400">کاربرد بالینی: </span>
+                                <span class="text-slate-300 whitespace-pre-line">${drug.uses}</span>
+                            </div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800/90">
+                                <div class="font-bold text-rose-400 mb-1">عوارض جانبی و سمیت (نکات امتحانی):</div>
+                                <ul class="space-y-1 text-slate-300 text-[11px]">${advList}</ul>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="simulateDrugInScrubber('${drug.simCond}')" class="mt-4 w-full py-2 rounded-xl bg-slate-950 hover:bg-cyan-600 hover:text-white text-cyan-400 border border-cyan-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play"></i>
+                        <span>مشاهده اثر این دارو روی منحنی اسکرابر</span>
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterDrugs(flt) {
+            document.querySelectorAll('.drug-filter-btn').forEach(btn => {
+                if (btn.dataset.filter === flt) {
+                    btn.className = 'drug-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-cyan-600 text-white';
+                } else {
+                    btn.className = 'drug-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800';
+                }
+            });
+            renderDrugCards(flt);
+        }
+
+        function simulateDrugInScrubber(cond) {
+            switchMainTab('scrubber');
+            selectCondition(cond);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ---------------------------------------------------------------------
+        // 8. LIVE TORSADES DE POINTES & ARRHYTHMIA STRIP MONITOR + QUIZ
+        // ---------------------------------------------------------------------
+        let currentStripType = 'tdp';
+        let stripOffset = 0;
+
+        function setRhythmStrip(type) {
+            currentStripType = type;
+            document.querySelectorAll('.strip-btn').forEach(b => {
+                b.className = 'strip-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-slate-300 border border-slate-800';
+            });
+            document.getElementById(`strip-btn-${type}`).className = 'strip-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-600 text-white shadow-lg shadow-rose-600/30';
+
+            const infoBox = document.getElementById('strip-info-box');
+            if (type === 'tdp') {
+                infoBox.innerHTML = `<strong class="text-rose-400">Torsades de Pointes (اسلایدهای ۳۱، ۳۲ و ۵۳):</strong> یک تاکی‌کاردی بطنی پلی‌مورفیک (چندشکلی) که در آن محور کمپلکس‌های QRS حول خط پایه می‌چرخد. ناشی از طولانی شدن فاصله QT توسط کلاس IA و کلاس III (به جز آمیودارون). همراه با سرگیجه، سنکوپ و خطر مرگ ناگهانی. <strong>درمان انتخابی: منیزیم سولفات وریدی.</strong>`;
+            } else if (type === 'nsr') {
+                infoBox.innerHTML = `<strong class="text-emerald-400">ریتم سینوسی طبیعی (Normal Sinus Rhythm - اسلاید ۵):</strong> ضربان ۶۰ تا ۱۰۰ بار در دقیقه، منشأ گرفته از گره SA، دارای موج P منظم قبل از هر کمپلکس QRS باریک و فاصله QT طبیعی.`;
+            } else if (type === 'afib') {
+                infoBox.innerHTML = `<strong class="text-amber-400">فیبریلاسیون دهلیزی (Atrial Fibrillation - AFib):</strong> عدم وجود موج P مشخص، خط پایه مواج و فواصل R-R کاملاً نامنظم. داروهای مؤثر در حفظ ریتم سینوسی: پروپافنون (IC)، آمیودارون و سوتالول (III). در صورت تجویز دیزوپرامید باید حتماً داروی کاهنده هدایت AV همراه آن داده شود.`;
+            } else if (type === 'vt') {
+                infoBox.innerHTML = `<strong class="text-purple-400">تاکی‌کاردی بطنی (Ventricular Tachycardia - VT):</strong> کمپلکس‌های QRS پهن و سریع. در VT ناشی از ایسکمی حاد (AMI) داروی انتخابی <strong>لیدوکائین وریدی</strong> است؛ در VT/VF منجر به ایست قلبی یا مقاوم به درمان، خط اول <strong>آمیودارون</strong> است.`;
+            }
+        }
+
+        function animateRhythmStrip() {
+            if (activeMainTab === 'strips') {
+                const canvas = document.getElementById('rhythm-strip-canvas');
+                if (canvas) {
+                    const rect = canvas.parentElement.getBoundingClientRect();
+                    canvas.width = rect.width * window.devicePixelRatio;
+                    canvas.height = rect.height * window.devicePixelRatio;
+                    const ctx = canvas.getContext('2d');
+                    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+                    const w = rect.width;
+                    const h = rect.height;
+                    ctx.clearRect(0, 0, w, h);
+
+                    const midY = h / 2;
+                    ctx.beginPath();
+                    ctx.strokeStyle = currentStripType === 'tdp' ? '#f43f5e' : '#10b981';
+                    ctx.shadowColor = ctx.strokeStyle;
+                    ctx.shadowBlur = 8;
+                    ctx.lineWidth = 2.8;
+
+                    for (let x = 0; x < w; x++) {
+                        let t = (x + stripOffset) * 0.08;
+                        let y = midY;
+
+                        if (currentStripType === 'tdp') {
+                            // Classic twisting spindle envelope of Torsades de Pointes
+                            let envelope = Math.sin(t * 0.14) * Math.cos(t * 0.05);
+                            let carrier = Math.sin(t * 1.9);
+                            y = midY - envelope * carrier * (h * 0.42);
+                        } else if (currentStripType === 'nsr') {
+                            let cycle = ((x + stripOffset * 2) % 140) * 2.8;
+                            y = midY - getECGVoltage(cycle, 'normal') * (h * 0.42);
+                        } else if (currentStripType === 'afib') {
+                            let fibNoise = Math.sin(t * 3.5) * 4 + Math.cos(t * 6.2) * 3;
+                            let rPeak = Math.exp(-Math.pow(((x + stripOffset * 2.2) % 95) - 45, 2) / 10) * (h * 0.42);
+                            y = midY + fibNoise - rPeak;
+                        } else if (currentStripType === 'vt') {
+                            y = midY - (Math.sin(t * 1.35) * 0.8 + Math.sin(t * 2.7) * 0.25) * (h * 0.38);
+                        }
+
+                        if (x === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                    stripOffset += 1.6;
+                }
+            }
+            requestAnimationFrame(animateRhythmStrip);
+        }
+
+        // 10 High-Yield Pharmacy Exam Questions from Dr. Gholibeiki's PDF
+        const quizQuestions = [
+            {
+                q: '۱. کدام داروی زیر دارای متابولیت فعالی به نام NAPA (با خاصیت کلاس III) است که در استیلاتورهای سریع خطر Torsades و در استیلاتورهای آهسته لوپوس دارویی ایجاد می‌کند؟',
+                options: ['کینیدین (Quinidine)', 'پروکائین‌آماید (Procainamide)', 'دیزوپرامید (Disopyramide)', 'فلکاینید (Flecainide)'],
+                answer: 1,
+                explanation: 'طبق اسلاید ۳۳، پروکائین‌آماید به N-acetylprocainamide (NAPA) استیله می‌شود که فعالیت کلاس III دارد. در استیلاتورهای سریع Torsades و در استیلاتورهای آهسته لوپوس القاشده با دارو و افزایش تیتر ANA ایجاد می‌کند.'
+            },
+            {
+                q: '۲. داروی انتخابی (Agent of choice) برای ختم آریتمی‌های بطنی حاد ناشی از انفارکتوس میوکارد (AMI) کدام است و با کدام داروها تداخل مهمی دارد؟',
+                options: ['فلکاینید - تداخل با دیگوکسین', 'لیدوکائین - تداخل با پروپرانولول و سایمتیدین', 'دیزوپرامید - تداخل با وراپامیل', 'پروپافنون - تداخل با آدنوزین'],
+                answer: 1,
+                explanation: 'طبق اسلایدهای ۳۷ و ۳۸، لیدوکائین (تزریقی IV/IM) داروی انتخابی در آریتمی‌های بطنی ناشی از ایسکمی حاد (AMI) است، در آریتمی دهلیزی کاربردی ندارد و با پروپرانولول و سایمتیدین تداخل دارد.'
+            },
+            {
+                q: '۳. کدام زیرگروه از مهارکننده‌های کانال سدیم، قوی‌ترین کاهش شیب فاز ۰ و پهن شدن QRS را ایجاد می‌کنند اما هیچ اثری بر طول پتانسیل عمل (APD) و فاصله QT ندارند؟',
+                options: ['کلاس IA (کینیدین)', 'کلاس IB (لیدوکائین)', 'کلاس IC (فلکاینید و پروپافنون)', 'کلاس III (سوتالول)'],
+                answer: 2,
+                explanation: 'طبق اسلایدهای ۲۹ و ۴۰، داروهای کلاس IC (مانند فلکاینید) با سینتیک جدایی بسیار آهسته (>۱۰ ثانیه) شیب فاز ۰ را به شدت کم کرده و QRS را پهن می‌کنند، اما اثری بر APD و QT ندارند.'
+            },
+            {
+                q: '۴. کدام داروی ضدآریتمی بیشترین اثرات آنتی‌موسکارینی قلبی (حتی بیش از کینیدین) و اثر اینوتروپ منفی قوی دارد و در فلاتر دهلیزی باید همراه با داروی کاهنده هدایت AV تجویز شود؟',
+                options: ['دیزوپرامید (Disopyramide)', 'مگزیلتین (Mexiletine)', 'پروکائین‌آماید (Procainamide)', 'اسمولول (Esmolol)'],
+                answer: 0,
+                explanation: 'طبق اسلاید ۳۵، دیزوپرامید اثرات آنتی‌موسکارینی بسیار بارزی دارد و به دلیل اثر اینوتروپ منفی می‌تواند باعث نارسایی قلبی شود.'
+            },
+            {
+                q: '۵. در مورد «آمیودارون» کدام گزینه بر اساس جزوه صحیح است؟',
+                options: [
+                    'بیشترین احتمال ایجاد Torsades de pointes را در بین تمام داروها دارد.',
+                    'مشتق بدون ید آن (دروندارون) اثربخشی بسیار بیشتری در حفظ ریتم سینوسی دارد.',
+                    'مؤثرترین داروی ضدآریتمی است، به ندرت آریتمی جدید ایجاد می‌کند و مرگ‌ومیر را در بیماران CAD یا CHF افزایش نمی‌دهد.',
+                    'فقط کانال‌های پتاسیم را مهار می‌کند و اثری روی کانال سدیم یا کلسیم ندارد.'
+                ],
+                answer: 2,
+                explanation: 'طبق اسلایدهای ۴۵ تا ۴۸، آمیودارون کانال‌های Na، K، Ca و گیرنده بتا را مهار می‌کند، مؤثرترین دارو است، به ندرت باعث Torsades می‌شود و مرگ‌ومیر را در CAD یا CHF بالا نمی‌برد. دروندارون عوارض کمتر اما اثربخشی کمتری دارد.'
+            },
+            {
+                q: '۶. داروی انتخابی (Drug of choice) برای آریتمی‌های گره دهلیزی-بطنی (AV node) که نیمه‌عمر آن در خون کمتر از ۱۰ ثانیه است کدام است؟',
+                options: ['اسمولول (Esmolol)', 'آدنوزین (Adenosine)', 'دیگوکسین (Digoxin)', 'فنی‌توئین (Phenytoin)'],
+                answer: 1,
+                explanation: 'طبق اسلاید ۵۱، آدنوزین با دوز ۶ تا ۱۲ میلی‌گرم و نیمه‌عمر کمتر از ۱۰ ثانیه، از طریق فعال کردن جریان پتاسیم حساس به استیل‌کولین و مهار جریان کلسیم، داروی انتخابی آریتمی گره AV است.'
+            },
+            {
+                q: '۷. کدام بتابلاکر بسیار کوتاه‌اثر وریدی بوده و به طور اختصاصی در آریتمی‌های حاد حین جراحی استفاده می‌شود؟',
+                options: ['سوتالول (Sotalol)', 'پروپرانولول (Propranolol)', 'اسمولول (Esmolol)', 'پروپافنون (Propafenone)'],
+                answer: 2,
+                explanation: 'طبق اسلاید ۴۲، اسمولول یک بتابلاکر بسیار کوتاه‌اثر وریدی است که منحصراً در آریتمی‌های حاد (به‌ویژه آریتمی حین جراحی) کاربرد دارد.'
+            },
+            {
+                q: '۸. در شرایط هایپرکالمی (Hyperkalemia) یا ایسکمی میوکارد که پتانسیل استراحت غشا از ۹۰- به ۶۰- میلی‌ولت تغییر می‌کند، چه اتفاقی رخ می‌دهد؟',
+                options: [
+                    'کانال‌های سدیمی بیشتری در دسترس قرار گرفته و سرعت فاز ۰ افزایش می‌یابد.',
+                    'بخشی از کانال‌های سدیمی غیرفعال شده، سرعت فاز ۰، دامنه پتانسیل عمل و سرعت هدایت کاهش می‌یابد.',
+                    'طول پتانسیل عمل (APD) به شدت طولانی می‌شود.',
+                    'غشا هایپرپلاریزه می‌شود.'
+                ],
+                answer: 1,
+                explanation: 'طبق اسلایدهای ۱۷ و ۲۰، در پتانسیل استراحت کمتر منفی (-60mV)، کانال‌های سدیمی کمتری در دسترس هستند که منجر به کاهش تحریک‌پذیری، کاهش سرعت فاز ۰، کاهش دامنه AP و کاهش سرعت هدایت می‌شود.'
+            },
+            {
+                q: '۹. برای درمان آریتمی بطنی و دردهای نوروپاتیک به صورت خوراکی کدام دارو کاربرد دارد و کدام دارو برای معکوس کردن آریتمی ناشی از دیژیتال استفاده می‌شود؟',
+                options: [
+                    'مگزیلتین (خوراکی در درد نوروپاتیک و آریتمی بطنی) - فنی‌توئین (در مسمومیت دیژیتال)',
+                    'لیدوکائین خوراکی - کینیدین',
+                    'دیزوپرامید - فلکاینید',
+                    'وراپامیل - آدنوزین'
+                ],
+                answer: 0,
+                explanation: 'طبق اسلاید ۳۷، مگزیلتین آنالوگ خوراکی لیدوکائین (کلاس IB) است که در آریتمی بطنی و دردهای نوروپاتیک کاربرد دارد و فنی‌توئین برای برطرف کردن آریتمی ناشی از دیژیتال به کار می‌رود.'
+            },
+            {
+                q: '۱۰. در درمان آریتمی Torsades de pointes کدام الکترولیت کاربرد درمانی دارد؟',
+                options: ['کلسیم', 'منیزیم (Magnesium)', 'سدیم', 'بی‌کربنات'],
+                answer: 1,
+                explanation: 'طبق اسلاید ۵۳، منیزیم بر پمپ Na+/K+ ATPase و کانال‌های یونی اثر گذاشته و در درمان Torsades de pointes و آریتمی ناشی از دیژیتال (در حضور هیپومنیزمی) کاربرد دارد.'
+            }
+        ];
+
+        let userAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((item, idx) => {
+                const qCard = document.createElement('div');
+                qCard.className = 'bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3';
+
+                const optsHtml = item.options.map((opt, oIdx) => {
+                    return `
+                        <button onclick="answerQuiz(${idx}, ${oIdx})" id="q-${idx}-opt-${oIdx}" class="w-full text-right p-3 rounded-xl border border-slate-800 bg-slate-900 hover:bg-slate-800 text-xs text-slate-200 transition-all flex items-center justify-between">
+                            <span>${opt}</span>
+                            <span id="q-${idx}-icon-${oIdx}"></span>
+                        </button>
+                    `;
+                }).join('');
+
+                qCard.innerHTML = `
+                    <div class="text-xs md:text-sm font-extrabold text-white leading-relaxed">${item.q}</div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">${optsHtml}</div>
+                    <div id="q-exp-${idx}" class="hidden p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/30 text-xs text-cyan-200 leading-relaxed">
+                        <strong>پاسخ تشریحی: </strong> ${item.explanation}
+                    </div>
+                `;
+                container.appendChild(qCard);
+            });
+        }
+
+        function answerQuiz(qIdx, selectedIdx) {
+            if (userAnswers[qIdx] !== undefined) return; // Already answered
+            userAnswers[qIdx] = selectedIdx;
+
+            const correctIdx = quizQuestions[qIdx].answer;
+            quizQuestions[qIdx].options.forEach((_, oIdx) => {
+                const btn = document.getElementById(`q-${qIdx}-opt-${oIdx}`);
+                const icon = document.getElementById(`q-${qIdx}-icon-${oIdx}`);
+                if (oIdx === correctIdx) {
+                    btn.className = 'w-full text-right p-3 rounded-xl border border-emerald-500 bg-emerald-500/20 text-xs text-white font-bold flex items-center justify-between';
+                    icon.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400"></i>';
+                } else if (oIdx === selectedIdx) {
+                    btn.className = 'w-full text-right p-3 rounded-xl border border-rose-500 bg-rose-500/20 text-xs text-rose-200 font-bold flex items-center justify-between';
+                    icon.innerHTML = '<i class="fa-solid fa-circle-xmark text-rose-400"></i>';
+                }
+            });
+
+            document.getElementById(`q-exp-${qIdx}`).classList.remove('hidden');
+            updateQuizScore();
+        }
+
+        function updateQuizScore() {
+            let correct = 0;
+            Object.keys(userAnswers).forEach(qIdx => {
+                if (userAnswers[qIdx] === quizQuestions[qIdx].answer) correct++;
+            });
+            document.getElementById('quiz-score-badge').textContent = `امتیاز: ${correct} از ۱۰`;
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            updateQuizScore();
+            renderQuiz();
+        }
+
+        // ---------------------------------------------------------------------
+        // 9. MAIN TAB NAVIGATION & WINDOW RESIZE HANDLING
+        // ---------------------------------------------------------------------
+        function switchMainTab(tabName) {
+            activeMainTab = tabName;
+            ['scrubber', 'concepts', 'drugs', 'strips'].forEach(t => {
+                const sec = document.getElementById(`section-${t}`);
+                const btn = document.getElementById(`tab-btn-${t}`);
+                if (t === tabName) {
+                    sec.classList.remove('hidden');
+                    btn.className = 'main-tab-btn px-3.5 py-2 rounded-lg text-xs md:text-sm font-bold transition-all bg-cyan-600 text-white shadow-md flex items-center gap-2';
+                } else {
+                    sec.classList.add('hidden');
+                    btn.className = 'main-tab-btn px-3.5 py-2 rounded-lg text-xs md:text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2';
+                }
+            });
+
+            if (tabName === 'scrubber') {
+                setTimeout(() => {
+                    drawActionPotentialCanvas();
+                    drawECGCanvas();
+                }, 50);
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            if (activeMainTab === 'scrubber') {
+                drawActionPotentialCanvas();
+                drawECGCanvas();
+            }
+        });
+
+        window.onload = function () {
+            renderDrugCards('all');
+            renderQuiz();
+            updateVisualsForTime(currentTime);
+            animateScrubber();
+            animateRhythmStrip();
+        };
+    </script>
+</body>
+</html>

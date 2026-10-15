@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پورتال جامع فارماکولوژی قلب و عروق | ویژه داروسازی</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- MathJax for rendering LaTeX in the index hub itself -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #050811;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050811;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+        .hero-mesh {
+            background-image: 
+                radial-gradient(at 15% 15%, rgba(6, 182, 212, 0.14) 0px, transparent 45%),
+                radial-gradient(at 85% 20%, rgba(244, 63, 94, 0.14) 0px, transparent 45%),
+                radial-gradient(at 50% 85%, rgba(16, 185, 129, 0.12) 0px, transparent 50%);
+        }
+        .grid-bg {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+        }
+        .ltr-code {
+            direction: ltr;
+            display: inline-block;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col hero-mesh grid-bg selection:bg-cyan-500 selection:text-white">
+
+    <header class="sticky top-0 z-40 bg-slate-950/85 backdrop-blur-xl border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3.5">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 via-emerald-500 to-rose-500 p-[2px] shadow-lg shadow-cyan-500/20">
+                    <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                        <i class="fa-solid fa-staff-snake text-transparent bg-clip-text bg-gradient-to-tr from-cyan-400 to-emerald-400 text-2xl"></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2.5 flex-wrap">
+                        <h1 class="text-lg sm:text-xl font-black tracking-tight text-white">پورتال جامع فارماکولوژی قلب و عروق</h1>
+                        <span class="px-2.5 py-0.5 text-[11px] font-extrabold rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                            نسخه تعاملی ویژه داروسازی
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-0.5">
+                        مجموعه شبیه‌سازهای اسکرابر محور بر اساس اسلایدهای دکتر افروز محمدقلی‌بیکی (دانشگاه علوم پزشکی مازندران)
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2.5">
+                <button onclick="toggleGithubGuideModal()" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700/80 text-xs font-bold transition-all flex items-center gap-2 shadow-sm">
+                    <i class="fa-brands fa-github text-base text-cyan-400"></i>
+                    <span>راهنمای اتصال در گیت‌هاب</span>
+                </button>
+                <div class="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs font-bold">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span>موتور رندر خودکار $\LaTeX$: فعال</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="portal-home" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 space-y-10">
+
+        <!-- Hero Banner & Quick Drug Finder -->
+        <section class="relative rounded-3xl bg-gradient-to-b from-slate-900/90 to-slate-950/90 border border-slate-800/90 p-6 sm:p-8 shadow-2xl overflow-hidden">
+            <div class="max-w-3xl space-y-4">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 text-xs font-bold">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>مرور سریع و بصری امتحانات فارماکولوژی</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight">
+                    فهرست هوشمند جزوات تعاملی <span class="text-transparent bg-clip-text bg-gradient-to-l from-cyan-400 via-emerald-400 to-rose-400">فارماکولوژی</span>
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    هر یک از ۳ مبحث زیر دارای اسکرابر زمانی، شبیه‌ساز سلولی و نوار قلب، بانک کامل داروها، نکات طلایی امتحانی و آزمون خودسنجی است. با باز کردن هر جزوه از داخل این پورتال، فرمول‌های $\LaTeX$ به صورت خودکار و بدون دستکاری فایل‌های اصلی رندر می‌شوند.
+                </p>
+
+                <!-- Quick Search Across All 3 Modules -->
+                <div class="pt-2">
+                    <div class="relative max-w-xl">
+                        <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input 
+                            type="text" 
+                            id="global-search" 
+                            oninput="filterModules(this.value)"
+                            placeholder="جستجوی سریع دارو یا مبحث (مثلاً: آمیودارون، دیگوکسین، فوروزماید، سوتالول، کاپتوپریل...)" 
+                            class="w-full pr-11 pl-4 py-3 rounded-2xl bg-slate-950/90 border border-slate-700/80 focus:border-cyan-400 focus:outline-none text-xs sm:text-sm text-white placeholder-slate-500 shadow-inner transition-all"
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Pills -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-7 pt-6 border-t border-slate-800/80">
+                <div class="bg-slate-950/70 border border-slate-800/80 rounded-2xl p-3.5 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-book-medical"></i>
+                    </div>
+                    <div>
+                        <div class="text-base font-black text-white">۳ ماژول جامع</div>
+                        <div class="text-[11px] text-slate-400">۱۹۷ اسلاید آموزشی</div>
+                    </div>
+                </div>
+                <div class="bg-slate-950/70 border border-slate-800/80 rounded-2xl p-3.5 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <div>
+                        <div class="text-base font-black text-white">۳ اسکرابر زنده</div>
+                        <div class="text-[11px] text-slate-400">پتانسیل عمل، سارکومر و نفرون</div>
+                    </div>
+                </div>
+                <div class="bg-slate-950/70 border border-slate-800/80 rounded-2xl p-3.5 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-capsules"></i>
+                    </div>
+                    <div>
+                        <div class="text-base font-black text-white">+۴۲ گروه دارویی</div>
+                        <div class="text-[11px] text-slate-400">مکانیسم، کاربرد و تداخلات</div>
+                    </div>
+                </div>
+                <div class="bg-slate-950/70 border border-slate-800/80 rounded-2xl p-3.5 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <div class="text-base font-black text-white">۳۰ سؤال امتحانی</div>
+                        <div class="text-[11px] text-slate-400">با پاسخ تشریحی کامل</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h3 class="text-base sm:text-lg font-black text-white flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-cyan-400"></i>
+                    <span>فهرست جزوات و شبیه‌سازهای تعاملی</span>
+                </h3>
+                <span class="text-xs text-slate-400">برای باز شدن همراه با فرمول‌های $\LaTeX$ روی «ورود به شبیه‌ساز» کلیک کنید</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" id="modules-grid">
+
+                <!-- MODULE 1: ANTIARRHYTHMIC DRUGS -->
+                <article class="module-card card-hover bg-slate-900/90 border border-slate-800 hover:border-cyan-500/60 rounded-3xl p-6 flex flex-col justify-between shadow-xl relative overflow-hidden group"
+                         data-keywords="ضدآریتمی آریتمی کینیدین پروکائین آماید دیزوپرامید لیدوکائین مگزیلتین فنی توئین فلکاینید پروپافنون پروپرانولول اسمولول آمیودارون دروندارون سوتالول دوفتیلید ایبوتیلید وراپامیل دیلتیازم آدنوزین منیزیم پتاسیم تورسادس پتانسیل عمل">
+                    <div class="absolute -top-12 -left-12 w-36 h-36 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-all"></div>
+                    
+                    <div class="space-y-4 relative z-10">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="px-3 py-1 rounded-xl bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 text-xs font-black">
+                                بخش اول • ۵۶ اسلاید
+                            </span>
+                            <span class="ltr-code text-[11px] text-slate-400 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800">
+                                antiarrhythmic_pharmacology_app.html
+                            </span>
+                        </div>
+
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xl shrink-0 shadow-lg shadow-cyan-500/25">
+                                <i class="fa-solid fa-wave-square"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-black text-white group-hover:text-cyan-300 transition-colors">
+                                    داروهای ضدآریتمی (Antiarrhythmics)
+                                </h4>
+                                <p class="text-xs text-slate-400 mt-1">
+                                    پتانسیل عمل غشا، دریچه‌های یونی و طبقه‌بندی Vaughan-Williams
+                                </p>
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            شبیه‌سازی میلی‌ثانیه‌ای فازهای ۰ تا ۴ پتانسیل عمل و نوار قلب (ECG)، دریچه‌های $m$ و $h$ کانال سدیم، سینتیک بازیابی ($\tau_{recovery}$)، مقایسه هایپرکالمی و هیپوکالمی و مانیتور زنده Torsades de Pointes.
+                        </p>
+
+                        <!-- Key Topics Chips -->
+                        <div class="flex flex-wrap gap-1.5 pt-1">
+                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">کلاس IA, IB, IC</span>
+                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">بتابلاکر (اسمولول)</span>
+                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">آمیودارون و سوتالول</span>
+                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">آدنوزین و منیزیم</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center gap-2 relative z-10">
+                        <button onclick="openModuleSmart('antiarrhythmic_pharmacology_app.html', 'فارماکولوژی داروهای ضدآریتمی')" class="flex-grow py-2.5 px-4 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-600/25">
+                            <i class="fa-solid fa-play"></i>
+                            <span>ورود به شبیه‌ساز (با رندر $\LaTeX$)</span>
+                        </button>
+                        <a href="antiarrhythmic_pharmacology_app.html" target="_blank" title="باز کردن مستقیم در تب جدید" class="p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-all">
+                            <i class="fa-solid fa-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- MODULE 2: HEART FAILURE DRUGS -->
+                <article class="module-card card-hover bg-slate-900/90 border border-slate-800 hover:border-rose-500/60 rounded-3xl p-6 flex flex-col justify-between shadow-xl relative overflow-hidden group"
+                         data-keywords="نارسایی قلبی دیگوکسین گلیکوزید قلبی دوبوتامین دوپامین میلرینون اینامرینون لووسیمندان ساکوبیترین والزارتان انترستو امپاگلیفلوزین داپاگلیفلوزین ایوابرادین وریسیگوات بوزنتان نسیریتاید سارکومر کسر تخلیه سیستولیک دیاستولیک">
+                    <div class="absolute -top-12 -left-12 w-36 h-36 bg-rose-500/10 rounded-full blur-2xl group-hover:bg-rose-500/20 transition-all"></div>
+                    
+                    <div class="space-y-4 relative z-10">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="px-3 py-1 rounded-xl bg-rose-500/15 text-rose-300 border border-rose-500/30 text-xs font-black">
+                                بخش دوم • ۷۲ اسلاید
+                            </span>
+                            <span class="ltr-code text-[11px] text-slate-400 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800">
+                                heart_failure_pharmacology_app.html
+                            </span>
+                        </div>
+
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-500 to-amber-500 flex items-center justify-center text-white text-xl shrink-0 shadow-lg shadow-rose-500/25">
+                                <i class="fa-solid fa-heart-crack"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-black text-white group-hover:text-rose-300 transition-colors">
+                                    داروهای نارسایی قلبی (Heart Failure)
+                                </h4>
+                                <p class="text-xs text-slate-400 mt-1">
+                                    اسکرابر سارکومر، چرخه کلسیم ($SERCA/RyR$) و درمان‌های خط اول
+                                </p>
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            بررسی زنده انقباض اکتین-میوزین، پمپ $Na^+/K^+\text{-ATPase}$ و مبدل $NCX$، مقایسه نارسایی سیستولیک (HFrEF) و دیاستولیک (HFpEF)، آزمایشگاه مسمومیت دیگوکسین (دید زرد/Xanthopsia) و گلیفلوزین‌ها (SGLT2i).
+                        </p>
+
+                        <!-- Key Topics Chips -->
+                        <div class="flex flex-wrap gap-1.5 pt-1">
+                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">دیگوکسین و DigiFab</span>
+                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">ARNI (ساکوبیترین)</span>
+                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">SGLT2i (گلیفلوزین)</span>
+                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">ایوابرادین و لووسیمندان</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center gap-2 relative z-10">
+                        <button onclick="openModuleSmart('heart_failure_pharmacology_app.html', 'فارماکولوژی داروهای نارسایی قلبی')" class="flex-grow py-2.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-lg shadow-rose-600/25">
+                            <i class="fa-solid fa-play"></i>
+                            <span>ورود به شبیه‌ساز (با رندر $\LaTeX$)</span>
+                        </button>
+                        <a href="heart_failure_pharmacology_app.html" target="_blank" title="باز کردن مستقیم در تب جدید" class="p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-all">
+                            <i class="fa-solid fa-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- MODULE 3: ANTIHYPERTENSIVE & DIURETIC DRUGS -->
+                <article class="module-card card-hover bg-slate-900/90 border border-slate-800 hover:border-emerald-500/60 rounded-3xl p-6 flex flex-col justify-between shadow-xl relative overflow-hidden group"
+                         data-keywords="ضدفشار خون فشار خون هایپرتنشن دیورتیک استازولامید مانیتول فوروزماید بومتاناید هیدروکلروتیازید اینداپامید کلروتالیدون اسپیرونولاکتون اپلرنون آمیلورید تریامترن تولواپتان دسموپرسین کاپتوپریل انالاپریل لوسارتان والزارتان آملودیپین نیفدیپین متیل دوپا کلونیدین پرازوسین هیدرالازین ماینوکسیدیل نیتروپروساید دیازوکساید نفرون">
+                    <div class="absolute -top-12 -left-12 w-36 h-36 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
+                    
+                    <div class="space-y-4 relative z-10">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="px-3 py-1 rounded-xl bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-black">
+                                بخش سوم • ۶۹ اسلاید
+                            </span>
+                            <span class="ltr-code text-[11px] text-slate-400 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800">
+                                antihypertensive_diuretics_pharmacology_app.html
+                            </span>
+                        </div>
+
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white text-xl shrink-0 shadow-lg shadow-emerald-500/25">
+                                <i class="fa-solid fa-filter"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-black text-white group-hover:text-emerald-300 transition-colors">
+                                    داروهای ضدفشار خون و دیورتیک‌ها
+                                </h4>
+                                <p class="text-xs text-slate-400 mt-1">
+                                    اسکرابر نفرون، پمپ‌های غشایی و انتخاب دارو در بیماری‌های همراه
+                                </p>
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            سفر تعاملی در ۶ ایستگاه نفرون ($PCT, TAL, DCT, CD$) به همراه زوم سلولی ناقل‌های $NHE3, NKCC2, NCC, ENaC, AQP2$، محور $RAAS$ و برادی‌کینین، سمپاتوپلژیک‌ها، وازودیلاتورها و راهنمای بالینی اسلاید ۶۸.
+                        </p>
+
+                        <!-- Key Topics Chips -->
+                        <div class="flex flex-wrap gap-1.5 pt-1">
+                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">۵ دسته دیورتیک‌ها</span>
+                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">ACEi / ARB / CCB</span>
+                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">سمپاتوپلژیک و وازودیلاتور</span>
+                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">داروی ارجح در بیماری‌ها</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center gap-2 relative z-10">
+                        <button onclick="openModuleSmart('antihypertensive_diuretics_pharmacology_app.html', 'فارماکولوژی داروهای ضدفشار خون و دیورتیک‌ها')" class="flex-grow py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/25">
+                            <i class="fa-solid fa-play"></i>
+                            <span>ورود به شبیه‌ساز (با رندر $\LaTeX$)</span>
+                        </button>
+                        <a href="antihypertensive_diuretics_pharmacology_app.html" target="_blank" title="باز کردن مستقیم در تب جدید" class="p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-all">
+                            <i class="fa-solid fa-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 shadow-xl">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+                <div>
+                    <h3 class="text-base sm:text-lg font-black text-white flex items-center gap-2">
+                        <i class="fa-brands fa-github text-cyan-400 text-xl"></i>
+                        <span>ساختار استاندارد فایل‌ها در مخزن گیت‌هاب (GitHub Repository)</span>
+                    </h3>
+                    <p class="text-xs text-slate-400 mt-1">
+                        کافی است این ۴ فایل را دقیقاً با همین نام‌های پیش‌فرض در ریشه (Root) مخزن گیت‌هاب خود آپلود کنید تا همه لینک‌ها و موتور $\LaTeX$ به صورت خودکار کار کنند:
+                    </p>
+                </div>
+                <button onclick="copyRepoStructure()" id="copy-struct-btn" class="px-4 py-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-cyan-400 border border-cyan-500/30 text-xs font-bold transition-all flex items-center gap-2 shrink-0 self-start md:self-auto">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>کپی نام استاندارد فایل‌ها</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-5 items-center">
+                <!-- File Tree Box -->
+                <div class="lg:col-span-6 bg-slate-950 rounded-2xl p-4 border border-slate-800/90 font-mono text-xs space-y-2.5 ltr-code w-full">
+                    <div class="text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-folder-open text-amber-400"></i>
+                        <span class="font-bold text-white">pharmacology-review/</span>
+                        <span class="text-[10px] text-slate-500">(Root Directory)</span>
+                    </div>
+                    <div class="pl-6 space-y-2 border-l border-slate-800 ml-2">
+                        <div class="flex items-center justify-between text-emerald-400 bg-emerald-500/10 px-2.5 py-1.5 rounded-lg border border-emerald-500/20">
+                            <span>├── index.html</span>
+                            <span class="text-[10px] font-sans text-emerald-300">صفحه اصلی فهرست + موتور رندر LaTeX</span>
+                        </div>
+                        <div class="flex items-center justify-between text-cyan-300 px-2.5 py-1">
+                            <span>├── antiarrhythmic_pharmacology_app.html</span>
+                            <span class="text-[10px] font-sans text-slate-400">جزوه ۱: ضدآریتمی</span>
+                        </div>
+                        <div class="flex items-center justify-between text-rose-300 px-2.5 py-1">
+                            <span>├── heart_failure_pharmacology_app.html</span>
+                            <span class="text-[10px] font-sans text-slate-400">جزوه ۲: نارسایی قلبی</span>
+                        </div>
+                        <div class="flex items-center justify-between text-amber-300 px-2.5 py-1">
+                            <span>└── antihypertensive_diuretics_pharmacology_app.html</span>
+                            <span class="text-[10px] font-sans text-slate-400">جزوه ۳: ضدفشار خون و دیورتیک</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How the Zero-Touch LaTeX Injector Works -->
+                <div class="lg:col-span-6 space-y-3 text-xs leading-relaxed text-slate-300">
+                    <div class="p-3.5 rounded-2xl bg-cyan-950/25 border border-cyan-500/30 space-y-1.5">
+                        <div class="font-black text-cyan-300 flex items-center gap-2">
+                            <i class="fa-solid fa-microchip"></i>
+                            <span>چطور فرمول‌های $\LaTeX$ بدون تغییر دادن ۳ فایل اصلی رندر می‌شوند؟</span>
+                        </div>
+                        <p class="text-slate-300">
+                            این فایل `index.html` مجهز به یک **تزریق‌گر خودکار MathJax و MutationObserver** است. وقتی کاربر در لینک گیت‌هاب شما روی هر جزوه کلیک می‌کند، صفحه در داخل نمایشگر تمام‌صفحه‌ی همین پورتال باز شده و اسکریپت مفسر $\LaTeX$ به صورت آنی به DOM آن فایل تزریق می‌شود. حتی وقتی کاربر تب‌ها یا دکمه‌های داخل جزوه را عوض می‌کند، ناظر هوشمند فرمول‌های جدید (مثل $BP = CO \times PVR$ یا $\tau_{recovery}$) را بلافاصله به فرمول ریاضی زیبا تبدیل می‌کند!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="smart-viewer-overlay" class="fixed inset-0 z-50 bg-slate-950 flex flex-col hidden">
+        <!-- Viewer Top Bar -->
+        <div class="bg-slate-900 border-b border-slate-800 px-4 py-2.5 flex items-center justify-between gap-4 shrink-0">
+            <div class="flex items-center gap-3">
+                <button onclick="closeSmartViewer()" class="px-3.5 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition-all flex items-center gap-2 shadow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <span>بازگشت به فهرست اصلی</span>
+                </button>
+                <div class="h-4 w-[1px] bg-slate-800 hidden sm:block"></div>
+                <h2 id="viewer-module-title" class="text-xs sm:text-sm font-black text-white truncate">در حال نمایش جزوه...</h2>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <span id="latex-status-pill" class="px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[11px] font-bold flex items-center gap-1.5">
+                    <i class="fa-solid fa-check-double"></i>
+                    <span>رندر خودکار $\LaTeX$ فعال</span>
+                </span>
+                <button onclick="forceTypesetIframe()" title="بازخوانی مجدد فرمول‌ها" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-bold transition-all">
+                    <i class="fa-solid fa-rotate"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Iframe Container -->
+        <div class="flex-grow relative w-full h-full bg-slate-950">
+            <div id="viewer-loading" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/90 z-10 space-y-3">
+                <div class="w-12 h-12 rounded-2xl bg-cyan-500/20 border border-cyan-400 flex items-center justify-center animate-spin">
+                    <i class="fa-solid fa-spinner text-cyan-400 text-xl"></i>
+                </div>
+                <p class="text-xs font-bold text-slate-300">در حال بارگذاری شبیه‌ساز و فعال‌سازی موتور فرمول‌نویس $\LaTeX$...</p>
+            </div>
+            <iframe id="module-iframe" class="w-full h-full border-0" onload="onModuleIframeLoad()"></iframe>
+        </div>
+    </div>
+
+    <div id="github-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <h3 class="text-base font-black text-white flex items-center gap-2">
+                    <i class="fa-brands fa-github text-cyan-400 text-xl"></i>
+                    <span>راهنمای گام‌به‌گام انتشار در GitHub Pages</span>
+                </h3>
+                <button onclick="toggleGithubGuideModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
+                <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800">
+                    <span class="font-black text-cyan-400 block mb-1">گام اول: ساخت مخزن (Repository)</span>
+                    وارد اکانت گیت‌هاب خود شوید و یک Repository جدید (مثلاً با نام <code class="text-emerald-300 ltr-code">pharmacology-app</code>) به صورت <strong>Public</strong> بسازید.
+                </div>
+                <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800">
+                    <span class="font-black text-emerald-400 block mb-1">گام دوم: آپلود هر ۴ فایل در کنار هم</span>
+                    دکمه <strong>Add file &rarr; Upload files</strong> را بزنید و این ۴ فایل را دقیقاً با همین نام‌ها آپلود کنید:
+                    <ul class="mt-2 space-y-1 font-mono text-[11px] text-amber-300 ltr-code block">
+                        <li>1. index.html</li>
+                        <li>2. antiarrhythmic_pharmacology_app.html</li>
+                        <li>3. heart_failure_pharmacology_app.html</li>
+                        <li>4. antihypertensive_diuretics_pharmacology_app.html</li>
+                    </ul>
+                </div>
+                <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800">
+                    <span class="font-black text-rose-400 block mb-1">گام سوم: فعال‌سازی لینک مستقیم (GitHub Pages)</span>
+                    در مخزن خود به تب <strong>Settings</strong> بروید، از منوی سمت چپ روی <strong>Pages</strong> کلیک کنید. در بخش <strong>Branch</strong>، گزینه <code class="ltr-code text-white">main</code> و پوشه <code class="ltr-code text-white">/(root)</code> را انتخاب کرده و <strong>Save</strong> را بزنید. پس از ۱ دقیقه، لینک سایت شما آماده است!
+                </div>
+                <div class="p-3.5 rounded-2xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-200">
+                    <strong>به‌روزرسانی در آینده:</strong> هر زمان که بخواهید جزوه‌های جدیدی اضافه کنیم یا هر یک از این فایل‌ها را ارتقا دهیم، فقط کافی است فایل جدید را جایگزین کنید.
+                </div>
+            </div>
+
+            <div class="pt-2 flex justify-end">
+                <button onclick="toggleGithubGuideModal()" class="px-5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold">
+                    متوجه شدم
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-auto border-t border-slate-800/80 bg-slate-950/90 backdrop-blur-md py-6 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+            <div class="flex items-center gap-2 text-slate-400">
+                <i class="fa-solid fa-graduation-cap text-emerald-400"></i>
+                <span>منبع علمی: اسلایدهای آموزشی فارماکولوژی دکتر افروز محمدقلی‌بیکی • ویژه دانشجویان داروسازی</span>
+            </div>
+
+            <div class="flex items-center gap-2 px-4 py-2 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 border border-slate-800 shadow-inner">
+                <i class="fa-solid fa-code text-cyan-400"></i>
+                <span class="text-slate-400">توسعه دهنده:</span>
+                <span class="font-black text-transparent bg-clip-text bg-gradient-to-l from-cyan-400 to-emerald-400 text-sm">
+                    نیما پیام
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Filter cards in real-time based on Persian drug or topic search
+        function filterModules(query) {
+            const cleanQ = query.trim().toLowerCase();
+            const cards = document.querySelectorAll('.module-card');
+            cards.forEach(card => {
+                const textContent = (card.innerText + ' ' + (card.dataset.keywords || '')).toLowerCase();
+                if (!cleanQ || textContent.includes(cleanQ)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Open selected HTML module inside Smart Viewer and inject MathJax automatically
+        function openModuleSmart(filePath, title) {
+            const overlay = document.getElementById('smart-viewer-overlay');
+            const iframe = document.getElementById('module-iframe');
+            const loading = document.getElementById('viewer-loading');
+            const titleEl = document.getElementById('viewer-module-title');
+
+            titleEl.textContent = title;
+            loading.classList.remove('hidden');
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            iframe.src = filePath;
+            // Update URL hash so browser back button or bookmarking works nicely on GitHub Pages
+            window.location.hash = encodeURIComponent(filePath);
+        }
+
+        function closeSmartViewer() {
+            const overlay = document.getElementById('smart-viewer-overlay');
+            const iframe = document.getElementById('module-iframe');
+            overlay.classList.add('hidden');
+            iframe.src = 'about:blank';
+            document.body.style.overflow = '';
+            history.pushState("", document.title, window.location.pathname + window.location.search);
+        }
+
+        // Automatically inject MathJax v3 + DOM MutationObserver into the loaded iframe
+        // so that all $...$ and $$...$$ LaTeX formulas render without editing the 3 original HTML files!
+        function onModuleIframeLoad() {
+            const iframe = document.getElementById('module-iframe');
+            const loading = document.getElementById('viewer-loading');
+
+            if (!iframe.src || iframe.src === 'about:blank') return;
+            loading.classList.add('hidden');
+
+            try {
+                const idoc = iframe.contentDocument || iframe.contentWindow.document;
+                if (!idoc || !idoc.head) return;
+
+                // Prevent duplicate injection
+                if (idoc.getElementById('injected-mathjax-script')) return;
+
+                // 1. Configure MathJax inside the child window
+                const configScript = idoc.createElement('script');
+                configScript.type = 'text/javascript';
+                configScript.text = `
+                    window.MathJax = {
+                        tex: {
+                            inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
+                            displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']],
+                            processEscapes: true
+                        },
+                        options: {
+                            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                        },
+                        startup: {
+                            pageReady: () => {
+                                return MathJax.startup.defaultPageReady().then(() => {
+                                    // Observe dynamic tab switches, scrubber updates, and quiz answers
+                                    let timeout = null;
+                                    const observer = new MutationObserver(() => {
+                                        if (timeout) clearTimeout(timeout);
+                                        timeout = setTimeout(() => {
+                                            if (window.MathJax && window.MathJax.typesetPromise) {
+                                                window.MathJax.typesetPromise();
+                                            }
+                                        }, 60);
+                                    });
+                                    observer.observe(document.body, {
+                                        childList: true,
+                                        subtree: true,
+                                        characterData: true
+                                    });
+                                });
+                            }
+                        }
+                    };
+                `;
+                idoc.head.appendChild(configScript);
+
+                // 2. Inject MathJax v3 CDN script into the child document
+                const mjScript = idoc.createElement('script');
+                mjScript.id = 'injected-mathjax-script';
+                mjScript.async = true;
+                mjScript.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+                idoc.head.appendChild(mjScript);
+
+            } catch (err) {
+                console.warn('MathJax injection note:', err);
+            }
+        }
+
+        function forceTypesetIframe() {
+            try {
+                const iframe = document.getElementById('module-iframe');
+                const iwin = iframe.contentWindow;
+                if (iwin && iwin.MathJax && iwin.MathJax.typesetPromise) {
+                    iwin.MathJax.typesetPromise();
+                }
+            } catch (e) {}
+        }
+
+        function toggleGithubGuideModal() {
+            const modal = document.getElementById('github-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function copyRepoStructure() {
+            const textToCopy = `index.html\nantiarrhythmic_pharmacology_app.html\nheart_failure_pharmacology_app.html\nantihypertensive_diuretics_pharmacology_app.html`;
+            const tempInput = document.createElement('textarea');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            const btn = document.getElementById('copy-struct-btn');
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i><span>کپی شد!</span>';
+            setTimeout(() => {
+                btn.innerHTML = originalHtml;
+            }, 2000);
+        }
+
+        // Check URL hash on load to support direct links
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = decodeURIComponent(window.location.hash.replace('#', ''));
+            if (hash && hash.endsWith('.html')) {
+                openModuleSmart(hash, 'نمایشگر هوشمند جزوه فارماکولوژی');
+            }
+        });
+    </script>
+</body>
+</html>

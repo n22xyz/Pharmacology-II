@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد تعاملی فارماکولوژی داروهای ضدفشار خون و دیورتیک‌ها | دکتر قلی‌بیکی</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #060a12;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060a12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+
+        input[type=range].nephron-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range].nephron-slider:focus {
+            outline: none;
+        }
+        input[type=range].nephron-slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 14px;
+            cursor: pointer;
+            background: linear-gradient(90deg, 
+                #ef4444 0%, 
+                #f59e0b 18%, 
+                #06b6d4 36%, 
+                #ec4899 56%, 
+                #10b981 76%, 
+                #8b5cf6 100%
+            );
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        input[type=range].nephron-slider::-webkit-slider-thumb {
+            height: 28px;
+            width: 28px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 4px solid #10b981;
+            box-shadow: 0 0 16px rgba(16, 185, 129, 0.95);
+            cursor: grab;
+            -webkit-appearance: none;
+            margin-top: -8px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        input[type=range].nephron-slider::-webkit-slider-thumb:active {
+            cursor: grabbing;
+            transform: scale(1.18);
+            border-color: #06b6d4;
+            box-shadow: 0 0 24px rgba(6, 182, 212, 1);
+        }
+
+        .bio-grid {
+            background-image: 
+                linear-gradient(to right, rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+                linear-gradient(to right, rgba(16, 185, 129, 0.12) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.12) 1px, transparent 1px);
+            background-size: 12px 12px, 12px 12px, 60px 60px, 60px 60px;
+        }
+
+        .glow-emerald {
+            box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.35);
+        }
+        .ltr-num {
+            direction: ltr;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-600 flex items-center justify-center shadow-lg shadow-emerald-600/30">
+                    <i class="fa-solid fa-heart-circle-check text-white text-xl animate-pulse"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-lg md:text-xl font-black tracking-tight text-white">فارماکولوژی جامع داروهای ضدفشار خون و دیورتیک‌ها</h1>
+                        <span class="px-2.5 py-0.5 text-xs font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">ویژه داروسازی</span>
+                    </div>
+                    <p class="text-xs text-slate-400">مرور بصری و تعاملی بر اساس اسلایدهای دکتر افروز محمدقلی‌بیکی (Pharm.D, Ph.D) - دانشگاه علوم پزشکی مازندران</p>
+                </div>
+            </div>
+
+            <nav class="flex flex-wrap items-center gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800">
+                <button onclick="switchMainTab('scrubber')" id="tab-btn-scrubber" class="main-tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition-all bg-emerald-600 text-white shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>اسکرابر نفرون و همودینامیک</span>
+                </button>
+                <button onclick="switchMainTab('raas')" id="tab-btn-raas" class="main-tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-diagram-project"></i>
+                    <span>محور RAAS، سمپاتوپلژیک و وازودیلاتورها</span>
+                </button>
+                <button onclick="switchMainTab('clinic')" id="tab-btn-clinic" class="main-tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-user-doctor"></i>
+                    <span>انتخاب دارو در بیماری‌های همراه (اسلاید ۶۸)</span>
+                </button>
+                <button onclick="switchMainTab('drugs')" id="tab-btn-drugs" class="main-tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-pills"></i>
+                    <span>بانک جامع داروها و تداخلات</span>
+                </button>
+                <button onclick="switchMainTab('quiz')" id="tab-btn-quiz" class="main-tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>جداول طلایی و آزمون امتحانی</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6 space-y-8">
+
+        <!-- ===================================================================== -->
+        <!-- SECTION 1: NEPHRON JOURNEY & BP HEMODYNAMIC SCRUBBER                  -->
+        <!-- ===================================================================== -->
+        <section id="section-scrubber" class="space-y-6">
+
+            <!-- Active Drug / Physiological State Selector Bar -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3 pb-3 border-b border-slate-800">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                        <h2 class="text-sm md:text-base font-bold text-slate-200">۱. کلاس دارویی را انتخاب کنید تا اثر مستقیم آن را بر پمپ‌های نفرون، الکترولیت‌ها و فرمول فشار خون ($BP = CO \times PVR$) ببینید:</h2>
+                    </div>
+                    <div class="text-xs text-emerald-400 font-bold">
+                        هایپرتنشن (اسلاید ۲): فشار خون بالاتر از <span class="ltr-num font-mono">130 / 80 mmHg</span> («قاتل خاموش / Silent Killer»)
+                    </div>
+                </div>
+
+                <!-- 9 Interactive Modes Covering Diuretics & Antihypertensives -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2" id="drug-mode-buttons">
+                    <button onclick="selectDrugMode('untreated')" data-mode="untreated" class="drug-mode-btn px-2.5 py-2 rounded-xl border text-right transition-all bg-emerald-500/20 border-emerald-400 text-white shadow-lg">
+                        <div class="text-xs font-black text-rose-400">۱. پرفشاری خون</div>
+                        <div class="text-[10px] text-slate-300 truncate">بدون دارو (160/100)</div>
+                    </button>
+                    <button onclick="selectDrugMode('cai')" data-mode="cai" class="drug-mode-btn px-2.5 py-2 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-amber-400">۲. استازولامید</div>
+                        <div class="text-[10px] text-slate-400 truncate">مهار کربنیک انیدراز (PCT)</div>
+                    </button>
+                    <button onclick="selectDrugMode('osmotic')" data-mode="osmotic" class="drug-mode-btn px-2.5 py-2 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-cyan-400">۳. مانیتول</div>
+                        <div class="text-[10px] text-slate-400 truncate">دیورتیک اسموتیک (هنله)</div>
+                    </button>
+                    <button onclick="selectDrugMode('loop')" data-mode="loop" class="drug-mode-btn px-2.5 py-2 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-pink-400">۴. فوروزماید (لوپ)</div>
+                        <div class="text-[10px] text-slate-400 truncate">مهار NKCC2 (TAL)</div>
+                    </button>
+                    <button onclick="selectDrugMode('thiazide')" data-mode="thiazide" class="drug-mode-btn px-2.5 py-2 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-emerald-400">۵. هیدروکلروتیازید</div>
+                        <div class="text-[10px] text-slate-400 truncate">مهار NCC (توبول دیستال)</div>
+                    </button>
+                    <button onclick="selectDrugMode('ksparing')" data-mode="ksparing" class="drug-mode-btn px-2.5 py-2 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-purple-400">۶. نگهدارنده پتاسیم</div>
+                        <div class="text-[10px] text-slate-400 truncate">اسپیرونولاکتون / تریامترن</div>
+                    </button>
+                    <button onclick="selectDrugMode('adh')" data-mode="adh" class="drug-mode-btn px-2.5 py-2 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-sky-400">۷. تولواپتان / دسموپرسین</div>
+                        <div class="text-[10px] text-slate-400 truncate">گیرنده V2 و کانال AQP2</div>
+                    </button>
+                    <button onclick="selectDrugMode('raas_ccb')" data-mode="raas_ccb" class="drug-mode-btn px-2.5 py-2 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-orange-400">۸. ACEi / ARB / CCB</div>
+                        <div class="text-[10px] text-slate-400 truncate">کاپتوپریل، لوسارتان، آملودیپین</div>
+                    </button>
+                    <button onclick="selectDrugMode('symp')" data-mode="symp" class="drug-mode-btn px-2.5 py-2 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-teal-400">۹. سمپاتوپلژیک‌ها</div>
+                        <div class="text-[10px] text-slate-400 truncate">بتابلاکر، پرازوسین، متیل‌دوپا</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Master Nephron & Hemodynamic Scrubber Bar -->
+            <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 border-2 border-emerald-500/40 rounded-2xl p-4 md:p-5 shadow-2xl glow-emerald">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                    <div class="flex items-center gap-3">
+                        <button id="play-pause-btn" onclick="togglePlay()" class="w-12 h-12 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black flex items-center justify-center shadow-lg shadow-emerald-500/30 transition-transform active:scale-95">
+                            <i id="play-icon" class="fa-solid fa-pause text-lg"></i>
+                        </button>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-emerald-400">اسکرابر تعاملی سفر در طول نفرون و عروق (۰ تا ۱۰۰٪ مسیر فیلتراسیون و بازجذب)</span>
+                                <span id="current-segment-badge" class="px-2.5 py-0.5 text-xs font-extrabold rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/40">بخش ۲: توبول خمیده نزدیک (PCT)</span>
+                            </div>
+                            <div class="text-xs text-slate-400 mt-0.5">
+                                نوار زیر را بکشید تا در طول ۶ ایستگاه نفرون (اسلایدهای ۳۳ تا ۶۱) حرکت کنید و زوم سلولی غشای لومینال و سمت خون را زنده ببینید!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2">
+                        <div class="bg-slate-950 border border-slate-800 px-3.5 py-1.5 rounded-xl flex items-center gap-2">
+                            <span class="text-xs text-slate-400">موقعیت در نفرون:</span>
+                            <span id="scrubber-readout" class="font-mono text-base font-black text-emerald-400 ltr-num">25%</span>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 p-1 rounded-xl flex items-center gap-1 text-xs">
+                            <span class="px-2 text-slate-400">سرعت:</span>
+                            <button onclick="setSpeed(0.12)" id="speed-0.12" class="speed-btn px-2 py-1 rounded bg-emerald-500/20 text-emerald-300 font-bold">آموزشی</button>
+                            <button onclick="setSpeed(0.3)" id="speed-0.3" class="speed-btn px-2 py-1 rounded text-slate-400 hover:text-white">سریع (2x)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scrubber Slider -->
+                <div class="relative py-2 px-1">
+                    <input type="range" id="nephron-scrubber" class="nephron-slider" min="0" max="100" step="0.5" value="25" oninput="onScrub(this.value)">
+                </div>
+
+                <!-- 6 Key Nephron Stations Jump Buttons (Aligned with Slides 33, 37, 41, 46, 50, 55, 61) -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mt-3 pt-3 border-t border-slate-800/80">
+                    <button onclick="jumpToStation(6)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-rose-400 group-hover:text-rose-300">۱. گلومرول و آرتریول (JG)</span>
+                        <span class="ltr-num font-mono text-[10px] text-slate-500">رنین و فیلتراسیون</span>
+                    </button>
+                    <button onclick="jumpToStation(24)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-amber-400 group-hover:text-amber-300">۲. توبول نزدیک (PCT)</span>
+                        <span class="ltr-num font-mono text-[10px] text-slate-500">65-70% Na⁺ | CA</span>
+                    </button>
+                    <button onclick="jumpToStation(42)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-cyan-400 group-hover:text-cyan-300">۳. بازوی نزولی هنله</span>
+                        <span class="ltr-num font-mono text-[10px] text-slate-500">H₂O | اسموتیک</span>
+                    </button>
+                    <button onclick="jumpToStation(58)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-pink-400 group-hover:text-pink-300">۴. قوس بالارونده (TAL)</span>
+                        <span class="ltr-num font-mono text-[10px] text-slate-500">25% Na⁺ | NKCC2</span>
+                    </button>
+                    <button onclick="jumpToStation(76)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-emerald-400 group-hover:text-emerald-300">۵. توبول دیستال (DCT)</span>
+                        <span class="ltr-num font-mono text-[10px] text-slate-500">5% Na⁺ | NCC</span>
+                    </button>
+                    <button onclick="jumpToStation(92)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-purple-400 group-hover:text-purple-300">۶. لوله جمع‌کننده (CD)</span>
+                        <span class="ltr-num font-mono text-[10px] text-slate-500">1-2% Na⁺ | ENaC/ADH</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Visualizers Grid: Right = Macro Nephron SVG (Slide 33/58), Left = Cellular Transporter Zoom SVG (Slides 37, 41, 46, 50, 61) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                <!-- Right Column (6 cols): Interactive Macro Nephron Diagram & Hemodynamic Telemetry -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                            <h3 class="text-sm md:text-base font-extrabold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-filter text-emerald-400"></i>
+                                <span>نقشه تعاملی نفرون و درصد بازجذب سدیم (اسلایدهای ۳۳ و ۵۸)</span>
+                            </h3>
+                            <span id="nephron-reabsorb-badge" class="px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[11px] font-bold">
+                                بازجذب ۶۵ تا ۷۰٪ سدیم در PCT
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-3">
+                            روی هر بخش از نفرون کلیک کنید یا اسلایدر را بکشید تا محل دقیق اثر دیورتیک‌ها را ببینید:
+                        </p>
+
+                        <!-- Interactive SVG of Full Nephron (Slide 33) -->
+                        <div class="bg-slate-950 rounded-xl border border-slate-800 p-2 relative overflow-hidden bio-grid">
+                            <svg id="macro-nephron-svg" viewBox="0 0 540 340" class="w-full h-auto">
+                                <!-- Cortex / Medulla Divider Line (Slide 33) -->
+                                <line x1="15" y1="165" x2="525" y2="165" stroke="#10b981" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.6"/>
+                                <text x="55" y="155" fill="#6ee7b7" font-size="11" font-weight="bold">قشر کلیه (Cortex)</text>
+                                <text x="55" y="182" fill="#38bdf8" font-size="11" font-weight="bold">مدولا (Medulla)</text>
+
+                                <!-- 1. Glomerulus & Bowman's Capsule -->
+                                <g onclick="jumpToStation(6)" class="cursor-pointer">
+                                    <path d="M 185 30 C 155 25, 155 75, 185 70 C 170 60, 170 40, 185 30 Z" fill="#f43f5e" stroke="#fda4af" stroke-width="2.5"/>
+                                    <circle cx="165" cy="50" r="14" fill="none" stroke="#e2e8f0" stroke-width="3"/>
+                                    <text x="165" y="20" fill="#fda4af" font-size="11" font-weight="black" text-anchor="middle">گلومرول (فیلتراسیون)</text>
+                                </g>
+
+                                <!-- 2. Proximal Convoluted Tubule (PCT - 65-70% Na+) -->
+                                <path id="path-pct" onclick="jumpToStation(24)" class="cursor-pointer transition-all"
+                                      d="M 152 50 C 125 55, 130 135, 105 135 C 80 135, 95 65, 65 70 C 40 75, 50 130, 50 165"
+                                      fill="none" stroke="#f59e0b" stroke-width="12" stroke-linecap="round"/>
+                                <text x="85" y="52" fill="#fcd34d" font-size="11" font-weight="black" text-anchor="middle">PCT (65-70% Na⁺)</text>
+                                <text x="85" y="38" fill="#fbbf24" font-size="9" font-weight="bold" text-anchor="middle">مهارکننده کربنیک انیدراز (NaHCO₃)</text>
+
+                                <!-- 3. Descending Limb of Loop of Henle (H2O & Osmotics) -->
+                                <path id="path-desc" onclick="jumpToStation(42)" class="cursor-pointer transition-all"
+                                      d="M 50 165 L 50 265 C 50 315, 165 315, 165 265 L 165 215"
+                                      fill="none" stroke="#06b6d4" stroke-width="8" stroke-linecap="round"/>
+                                <text x="108" y="325" fill="#67e8f9" font-size="11" font-weight="black" text-anchor="middle">قوس نزولی هنله (خروج H₂O - مانیتول)</text>
+
+                                <!-- 4. Thick Ascending Limb (TAL - 25% Na+, K+, 2Cl-) -->
+                                <path id="path-tal" onclick="jumpToStation(58)" class="cursor-pointer transition-all"
+                                      d="M 165 215 L 165 110"
+                                      fill="none" stroke="#ec4899" stroke-width="13" stroke-linecap="round"/>
+                                <text x="235" y="195" fill="#f472b6" font-size="11" font-weight="black" text-anchor="middle">TAL (~25% Na⁺K⁺2Cl⁻)</text>
+                                <text x="235" y="210" fill="#fbcfe8" font-size="10" font-weight="bold" text-anchor="middle">دیورتیک‌های لوپ (فوروزماید)</text>
+
+                                <!-- 5. Distal Convoluted Tubule (DCT - ~5% NaCl) -->
+                                <path id="path-dct" onclick="jumpToStation(76)" class="cursor-pointer transition-all"
+                                      d="M 165 110 C 165 55, 255 55, 265 115 C 275 165, 325 145, 340 95 C 355 55, 420 60, 430 115"
+                                      fill="none" stroke="#10b981" stroke-width="11" stroke-linecap="round"/>
+                                <text x="305" y="52" fill="#6ee7b7" font-size="11" font-weight="black" text-anchor="middle">DCT (~5% Na⁺Cl⁻) - تیازیدها</text>
+
+                                <!-- 6. Collecting Tubule & Duct (CD - 1-2% Na+, K+, H+, Aldosterone & ADH) -->
+                                <path id="path-cd" onclick="jumpToStation(92)" class="cursor-pointer transition-all"
+                                      d="M 430 115 L 430 295"
+                                      fill="none" stroke="#8b5cf6" stroke-width="12" stroke-linecap="round"/>
+                                <text x="485" y="145" fill="#c4b5fd" font-size="10" font-weight="black" text-anchor="middle">لوله جمع‌کننده</text>
+                                <text x="485" y="160" fill="#ddd6fe" font-size="9" font-weight="bold" text-anchor="middle">(1-2% Na⁺ | آلدوسترون)</text>
+                                <text x="485" y="245" fill="#38bdf8" font-size="10" font-weight="bold" text-anchor="middle">+ ADH (بازجذب H₂O)</text>
+                                <text x="430" y="325" fill="#e2e8f0" font-size="11" font-weight="black" text-anchor="middle">↓ دفع ادرار (Urine)</text>
+
+                                <!-- Animated Scrubber Marker Dot on Nephron -->
+                                <circle id="nephron-marker-outer" cx="85" cy="100" r="14" fill="rgba(255,255,255,0.25)"/>
+                                <circle id="nephron-marker-dot" cx="85" cy="100" r="8" fill="#ffffff" stroke="#10b981" stroke-width="3"/>
+                            </svg>
+                        </div>
+
+                        <!-- Live Hemodynamic Formula Readout (Slide 6: BP = CO x PVR, CO = SV x HR) -->
+                        <div class="mt-3 bg-slate-950 rounded-xl border border-slate-800 p-3">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-2 pb-2 border-b border-slate-800/80">
+                                <span class="text-xs font-extrabold text-slate-300">فرمول همودینامیک اسلاید ۶:</span>
+                                <span class="font-mono text-xs font-black text-cyan-400 ltr-num">BP = CO (SV × HR) × PVR</span>
+                            </div>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                                    <div class="text-[10px] text-slate-400">فشار خون (BP)</div>
+                                    <div id="tele-bp" class="text-sm font-black text-rose-400 font-mono ltr-num">160/100 mmHg</div>
+                                </div>
+                                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                                    <div class="text-[10px] text-slate-400">برون‌ده قلبی (CO)</div>
+                                    <div id="tele-co" class="text-xs font-black text-cyan-400">↑ یا نرمال</div>
+                                </div>
+                                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                                    <div class="text-[10px] text-slate-400">مقاومت عروقی (PVR)</div>
+                                    <div id="tele-pvr" class="text-xs font-black text-amber-400">↑↑ افزایش‌یافته</div>
+                                </div>
+                                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                                    <div class="text-[10px] text-slate-400">پتاسیم و اسید-باز خون</div>
+                                    <div id="tele-electrolyte" class="text-xs font-black text-emerald-400">K⁺ نرمال</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Left Column (6 cols): Dynamic Cellular Zoom (Lumen vs Epithelial Cell vs Blood) + Exam Pearl -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                            <h3 id="cell-zoom-title" class="text-sm md:text-base font-extrabold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-microscope text-amber-400"></i>
+                                <span>زوم سلولی: توبول خمیده نزدیک (PCT) - اسلاید ۳۷</span>
+                            </h3>
+                            <span class="px-2.5 py-0.5 rounded bg-slate-800 text-slate-300 text-[11px] font-bold">
+                                زرد: لومن ادرار | سبز: سلول توبول | آبی: خون
+                            </span>
+                        </div>
+                        <p id="cell-zoom-subtitle" class="text-xs text-slate-400 mb-3">
+                            مشاهده زنده پمپ‌ها، کوترانسپورترها و محل دقیق مهار دارویی (مطابق دیاگرام‌های کاتزونگ در اسلایدهای ۳۷، ۴۱، ۴۶، ۵۰ و ۶۱):
+                        </p>
+
+                        <!-- Dynamic SVG replicating Katzung/Gholibeiki Cellular Diagrams (Lumen - Cell - Interstitium/Blood) -->
+                        <div class="bg-slate-950 rounded-xl border border-slate-800 p-2 relative overflow-hidden">
+                            <svg id="cellular-zoom-svg" viewBox="0 0 540 280" class="w-full h-auto">
+                                <!-- 3 Vertical Zones: Left = Lumen (Urine - Yellow), Middle = Tubular Cell (Green), Right = Interstitium/Blood (Blue) -->
+                                <rect x="0" y="0" width="165" height="280" fill="#ca8a04" opacity="0.22"/>
+                                <rect x="165" y="20" width="210" height="240" rx="18" fill="#065f46" opacity="0.45" stroke="#10b981" stroke-width="3"/>
+                                <rect x="375" y="0" width="165" height="280" fill="#0284c7" opacity="0.22"/>
+
+                                <!-- Zone Headers -->
+                                <text x="82" y="22" fill="#fde047" font-size="12" font-weight="black" text-anchor="middle">لومن - ادرار (Lumen)</text>
+                                <text id="svg-cell-header" x="270" y="42" fill="#a7f3d0" font-size="12" font-weight="black" text-anchor="middle">سلول توبول پروگزیمال (PCT)</text>
+                                <text x="457" y="22" fill="#7dd3fc" font-size="12" font-weight="black" text-anchor="middle">مایع بینابینی - خون (Blood)</text>
+
+                                <!-- Basolateral Na+/K+ ATPase Pump (Universal on right membrane) -->
+                                <g transform="translate(352, 72)">
+                                    <circle cx="23" cy="23" r="22" fill="#f59e0b" stroke="#fef08a" stroke-width="2"/>
+                                    <text x="23" y="26" fill="#451a03" font-size="10" font-weight="black" text-anchor="middle">ATP</text>
+                                    <path d="M -10 12 L 58 12" stroke="#fde047" stroke-width="2.5"/>
+                                    <text x="72" y="16" fill="#fde047" font-size="11" font-weight="bold">3Na⁺</text>
+                                    <path d="M 58 34 L -10 34" stroke="#c4b5fd" stroke-width="2.5"/>
+                                    <text x="-24" y="38" fill="#c4b5fd" font-size="11" font-weight="bold">2K⁺</text>
+                                </g>
+
+                                <!-- Dynamic Transporter Content Group (Populated by JS based on Scrubber Station) -->
+                                <g id="svg-dynamic-transporters"></g>
+                            </svg>
+                        </div>
+
+                        <!-- Instant Pharmacology & Exam Pearl Box -->
+                        <div class="mt-3 bg-gradient-to-br from-slate-950 to-slate-900 border border-slate-800 rounded-xl p-4 space-y-2.5">
+                            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                                <span id="station-explain-title" class="text-xs md:text-sm font-black text-emerald-400">ایستگاه فعلی: توبول خمیده نزدیک (PCT)</span>
+                                <span id="station-drug-badge" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                                    استازولامید / دورزولامید
+                                </span>
+                            </div>
+                            <p id="station-explain-desc" class="text-xs text-slate-200 leading-relaxed">
+                                در توبول پروگزیمال ۶۵ تا ۷۰٪ سدیم فیلترشده بازجذب می‌شود. آنزیم کربنیک انیدراز (CA) در حاشیه مسواکی و سیتوپلاسم، بازجذب بی‌کربنات سدیم ($NaHCO_3$) را کاتالیز می‌کند.
+                            </p>
+                            <div id="station-exam-pearl" class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-xs text-emerald-200 leading-relaxed">
+                                <strong>نکته طلایی امتحان (اسلاید ۳۸ و ۳۹):</strong> مهارکننده‌های کربنیک انیدراز کاربرد ضدفشار خون ندارند! باعث دفع بی‌کربنات، <strong>قلیایی شدن ادرار</strong> (ریسک رسوب کلسیم و سنگ کلیه) و <strong>اسیدوز متابولیک</strong> می‌شوند.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- SECTION 2: RAAS CASCADE, SYMPATHOPLEGICS & VASODILATORS               -->
+        <!-- ===================================================================== -->
+        <section id="section-raas" class="hidden space-y-6">
+
+            <!-- Top Row: Interactive RAAS Pathway & Bradykinin Comparator (Slides 23-32) -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-800">
+                    <div>
+                        <h2 class="text-base md:text-lg font-black text-white flex items-center gap-2">
+                            <i class="fa-solid fa-diagram-next text-cyan-400"></i>
+                            <span>شبیه‌ساز تعاملی محور رنین-آنژیوتانسین-آلدوسترون (RAAS) و برادی‌کینین (اسلایدهای ۲۳ تا ۳۲)</span>
+                        </h2>
+                        <p class="text-xs text-slate-400">روی هر یک از ۵ گروه دارویی زیر کلیک کنید تا محل دقیق قطع آبشار RAAS و تفاوت ACEi با ARB را ببینید:</p>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">
+                        <button onclick="setRAASBlock('none')" id="raas-btn-none" class="raas-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-600 text-white">بدون دارو (فعالیت کامل RAAS)</button>
+                        <button onclick="setRAASBlock('bb')" id="raas-btn-bb" class="raas-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-amber-400 border border-slate-800">بتابلاکرها (مهار گیرنده β1 کلیه)</button>
+                        <button onclick="setRAASBlock('aliskiren')" id="raas-btn-aliskiren" class="raas-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-cyan-400 border border-slate-800">آلیسکرن (مهار مستقیم رنین)</button>
+                        <button onclick="setRAASBlock('acei')" id="raas-btn-acei" class="raas-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-emerald-400 border border-slate-800">مهارکننده ACE (کاپتوپریل/انالاپریل)</button>
+                        <button onclick="setRAASBlock('arb')" id="raas-btn-arb" class="raas-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-purple-400 border border-slate-800">آنتاگونیست AT1 (لوسارتان/والزارتان)</button>
+                        <button onclick="setRAASBlock('mra')" id="raas-btn-mra" class="raas-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-pink-400 border border-slate-800">آنتاگونیست آلدوسترون (اسپیرونولاکتون)</button>
+                    </div>
+                </div>
+
+                <!-- Interactive RAAS + Bradykinin Diagram (Slide 27) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+                    <div class="lg:col-span-8 bg-slate-950 rounded-xl border border-slate-800 p-4 space-y-3 text-xs">
+                        <!-- Triggers of Renin Release (Slide 23) -->
+                        <div id="raas-node-renin" class="p-3 rounded-xl bg-slate-900 border border-slate-700 flex flex-wrap items-center justify-between gap-2 transition-all">
+                            <div>
+                                <span class="font-black text-cyan-400">۱. ترشح رنین از قشر کلیه (دستگاه جنب‌گلومرولی):</span>
+                                <span class="text-slate-300 block text-[11px] mt-0.5">محرک‌ها (اسلاید ۲۳): ۱) ↓ فشار آرتریول کلیه ۲) ↓ غلظت سدیم در مدولای توبول دیستال ۳) تحریک سمپاتیک (گیرنده $\beta_1$ کلیه)</span>
+                            </div>
+                            <span id="raas-tag-renin" class="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 font-bold">فعال</span>
+                        </div>
+
+                        <div class="flex justify-center text-slate-500"><i class="fa-solid fa-arrow-down"></i></div>
+
+                        <!-- Angiotensinogen -> Ang I + Bradykinin Parallel Track (Slide 27) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div id="raas-node-ace" class="p-3 rounded-xl bg-slate-900 border border-slate-700 transition-all">
+                                <div class="font-black text-emerald-400 mb-1">۲. تبدیل آنژیوتانسین I (دکاپپتید غیرفعال) به آنژیوتانسین II:</div>
+                                <p class="text-[11px] text-slate-300">توسط آنزیم مبدل آنژیوتانسین (<strong>ACE</strong>) در سطح اندوتلیوم عروق ریه و کلیه.</p>
+                            </div>
+                            <div id="raas-node-bradykinin" class="p-3 rounded-xl bg-slate-900 border border-slate-700 transition-all">
+                                <div class="font-black text-amber-400 mb-1">مسیر موازی: برادی‌کینین (وازودیلاتور فعال):</div>
+                                <p id="bradykinin-status" class="text-[11px] text-slate-300">آنزیم ACE برادی‌کینین را به متابولیت‌های غیرفعال تجزیه می‌کند.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-center text-slate-500"><i class="fa-solid fa-arrow-down"></i></div>
+
+                        <!-- Angiotensin II -> AT1 Receptor & Aldosterone (Slides 25 & 26) -->
+                        <div id="raas-node-at1" class="p-3 rounded-xl bg-slate-900 border border-slate-700 transition-all">
+                            <div class="font-black text-purple-400 mb-1">۳. اثرات آنژیوتانسین II روی گیرنده $AT_1$ (اسلاید ۲۵ و ۲۶):</div>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] text-slate-300 mt-2">
+                                <div class="p-2 rounded bg-slate-950 border border-slate-800">۱. انقباض شدید شریانچه‌ها ($\uparrow PVR$)</div>
+                                <div class="p-2 rounded bg-slate-950 border border-slate-800">۲. ترشح کاتکول‌آمین از مدولای فوق‌کلیه و NE از سمپاتیک</div>
+                                <div class="p-2 rounded bg-slate-950 border border-slate-800">۳. ترشح <strong>آلدوسترون</strong> از قشر فوق‌کلیه ($\uparrow$ بازجذب آب و نمک)</div>
+                                <div class="p-2 rounded bg-slate-950 border border-slate-800">۴. تحریک ترشح <strong>ADH</strong> از هیپوفیز خلفی</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RAAS Explanation & Clinical Pearls Card (4 cols) -->
+                    <div class="lg:col-span-4 bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3 text-xs">
+                        <h4 id="raas-explain-title" class="text-sm font-black text-rose-400">وضعیت: فعالیت کامل سیستم RAAS</h4>
+                        <p id="raas-explain-body" class="text-slate-300 leading-relaxed">
+                            آنژیوتانسین II قوی‌ترین منقبض‌کننده عروقی درون‌زاد است که از طریق گیرنده $AT_1$ باعث انقباض عروق، افزایش فعالیت سمپاتیک و ترشح آلدوسترون می‌شود.
+                        </p>
+                        <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-200 space-y-1">
+                            <div class="font-black text-rose-400">نکات امتحانی ACEi و ARB (اسلاید ۲۹ تا ۳۲):</div>
+                            <ul class="space-y-1 text-[11px]">
+                                <li>• <strong>سرفه خشک و آنژیوادم:</strong> به علت مهار تجزیه برادی‌کینین در ACEi (بیشتر با <strong>کاپتوپریل</strong>). در عدم تحمل، جایگزین با <strong>ARB</strong>.</li>
+                                <li>• <strong>طعم فلزی و کاهش حس چشایی:</strong> عارضه شاخص مهارکننده‌های ACE.</li>
+                                <li>• <strong>دیابت و پروتئینوری:</strong> بسیار مناسب در دیابت و نارسایی کلیوی.</li>
+                                <li>• <strong>منع مصرف مطلق در بارداری:</strong> خطر افت فشار، نارسایی کلیه و ناهنجاری در جنین!</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row: Sympathoplegics Anatomical Map (Slides 9-16) & Vasodilators 4 Mechanisms + Compensatory Reflex (Slides 17-22) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- Card 1: Sympathoplegics (Slides 9 to 16) -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+                    <div>
+                        <h3 class="text-base font-extrabold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-brain text-amber-400"></i>
+                            <span>دسته اول: مهارکننده‌های سیستم سمپاتیک (سمپاتوپلژیک‌ها - اسلاید ۹ تا ۱۶)</span>
+                        </h3>
+                        <p class="text-xs text-slate-400">دسته‌بندی بر اساس محل آناتومیک اثر (CNS، گانگلیون، پایانه عصبی، گیرنده‌های $\alpha$ و $\beta$):</p>
+                    </div>
+
+                    <div class="space-y-2.5 text-xs">
+                        <div class="p-3 rounded-xl bg-slate-950 border-r-4 border-emerald-500">
+                            <div class="font-black text-emerald-400">۱. آگونیست‌های گیرنده $\alpha_2$ در CNS (کاهش جریان خروجی سمپاتیک):</div>
+                            <p class="text-slate-300 mt-1 leading-relaxed">
+                                • <strong>متیل‌دوپا (Methyldopa):</strong> خط اول فشار خون <strong>دوران بارداری</strong>. عوارض: خواب‌آلودگی، <strong>آنمی همولیتیک</strong> و <strong>سمیت کبدی</strong> در مصرف مزمن.<br>
+                                • <strong>کلونیدین (Clonidine):</strong> هایپرتنشن متوسط تا شدید + <strong>کنترل علائم ترک مخدرهای اپیوئیدی</strong>. عارضه مهم: <strong>برگشت فشار خون شدید (Rebound hypertension) با قطع ناگهانی!</strong> (درمان: مصرف مجدد کلونیدین یا آلفابلاکر مثل <strong>فنتولامین</strong>).
+                            </p>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-slate-950 border-r-4 border-rose-500">
+                            <div class="font-black text-rose-400">۲. آلفا بلاکرهای غیرانتخابی ($\alpha_1, \alpha_2$) و انتخابی ($\alpha_1$):</div>
+                            <p class="text-slate-300 mt-1 leading-relaxed">
+                                • <strong>فنتولامین و فنوکسی‌بنزامین (غیرانتخابی):</strong> کاربرد در <strong>فئوکروموسایتوما</strong> و اورژانس فشار خون. به علت <strong>تاکی‌کاردی رفلکسی شدید</strong> در فشار خون مزمن نامناسب‌اند!<br>
+                                • <strong>پرازوسین و ترازوسین ($\alpha_1$ انتخابی):</strong> هایپرتنشن خفیف + <strong>هایپرپلازی خوش‌خیم پروستات (BPH)</strong>. عارضه مهم: <strong>افت فشار وضعیتی (پدیده‌ی دوز اول / First-dose syncope)</strong>.
+                            </p>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-slate-950 border-r-4 border-cyan-500">
+                            <div class="font-black text-cyan-400">۳. بتابلاکرها (مهار $\beta_1$ قلبی $\leftarrow \downarrow CO$ و مهار $\beta_1$ کلیه $\leftarrow \downarrow$ رنین):</div>
+                            <p class="text-slate-300 mt-1 leading-relaxed">
+                                • <strong>پروپرانولول (غیرانتخابی):</strong> برونکواسپاسم (مهار $\beta_2$، ممنوع در آسم)، <strong>تشدید هایپوگلیسمی</strong>، کابوس شبانه و <strong>برادی‌کاردی در جنین</strong>.<br>
+                                • <strong>آتنولول و متوپرولول:</strong> انتخابی $\beta_1$ قلبی.<br>
+                                • <strong>لابتالول و کارودیلول:</strong> مهار هم‌زمان $\beta$ و $\alpha_1$ ($\downarrow CO + \downarrow PVR$).<br>
+                                • <strong>نبیولول (Nebivolol):</strong> بتابلاکر جدید با قابلیت <strong>آزادسازی نیتریک اکساید (NO)</strong> و گشادکنندگی عروق.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Vasodilators 4 Mechanisms & Compensatory Reflex (Slides 17 to 22) -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+                    <div>
+                        <h3 class="text-base font-extrabold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-maximize text-rose-400"></i>
+                            <span>دسته دوم: وازودیلاتورها (۴ مکانیسم عمده و پاسخ جبرانی - اسلاید ۱۷ تا ۲۲)</span>
+                        </h3>
+                        <p class="text-xs text-slate-400">اثر مستقیم غیراتونوم بر عضلات صاف عروق:</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                            <div class="font-black text-amber-400 mb-1">۱. آزادسازی NO (شریان &gt; ورید):</div>
+                            <p class="text-slate-300 text-[11px] leading-relaxed">
+                                • <strong>هیدرالازین (خوراکی):</strong> هایپرتنشن شدید و نارسایی قلبی (همراه ایزوسورباید). عارضه: <strong>سندرم شبه‌لوپوس</strong>، تاکی‌کاردی و احتباس آب و سدیم.<br>
+                                • <strong>نیتروپروساید (تزریقی):</strong> اورژانس فشار خون (اثر ۱ تا ۱۰ دقیقه، انفوزیون مداوم). <strong>حساس به نور</strong>؛ عارضه: <strong>تجمع سیانید!</strong>
+                            </p>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                            <div class="font-black text-purple-400 mb-1">۲. بازکننده کانال پتاسیمی ($K^+$):</div>
+                            <p class="text-slate-300 text-[11px] leading-relaxed">
+                                • <strong>ماینوکسیدیل (خوراکی/موضعی):</strong> شریان &gt; ورید. عارضه: <strong>هیرسوتیسم (پرمویی)</strong> (کاربرد موضعی در ریزش مو و طاسی).<br>
+                                • <strong>دیازوکساید (تزریقی/خوراکی):</strong> مشتق تیازیدی <strong>بدون اثر دیورتیک!</strong> کاربرد در اورژانس فشار خون (طول اثر ۴ تا ۲۴ ساعت) و <strong>هیپوگلیسمی ناشی از تومور ترشح‌کننده انسولین</strong> (عارضه: هایپرگلیسمی).
+                            </p>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                            <div class="font-black text-emerald-400 mb-1">۳. مهارکننده کانال کلسیم (CCBs):</div>
+                            <p class="text-slate-300 text-[11px] leading-relaxed">
+                                • <strong>دی‌هیدروپیریدینی (آملودیپین، نیفدیپین):</strong> انتخابی عروق ($\downarrow PVR$). عارضه شاخص: <strong>ادم قوزک پا</strong>، فلاشینگ، سردرد.<br>
+                                • <strong>غیردی‌هیدروپیریدینی (وراپامیل، دیلتیازم):</strong> اثر بر هدایت قلبی ($\downarrow HR, \downarrow CO$) و یبوست.
+                            </p>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                            <div class="font-black text-cyan-400 mb-1">۴. آگونیست گیرنده دوپامینی $D_1$:</div>
+                            <p class="text-slate-300 text-[11px] leading-relaxed">
+                                • <strong>فنلدوپام (Fenoldopam):</strong> فعال‌سازی گیرنده $D_1$ عروقی و کلیوی.<br>
+                                <span class="text-rose-300 font-bold block mt-1.5">نکته اسلاید ۱۸: هیدرالازین و ماینوکسیدیل برای مهار تاکی‌کاردی رفلکسی و احتباس آب/سدیم حتماً همراه با «بتابلاکر + دیورتیک» تجویز می‌شوند!</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- SECTION 3: CLINICAL COMORBIDITY DRUG SELECTOR (SLIDES 66-68)          -->
+        <!-- ===================================================================== -->
+        <section id="section-clinic" class="hidden space-y-6">
+
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-5 pb-4 border-b border-slate-800">
+                    <div>
+                        <h2 class="text-base md:text-lg font-black text-white flex items-center gap-2">
+                            <i class="fa-solid fa-stethoscope text-emerald-400"></i>
+                            <span>شبیه‌ساز انتخاب داروی ضدفشار خون بر اساس شرایط بیمار و بیماری‌های همراه (اسلایدهای ۶۶ تا ۶۸)</span>
+                        </h2>
+                        <p class="text-xs text-slate-400">یکی از پرتکرارترین مباحث امتحانی! روی هر یک از شرایط بالینی زیر کلیک کنید تا داروی ارجح و داروهای ممنوع را ببینید:</p>
+                    </div>
+                    <div class="px-3 py-1.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-extrabold">
+                        شروع دارودرمانی: تمام بزرگسالان $\ge 140/90$ یا افراد پرخطر $\ge 130/80$ (خط اول عمومی: تیازیدها)
+                    </div>
+                </div>
+
+                <!-- 10 Clinical Profiles from Slides 67 & 68 -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 mb-6" id="comorbidity-buttons">
+                    <button onclick="selectComorbidity('age_race')" data-case="age_race" class="case-btn p-3 rounded-xl border text-right transition-all bg-emerald-600/20 border-emerald-400 text-white">
+                        <div class="text-xs font-black text-emerald-300">۱. سن &gt; ۵۵ سال / نژاد آفریقایی</div>
+                        <div class="text-[11px] text-slate-300 mt-0.5">پاسخ بهتر به کدام داروها؟</div>
+                    </button>
+                    <button onclick="selectComorbidity('diabetes')" data-case="diabetes" class="case-btn p-3 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-cyan-400">۲. دیابت و نفروپاتی (پروتئینوری)</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">محافظت کلیوی</div>
+                    </button>
+                    <button onclick="selectComorbidity('asthma')" data-case="asthma" class="case-btn p-3 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-rose-400">۳. ابتلا به آسم / COPD</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">کدام دارو ممنوع است؟</div>
+                    </button>
+                    <button onclick="selectComorbidity('gout')" data-case="gout" class="case-btn p-3 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-amber-400">۴. ابتلا به نقرس (هایپراوریسمی)</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">داروی ممنوع و داروی ارجح</div>
+                    </button>
+                    <button onclick="selectComorbidity('pregnancy')" data-case="pregnancy" class="case-btn p-3 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-pink-400">۵. دوران بارداری</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">داروهای ارجح و تراتوژن</div>
+                    </button>
+                    <button onclick="selectComorbidity('bph')" data-case="bph" class="case-btn p-3 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-purple-400">۶. بزرگی خوش‌خیم پروستات (BPH)</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">درمان دوگانه با یک دارو</div>
+                    </button>
+                    <button onclick="selectComorbidity('anxiety')" data-case="anxiety" class="case-btn p-3 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-sky-400">۷. اضطراب، لرزش (ترمور) و میگرن</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">و کنترل علائم هایپرتیروئیدی</div>
+                    </button>
+                    <button onclick="selectComorbidity('angina_hf')" data-case="angina_hf" class="case-btn p-3 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-orange-400">۸. آنژین صدری و نارسایی قلبی</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">بیماری‌های قلبی همراه</div>
+                    </button>
+                    <button onclick="selectComorbidity('osteoporosis')" data-case="osteoporosis" class="case-btn p-3 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-teal-400">۹. پوکی استخوان و سنگ کلیه کلسیمی</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">در برابر هایپرکلسمی</div>
+                    </button>
+                    <button onclick="selectComorbidity('pcos_siadh')" data-case="pcos_siadh" class="case-btn p-3 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-indigo-400">۱۰. PCOD / ریزش مو و SIADH</div>
+                        <div class="text-[11px] text-slate-400 mt-0.5">کاربردهای اختصاصی دیورتیک‌ها</div>
+                    </button>
+                </div>
+
+                <!-- Dynamic Prescription Output Card -->
+                <div class="bg-slate-950 border-2 border-emerald-500/40 rounded-2xl p-5 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/40 space-y-2">
+                        <div class="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>دارو(های) ارجح و خط اول (Drug of Choice):</span>
+                        </div>
+                        <div id="case-preferred" class="text-sm md:text-base font-black text-white">دیورتیک‌های تیازیدی و مهارکننده‌های کانال کلسیم (CCBs)</div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-rose-950/30 border border-rose-500/40 space-y-2">
+                        <div class="text-xs font-bold text-rose-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-ban"></i>
+                            <span>داروهای ممنوع یا نیازمند احتیاط شدید:</span>
+                        </div>
+                        <div id="case-contra" class="text-sm font-black text-rose-200">اثربخشی کمتر مهارکننده‌های ACE و بتابلاکرها به تنهایی در نژاد آفریقایی</div>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+                        <div class="text-xs font-bold text-cyan-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-lightbulb"></i>
+                            <span>مکانیسم و دلیل فارماکولوژیک (اسلایدهای جزوه):</span>
+                        </div>
+                        <p id="case-reason" class="text-xs text-slate-300 leading-relaxed">
+                            طبق اسلاید ۶۷ و ۶۸، بیماران بالای ۵۵ سال و افراد با نژاد آفریقایی به دیورتیک‌های تیازیدی و مهارکننده‌های کانال کلسیم (CCBs) پاسخ درمانی بسیار بهتری می‌دهند.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- SECTION 4: COMPREHENSIVE DRUG DATABASE & INTERACTIONS                 -->
+        <!-- ===================================================================== -->
+        <section id="section-drugs" class="hidden space-y-6">
+
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-base font-extrabold text-white">بانک جامع داروهای ضدفشار خون، دیورتیک‌ها و آگونیست/آنتاگونیست‌های ADH</h2>
+                    <p class="text-xs text-slate-400">شامل مکانیسم دقیق، محل اثر، کاربردهای بالینی، عوارض جانبی شاخص و تداخلات دارویی جدی</p>
+                </div>
+                <div class="flex flex-wrap gap-1.5" id="catalog-filter-btns">
+                    <button onclick="filterCatalog('all')" data-cat="all" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white">همه داروها (۱۴ گروه)</button>
+                    <button onclick="filterCatalog('diuretic')" data-cat="diuretic" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-cyan-400 border border-slate-800">دیورتیک‌ها و ADH (۶ گروه)</button>
+                    <button onclick="filterCatalog('symp')" data-cat="symp" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-amber-400 border border-slate-800">سمپاتوپلژیک‌ها (۳ گروه)</button>
+                    <button onclick="filterCatalog('vaso')" data-cat="vaso" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-rose-400 border border-slate-800">وازودیلاتورها و CCB (۳ گروه)</button>
+                    <button onclick="filterCatalog('raas')" data-cat="raas" class="cat-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-purple-400 border border-slate-800">مهارکننده‌های RAAS (۲ گروه)</button>
+                </div>
+            </div>
+
+            <div id="drugs-catalog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Populated by JS -->
+            </div>
+
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- SECTION 5: GOLDEN COMPARISON TABLES & 10-QUESTION EXAM QUIZ           -->
+        <!-- ===================================================================== -->
+        <section id="section-quiz" class="hidden space-y-6">
+
+            <!-- Golden Comparison Table of All 5 Diuretic Classes (Slides 35-59) -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+                <div class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                        <h3 class="text-sm md:text-base font-black text-emerald-400">جدول طلایی مقایسه ۵ دسته دیورتیک‌ها و اثرات آن‌ها بر الکترولیت‌ها و اسید-باز (اسلایدهای ۳۵ تا ۵۹)</h3>
+                        <p class="text-xs text-slate-400">تفاوت حیاتی دیورتیک‌های لوپ و تیازیدی روی کلسیم ادرار و خون!</p>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right text-xs">
+                        <thead class="bg-slate-950/80 text-slate-400 border-b border-slate-800">
+                            <tr>
+                                <th class="p-3">دسته دیورتیک و داروها</th>
+                                <th class="p-3">محل اثر و ناقل هدف</th>
+                                <th class="p-3">تأثیر بر پتاسیم و اسید-باز</th>
+                                <th class="p-3">تأثیر بر کلسیم ($Ca^{2+}$)</th>
+                                <th class="p-3">کاربردها و عوارض اختصاصی</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/70 text-slate-200">
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-black text-amber-400">۱. مهارکننده کربنیک انیدراز<br><span class="text-[11px] font-normal text-slate-400">(استازولامید، دورزولامید، برینزولامید)</span></td>
+                                <td class="p-3">توبول پروگزیمال (PCT)<br>مهار آنزیم CA (کاهش بازجذب $NaHCO_3$)</td>
+                                <td class="p-3 text-rose-300 font-bold">هایپوکالمی + اسیدوز متابولیک (قلیایی شدن ادرار)</td>
+                                <td class="p-3">رسوب کلسیم در ادرار قلیایی (تشکیل سنگ کلیه)</td>
+                                <td class="p-3">گلوکوم، بیماری حاد کوهستانی، مسمومیت سالیسیلات، صرع غایب. <strong>فاقد کاربرد ضدفشار خون! ممنوع در سیروز (هایپرآمونمی).</strong></td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-black text-pink-400">۲. دیورتیک‌های لوپ (سقف بالا)<br><span class="text-[11px] font-normal text-slate-400">(فوروزماید، بومتاناید)</span></td>
+                                <td class="p-3">بخش ضخیم بالارونده هنله (TAL)<br>مهار کوترانسپورتر $Na^+/K^+/2Cl^-$</td>
+                                <td class="p-3 text-rose-300 font-bold">هایپوکالمی + آلکالوز متابولیک هایپوکالمیک</td>
+                                <td class="p-3 text-cyan-300 font-black">↑ افزایش دفع ادراری $Ca^{2+}$ و $Mg^{2+}$ (درمان هایپرکلسمی!)</td>
+                                <td class="p-3">ادم حاد ریوی، CHF، هایپرکلسمی. عوارض: <strong>سمیت شنوایی (Ototoxicity)</strong>، هایپراوریسمی، مسمومیت لیتیم.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-black text-emerald-400">۳. دیورتیک‌های تیازیدی<br><span class="text-[11px] font-normal text-slate-400">(هیدروکلروتیازید، اینداپامید، کلروتالیدون)</span></td>
+                                <td class="p-3">توبول خمیده دور (DCT)<br>مهار ترانسپورتر $Na^+Cl^-$ (NCC)</td>
+                                <td class="p-3 text-rose-300 font-bold">هایپوکالمی + آلکالوز متابولیک</td>
+                                <td class="p-3 text-amber-300 font-black">↓ کاهش دفع ادراری $Ca^{2+}$ (ایجاد هایپرکلسمی در خون!)</td>
+                                <td class="p-3"><strong>خط اول هایپرتنشن</strong>، پوکی استخوان، سنگ کلیه کلسیمی، دیابت بی‌مزه نفروژنیک. عوارض: هیپوناترمی، هایپراوریسمی، هایپرلیپیدمی.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-black text-purple-400">۴. نگهدارنده پتاسیم<br><span class="text-[11px] font-normal text-slate-400">(اسپیرونولاکتون، اپلرنون، آمیلورید، تریامترن)</span></td>
+                                <td class="p-3">لوله جمع‌کننده (CD)<br>مهار کانال $ENaC$ یا آنتاگونیست گیرنده آلدوسترون</td>
+                                <td class="p-3 text-emerald-300 font-bold">هایپرکالمی (نگهداری $K^+$) + اسیدوز متابولیک</td>
+                                <td class="p-3">تغییر ناچیز</td>
+                                <td class="p-3">HF شدید، هایپرآلدوسترونیسم، ادم سیروتیک، و <strong>PCOD و ریزش موی آندروژنیک (فقط اسپیرونولاکتون)</strong>. عارضه: <strong>ژنیکوماستی</strong>.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-black text-cyan-400">۵. دیورتیک‌های اسموتیک<br><span class="text-[11px] font-normal text-slate-400">(مانیتول، اوره، سوکروز، گلیسرول)</span></td>
+                                <td class="p-3">بازوی نزولی قوس هنله و PCT<br>افزایش فشار اسمزی داخل لومن (بی‌اثر فارماکولوژیک)</td>
+                                <td class="p-3 text-amber-300 font-bold">هایپرناترمی و دهیدراتاسیون</td>
+                                <td class="p-3">افزایش جریان ادرار</td>
+                                <td class="p-3"><strong>افزایش فشار داخل جمجمه (ادم مغزی - مانیتول تزریقی)</strong>، گلوکوم حاد، حفظ دیورز در نارسایی حاد کلیه.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Interactive 10-Question Pharmacy Exam Self-Test -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-800">
+                    <div>
+                        <h3 class="text-base font-extrabold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-clipboard-question text-emerald-400"></i>
+                            <span>آزمون خودسنجی فارماکولوژی ضدفشار خون و دیورتیک‌ها (۱۰ سؤال کلیدی امتحانی)</span>
+                        </h3>
+                        <p class="text-xs text-slate-400">طراحی شده خط‌به‌خط بر اساس نکات امتحانی اسلایدهای دکتر قلی‌بیکی</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span id="quiz-score-badge" class="px-3 py-1 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-black">
+                            امتیاز: ۰ از ۱۰
+                        </span>
+                        <button onclick="resetQuiz()" class="px-3 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-bold">
+                            شروع مجدد آزمون
+                        </button>
+                    </div>
+                </div>
+
+                <div id="quiz-container" class="space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-950 border-t border-slate-900 py-4 px-4 text-center text-xs text-slate-500">
+        طراحی شده برای مرور تعاملی و بصری دانشجویان داروسازی | منبع علمی: اسلایدهای فارماکولوژی داروهای ضدفشار خون و دیورتیک‌ها - دکتر افروز محمدقلی‌بیکی
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- APPLICATION JAVASCRIPT LOGIC                                          -->
+    <!-- ===================================================================== -->
+    <script>
+        let currentPos = 24; // 0 to 100% along the nephron
+        let isPlaying = true;
+        let playSpeed = 0.12;
+        let currentDrugMode = 'untreated';
+        let activeMainTab = 'scrubber';
+
+        const drugModesInfo = {
+            untreated: {
+                bp: '160/100 mmHg (Stage 2)',
+                co: 'نرمال یا ↑',
+                pvr: '↑↑ مقاومت عروقی بالا',
+                elec: 'K⁺ و pH نرمال'
+            },
+            cai: {
+                bp: 'بدون اثر ضدفشار خون!',
+                co: 'بدون تغییر',
+                pvr: 'بدون تغییر',
+                elec: '↓ K⁺ | اسیدوز متابولیک (ادرار قلیایی)'
+            },
+            osmotic: {
+                bp: '↓ فشار داخل جمجمه/چشم',
+                co: 'تغییر حجم مایع خارج سلولی',
+                pvr: 'بدون اثر مستقیم',
+                elec: '↑ Na⁺ (هایپرناترمی و دهیدراتاسیون)'
+            },
+            loop: {
+                bp: '130/82 mmHg (کاهش سریع پیش‌بار)',
+                co: 'بهبود احتقان و ادم ریوی',
+                pvr: '↓ حجم خون در گردش',
+                elec: '↓↓ K⁺ | ↓ Ca²⁺/Mg²⁺ | آلکالوز متابولیک'
+            },
+            thiazide: {
+                bp: '124/78 mmHg (خط اول کنترل مزمن)',
+                co: '↓ حجم خون اولیه',
+                pvr: '↓ مقاومت عروقی در مصرف طولانی',
+                elec: '↓ K⁺ | ↓ Na⁺ | ↑ Ca²⁺ خون | ↑ اسیداوریک'
+            },
+            ksparing: {
+                bp: '128/80 mmHg (دیورز ملایم)',
+                co: '↓ بازآرایی قلبی (با اسپیرونولاکتون)',
+                pvr: 'مهار اثرات آلدوسترون',
+                elec: '↑↑ K⁺ (هایپرکالمی) | اسیدوز متابولیک'
+            },
+            adh: {
+                bp: 'تنظیم اسمولاریته و آب آزاد',
+                co: 'تغییر حجم آب بدن',
+                pvr: 'اثر از طریق گیرنده V2 کلیوی',
+                elec: 'اصلاح هیپوناترمی (تولواپتان)'
+            },
+            raas_ccb: {
+                bp: '122/76 mmHg (کنترل عالی)',
+                co: 'کاهش بار کاری قلب',
+                pvr: '↓↓ اتساع شریانچه‌ها (↓ PVR)',
+                elec: 'ACEi/ARB: ↑ K⁺ | CCB: نرمال'
+            },
+            symp: {
+                bp: '125/78 mmHg (کاهش تون سمپاتیک)',
+                co: '↓↓ کاهش HR و قدرت انقباض (β1)',
+                pvr: '↓↓ کاهش PVR (با α1 بلاکر، کارودیلول، نبیولول)',
+                elec: 'نرمال (تشدید هایپوگلیسمی با پروپرانولول)'
+            }
+        };
+
+        // Map 0..100 scrubber position to coordinates on the macro nephron SVG
+        function getNephronMarkerCoords(pos) {
+            if (pos < 14) {
+                return { x: 165, y: 50 }; // Glomerulus
+            } else if (pos < 34) {
+                let p = (pos - 14) / 20;
+                return { x: 145 - p * 90, y: 75 + p * 65 }; // PCT
+            } else if (pos < 50) {
+                let p = (pos - 34) / 16;
+                return { x: 50 + p * 115, y: 230 + Math.sin(p * Math.PI) * 65 }; // Loop Descending
+            } else if (pos < 66) {
+                let p = (pos - 50) / 16;
+                return { x: 165, y: 215 - p * 100 }; // TAL
+            } else if (pos < 84) {
+                let p = (pos - 66) / 18;
+                return { x: 185 + p * 230, y: 95 }; // DCT
+            } else {
+                let p = (pos - 84) / 16;
+                return { x: 430, y: 125 + p * 155 }; // Collecting Duct
+            }
+        }
+
+        // Render the exact cellular transporter diagram (Slides 37, 41, 46, 50, 61) inside #svg-dynamic-transporters
+        function renderCellularZoom(pos) {
+            const g = document.getElementById('svg-dynamic-transporters');
+            const header = document.getElementById('svg-cell-header');
+            const zoomTitle = document.getElementById('cell-zoom-title');
+            const segBadge = document.getElementById('current-segment-badge');
+            const reabsorbBadge = document.getElementById('nephron-reabsorb-badge');
+            const stTitle = document.getElementById('station-explain-title');
+            const stBadge = document.getElementById('station-drug-badge');
+            const stDesc = document.getElementById('station-explain-desc');
+            const stPearl = document.getElementById('station-exam-pearl');
+
+            // Reset stroke width on macro paths
+            ['pct', 'desc', 'tal', 'dct', 'cd'].forEach(id => {
+                const el = document.getElementById(`path-${id}`);
+                if (el) el.setAttribute('filter', 'none');
+            });
+
+            if (pos < 14) {
+                // STATION 1: Glomerulus, Juxtaglomerular Apparatus & Vascular Smooth Muscle
+                header.textContent = 'سلول جنب‌گلومرولی (JG) و عضله صاف عروق';
+                zoomTitle.innerHTML = '<i class="fa-solid fa-microscope text-rose-400"></i><span>زوم سلولی: گلومرول، ترشح رنین و کانال کلسیم عروقی (اسلاید ۲۰ و ۲۳)</span>';
+                segBadge.textContent = 'بخش ۱: گلومرول و آرتریول کلیه';
+                reabsorbBadge.textContent = 'فیلتراسیون گلومرولی و تنظیم رنین';
+                stTitle.textContent = 'ایستگاه ۱: گلومرول، دستگاه جنب‌گلومرولی و عضله صاف شریانچه';
+                stBadge.textContent = 'بتابلاکر (β1) | آلیسکرن | CCBs (آملودیپین)';
+                stDesc.textContent = 'کاهش فشار آرتریول کلیه، کاهش غلظت سدیم در توبول دیستال و تحریک گیرنده β1 سمپاتیک باعث ترشح رنین از قشر کلیه می‌شوند. در دیواره عروق نیز ورود کلسیم از کانال‌های وابسته به ولتاژ باعث انقباض (↑ PVR) می‌شود.';
+                stPearl.innerHTML = '<strong>نکته امتحانی (اسلاید ۱۴ و ۲۱):</strong> بتابلاکرها با مهار گیرنده $\\beta_1$ کلیه ترشح رنین را مهار می‌کنند. دی‌هیدروپیریدین‌ها (آملودیپین و نیفدیپین) انتخابی عروق بوده و عارضه شاخص آن‌ها <strong>ادم قوزک پا</strong> و گرگرفتگی است.';
+
+                const blockActive = (currentDrugMode === 'raas_ccb' || currentDrugMode === 'symp');
+                g.innerHTML = `
+                    <!-- L-Type Ca2+ Channel on Vascular Smooth Muscle -->
+                    <rect x="145" y="75" width="42" height="36" rx="8" fill="#10b981" stroke="#fff" stroke-width="2"/>
+                    <text x="166" y="97" fill="#052e16" font-size="10" font-weight="black" text-anchor="middle">Ca²⁺ Ch</text>
+                    <path d="M 95 93 L 235 93" stroke="#6ee7b7" stroke-width="3"/>
+                    <text x="72" y="97" fill="#6ee7b7" font-size="12" font-weight="black">Ca²⁺</text>
+                    <text x="275" y="97" fill="#a7f3d0" font-size="11" font-weight="bold">← انقباض عروق (↑ PVR)</text>
+                    ${blockActive ? `<rect x="135" y="52" width="110" height="22" rx="6" fill="#f43f5e"/><text x="190" y="67" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">مهار توسط آملودیپین/نیفدیپین</text>` : ''}
+
+                    <!-- Beta-1 Receptor & Renin Secretion -->
+                    <circle cx="375" cy="185" r="22" fill="#38bdf8" stroke="#fff" stroke-width="2"/>
+                    <text x="375" y="189" fill="#082f49" font-size="11" font-weight="black" text-anchor="middle">گیرنده β1</text>
+                    <path d="M 340 185 L 250 185" stroke="#38bdf8" stroke-width="3"/>
+                    <text x="245" y="168" fill="#bae6fd" font-size="11" font-weight="bold" text-anchor="middle">ترشح رنین به خون (→ Ang I → Ang II)</text>
+                    ${currentDrugMode === 'symp' ? `<rect x="315" y="212" width="120" height="22" rx="6" fill="#f43f5e"/><text x="375" y="227" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">مهار توسط بتابلاکرها</text>` : ''}
+                `;
+
+            } else if (pos < 34) {
+                // STATION 2: Proximal Convoluted Tubule (PCT) - Slide 37
+                header.textContent = 'سلول توبول خمیده نزدیک (PCT)';
+                zoomTitle.innerHTML = '<i class="fa-solid fa-microscope text-amber-400"></i><span>زوم سلولی: توبول پروگزیمال (PCT) و آنزیم کربنیک انیدراز (اسلاید ۳۷)</span>';
+                segBadge.textContent = 'بخش ۲: توبول خمیده نزدیک (PCT)';
+                reabsorbBadge.textContent = 'بازجذب ۶۵ تا ۷۰٪ سدیم و بی‌کربنات (NaHCO₃)';
+                stTitle.textContent = 'ایستگاه ۲: توبول خمیده نزدیک (Proximal Convoluted Tubule)';
+                stBadge.textContent = 'استازولامید | دورزولامید و برینزولامید';
+                stDesc.textContent = 'مبادله‌کننده NHE3 یون Na⁺ را وارد و H⁺ را خارج می‌کند. H⁺ با HCO₃⁻ ترکیب شده و توسط آنزیم کربنیک انیدراز (CA) به H₂O + CO₂ تبدیل می‌شود تا وارد سلول شده و مجدداً بی‌کربنات به خون بازجذب شود.';
+                stPearl.innerHTML = '<strong>نکته امتحانی (اسلاید ۳۸ و ۳۹):</strong> مهار استازولامید باعث دفع بی‌کربنات، <strong>قلیایی شدن ادرار</strong> (کاربرد در مسمومیت سالیسیلات‌ها، عارضه سنگ کلیه کلسیمی) و <strong>اسیدوز متابولیک</strong> می‌شود. در سیروز کبدی به علت ایجاد <strong>هایپرآمونمی</strong> ممنوع است!';
+
+                const caBlocked = (currentDrugMode === 'cai');
+                g.innerHTML = `
+                    <!-- NHE3 Antiporter on Luminal Membrane -->
+                    <circle cx="165" cy="85" r="20" fill="#d8b4fe" stroke="#fff" stroke-width="2"/>
+                    <text x="165" y="89" fill="#3b0764" font-size="10" font-weight="black" text-anchor="middle">NHE3</text>
+                    <path d="M 115 76 L 215 76" stroke="#fde047" stroke-width="2.5"/>
+                    <text x="95" y="80" fill="#fde047" font-size="11" font-weight="black">Na⁺</text>
+                    <path d="M 215 95 L 115 95" stroke="#fda4af" stroke-width="2.5"/>
+                    <text x="95" y="99" fill="#fda4af" font-size="11" font-weight="black">H⁺</text>
+
+                    <!-- H+ + HCO3- <-> H2CO3 <-> H2O + CO2 with CA boxes (Slide 37) -->
+                    <text x="82" y="132" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">HCO₃⁻ + H⁺ → H₂CO₃</text>
+                    <rect x="130" y="148" width="52" height="24" rx="5" fill="${caBlocked ? '#f43f5e' : '#fef08a'}" stroke="#000" stroke-width="1.5"/>
+                    <text x="156" y="164" fill="${caBlocked ? '#fff' : '#000'}" font-size="11" font-weight="black" text-anchor="middle">${caBlocked ? 'مهار CA!' : 'آنزیم CA'}</text>
+
+                    <text x="82" y="205" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">H₂O + CO₂</text>
+                    <path d="M 120 201 L 210 201" stroke="#a7f3d0" stroke-width="2.5" stroke-dasharray="4,3"/>
+                    <text x="260" y="205" fill="#a7f3d0" font-size="11" font-weight="bold" text-anchor="middle">CO₂ + H₂O</text>
+
+                    <rect x="235" y="148" width="52" height="24" rx="5" fill="${caBlocked ? '#f43f5e' : '#fef047'}" stroke="#000" stroke-width="1.5"/>
+                    <text x="261" y="164" fill="${caBlocked ? '#fff' : '#000'}" font-size="11" font-weight="black" text-anchor="middle">${caBlocked ? 'مهار CA!' : 'آنزیم CA'}</text>
+
+                    <!-- Basolateral HCO3- reabsorption -->
+                    <circle cx="375" cy="145" r="16" fill="#d8b4fe" stroke="#fff" stroke-width="1.5"/>
+                    <path d="M 310 145 L 430 145" stroke="#6ee7b7" stroke-width="2.5"/>
+                    <text x="465" y="149" fill="#6ee7b7" font-size="11" font-weight="bold">HCO₃⁻ به خون</text>
+                `;
+
+            } else if (pos < 50) {
+                // STATION 3: Thin Descending Limb of Loop of Henle (Osmotic Diuretics - Slides 55-57)
+                header.textContent = 'بازوی نزولی قوس هنله (Descending Limb)';
+                zoomTitle.innerHTML = '<i class="fa-solid fa-microscope text-cyan-400"></i><span>زوم سلولی: بازوی نزولی قوس هنله و دیورتیک‌های اسموتیک (اسلاید ۵۵ تا ۵۷)</span>';
+                segBadge.textContent = 'بخش ۳: بازوی نزولی قوس هنله';
+                reabsorbBadge.textContent = 'نفوذپذیر به آب (H₂O) | محل اثر مانیتول';
+                stTitle.textContent = 'ایستگاه ۳: بازوی نزولی قوس هنله (دیورتیک‌های اسموتیک)';
+                stBadge.textContent = 'مانیتول (سردسته) | اوره | سوکروز | گلیسرول';
+                stDesc.textContent = 'بازوی نزولی قوس هنله به آب نفوذپذیر است. دیورتیک‌های اسموتیک (مانند مانیتول) از نظر فارماکولوژیک بی‌اثرند، بازجذب نمی‌شوند و با افزایش فشار اسمزی داخل لومن، آب را به دنبال خود نگه داشته و حجم ادرار را افزایش می‌دهند.';
+                stPearl.innerHTML = '<strong>نکته امتحانی (اسلاید ۵۶ و ۵۷):</strong> کاربرد اصلی <strong>مانیتول تزریقی</strong> کاهش <strong>فشار داخل جمجمه (ادم مغزی)</strong>، گلوکوم حاد و حفظ دیورز در نارسایی کلیوی است. عوارض جانبی: <strong>هایپرناترمی و دهیدراتاسیون</strong>!';
+
+                const osmActive = (currentDrugMode === 'osmotic');
+                g.innerHTML = `
+                    <!-- Osmotic Molecules in Lumen -->
+                    <rect x="18" y="65" width="128" height="95" rx="12" fill="${osmActive ? 'rgba(6, 182, 212, 0.35)' : 'rgba(255,255,255,0.08)'}" stroke="#22d3ee" stroke-width="2"/>
+                    <text x="82" y="92" fill="#67e8f9" font-size="11" font-weight="black" text-anchor="middle">مولکول‌های مانیتول</text>
+                    <text x="82" y="112" fill="#fff" font-size="10" text-anchor="middle">بازجذب نمی‌شوند!</text>
+                    <text x="82" y="132" fill="#fde047" font-size="10" font-weight="bold" text-anchor="middle">↑ فشار اسمزی لومن</text>
+                    <text x="82" y="150" fill="#fde047" font-size="10" font-weight="bold" text-anchor="middle">نگهداری H₂O در ادرار</text>
+
+                    <!-- Water Channels -->
+                    <path d="M 145 205 L 410 205" stroke="#38bdf8" stroke-width="4" stroke-dasharray="${osmActive ? '3,6' : 'none'}"/>
+                    <text x="270" y="195" fill="#bae6fd" font-size="11" font-weight="bold" text-anchor="middle">${osmActive ? 'کاهش بازجذب آب به مدولا (دیورز اسموتیک)' : 'بازجذب اسموتیک آب (H₂O) به مدولای هایپرتونیک'}</text>
+                `;
+
+            } else if (pos < 66) {
+                // STATION 4: Thick Ascending Limb (TAL) - Loop Diuretics (Slide 41)
+                header.textContent = 'بخش ضخیم بالارونده قوس هنله (TAL)';
+                zoomTitle.innerHTML = '<i class="fa-solid fa-microscope text-pink-400"></i><span>زوم سلولی: قوس بالارونده هنله (TAL)، کوترانسپورتر NKCC2 و Ca²⁺/Mg²⁺ (اسلاید ۴۱)</span>';
+                segBadge.textContent = 'بخش ۴: بخش ضخیم بالارونده هنله (TAL)';
+                reabsorbBadge.textContent = 'بازجذب ۲۵٪ سدیم | کوترانسپورتر Na⁺-K⁺-2Cl⁻';
+                stTitle.textContent = 'ایستگاه ۴: بخش ضخیم بالارونده قوس هنله (دیورتیک‌های لوپ / سقف بالا)';
+                stBadge.textContent = 'فوروزماید (اصلی‌ترین) | بومتاناید';
+                stDesc.textContent = 'کوترانسپورتر لومینال NKCC2 هم‌زمان ۱ سدیم، ۱ پتاسیم و ۲ کلر را وارد سلول می‌کند. نشت برگشتی K⁺ به لومن باعث ایجاد «پتانسیل مثبت (+ Potential)» در لومن می‌شود که نیروی محرکه بازجذب بین‌سلولی Mg²⁺ و Ca²⁺ است!';
+                stPearl.innerHTML = '<strong>نکته طلایی امتحان (اسلاید ۴۱ تا ۴۴):</strong> فوروزماید با مهار NKCC2 پتانسیل مثبت لومن را از بین برده و باعث <strong>افزایش دفع Ca²⁺ و Mg²⁺</strong> می‌شود (کاربرد در <strong>درمان هایپرکلسمی</strong>!). تداخلات جدی: ۱) <strong>کاهش دفع لیتیم و مسمومیت لیتیم</strong> ۲) تشدید <strong>سمیت شنوایی (Ototoxicity) با آمینوگلیکوزیدها</strong> ۳) تشدید هایپوکالمی با کورتیکواستروئیدها.';
+
+                const loopBlocked = (currentDrugMode === 'loop');
+                g.innerHTML = `
+                    <!-- NKCC2 Cotransporter on Luminal Membrane (Slide 41) -->
+                    <circle cx="165" cy="95" r="26" fill="${loopBlocked ? '#f43f5e' : '#fdba74'}" stroke="#fff" stroke-width="2"/>
+                    <text x="165" y="99" fill="#431407" font-size="11" font-weight="black" text-anchor="middle">NKCC2</text>
+                    <path d="M 95 78 L 225 78" stroke="#fde047" stroke-width="2.5"/>
+                    <path d="M 95 95 L 225 95" stroke="#c4b5fd" stroke-width="2.5"/>
+                    <path d="M 95 112 L 225 112" stroke="#6ee7b7" stroke-width="2.5"/>
+                    <text x="68" y="82" fill="#fde047" font-size="11" font-weight="black">Na⁺</text>
+                    <text x="68" y="99" fill="#c4b5fd" font-size="11" font-weight="black">K⁺</text>
+                    <text x="68" y="116" fill="#6ee7b7" font-size="11" font-weight="black">2Cl⁻</text>
+
+                    ${loopBlocked ? `<rect x="198" y="82" width="120" height="24" rx="6" fill="#f43f5e"/><text x="258" y="98" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">مهار توسط فوروزماید!</text>` : ''}
+
+                    <!-- K+ Back-leak & (+) Potential driving Mg2+ and Ca2+ paracellularly (Slide 41) -->
+                    <rect x="152" y="162" width="26" height="14" fill="#fff" stroke="#000"/>
+                    <path d="M 215 169 L 105 169" stroke="#c4b5fd" stroke-width="2.5"/>
+                    <text x="62" y="173" fill="#fde047" font-size="11" font-weight="black">(+) Potential</text>
+
+                    <!-- Paracellular Mg2+, Ca2+ pathway at bottom -->
+                    <path d="M 65 248 L 420 248" stroke="#38bdf8" stroke-width="3.5" stroke-dasharray="${loopBlocked ? '4,6' : 'none'}"/>
+                    <text x="65" y="236" fill="#7dd3fc" font-size="12" font-weight="black">Mg²⁺, Ca²⁺</text>
+                    <text x="275" y="238" fill="${loopBlocked ? '#fda4af' : '#bae6fd'}" font-size="10" font-weight="bold" text-anchor="middle">
+                        ${loopBlocked ? 'عدم بازجذب و دفع Ca²⁺ و Mg²⁺ در ادرار!' : 'بازجذب بین‌سلولی ناشی از پتانسیل مثبت لومن'}
+                    </text>
+                `;
+
+            } else if (pos < 84) {
+                // STATION 5: Distal Convoluted Tubule (DCT) - Thiazides & PTH/Ca2+ (Slide 46)
+                header.textContent = 'سلول توبول خمیده دور (DCT)';
+                zoomTitle.innerHTML = '<i class="fa-solid fa-microscope text-emerald-400"></i><span>زوم سلولی: توبول دیستال (DCT)، ناقل NCC و بازجذب کلسیم (اسلاید ۴۶)</span>';
+                segBadge.textContent = 'بخش ۵: توبول خمیده دور (DCT)';
+                reabsorbBadge.textContent = 'بازجذب ۵٪ سدیم (NCC) | افزایش بازجذب کلسیم';
+                stTitle.textContent = 'ایستگاه ۵: توبول خمیده دور (دیورتیک‌های تیازیدی - خط اول فشار خون)';
+                stBadge.textContent = 'هیدروکلروتیازید | اینداپامید | کلروتالیدون';
+                stDesc.textContent = 'تیازیدها ترانسپورتر Na⁺-Cl⁻ (NCC) را در غشای لومینال مهار می‌کنند (دیورز متوسط و پیوسته). در این سلول، کلسیم از طریق کانال لومینال (تحت اثر PTH) وارد شده و در غشای سمت خون توسط مبدل Na⁺/Ca²⁺ و پمپ کلسیم وارد خون می‌شود.';
+                stPearl.innerHTML = '<strong>نکته فوق‌العاده مهم امتحانی (اسلاید ۴۶ تا ۴۸):</strong> برخلاف فوروزماید، تیازیدها <strong>دفع ادراری کلسیم را کاهش می‌دهند</strong> (مطلوب در <strong>پوکی استخوان</strong> و <strong>پیشگیری از سنگ کلیه کلسیمی</strong>؛ عارضه در خون: <strong>هایپرکلسمی</strong>!). همچنین در <strong>دیابت بی‌مزه نفروژنیک</strong> کاربرد دارند.';
+
+                const thzBlocked = (currentDrugMode === 'thiazide');
+                g.innerHTML = `
+                    <!-- NCC Cotransporter on Luminal Membrane (Slide 46) -->
+                    <circle cx="165" cy="88" r="24" fill="${thzBlocked ? '#f43f5e' : '#fdba74'}" stroke="#fff" stroke-width="2"/>
+                    <text x="165" y="92" fill="#431407" font-size="11" font-weight="black" text-anchor="middle">NCC</text>
+                    <path d="M 95 78 L 225 78" stroke="#fde047" stroke-width="2.5"/>
+                    <path d="M 95 98 L 225 98" stroke="#6ee7b7" stroke-width="2.5"/>
+                    <text x="68" y="82" fill="#fde047" font-size="11" font-weight="black">Na⁺</text>
+                    <text x="68" y="102" fill="#6ee7b7" font-size="11" font-weight="black">Cl⁻</text>
+
+                    ${thzBlocked ? `<rect x="198" y="76" width="125" height="24" rx="6" fill="#10b981"/><text x="260" y="92" fill="#052e16" font-size="10" font-weight="black" text-anchor="middle">مهار توسط تیازیدها!</text>` : ''}
+
+                    <!-- Ca2+ Apical Channel stimulated by PTH & Basolateral Na+/Ca2+ Exchanger (Slide 46) -->
+                    <rect x="152" y="165" width="26" height="16" fill="#fff" stroke="#000"/>
+                    <path d="M 95 173 L 220 173" stroke="#38bdf8" stroke-width="3.5"/>
+                    <text x="65" y="177" fill="#38bdf8" font-size="12" font-weight="black">Ca²⁺</text>
+
+                    <!-- PTH Receptor on Basolateral side -->
+                    <rect x="358" y="138" width="32" height="22" rx="4" fill="#e2e8f0" stroke="#000"/>
+                    <text x="374" y="153" fill="#000" font-size="10" font-weight="black" text-anchor="middle">PTH</text>
+                    <path d="M 358 149 L 195 149 L 180 165" fill="none" stroke="#fde047" stroke-width="2"/>
+
+                    <!-- Basolateral Na+/Ca2+ Exchanger -->
+                    <circle cx="375" cy="205" r="16" fill="#d8b4fe" stroke="#fff" stroke-width="1.5"/>
+                    <path d="M 310 198 L 435 198" stroke="#38bdf8" stroke-width="3"/>
+                    <text x="468" y="202" fill="#38bdf8" font-size="11" font-weight="black">↑ بازجذب Ca²⁺</text>
+                `;
+
+            } else {
+                // STATION 6: Collecting Tubule & Duct (Principal Cell, ENaC, Aldosterone & ADH/AQP2 - Slides 50 & 61)
+                header.textContent = 'سلول اصلی لوله جمع‌کننده (Principal Cell)';
+                zoomTitle.innerHTML = '<i class="fa-solid fa-microscope text-purple-400"></i><span>زوم سلولی: لوله جمع‌کننده (CD)، کانال ENaC، آلدوسترون و گیرنده V2/AQP2 (اسلاید ۵۰ و ۶۱)</span>';
+                segBadge.textContent = 'بخش ۶: لوله جمع‌کننده ادرار (CD)';
+                reabsorbBadge.textContent = '۱ تا ۲٪ سدیم | نگهدارنده پتاسیم و ADH';
+                stTitle.textContent = 'ایستگاه ۶: لوله جمع‌کننده ادرار (نگهدارنده‌های پتاسیم و آگونیست/آنتاگونیست ADH)';
+                stBadge.textContent = 'اسپیرونولاکتون/اپلرنون | آمیلورید/تریامترن | تولواپتان';
+                stDesc.textContent = 'در سلول‌های اصلی (Principal cells)، ورود سدیم از کانال اپی‌تلیالی لومینال (ENaC) باعث دفع پتاسیم و H⁺ به ادرار می‌شود. آلدوسترون گیرنده داخل سلولی (R) را فعال کرده و ENaC و پمپ ATPase را تقویت می‌کند. هورمون ADH نیز از طریق گیرنده V2 و cAMP کانال‌های آب (AQP2) را در غشا قرار می‌دهد.';
+                stPearl.innerHTML = '<strong>نکته طلایی امتحان (اسلاید ۵۱ تا ۵۴ و ۶۰ تا ۶۴):</strong> ۱) <strong>آمیلورید و تریامترن</strong> مستقیم کانال ENaC را مهار می‌کنند (در اسلاید ۵۲ به اشتباه تایپی آمیودارون نوشته شده که منظور آمیلورید است!). ۲) <strong>اسپیرونولاکتون</strong> آنتاگونیست گیرنده آلدوسترون با خواص آنتی‌آندروژنیک است (عارضه: <strong>ژنیکوماستی</strong>؛ کاربرد در <strong>PCOD و ریزش موی آندروژنیک</strong>). ۳) <strong>تولواپتان</strong> آنتاگونیست انتخابی $V_2$ در درمان SIADH است.';
+
+                const ksparingActive = (currentDrugMode === 'ksparing');
+                const adhActive = (currentDrugMode === 'adh');
+                g.innerHTML = `
+                    <!-- Apical ENaC Channel & K+ Channel (Slide 50) -->
+                    <rect x="150" y="78" width="30" height="16" fill="${ksparingActive ? '#f43f5e' : '#fff'}" stroke="#000" stroke-width="1.5"/>
+                    <text x="135" y="70" fill="#fde047" font-size="11" font-weight="black">کانال ENaC</text>
+                    <path d="M 95 86 L 220 86" stroke="#fde047" stroke-width="3"/>
+                    <text x="68" y="90" fill="#fde047" font-size="11" font-weight="black">Na⁺</text>
+
+                    <!-- Intracellular Aldosterone Receptor (R) -->
+                    <circle cx="275" cy="86" r="18" fill="#f472b6" stroke="#fff" stroke-width="2"/>
+                    <text x="275" y="90" fill="#500724" font-size="11" font-weight="black" text-anchor="middle">R (Aldo)</text>
+                    <path d="M 415 86 L 295 86" stroke="#f472b6" stroke-width="2.5"/>
+                    <text x="465" y="90" fill="#fbcfe8" font-size="11" font-weight="bold">آلدوسترون</text>
+
+                    <!-- Apical K+ secretion -->
+                    <rect x="150" y="138" width="30" height="14" fill="#fff" stroke="#000"/>
+                    <path d="M 220 145 L 95 145" stroke="#c4b5fd" stroke-width="2.5"/>
+                    <text x="68" y="149" fill="#c4b5fd" font-size="11" font-weight="black">دفع K⁺</text>
+
+                    <!-- V2 Receptor -> cAMP -> AQP2 Water Channel (Slide 61) -->
+                    <circle cx="375" cy="215" r="17" fill="#38bdf8" stroke="#fff" stroke-width="2"/>
+                    <text x="375" y="219" fill="#082f49" font-size="11" font-weight="black" text-anchor="middle">V₂</text>
+                    <text x="455" y="219" fill="#7dd3fc" font-size="11" font-weight="bold">ADH (وازوپرسین)</text>
+                    <path d="M 355 215 L 250 215" stroke="#38bdf8" stroke-width="2.5"/>
+                    <text x="285" y="205" fill="#bae6fd" font-size="10" font-weight="bold">cAMP → AQP2</text>
+
+                    <rect x="150" y="206" width="30" height="16" fill="${adhActive ? '#38bdf8' : '#fff'}" stroke="#000"/>
+                    <path d="M 95 214 L 220 214" stroke="#38bdf8" stroke-width="3"/>
+                    <text x="65" y="218" fill="#7dd3fc" font-size="11" font-weight="black">H₂O (AQP2)</text>
+                `;
+            }
+        }
+
+        function updateScrubberUI(pos) {
+            currentPos = Number(pos);
+            document.getElementById('nephron-scrubber').value = currentPos;
+            document.getElementById('scrubber-readout').textContent = `${Math.round(currentPos)}%`;
+
+            const coords = getNephronMarkerCoords(currentPos);
+            document.getElementById('nephron-marker-outer').setAttribute('cx', coords.x);
+            document.getElementById('nephron-marker-outer').setAttribute('cy', coords.y);
+            document.getElementById('nephron-marker-dot').setAttribute('cx', coords.x);
+            document.getElementById('nephron-marker-dot').setAttribute('cy', coords.y);
+
+            const modeData = drugModesInfo[currentDrugMode];
+            document.getElementById('tele-bp').textContent = modeData.bp;
+            document.getElementById('tele-co').textContent = modeData.co;
+            document.getElementById('tele-pvr').textContent = modeData.pvr;
+            document.getElementById('tele-electrolyte').textContent = modeData.elec;
+
+            renderCellularZoom(currentPos);
+        }
+
+        function animateLoop() {
+            if (isPlaying && activeMainTab === 'scrubber') {
+                currentPos += playSpeed;
+                if (currentPos > 100) currentPos = 0;
+                updateScrubberUI(currentPos);
+            }
+            requestAnimationFrame(animateLoop);
+        }
+
+        function onScrub(val) {
+            if (isPlaying) togglePlay(false);
+            updateScrubberUI(val);
+        }
+
+        function togglePlay(force) {
+            isPlaying = typeof force === 'boolean' ? force : !isPlaying;
+            document.getElementById('play-icon').className = isPlaying ? 'fa-solid fa-pause text-lg' : 'fa-solid fa-play text-lg';
+        }
+
+        function setSpeed(spd) {
+            playSpeed = spd;
+            document.querySelectorAll('.speed-btn').forEach(b => {
+                b.className = 'speed-btn px-2 py-1 rounded text-slate-400 hover:text-white';
+            });
+            const btn = document.getElementById(`speed-${spd}`);
+            if (btn) btn.className = 'speed-btn px-2 py-1 rounded bg-emerald-500/20 text-emerald-300 font-bold';
+        }
+
+        function jumpToStation(pos) {
+            togglePlay(false);
+            updateScrubberUI(pos);
+        }
+
+        function selectDrugMode(mode) {
+            currentDrugMode = mode;
+            document.querySelectorAll('.drug-mode-btn').forEach(btn => {
+                if (btn.dataset.mode === mode) {
+                    btn.className = 'drug-mode-btn px-2.5 py-2 rounded-xl border text-right transition-all bg-emerald-500/20 border-emerald-400 text-white shadow-lg';
+                } else {
+                    btn.className = 'drug-mode-btn px-2.5 py-2 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all';
+                }
+            });
+
+            // Jump to the relevant nephron segment automatically when a specific diuretic is chosen
+            if (mode === 'cai') updateScrubberUI(24);
+            else if (mode === 'osmotic') updateScrubberUI(42);
+            else if (mode === 'loop') updateScrubberUI(58);
+            else if (mode === 'thiazide') updateScrubberUI(76);
+            else if (mode === 'ksparing' || mode === 'adh') updateScrubberUI(92);
+            else if (mode === 'raas_ccb' || mode === 'symp') updateScrubberUI(6);
+            else updateScrubberUI(currentPos);
+        }
+
+        function setRAASBlock(type) {
+            document.querySelectorAll('.raas-btn').forEach(b => {
+                b.className = 'raas-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800';
+            });
+            document.getElementById(`raas-btn-${type}`).className = 'raas-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white shadow-lg';
+
+            const nRenin = document.getElementById('raas-node-renin');
+            const nAce = document.getElementById('raas-node-ace');
+            const nBrady = document.getElementById('raas-node-bradykinin');
+            const nAt1 = document.getElementById('raas-node-at1');
+            const bradyText = document.getElementById('bradykinin-status');
+            const title = document.getElementById('raas-explain-title');
+            const body = document.getElementById('raas-explain-body');
+
+            [nRenin, nAce, nBrady, nAt1].forEach(el => {
+                el.className = 'p-3 rounded-xl bg-slate-900 border border-slate-700 transition-all';
+            });
+            bradyText.textContent = 'آنزیم ACE برادی‌کینین را به متابولیت‌های غیرفعال تجزیه می‌کند.';
+
+            if (type === 'bb') {
+                nRenin.className = 'p-3 rounded-xl bg-amber-950/40 border-2 border-amber-400 transition-all';
+                title.textContent = 'مهار گیرنده β1 کلیه توسط بتابلاکرها (اسلاید ۱۴ و ۲۳)';
+                body.textContent = 'بتابلاکرها با مهار گیرنده β1 در دستگاه جنب‌گلومرولی کلیه، آزادسازی رنین را در ابتدای مسیر کاهش داده و علاوه بر کاهش برون‌ده قلبی، مقاومت عروقی (PVR) را نیز کم می‌کنند.';
+            } else if (type === 'aliskiren') {
+                nRenin.className = 'p-3 rounded-xl bg-cyan-950/40 border-2 border-cyan-400 transition-all';
+                title.textContent = 'مهار مستقیم آنزیم رنین توسط آلیسکرن (Aliskiren - اسلاید ۲۷)';
+                body.textContent = 'آلیسکرن مستقیماً آنزیم رنین را مهار کرده و مانع از تبدیل آنژیوتانسینوژن کبدی به آنژیوتانسین I (دکاپپتید غیرفعال) می‌شود.';
+            } else if (type === 'acei') {
+                nAce.className = 'p-3 rounded-xl bg-emerald-950/40 border-2 border-emerald-400 transition-all';
+                nBrady.className = 'p-3 rounded-xl bg-rose-950/40 border-2 border-rose-400 transition-all';
+                bradyText.innerHTML = '<strong class="text-rose-300">مهار تخریب برادی‌کینین!</strong> تجمع برادی‌کینین باعث گشادی عروق، اما ایجاد <strong>سرفه خشک و آنژیوادم</strong> می‌شود.';
+                title.textContent = 'مهارکننده‌های ACE: کاپتوپریل، انالاپریل، لیزینوپریل (اسلاید ۲۸ تا ۳۰)';
+                body.textContent = 'مهار آنزیم مبدل آنژیوتانسین هم تولید Ang II را متوقف می‌کند و هم مانع تخریب برادی‌کینین می‌شود. کاهش پیش‌بار و پس‌بار قلب، مناسب در دیابت و پروتئینوری. عوارض: سرفه خشک (بیشتر با کاپتوپریل)، هایپرکالمی، طعم فلزی دهان و آنژیوادم.';
+            } else if (type === 'arb') {
+                nAt1.className = 'p-3 rounded-xl bg-purple-950/40 border-2 border-purple-400 transition-all';
+                title.textContent = 'آنتاگونیست‌های گیرنده AT1: لوسارتان، والزارتان، تلمیسارتان (اسلاید ۳۱ و ۳۲)';
+                body.textContent = 'مهار رقابتی اتصال آنژیوتانسین II به گیرنده AT1. نکته کلیدی اسلاید ۳۲: این داروها مانع تجزیه برادی‌کینین نمی‌شوند، بنابراین عارضه سرفه خشک و آنژیوادم با ARBها بسیار کمتر است و در افراد دچار عدم تحمل ACEi تجویز می‌شوند.';
+            } else if (type === 'mra') {
+                nAt1.className = 'p-3 rounded-xl bg-pink-950/40 border-2 border-pink-400 transition-all';
+                title.textContent = 'آنتاگونیست آلدوسترون: اسپیرونولاکتون و اپلرنون (اسلاید ۲۷ و ۵۳)';
+                body.textContent = 'رقابت با آلدوسترون روی گیرنده داخل سلولی در لوله جمع‌کننده ادرار ← افزایش دفع سدیم و آب و نگهداری پتاسیم و یون هیدروژن.';
+            } else {
+                title.textContent = 'وضعیت: فعالیت کامل سیستم RAAS (بدون دارو)';
+                body.textContent = 'آنژیوتانسین II از طریق گیرنده AT1 باعث انقباض شریانچه‌ها، تحریک سمپاتیک، ترشح آلدوسترون از قشر فوق‌کلیه و ترشح ADH از هیپوفیز خلفی می‌شود.';
+            }
+        }
+
+        const comorbidityCases = {
+            age_race: {
+                preferred: 'دیورتیک‌های تیازیدی و مهارکننده‌های کانال کلسیم (CCBs)',
+                contra: 'پاسخ ضعیف‌تر به ACEi یا بتابلاکر به تنهایی',
+                reason: 'طبق اسلاید ۶۷ و ۶۸، بیماران بالای ۵۵ سال و بیماران با نژاد آفریقایی به دیورتیک‌های تیازیدی (مثل هیدروکلروتیازید/کلروتالیدون) و مهارکننده‌های کانال کلسیم (مثل آملودیپین) بسیار بهتر جواب می‌دهند.'
+            },
+            diabetes: {
+                preferred: 'مهارکننده‌های ACE (کاپتوپریل، انالاپریل) و ARBs (لوسارتان، والزارتان)',
+                contra: 'پروپرانولول (تشدید هایپوگلیسمی و پوشاندن علائم) و دیازوکساید (هایپرگلیسمی)',
+                reason: 'طبق اسلاید ۲۹ و ۶۸، در بیماران مبتلا به دیابت و نارسایی کلیوی همراه با پروتئینوری، مهارکننده‌های ACE و ARBها به دلیل کاهش فشار گلومرولی و کاهش پروتئینوری خط اول و ارجح هستند.'
+            },
+            asthma: {
+                preferred: 'مهارکننده‌های کانال کلسیم (CCBs) یا ARBs',
+                contra: 'بتابلاکرها (به‌ویژه پروپرانولول غیرانتخابی) مطلقاً ممنوع!',
+                reason: 'طبق اسلاید ۱۵ و ۶۸، در مبتلایان به آسم، تجویز بتابلاکرها به علت مهار گیرنده β2 در عضلات صاف مجاری تنفسی باعث برونکواسپاسم شدید می‌شود و ممنوع است.'
+            },
+            gout: {
+                preferred: 'لوسارتان (Losartan) ارجح است!',
+                contra: 'دیورتیک‌ها (لوپ و تیازیدی) ممنوع!',
+                reason: 'طبق اسلاید ۴۴، ۴۸ و ۶۸، دیورتیک‌های تیازیدی و لوپ باعث هایپراوریسمی (افزایش اسید اوریک خون) و تشدید نقرس می‌شوند؛ بنابراین در بیمار مبتلا به نقرس، دیورتیک ممنوع بوده و «لوسارتان» داروی ارجح است.'
+            },
+            pregnancy: {
+                preferred: 'متیل‌دوپا (Methyldopa - ارجح) و هیدرالازین (Hydralazine)',
+                contra: 'مهارکننده‌های ACE و ARBها مطلقاً ممنوع! (خطر ناهنجاری و نارسایی کلیه جنین)',
+                reason: 'طبق اسلاید ۱۰، ۳۰، ۳۲ و ۶۸، در دوران بارداری متیل‌دوپا (آگونیست α2 مرکزی) داروی ارجح است و هیدرالازین نیز کاربرد دارد. ACEi و ARB باعث افت فشار، نارسایی کلیه و ناهنجاری در جنین می‌شوند.'
+            },
+            bph: {
+                preferred: 'آلفا-۱ بلاکرهای انتخابی: پرازوسین (Prazosin) و ترازوسین (Terazosin)',
+                contra: 'احتیاط از نظر افت فشار وضعیتی (Orthostatic hypotension) در دوزهای اول',
+                reason: 'طبق اسلاید ۱۳ و ۶۸، در مردان مبتلا به هایپرتنشن همراه با بزرگی خوش‌خیم پروستات (BPH)، آلفا-۱ بلاکرها هم مقاومت عروقی (PVR) را کم می‌کنند و هم عضله صاف گردن مثانه و پروستات را شل می‌کنند.'
+            },
+            anxiety: {
+                preferred: 'بتابلاکرها (مانند پروپرانولول)',
+                contra: 'پرهیز در صورت وجود برادی‌کاردی شدید یا آسم',
+                reason: 'طبق اسلاید ۱۶ و ۶۸، در بیماران مبتلا به فشار خون همراه با اضطراب، لرزش (ترمور اولیه)، پیشگیری از میگرن یا پرکاری تیروئید (هایپرتیروئیدی)، بتابلاکرها داروی ارجح هستند.'
+            },
+            angina_hf: {
+                preferred: 'در آنژین صدری: CCBها و بتابلاکرها | در نارسایی قلبی: ACEi، ARB، بتابلاکر و دیورتیک',
+                contra: 'آلفابلاکرهای غیرانتخابی یا وازودیلاتورها بدون بتابلاکر (به علت تاکی‌کاردی رفلکسی)',
+                reason: 'طبق اسلاید ۱۶، ۲۱ و ۶۸، در آنژین صدری مهارکننده‌های کانال کلسیم و بتابلاکرها و در نارسایی قلبی مهارکننده‌های ACE و ARBها به همراه دیورتیک‌های لوپ و اسپیرونولاکتون ارجح هستند.'
+            },
+            osteoporosis: {
+                preferred: 'در پوکی استخوان و سنگ کلیه کلسیمی: تیازیدها | در هایپرکلسمی: فوروزماید (لوپ)',
+                contra: 'استازولامید باعث قلیایی شدن ادرار و تشکیل سنگ کلیه کلسیمی می‌شود!',
+                reason: 'طبق اسلاید ۴۳، ۴۷ و ۴۸، تیازیدها دفع ادراری کلسیم را کاهش می‌دهند (مفید در پوکی استخوان و سنگ کلیه کلسیمی)، در حالی که فوروزماید دفع کلسیم را افزایش می‌دهد (مفید در درمان هایپرکلسمی).'
+            },
+            pcos_siadh: {
+                preferred: 'در PCOD و ریزش موی آندروژنیک: اسپیرونولاکتون | در SIADH: تولواپتان | در دیابت بی‌مزه مرکزی: دسموپرسین',
+                contra: 'اسپیرونولاکتون در مردان باعث ژنیکوماستی می‌شود؛ ممنوع هم‌زمان با ACEi/ARB و نارسایی کلیه (خطر هایپرکالمی)',
+                reason: 'طبق اسلاید ۵۳، ۵۴، ۶۰ و ۶۳، اسپیرونولاکتون یک مشتق استروئیدی با خواص آنتی‌آندروژنیک است که علاوه بر آلدوسترونیسم و HF، در PCOD (تخمدان پلی‌کیستیک) و ریزش موی آندروژنیک کاربرد دارد.'
+            }
+        };
+
+        function selectComorbidity(caseKey) {
+            document.querySelectorAll('.case-btn').forEach(btn => {
+                if (btn.dataset.case === caseKey) {
+                    btn.className = 'case-btn p-3 rounded-xl border text-right transition-all bg-emerald-600/20 border-emerald-400 text-white shadow-lg';
+                } else {
+                    btn.className = 'case-btn p-3 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-800 text-right transition-all';
+                }
+            });
+            const data = comorbidityCases[caseKey];
+            document.getElementById('case-preferred').textContent = data.preferred;
+            document.getElementById('case-contra').textContent = data.contra;
+            document.getElementById('case-reason').textContent = data.reason;
+        }
+
+        const fullDrugsCatalog = [
+            {
+                name: '۱. آگونیست‌های آلفا-۲ مرکزی: متیل‌دوپا و کلونیدین',
+                cat: 'symp',
+                badge: 'سمپاتوپلژیک مرکزی (CNS)',
+                color: 'emerald',
+                simMode: 'symp',
+                moa: 'فعال‌سازی گیرنده α2 در CNS ← کاهش جریان خروجی سمپاتیک ← کاهش برون‌ده قلبی، کاهش مقاومت عروقی یا هر دو.',
+                uses: '• متیل‌دوپا: خط اول کاهش فشار خون دوران بارداری.\n• کلونیدین: هایپرتنشن متوسط تا شدید و کنترل علائم قطع مصرف مخدرهای اپیوئیدی.',
+                adverse: '• متیل‌دوپا: خواب‌آلودگی، آنمی همولیتیک و سمیت کبدی در مصرف مزمن.\n• کلونیدین: خواب‌آلودگی و خطر برگشت فشار خون شدید (Rebound) با قطع ناگهانی (درمان با کلونیدین یا فنتولامین).'
+            },
+            {
+                name: '۲. آلفا بلاکرها: فنتولامین، فنوکسی‌بنزامین، پرازوسین و ترازوسین',
+                cat: 'symp',
+                badge: 'غیرانتخابی در برابر انتخابی α1',
+                color: 'amber',
+                simMode: 'symp',
+                moa: '• فنتولامین و فنوکسی‌بنزامین: مهار غیرانتخابی گیرنده α (اتساع عروق اما تاکی‌کاردی رفلکسی شدید).\n• پرازوسین و ترازوسین: مهار انتخابی گیرنده α1 در جدار عروق (↓ PVR).',
+                uses: '• غیرانتخابی‌ها: فئوکروموسایتوما و اورژانس فشار خون (نامناسب در فشار خون مزمن).\n• انتخابی‌های α1: هایپرتنشن خفیف و هایپرپلازی خوش‌خیم پروستات (BPH).',
+                adverse: 'پرازوسین و ترازوسین: افت فشار وضعیتی (Orthostatic hypotension) مخصوصاً با چند دوز اول مصرف.'
+            },
+            {
+                name: '۳. بتابلاکرها: پروپرانولول، آتنولول، متوپرولول، لابتالول، کارودیلول، نبیولول',
+                cat: 'symp',
+                badge: 'مهار β قلبی و رنین کلیوی',
+                color: 'cyan',
+                simMode: 'symp',
+                moa: 'مهار گیرنده β1 قلبی (↓ CO) + مهار گیرنده β1 کلیه (↓ رنین و مهار RAAS ← ↓ PVR). لابتالول و کارودیلول گیرنده α1 را هم مهار می‌کنند. نبیولول دارای قابلیت آزادسازی نیتریک اکساید (NO) است.',
+                uses: 'هایپرتنشن، نارسایی قلبی، آنژین صدری، آریتمی، گلوکوم (تیمولول، بتاکسولول)، ترمور اولیه، پیشگیری از میگرن، هایپرتیروئیدی و اضطراب.',
+                adverse: 'برادی‌کاردی، برونکواسپاسم با پروپرانولول (ممنوع در آسم)، تشدید هایپوگلیسمی، کابوس شبانه و اختلال خواب، و برادی‌کاردی در جنین.'
+            },
+            {
+                name: '۴. وازودیلاتورهای خوراکی: هیدرالازین و ماینوکسیدیل',
+                cat: 'vaso',
+                badge: 'اثر بر شریان > ورید',
+                color: 'rose',
+                simMode: 'raas_ccb',
+                moa: '• هیدرالازین: آزادسازی نیتریک اکساید (NO) با پاسخ بارورسپتوری قابل توجه.\n• ماینوکسیدیل: بازکننده کانال پتاسیمی (K+) در عضلات صاف شریان‌ها.',
+                uses: 'هایپرتنشن شدید، نارسایی قلبی (هیدرالازین + ایزوسورباید)، فشار خون بارداری (هیدرالازین) و کنترل موضعی ریزش مو و طاسی (ماینوکسیدیل). معمولاً همراه با بتابلاکر یا دیورتیک مصرف می‌شوند.',
+                adverse: '• هیدرالازین: سندرم شبه‌لوپوس، تاکی‌کاردی، احتباس آب و سدیم، سردرد و گرگرفتگی.\n• ماینوکسیدیل: هیرسوتیسم (پرمویی)، تاکی‌کاردی رفلکسی و احتباس آب و نمک.'
+            },
+            {
+                name: '۵. وازودیلاتورهای تزریقی اورژانس: نیتروپروساید، دیازوکساید و فنلدوپام',
+                cat: 'vaso',
+                badge: 'اورژانس فشار خون',
+                color: 'rose',
+                simMode: 'raas_ccb',
+                moa: '• نیتروپروساید: آزادسازی مستقیم NO از مولکول دارو (حساس به نور؛ اثر ۱ تا ۱۰ دقیقه).\n• دیازوکساید: مشتق تیازیدی بدون اثر دیورتیک! بازکننده کانال پتاسیمی (طول اثر ۴ تا ۲۴ ساعت).\n• فنلدوپام: فعال‌سازی گیرنده دوپامینی D1.',
+                uses: 'اورژانس‌های فشار خون؛ دیازوکساید خوراکی همچنین در هیپوگلیسمی ناشی از تومور ترشح‌کننده انسولین (اینسولینوما) کاربرد دارد.',
+                adverse: '• نیتروپروساید: هیپوتانسیون شدید، تاکی‌کاردی و تجمع سیانید!\n• دیازوکساید: هایپرگلیسمی، احتباس آب و نمک و تاکی‌کاردی.'
+            },
+            {
+                name: '۶. مهارکننده‌های کانال کلسیم (CCBs): آملودیپین، نیفدیپین، وراپامیل، دیلتیازم',
+                cat: 'vaso',
+                badge: 'دی‌هیدروپیریدینی و غیردی‌هیدروپیریدینی',
+                color: 'emerald',
+                simMode: 'raas_ccb',
+                moa: 'مهار ورود کلسیم از کانال‌های کلسیمی وابسته به ولتاژ. دی‌هیدروپیریدین‌ها (آملودیپین، نیفدیپین) وازودیلاتور انتخابی عروق‌اند؛ غیردی‌هیدروپیریدین‌ها (وراپامیل، دیلتیازم) بر هدایت و برون‌ده قلب اثر می‌گذارند.',
+                uses: 'هایپرتنشن (به‌ویژه بالای ۵۵ سال و نژاد آفریقایی)، آنژین صدری و آریتمی قلبی (وراپامیل/دیلتیازم).',
+                adverse: 'ادم قوزک پا (بسیار شاخص)، سردرد، فلاشینگ و گرگرفتگی، تهوع، یبوست (به‌ویژه وراپامیل) و افت فشار وضعیتی.'
+            },
+            {
+                name: '۷. مهارکننده‌های ACE: کاپتوپریل، انالاپریل، لیزینوپریل',
+                cat: 'raas',
+                badge: 'مهار تولید Ang II + حفظ برادی‌کینین',
+                color: 'purple',
+                simMode: 'raas_ccb',
+                moa: 'مهار آنزیم مبدل آنژیوتانسین (ACE) ← مهار تولید Ang II و جلوگیری از تخریب برادی‌کینین ← کاهش مقاومت عروق، کاهش ترشح آلدوسترون و کاهش پیش‌بار و پس‌بار.',
+                uses: 'فشار خون خفیف تا متوسط (اغلب همراه دیورتیک)، خط اول در دیابت و نارسایی کلیوی (پروتئینوری) و نارسایی قلبی.',
+                adverse: 'سرفه خشک (بیشتر با کاپتوپریل)، هایپرکالمی (تداخل با مکمل پتاسیم و نگهدارنده‌های پتاسیم)، احساس طعم فلزی در دهان، کاهش حس چشایی، آنژیوادم و منع مصرف مطلق در بارداری.'
+            },
+            {
+                name: '۸. آنتاگونیست‌های گیرنده آنژیوتانسین (ARBs) و مهارکننده رنین (آلیسکرن)',
+                cat: 'raas',
+                badge: 'لوسارتان، والزارتان، تلمیسارتان',
+                color: 'purple',
+                simMode: 'raas_ccb',
+                moa: 'مهار رقابتی گیرنده AT1 آنژیوتانسین II. برخلاف ACEi مانع تجزیه برادی‌کینین نمی‌شوند. آلیسکرن مستقیماً آنزیم رنین را مهار می‌کند.',
+                uses: 'درمان هایپرتنشن، نارسایی قلبی، نفروپاتی دیابتی، بیماران با عدم تحمل ACEi (سرفه خشک) و بیماران مبتلا به نقرس (لوسارتان ارجح است).',
+                adverse: 'هایپرکالمی و ممنوعیت در بارداری (سرفه خشک و آنژیوادم بسیار کمتر از ACEi).'
+            },
+            {
+                name: '۹. مهارکننده‌های کربنیک انیدراز: استازولامید، دورزولامید، برینزولامید',
+                cat: 'diuretic',
+                badge: 'توبول پروگزیمال (PCT)',
+                color: 'amber',
+                simMode: 'cai',
+                moa: 'مهار آنزیم کربنیک انیدراز در لوله خمیده نزدیک (PCT) و جسم مژگانی چشم ← دفع بی‌کربنات سدیم و قلیایی شدن ادرار.',
+                uses: 'فاقد کاربرد ضدفشار خون! کاربرد در گلوکوم (استازولامید تزریقی و قطره‌های چشمی دورزولامید و برینزولامید)، بیماری حاد کوهستانی، قلیایی کردن ادرار در مسمومیت سالیسیلات‌ها، آلکالوز متابولیک همراه ادم و صرع غایب.',
+                adverse: 'اسیدوز متابولیک، هایپوکالمی، آلرژی سولفونامیدی، گزگز اندام‌های انتهایی، رسوب کلسیم و سنگ کلیه (به دنبال قلیایی شدن ادرار) و هایپرآمونمی در سیروز کبدی.'
+            },
+            {
+                name: '۱۰. دیورتیک‌های لوپ (سقف بالا): فوروزماید و بومتاناید',
+                cat: 'diuretic',
+                badge: 'بخش ضخیم بالارونده هنله (TAL)',
+                color: 'pink',
+                simMode: 'loop',
+                moa: 'مهار کوترانسپورتر Na⁺-K⁺-2Cl⁻ (NKCC2) در قوس بالارونده هنله ← مهار بازجذب ۲۵٪ سدیم و کلر + حذف پتانسیل مثبت لومن و افزایش دفع کلسیم و منیزیم. دیورز قوی، سریع و کوتاه‌مدت (۴ ساعت).',
+                uses: 'ادم حاد ریوی، ادم محیطی، نارسایی قلبی، هایپرتنشن حاد و شدید (در عدم پاسخ به تیازید) و درمان هایپرکلسمی!',
+                adverse: 'سمیت شنوایی (Ototoxicity - تشدید با آمینوگلیکوزیدها)، آلکالوز متابولیک هایپوکالمیک (تشدید با کورتیکواستروئیدها)، هایپراوریسمی، هایپوولمی و کاهش دفع لیتیم (مسمومیت لیتیم).'
+            },
+            {
+                name: '۱۱. دیورتیک‌های تیازیدی: هیدروکلروتیازید، اینداپامید، کلروتالیدون',
+                cat: 'diuretic',
+                badge: 'توبول دیستال (DCT) - خط اول HTN',
+                color: 'emerald',
+                simMode: 'thiazide',
+                moa: 'مهار ترانسپورتر Na⁺-Cl⁻ (NCC) در لوله خمیده دور (DCT) ← دیورز متوسط ولی پیوسته + کاهش دفع ادراری کلسیم + کاهش مقاومت عروقی در مصرف مزمن.',
+                uses: 'خط اول هایپرتنشن خفیف تا متوسط، نارسایی قلبی (بعد از لوپ)، پیشگیری از سنگ‌های کلیوی کلسیمی، افراد مبتلا به پوکی استخوان و دیابت بی‌مزه نفروژنیک.',
+                adverse: 'هایپوکالمی، هیپوناترمی، هایپرکلسمی (در خون)، هایپراوریسمی (ممنوع در نقرس) و هایپرلیپیدمی.'
+            },
+            {
+                name: '۱۲. دیورتیک‌های نگهدارنده پتاسیم: اسپیرونولاکتون، اپلرنون، آمیلورید و تریامترن',
+                cat: 'diuretic',
+                badge: 'لوله جمع‌کننده ادرار (CD)',
+                color: 'purple',
+                simMode: 'ksparing',
+                moa: '• دسته اول (آمیلورید و تریامترن): مهار مستقیم بازجذب سدیم از کانال اپی‌تلیال (ENaC) در غشای لومینال.\n• دسته دوم (اسپیرونولاکتون و اپلرنون): آنتاگونیست گیرنده داخل سلولی آلدوسترون.',
+                uses: 'جلوگیری از هایپوکالمی در کنار سایر دیورتیک‌ها، نارسایی قلبی شدید، هایپرآلدوسترونیسم، ادم سیروتیک، و فقط با اسپیرونولاکتون: سندرم تخمدان پلی‌کیستیک (PCOD) و ریزش موی آندروژنیک.',
+                adverse: 'هایپرکالمی، اسیدوز متابولیک و ژنیکوماستی (فقط با اسپیرونولاکتون). منع مصرف: نارسایی مزمن کلیوی، مصرف هم‌زمان پتاسیم خوراکی و مصرف هم‌زمان با ACEi/ARB.'
+            },
+            {
+                name: '۱۳. دیورتیک‌های اسموتیک: مانیتول، اوره، سوکروز، گلیسرول',
+                cat: 'diuretic',
+                badge: 'بازوی نزولی قوس هنله',
+                color: 'cyan',
+                simMode: 'osmotic',
+                moa: 'بی‌اثر از نظر فارماکولوژیک؛ بازجذب نمی‌شوند و با افزایش فشار اسمزی داخل لومن و کاهش هایپرتونیسیته مدولا، آب را به دنبال خود می‌کشند.',
+                uses: 'افزایش فشار داخل جمجمه به دلیل ادم مغزی (مانیتول تزریقی)، افزایش فشار کره چشم (گلوکوم حاد) و نارسایی کلیوی جهت حفظ دیورز.',
+                adverse: 'هایپرناترمی و دهیدراتاسیون.'
+            },
+            {
+                name: '۱۴. آگونیست‌ها و آنتاگونیست‌های هورمون ضدادراری (ADH)',
+                cat: 'diuretic',
+                badge: 'گیرنده V2 و کانال AQP2',
+                color: 'sky',
+                simMode: 'adh',
+                moa: '• آگونیست‌های ADH (وازوپرسین و دسموپرسین): فعال‌سازی گیرنده V2 در لوله جمع‌کننده ← افزایش cAMP ← قرارگیری کانال‌های آب (AQP2) در غشای لومینال.\n• آنتاگونیست‌های ADH (تولواپتان، لیتیم، دمکلوسیکلین): مهار گیرنده V2.',
+                uses: '• دسموپرسین و وازوپرسین: درمان دیابت بی‌مزه مرکزی (Central diabetes insipidus).\n• تولواپتان: سندرم ترشح نامتناسب ADH (SIADH) و افزایش ADH در CHF.',
+                adverse: 'دیابت بی‌مزه نفروژنیک و نارسایی حاد کلیوی (ناشی از لیتیم و دمکلوسیکلین که امروزه دیگر برای این منظور استفاده نمی‌شوند).'
+            }
+        ];
+
+        function renderDrugCatalog(filter = 'all') {
+            const grid = document.getElementById('drugs-catalog-grid');
+            grid.innerHTML = '';
+
+            const list = filter === 'all' ? fullDrugsCatalog : fullDrugsCatalog.filter(d => d.cat === filter);
+
+            list.forEach(d => {
+                const card = document.createElement('div');
+                card.className = 'bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-5 shadow-xl flex flex-col justify-between transition-all';
+                card.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2 border-b border-slate-800 pb-3">
+                            <h3 class="text-sm md:text-base font-black text-white leading-snug">${d.name}</h3>
+                            <span class="px-2.5 py-1 rounded-lg text-[10px] font-extrabold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shrink-0">${d.badge}</span>
+                        </div>
+                        <div class="text-xs space-y-2 leading-relaxed">
+                            <div>
+                                <span class="font-bold text-cyan-400">مکانیسم اثر: </span>
+                                <span class="text-slate-300 whitespace-pre-line">${d.moa}</span>
+                            </div>
+                            <div>
+                                <span class="font-bold text-emerald-400">کاربرد بالینی: </span>
+                                <span class="text-slate-300 whitespace-pre-line">${d.uses}</span>
+                            </div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <span class="font-bold text-rose-400">عوارض و تداخلات امتحانی: </span>
+                                <span class="text-slate-300 text-[11px] whitespace-pre-line">${d.adverse}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="jumpToScrubberFromCard('${d.simMode}')" class="mt-4 w-full py-2 rounded-xl bg-slate-950 hover:bg-emerald-600 hover:text-white text-emerald-400 border border-emerald-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play"></i>
+                        <span>مشاهده در اسکرابر نفرون و همودینامیک</span>
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCatalog(cat) {
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.className = 'cat-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white';
+                } else {
+                    btn.className = 'cat-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800';
+                }
+            });
+            renderDrugCatalog(cat);
+        }
+
+        function jumpToScrubberFromCard(mode) {
+            switchMainTab('scrubber');
+            selectDrugMode(mode);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        const quizQuestions = [
+            {
+                q: '۱. کدام گزینه در مورد تفاوت اثر «فوروزماید» و «هیدروکلروتیازید» بر دفع ادراری کلسیم و کاربرد بالینی آن‌ها صحیح است؟ (اسلاید ۴۳، ۴۷ و ۴۸)',
+                options: [
+                    'فوروزماید دفع کلسیم را افزایش می‌دهد (درمان هایپرکلسمی) — هیدروکلروتیازید دفع کلسیم را کاهش می‌دهد (مفید در پوکی استخوان و پیشگیری از سنگ کلیه کلسیمی)',
+                    'هر دو دارو باعث افزایش دفع کلسیم در ادرار و ایجاد هیپوکلسمی می‌شوند',
+                    'هیدروکلروتیازید خط اول درمان هایپرکلسمی بدخیمی است',
+                    'فوروزماید با مهار کانال NCC در توبول دیستال باعث احتباس کلسیم می‌شود'
+                ],
+                answer: 0,
+                explanation: 'طبق اسلایدهای ۴۱ تا ۴۸، فوروزماید با مهار NKCC2 در TAL پتانسیل مثبت لومن را حذف کرده و دفع کلسیم و منیزیم را افزایش می‌دهد (کاربرد در درمان هایپرکلسمی)؛ اما تیازیدها در DCT دفع کلسیم را کم می‌کنند (مفید در پوکی استخوان و سنگ کلیه کلسیمی، اما ایجاد هایپرکلسمی در خون).'
+            },
+            {
+                q: '۲. در بیمار مبتلا به پرفشاری خون همراه با «نقرس (هایپراوریسمی)»، کدام دارو ممنوع است و کدام دارو ارجح می‌باشد؟ (اسلاید ۶۸)',
+                options: [
+                    'بتابلاکر ممنوع — آملودیپین ارجح',
+                    'دیورتیک‌ها ممنوع — لوسارتان (Losartan) ارجح',
+                    'مهارکننده ACE ممنوع — هیدروکلروتیازید ارجح',
+                    'پرازوسین ممنوع — فوروزماید ارجح'
+                ],
+                answer: 1,
+                explanation: 'طبق اسلاید ۴۴، ۴۸ و ۶۸، دیورتیک‌های لوپ و تیازیدی باعث هایپراوریسمی می‌شوند و در نقرس ممنوع هستند؛ در مقابل، «لوسارتان» داروی ارجح در بیماران مبتلا به نقرس است.'
+            },
+            {
+                q: '۳. کدام وازودیلاتور زیر یک «مشتق تیازیدی بدون اثر دیورتیک» است که از طریق باز کردن کانال‌های پتاسیمی عمل می‌کند و علاوه بر اورژانس فشار خون، به صورت خوراکی در «هیپوگلیسمی ناشی از تومور ترشح‌کننده انسولین» کاربرد دارد؟ (اسلاید ۱۹)',
+                options: ['نیتروپروساید سدیم', 'هیدرالازین', 'دیازوکساید (Diazoxide)', 'فنلدوپام'],
+                answer: 2,
+                explanation: 'طبق اسلاید ۱۷ و ۱۹، دیازوکساید و ماینوکسیدیل بازکننده کانال پتاسیمی هستند. دیازوکساید مشتق تیازیدی بدون اثر دیورتیک است که باعث مهار ترشح انسولین (عارضه هایپرگلیسمی) شده و در تومور انسولینوما و اورژانس فشار خون کاربرد دارد.'
+            },
+            {
+                q: '۴. قطع ناگهانی مصرف کدام داروی ضدفشار خون باعث «برگشت فشار خون شدید (Rebound Hypertension)» می‌شود و درمان آن چیست؟ (اسلاید ۱۱)',
+                options: [
+                    'متیل‌دوپا — درمان با آتنولول',
+                    'کلونیدین (Clonidine) — قابل جبران با مصرف مجدد کلونیدین یا آلفابلاکر مثل فنتولامین',
+                    'کاپتوپریل — درمان با لوسارتان',
+                    'آملودیپین — درمان با فوروزماید'
+                ],
+                answer: 1,
+                explanation: 'طبق اسلاید ۱۱، کلونیدین (آگونیست α2 مرکزی که در ترک اپیوئیدها هم کاربرد دارد) در صورت قطع ناگهانی باعث Rebound hypertension شدید می‌شود که با مصرف مجدد کلونیدین یا تجویز آلفابلاکر مثل فنتولامین درمان می‌گردد.'
+            },
+            {
+                q: '۵. کدام یک از بتابلاکرهای زیر دارای قابلیت «آزادسازی نیتریک اکساید (NO)» و گشادکنندگی عروق است و کدام دو دارو هم‌زمان گیرنده α1 را نیز مهار می‌کنند؟ (اسلاید ۱۴)',
+                options: [
+                    'آزادسازی NO: نبیولول (Nebivolol) — مهار α1 و β: لابتالول و کارودیلول',
+                    'آزادسازی NO: آتنولول — مهار α1 و β: پروپرانولول و متوپرولول',
+                    'آزادسازی NO: تیمولول — مهار α1 و β: بتاکسولول',
+                    'آزادسازی NO: کارودیلول — مهار α1 و β: نبیولول'
+                ],
+                answer: 0,
+                explanation: 'طبق اسلاید ۱۴، لابتالول و کارودیلول علاوه بر گیرنده بتا، گیرنده آلفا-۱ را نیز مهار می‌کنند و نبیولول بتابلاکر جدیدی است که با آزادسازی NO باعث گشادی عروق می‌شود.'
+            },
+            {
+                q: '۶. چرا مهارکننده‌های آنزیم کربنیک انیدراز (مانند استازولامید) باعث تشکیل سنگ کلیه می‌شوند و در بیماران مبتلا به سیروز کبدی چه عارضه‌ای ایجاد می‌کنند؟ (اسلاید ۳۸ و ۳۹)',
+                options: [
+                    'به علت اسیدی کردن شدید ادرار و ایجاد هایپوگلیسمی',
+                    'به علت دفع بی‌کربنات و قلیایی شدن ادرار (رسوب املاح کلسیم) + ایجاد اسیدوز متابولیک و هایپرآمونمی در سیروز کبدی',
+                    'به علت مهار کانال NKCC2 و ایجاد آلکالوز متابولیک',
+                    'به علت احتباس پتاسیم و ایجاد ژنیکوماستی'
+                ],
+                answer: 1,
+                explanation: 'طبق اسلاید ۳۸ و ۳۹، استازولامید با مهار بازجذب بی‌کربنات در PCT باعث قلیایی شدن ادرار (رسوب کلسیم و سنگ کلیه)، اسیدوز متابولیک و هایپرآمونمی در سیروز کبدی می‌شود.'
+            },
+            {
+                q: '۷. کدام گزینه در مورد تداخلات دارویی جدی «دیورتیک‌های لوپ (فوروزماید)» بر اساس اسلاید ۴۴ کاملاً صحیح است؟',
+                options: [
+                    'افزایش دفع لیتیم، کاهش سمیت شنوایی آمینوگلیکوزیدها و ایجاد هایپرکالمی با کورتیکواستروئیدها',
+                    'کاهش دفع لیتیم (افزایش احتمال مسمومیت با لیتیم)، افزایش ریسک سمیت شنوایی با آمینوگلیکوزیدها، و افزایش ریسک هایپوکالمی با کورتیکواستروئیدها',
+                    'ایجاد سرفه خشک در مصرف هم‌زمان با آملودیپین',
+                    'ایجاد سندرم شبه‌لوپوس و هیرسوتیسم'
+                ],
+                answer: 1,
+                explanation: 'طبق اسلاید ۴۴، سه تداخل جدی دیورتیک‌های لوپ عبارت‌اند از: ۱) کاهش دفع لیتیم و مسمومیت لیتیم ۲) تشدید اتوتوکسیسیتی با آمینوگلیکوزیدها ۳) تشدید هایپوکالمی با کورتیکواستروئیدها.'
+            },
+            {
+                q: '۸. کدام دیورتیک نگهدارنده پتاسیم یک مشتق استروئیدی با خواص آنتی‌آندروژنیک است که علاوه بر نارسایی قلبی و ادم سیروتیک، در درمان «تخمدان پلی‌کیستیک (PCOD) و ریزش موی آندروژنیک» کاربرد دارد؟ (اسلاید ۵۳ و ۵۴)',
+                options: ['تریامترن (Triamterene)', 'اپلرنون (Eplerenone)', 'اسپیرونولاکتون (Spironolactone)', 'آمیلورید (Amiloride)'],
+                answer: 2,
+                explanation: 'طبق اسلاید ۵۳ و ۵۴، اسپیرونولاکتون آنتاگونیست استروئیدی گیرنده آلدوسترون با خواص آنتی‌آندروژنیک است که عارضه ژنیکوماستی و کاربرد در PCOD و ریزش موی آندروژنیک اختصاصی آن است.'
+            },
+            {
+                q: '۹. در مورد داروهای مؤثر بر مسیر هورمون ضدادراری (ADH) در لوله جمع‌کننده، کدام گزینه صحیح است؟ (اسلایدهای ۶۰ تا ۶۴)',
+                options: [
+                    'تولواپتان آگونیست گیرنده V2 است و در دیابت بی‌مزه مرکزی کاربرد دارد',
+                    'دسموپرسین (آگونیست V2) در دیابت بی‌مزه مرکزی کاربرد دارد و تولواپتان (آنتاگونیست انتخابی V2) در درمان SIADH و احتباس آب ناشی از افزایش ADH استفاده می‌شود',
+                    'لیتیم و دمکلوسیکلین خط اول فعلی درمان پرفشاری خون هستند',
+                    'گیرنده‌های V2 در قوس نزولی هنله قرار دارند و کانال NKCC2 را فعال می‌کنند'
+                ],
+                answer: 1,
+                explanation: 'طبق اسلایدهای ۶۰ تا ۶۴، وازوپرسین و دسموپرسین آگونیست V2 برای درمان دیابت بی‌مزه مرکزی هستند و تولواپتان آنتاگونیست انتخابی گیرنده V2 برای درمان SIADH است (لیتیم و دمکلوسیکلین به علت ایجاد دیابت بی‌مزه نفروژنیک و نارسایی حاد کلیه دیگر استفاده نمی‌شوند).'
+            },
+            {
+                q: '۱۰. چرا عارضه «سرفه خشک» و «آنژیوادم» با داروهای دسته ARB (مانند لوسارتان و والزارتان) بسیار کمتر از مهارکننده‌های ACE (مانند کاپتوپریل) رخ می‌دهد؟ (اسلاید ۲۷، ۳۰ و ۳۲)',
+                options: [
+                    'چون ARBها ترشح رنین را مهار می‌کنند',
+                    'چون ARBها مستقیماً گیرنده AT1 را مسدود می‌کنند و برخلاف ACEi مانع تجزیه برادی‌کینین نمی‌شوند',
+                    'چون ARBها در بارداری کاملاً ایمن هستند',
+                    'چون ARBها باعث دفع پتاسیم می‌شوند'
+                ],
+                answer: 1,
+                explanation: 'طبق اسلاید ۲۷، ۳۰ و ۳۲، آنزیم ACE علاوه بر تولید Ang II مسئول تجزیه برادی‌کینین نیز هست. مهار ACE باعث تجمع برادی‌کینین و بروز سرفه خشک (بیشتر با کاپتوپریل) می‌شود، اما ARBها اثری روی تجزیه برادی‌کینین ندارند.'
+            }
+        ];
+
+        let userAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((item, idx) => {
+                const qCard = document.createElement('div');
+                qCard.className = 'bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3';
+
+                const optsHtml = item.options.map((opt, oIdx) => `
+                    <button onclick="answerQuiz(${idx}, ${oIdx})" id="q-${idx}-opt-${oIdx}" class="w-full text-right p-3 rounded-xl border border-slate-800 bg-slate-900 hover:bg-slate-800 text-xs text-slate-200 transition-all flex items-center justify-between gap-2">
+                        <span>${opt}</span>
+                        <span id="q-${idx}-icon-${oIdx}" class="shrink-0"></span>
+                    </button>
+                `).join('');
+
+                qCard.innerHTML = `
+                    <div class="text-xs md:text-sm font-extrabold text-white leading-relaxed">${item.q}</div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">${optsHtml}</div>
+                    <div id="q-exp-${idx}" class="hidden p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-xs text-emerald-200 leading-relaxed">
+                        <strong>پاسخ تشریحی: </strong> ${item.explanation}
+                    </div>
+                `;
+                container.appendChild(qCard);
+            });
+        }
+
+        function answerQuiz(qIdx, selectedIdx) {
+            if (userAnswers[qIdx] !== undefined) return;
+            userAnswers[qIdx] = selectedIdx;
+
+            const correctIdx = quizQuestions[qIdx].answer;
+            quizQuestions[qIdx].options.forEach((_, oIdx) => {
+                const btn = document.getElementById(`q-${qIdx}-opt-${oIdx}`);
+                const icon = document.getElementById(`q-${qIdx}-icon-${oIdx}`);
+                if (oIdx === correctIdx) {
+                    btn.className = 'w-full text-right p-3 rounded-xl border border-emerald-500 bg-emerald-500/20 text-xs text-white font-bold flex items-center justify-between gap-2';
+                    icon.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400"></i>';
+                } else if (oIdx === selectedIdx) {
+                    btn.className = 'w-full text-right p-3 rounded-xl border border-rose-500 bg-rose-500/20 text-xs text-rose-200 font-bold flex items-center justify-between gap-2';
+                    icon.innerHTML = '<i class="fa-solid fa-circle-xmark text-rose-400"></i>';
+                }
+            });
+
+            document.getElementById(`q-exp-${qIdx}`).classList.remove('hidden');
+            updateQuizScore();
+        }
+
+        function updateQuizScore() {
+            let correct = 0;
+            Object.keys(userAnswers).forEach(qIdx => {
+                if (userAnswers[qIdx] === quizQuestions[qIdx].answer) correct++;
+            });
+            document.getElementById('quiz-score-badge').textContent = `امتیاز: ${correct} از ۱۰`;
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            updateQuizScore();
+            renderQuiz();
+        }
+
+        function switchMainTab(tabName) {
+            activeMainTab = tabName;
+            ['scrubber', 'raas', 'clinic', 'drugs', 'quiz'].forEach(t => {
+                const sec = document.getElementById(`section-${t}`);
+                const btn = document.getElementById(`tab-btn-${t}`);
+                if (t === tabName) {
+                    sec.classList.remove('hidden');
+                    btn.className = 'main-tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition-all bg-emerald-600 text-white shadow-md flex items-center gap-2';
+                } else {
+                    sec.classList.add('hidden');
+                    btn.className = 'main-tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2';
+                }
+            });
+        }
+
+        window.onload = function () {
+            renderDrugCatalog('all');
+            renderQuiz();
+            updateScrubberUI(currentPos);
+            animateLoop();
+        };
+    </script>
+</body>
+</html>

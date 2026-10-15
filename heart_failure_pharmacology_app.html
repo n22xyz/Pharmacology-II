@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد تعاملی فارماکولوژی نارسایی قلبی | دکتر قلی‌بیکی</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #070b14;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070b14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+
+        input[type=range].scrubber-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range].scrubber-slider:focus {
+            outline: none;
+        }
+        input[type=range].scrubber-slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 13px;
+            cursor: pointer;
+            background: linear-gradient(90deg, 
+                #0ea5e9 0%, 
+                #f43f5e 18%, 
+                #f59e0b 38%, 
+                #10b981 62%, 
+                #8b5cf6 85%, 
+                #0ea5e9 100%
+            );
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+        input[type=range].scrubber-slider::-webkit-slider-thumb {
+            height: 26px;
+            width: 26px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 4px solid #f43f5e;
+            box-shadow: 0 0 16px rgba(244, 63, 94, 0.95);
+            cursor: grab;
+            -webkit-appearance: none;
+            margin-top: -7px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        input[type=range].scrubber-slider::-webkit-slider-thumb:active {
+            cursor: grabbing;
+            transform: scale(1.18);
+            border-color: #06b6d4;
+            box-shadow: 0 0 24px rgba(6, 182, 212, 1);
+        }
+
+        .bio-grid {
+            background-image: 
+                linear-gradient(to right, rgba(6, 182, 212, 0.06) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(6, 182, 212, 0.06) 1px, transparent 1px),
+                linear-gradient(to right, rgba(6, 182, 212, 0.14) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(6, 182, 212, 0.14) 1px, transparent 1px);
+            background-size: 12px 12px, 12px 12px, 60px 60px, 60px 60px;
+        }
+
+        .glow-rose {
+            box-shadow: 0 0 25px -5px rgba(244, 63, 94, 0.35);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.35);
+        }
+        .xanthopsia-halo {
+            box-shadow: 0 0 35px 12px rgba(250, 204, 21, 0.45), inset 0 0 25px rgba(250, 204, 21, 0.35);
+        }
+        .ltr-num {
+            direction: ltr;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-rose-500 selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-rose-600 to-amber-500 flex items-center justify-center shadow-lg shadow-rose-600/30">
+                    <i class="fa-solid fa-heart-crack text-white text-xl animate-pulse"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-lg md:text-xl font-black tracking-tight text-white">فارماکولوژی جامع داروهای نارسایی قلبی (Heart Failure)</h1>
+                        <span class="px-2.5 py-0.5 text-xs font-bold rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30">ویژه داروسازی</span>
+                    </div>
+                    <p class="text-xs text-slate-400">مرور بصری و تعاملی بر اساس اسلایدهای دکتر افروز قلی‌بیکی (Pharm.D, Ph.D) - دانشگاه علوم پزشکی مازندران</p>
+                </div>
+            </div>
+
+            <nav class="flex flex-wrap items-center gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800">
+                <button onclick="switchMainTab('scrubber')" id="tab-btn-scrubber" class="main-tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition-all bg-rose-600 text-white shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>اسکرابر سارکومر و کلسیم</span>
+                </button>
+                <button onclick="switchMainTab('patho')" id="tab-btn-patho" class="main-tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-diagram-project"></i>
+                    <span>پاتوفیزیولوژی و پاسخ جبرانی</span>
+                </button>
+                <button onclick="switchMainTab('digoxin')" id="tab-btn-digoxin" class="main-tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-skull-crossbones"></i>
+                    <span>شبیه‌ساز دیگوکسین و مسمومیت</span>
+                </button>
+                <button onclick="switchMainTab('drugs')" id="tab-btn-drugs" class="main-tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-pills"></i>
+                    <span>بانک جامع داروها و SGLT2i</span>
+                </button>
+                <button onclick="switchMainTab('quiz')" id="tab-btn-quiz" class="main-tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>مقایسه سیستولیک/دیاستولیک و آزمون</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6 space-y-8">
+
+        <!-- ===================================================================== -->
+        <!-- SECTION 1: INTERACTIVE SARCOMERE, Ca2+ & HEMODYNAMIC TIME SCRUBBER    -->
+        <!-- ===================================================================== -->
+        <section id="section-scrubber" class="space-y-6">
+
+            <!-- Condition & Drug Mode Selector Bar -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3 pb-3 border-b border-slate-800">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
+                        <h2 class="text-sm md:text-base font-bold text-slate-200">۱. وضعیت بالینی یا کلاس دارویی را انتخاب کنید تا تأثیر زنده آن بر چرخه کلسیم، سارکومر و EF را ببینید:</h2>
+                    </div>
+                    <div class="flex items-center gap-3 text-xs">
+                        <span class="flex items-center gap-1.5 text-slate-300">
+                            <span class="w-4 h-1 bg-slate-400 inline-block rounded"></span> منحنی قلب نرمال (EF = 58%)
+                        </span>
+                        <span class="flex items-center gap-1.5 text-rose-400 font-bold">
+                            <span class="w-4 h-1 bg-rose-500 inline-block rounded"></span> منحنی وضعیت / داروی انتخابی
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 8 Interactive Conditions from PDF -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2" id="hf-mode-buttons">
+                    <button onclick="selectHFMode('normal')" data-mode="normal" class="hf-mode-btn px-3 py-2.5 rounded-xl border text-right transition-all bg-rose-500/20 border-rose-400 text-white shadow-lg">
+                        <div class="text-xs font-black text-emerald-300">۱. قلب سالم</div>
+                        <div class="text-[11px] text-slate-300 truncate">EF: 58% | CO نرمال</div>
+                    </button>
+                    <button onclick="selectHFMode('systolic_hf')" data-mode="systolic_hf" class="hf-mode-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-rose-400">۲. نارسایی سیستولیک</div>
+                        <div class="text-[11px] text-slate-400 truncate">HFrEF (EF &lt; 45%)</div>
+                    </button>
+                    <button onclick="selectHFMode('diastolic_hf')" data-mode="diastolic_hf" class="hf-mode-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-amber-400">۳. نارسایی دیاستولیک</div>
+                        <div class="text-[11px] text-slate-400 truncate">HFpEF (اختلال شل شدن)</div>
+                    </button>
+                    <button onclick="selectHFMode('digoxin')" data-mode="digoxin" class="hf-mode-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-cyan-400">۴. دیگوکسین (Digoxin)</div>
+                        <div class="text-[11px] text-slate-400 truncate">مهار Na⁺/K⁺ ATPase</div>
+                    </button>
+                    <button onclick="selectHFMode('camp_inotrope')" data-mode="camp_inotrope" class="hf-mode-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-purple-400">۵. دوبوتامین / میلرینون</div>
+                        <div class="text-[11px] text-slate-400 truncate">اینوتروپ وابسته به cAMP</div>
+                    </button>
+                    <button onclick="selectHFMode('levosimendan')" data-mode="levosimendan" class="hf-mode-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-emerald-400">۶. لووسیمندان</div>
+                        <div class="text-[11px] text-slate-400 truncate">حساس‌کننده تروپونین به Ca²⁺</div>
+                    </button>
+                    <button onclick="selectHFMode('gdmt')" data-mode="gdmt" class="hf-mode-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-sky-400">۷. خط اول (ARNI/SGLT2i)</div>
+                        <div class="text-[11px] text-slate-400 truncate">↓ پیش‌بار، ↓ پس‌بار، ↓ مرگ‌ومیر</div>
+                    </button>
+                    <button onclick="selectHFMode('ivabradine')" data-mode="ivabradine" class="hf-mode-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all">
+                        <div class="text-xs font-black text-pink-400">۸. ایوابرادین (Ivabradine)</div>
+                        <div class="text-[11px] text-slate-400 truncate">مهار کانال If در گره SA</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Master Time Scrubber Control Bar -->
+            <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 border-2 border-rose-500/40 rounded-2xl p-4 md:p-5 shadow-2xl glow-rose">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                    <div class="flex items-center gap-3">
+                        <button id="play-pause-btn" onclick="togglePlay()" class="w-12 h-12 rounded-xl bg-rose-500 hover:bg-rose-400 text-white font-black flex items-center justify-center shadow-lg shadow-rose-500/30 transition-transform active:scale-95">
+                            <i id="play-icon" class="fa-solid fa-pause text-lg"></i>
+                        </button>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-rose-400">اسکرابر لحظه‌به‌لحظه چرخه سیستول و دیاستول (۰ تا ۸۰۰ میلی‌ثانیه)</span>
+                                <span id="current-stage-badge" class="px-2.5 py-0.5 text-xs font-extrabold rounded-md bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">مرحله ۱: ورود کلسیم ماشه (Trigger Ca²⁺)</span>
+                            </div>
+                            <div class="text-xs text-slate-400 mt-0.5">
+                                نوار زیر را بکشید تا مراحل ۴گانه چرخه اکتین-میوزین (اسلاید ۸)، عملکرد پمپ <span class="font-mono text-cyan-300">SERCA</span> و <span class="font-mono text-amber-300">Na⁺/K⁺-ATPase</span> (اسلاید ۱۰ و ۲۷) را زنده ببینید!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2">
+                        <div class="bg-slate-950 border border-slate-800 px-3.5 py-1.5 rounded-xl flex items-center gap-2">
+                            <span class="text-xs text-slate-400">زمان چرخه قلبی:</span>
+                            <span id="time-readout" class="font-mono text-base font-black text-rose-400 ltr-num">120 ms</span>
+                            <span class="text-xs text-slate-600">/ 800 ms</span>
+                        </div>
+                        <div class="bg-slate-950 border border-slate-800 p-1 rounded-xl flex items-center gap-1 text-xs">
+                            <span class="px-2 text-slate-400">سرعت:</span>
+                            <button onclick="setSpeed(0.8)" id="speed-0.8" class="speed-btn px-2 py-1 rounded bg-rose-500/20 text-rose-300 font-bold">آموزشی</button>
+                            <button onclick="setSpeed(2)" id="speed-2" class="speed-btn px-2 py-1 rounded text-slate-400 hover:text-white">سریع (2x)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scrubber Slider -->
+                <div class="relative py-2 px-1">
+                    <input type="range" id="time-scrubber" class="scrubber-slider" min="0" max="800" step="2" value="180" oninput="onScrub(this.value)">
+                </div>
+
+                <!-- 5 Key Moments Jump Buttons (Aligned with Slides 8, 10, 11, 26, 27) -->
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-3 pt-3 border-t border-slate-800/80">
+                    <button onclick="jumpToTime(60)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-sky-400 group-hover:text-sky-300">۱. پایان دیاستول (Preload)</span>
+                        <span class="ltr-num font-mono text-[10px] text-slate-500">0-110 ms</span>
+                    </button>
+                    <button onclick="jumpToTime(160)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-rose-400 group-hover:text-rose-300">۲. ورود Ca²⁺ و رهاسازی RyR</span>
+                        <span class="ltr-num font-mono text-[10px] text-slate-500">110-220 ms</span>
+                    </button>
+                    <button onclick="jumpToTime(300)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-amber-400 group-hover:text-amber-300">۳. اوج سیستول (انقباض سارکومر)</span>
+                        <span class="ltr-num font-mono text-[10px] text-slate-500">220-380 ms</span>
+                    </button>
+                    <button onclick="jumpToTime(480)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-emerald-400 group-hover:text-emerald-300">۴. بازجذب کلسیم توسط SERCA</span>
+                        <span class="ltr-num font-mono text-[10px] text-slate-500">380-560 ms</span>
+                    </button>
+                    <button onclick="jumpToTime(680)" class="px-2.5 py-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 text-xs flex items-center justify-between group">
+                        <span class="font-bold text-purple-400 group-hover:text-purple-300">۵. پمپ Na⁺/K⁺ و مبدل NCX</span>
+                        <span class="ltr-num font-mono text-[10px] text-slate-500">560-800 ms</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Visualizers Grid: Left = Animated Cardiomyocyte & Sarcomere (Slide 10 & 8), Right = Ca2+ Transient & LV Volume/EF Curves -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                <!-- Right Column (6 cols): Animated Cardiomyocyte Membrane, SR, SERCA, RyR & Actin-Myosin Cross-bridge -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                            <h3 class="text-sm md:text-base font-extrabold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-microscope text-cyan-400"></i>
+                                <span>شبیه‌ساز زنده کاردیومیوسیت، شبکه سارکوپلاسمی (SR) و سارکومر (اسلاید ۸ و ۱۰)</span>
+                            </h3>
+                            <span id="sarcomere-step-badge" class="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] font-bold">
+                                گام ۳: Power Stroke
+                            </span>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-3">
+                            مسیر دقیق داروها روی غشا، شبکه سارکوپلاسمی (<span class="text-emerald-400 font-bold">SERCA / RyR</span>) و رشته <span class="text-rose-400 font-bold">اکتین-تروپونین-تروپومیوزین</span>:
+                        </p>
+
+                        <!-- Interactive SVG of Slide 10 (Digoxin, Na/K ATPase, NCX, Ca-L, SR, SERCA, RyR, Sarcomere) -->
+                        <div class="bg-slate-950 rounded-xl border border-slate-800 p-2 relative overflow-hidden">
+                            <svg id="cardiomyocyte-svg" viewBox="0 0 560 390" class="w-full h-auto">
+                                <defs>
+                                    <linearGradient id="srGrad" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#7c2d12" stop-opacity="0.75"/>
+                                        <stop offset="100%" stop-color="#431407" stop-opacity="0.9"/>
+                                    </linearGradient>
+                                </defs>
+
+                                <!-- Interstitium / Extracellular -->
+                                <rect x="0" y="0" width="560" height="55" fill="#0f172a"/>
+                                <text x="545" y="18" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="start">فضای خارج سلولی (Interstitium) - Na⁺ و Ca²⁺ بالا</text>
+
+                                <!-- Sarcolemma (Cell Membrane) -->
+                                <rect x="0" y="55" width="560" height="24" fill="#b45309" opacity="0.45"/>
+                                <line x1="0" y1="55" x2="560" y2="55" stroke="#f59e0b" stroke-width="2"/>
+                                <line x1="0" y1="79" x2="560" y2="79" stroke="#f59e0b" stroke-width="2"/>
+
+                                <!-- 1. Na+/K+ ATPase Pump (Slide 10 & 26) -->
+                                <g transform="translate(55, 32)">
+                                    <rect id="svg-nak-pump" x="0" y="6" width="58" height="55" rx="10" fill="#10b981" stroke="#a7f3d0" stroke-width="2"/>
+                                    <text x="29" y="32" fill="#052e16" font-size="10" font-weight="black" text-anchor="middle">Na⁺/K⁺</text>
+                                    <text x="29" y="44" fill="#052e16" font-size="9" font-weight="bold" text-anchor="middle">ATPase</text>
+                                    <!-- Digoxin Block Overlay -->
+                                    <g id="svg-digoxin-tag" opacity="0" style="transition: opacity 0.25s;">
+                                        <rect x="-12" y="-18" width="82" height="22" rx="6" fill="#f43f5e" stroke="#fff" stroke-width="1.5"/>
+                                        <text x="29" y="-4" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">مهار توسط دیگوکسین</text>
+                                        <line x1="8" y1="12" x2="50" y2="54" stroke="#f43f5e" stroke-width="4"/>
+                                        <line x1="50" y1="12" x2="8" y2="54" stroke="#f43f5e" stroke-width="4"/>
+                                    </g>
+                                    <text x="29" y="74" fill="#6ee7b7" font-size="10" font-weight="bold" text-anchor="middle">خروج 3Na⁺ / ورود 2K⁺</text>
+                                </g>
+
+                                <!-- 2. NCX (Na+/Ca2+ Exchanger) -->
+                                <g transform="translate(215, 32)">
+                                    <ellipse id="svg-ncx" cx="32" cy="34" rx="28" ry="26" fill="#eab308" stroke="#fef08a" stroke-width="2"/>
+                                    <text x="32" y="37" fill="#422006" font-size="11" font-weight="black" text-anchor="middle">NCX</text>
+                                    <text id="svg-ncx-label" x="32" y="74" fill="#fde047" font-size="10" font-weight="bold" text-anchor="middle">مبدل Na⁺ / Ca²⁺</text>
+                                </g>
+
+                                <!-- 3. L-Type Ca2+ Channel (Ca-L) -->
+                                <g transform="translate(385, 32)">
+                                    <rect id="svg-cal-left" x="0" y="6" width="22" height="55" rx="8" fill="#a855f7" stroke="#e9d5ff" stroke-width="2"/>
+                                    <rect id="svg-cal-right" x="36" y="6" width="22" height="55" rx="8" fill="#a855f7" stroke="#e9d5ff" stroke-width="2"/>
+                                    <text x="29" y="-4" fill="#d8b4fe" font-size="10" font-weight="bold" text-anchor="middle">کانال کلسیم (Ca-L)</text>
+                                    <!-- Trigger Ca2+ stream -->
+                                    <g id="svg-trigger-ca" opacity="0" style="transition: opacity 0.2s;">
+                                        <circle cx="29" cy="25" r="6" fill="#38bdf8"/>
+                                        <circle cx="29" cy="52" r="6" fill="#38bdf8"/>
+                                        <path d="M 29 5 L 29 102" stroke="#38bdf8" stroke-width="3" stroke-dasharray="4,4"/>
+                                    </g>
+                                    <text x="29" y="74" fill="#c084fc" font-size="10" font-weight="bold" text-anchor="middle">Trigger Ca²⁺</text>
+                                </g>
+
+                                <!-- 4. Sarcoplasmic Reticulum (SR) Bone-shaped Organelle -->
+                                <g transform="translate(45, 130)">
+                                    <path d="M 20 15 Q 0 -10 45 5 L 425 5 Q 470 -10 450 15 L 450 85 Q 470 110 425 95 L 45 95 Q 0 110 20 85 Z" fill="url(#srGrad)" stroke="#ea580c" stroke-width="2.5"/>
+                                    <text x="235" y="46" fill="#fed7aa" font-size="13" font-weight="black" text-anchor="middle">شبکه سارکوپلاسمی (Sarcoplasmic Reticulum - SR)</text>
+                                    <text id="svg-sr-store-text" x="235" y="65" fill="#fdba74" font-size="11" font-weight="bold" text-anchor="middle">ذخیره کلسیم داخل SR: نرمال</text>
+
+                                    <!-- SERCA Pump on Top of SR -->
+                                    <g transform="translate(205, -14)">
+                                        <rect id="svg-serca" x="0" y="0" width="60" height="32" rx="7" fill="#06b6d4" stroke="#cffafe" stroke-width="2"/>
+                                        <text x="30" y="15" fill="#083344" font-size="10" font-weight="black" text-anchor="middle">SERCA</text>
+                                        <text x="30" y="27" fill="#083344" font-size="8" font-weight="bold" text-anchor="middle">Ca²⁺-ATPase</text>
+                                    </g>
+
+                                    <!-- SERCA Uptake Arrows (Active in Diastole) -->
+                                    <g id="svg-serca-arrows" opacity="0" style="transition: opacity 0.2s;">
+                                        <path d="M 190 -20 L 215 18" stroke="#22d3ee" stroke-width="3"/>
+                                        <path d="M 280 -20 L 255 18" stroke="#22d3ee" stroke-width="3"/>
+                                        <circle cx="190" cy="-20" r="5" fill="#22d3ee"/>
+                                        <circle cx="280" cy="-20" r="5" fill="#22d3ee"/>
+                                    </g>
+
+                                    <!-- RyR (Ryanodine Receptors) on Bottom of SR -->
+                                    <g transform="translate(80, 78)">
+                                        <rect id="svg-ryr-1" x="0" y="0" width="42" height="26" rx="6" fill="#f43f5e" stroke="#fecdd3" stroke-width="1.5"/>
+                                        <text x="21" y="17" fill="#fff" font-size="10" font-weight="black" text-anchor="middle">RyR</text>
+                                    </g>
+                                    <g transform="translate(345, 78)">
+                                        <rect id="svg-ryr-2" x="0" y="0" width="42" height="26" rx="6" fill="#f43f5e" stroke="#fecdd3" stroke-width="1.5"/>
+                                        <text x="21" y="17" fill="#fff" font-size="10" font-weight="black" text-anchor="middle">RyR</text>
+                                    </g>
+
+                                    <!-- Massive Ca2+ Release from RyR to Sarcomere -->
+                                    <g id="svg-ryr-release" opacity="0" style="transition: opacity 0.2s;">
+                                        <path d="M 101 105 L 135 155" stroke="#fb7185" stroke-width="3.5" stroke-dasharray="5,3"/>
+                                        <path d="M 366 105 L 335 155" stroke="#fb7185" stroke-width="3.5" stroke-dasharray="5,3"/>
+                                        <circle cx="120" cy="132" r="6" fill="#38bdf8"/>
+                                        <circle cx="140" cy="148" r="6" fill="#38bdf8"/>
+                                        <circle cx="350" cy="132" r="6" fill="#38bdf8"/>
+                                        <circle cx="330" cy="148" r="6" fill="#38bdf8"/>
+                                    </g>
+                                </g>
+
+                                <!-- 5. Animated Sarcomere (Actin-Troponin-Tropomyosin & Myosin Heads - Slide 8 & 10) -->
+                                <g transform="translate(35, 285)">
+                                    <!-- Z-Lines (Move inward during contraction!) -->
+                                    <line id="svg-zline-left" x1="25" y1="0" x2="25" y2="85" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" style="transition: all 0.15s;"/>
+                                    <line id="svg-zline-right" x1="465" y1="0" x2="465" y2="85" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" style="transition: all 0.15s;"/>
+                                    <text x="25" y="98" fill="#38bdf8" font-size="10" font-weight="bold" text-anchor="middle">خط Z</text>
+                                    <text x="465" y="98" fill="#38bdf8" font-size="10" font-weight="bold" text-anchor="middle">خط Z</text>
+
+                                    <!-- Thin Filaments (Actin + Troponin-Tropomyosin) -->
+                                    <g id="svg-actin-left" style="transition: transform 0.15s;">
+                                        <line x1="25" y1="22" x2="215" y2="22" stroke="#4ade80" stroke-width="7" stroke-linecap="round"/>
+                                        <line x1="25" y1="64" x2="215" y2="64" stroke="#4ade80" stroke-width="7" stroke-linecap="round"/>
+                                        <!-- Troponin complexes -->
+                                        <circle class="tn-dot" cx="85" cy="22" r="6" fill="#facc15"/>
+                                        <circle class="tn-dot" cx="145" cy="22" r="6" fill="#facc15"/>
+                                        <circle class="tn-dot" cx="195" cy="22" r="6" fill="#facc15"/>
+                                    </g>
+                                    <g id="svg-actin-right" style="transition: transform 0.15s;">
+                                        <line x1="275" y1="22" x2="465" y2="22" stroke="#4ade80" stroke-width="7" stroke-linecap="round"/>
+                                        <line x1="275" y1="64" x2="465" y2="64" stroke="#4ade80" stroke-width="7" stroke-linecap="round"/>
+                                        <circle class="tn-dot" cx="305" cy="22" r="6" fill="#facc15"/>
+                                        <circle class="tn-dot" cx="355" cy="22" r="6" fill="#facc15"/>
+                                        <circle class="tn-dot" cx="405" cy="22" r="6" fill="#facc15"/>
+                                    </g>
+
+                                    <!-- Thick Filament (Myosin Central Backbone + Cross-Bridge Heads) -->
+                                    <rect x="115" y="37" width="260" height="12" rx="6" fill="#8b5cf6"/>
+                                    <g id="svg-myosin-heads" style="transition: transform 0.15s;">
+                                        <ellipse cx="145" cy="30" rx="8" ry="5" fill="#c084fc"/>
+                                        <ellipse cx="185" cy="30" rx="8" ry="5" fill="#c084fc"/>
+                                        <ellipse cx="305" cy="30" rx="8" ry="5" fill="#c084fc"/>
+                                        <ellipse cx="345" cy="30" rx="8" ry="5" fill="#c084fc"/>
+                                        <ellipse cx="145" cy="56" rx="8" ry="5" fill="#c084fc"/>
+                                        <ellipse cx="185" cy="56" rx="8" ry="5" fill="#c084fc"/>
+                                        <ellipse cx="305" cy="56" rx="8" ry="5" fill="#c084fc"/>
+                                        <ellipse cx="345" cy="56" rx="8" ry="5" fill="#c084fc"/>
+                                    </g>
+
+                                    <!-- Levosimendan Ca2+ Sensitizer Badge -->
+                                    <g id="svg-levo-badge" opacity="0" style="transition: opacity 0.25s;">
+                                        <rect x="155" y="72" width="180" height="22" rx="6" fill="#10b981" stroke="#fff" stroke-width="1.5"/>
+                                        <text x="245" y="87" fill="#052e16" font-size="10" font-weight="black" text-anchor="middle">+ لووسیمندان: حساس‌کننده تروپونین به Ca²⁺</text>
+                                    </g>
+
+                                    <text x="245" y="100" fill="#cbd5e1" font-size="11" font-weight="bold" text-anchor="middle">سارکومر: اکتین-تروپونین-تروپومیوزین (سبز) و سرهای میوزین (بنفش)</text>
+                                </g>
+                            </svg>
+                        </div>
+
+                        <!-- 4 Steps of Cross-Bridge Cycle Mini-Guide (Slide 8) -->
+                        <div class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
+                            <div id="cb-step-1" class="p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-400">
+                                <span class="font-black text-cyan-400">۱. هیدرولیز ATP:</span> زمانی که سر میوزین جداست، ATP به ADP+P تجزیه می‌شود.
+                            </div>
+                            <div id="cb-step-2" class="p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-400">
+                                <span class="font-black text-rose-400">۲. اتصال پل عرضی:</span> Ca²⁺ به تروپونین متصل شده، تروپومیوزین کنار رفته و سر میوزین به اکتین می‌چسبد.
+                            </div>
+                            <div id="cb-step-3" class="p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-400">
+                                <span class="font-black text-amber-400">۳. حرکت فیلامان:</span> آزاد شدن ADP+P باعث خم شدن سر میوزین و حرکت اکتین (انقباض) می‌شود.
+                            </div>
+                            <div id="cb-step-4" class="p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-400">
+                                <span class="font-black text-emerald-400">۴. اتصال مجدد ATP:</span> اتصال ATP جدید باعث جدا شدن سر میوزین و بازگشت به حالت استراحت می‌شود.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Left Column (6 cols): Synchronized Ca2+ Transient & Left Ventricular Volume / Ejection Fraction Canvas -->
+                <div class="lg:col-span-6 space-y-6">
+                    
+                    <!-- Canvas: Intracellular Free [Ca2+] & LV Volume (EDV -> ESV) -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                            <div>
+                                <h3 class="text-sm md:text-base font-extrabold text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-chart-area text-rose-500"></i>
+                                    <span>منحنی هم‌زمان کلسیم آزاد سیتوپلاسمی و حجم بطن چپ (EDV / SV / EF)</span>
+                                </h3>
+                                <p class="text-xs text-slate-400">فرمول اسلاید ۴: <span class="ltr-num font-mono text-cyan-300">EF = (Stroke Volume / End-Diastolic Volume) = 70 / 120 = 58%</span></p>
+                            </div>
+                        </div>
+
+                        <div class="relative w-full h-64 bg-slate-950 rounded-xl border border-slate-800 overflow-hidden bio-grid">
+                            <canvas id="hf-scrubber-canvas" class="w-full h-full block"></canvas>
+                        </div>
+
+                        <!-- Live Hemodynamic Telemetry Cards (Slides 4, 5, 6) -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-3">
+                            <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                                <div class="text-[11px] text-slate-400">کسر تخلیه (Ejection Fraction)</div>
+                                <div id="telemetry-ef" class="text-base font-black text-emerald-400 font-mono ltr-num">58% (نرمال)</div>
+                            </div>
+                            <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                                <div class="text-[11px] text-slate-400">برون‌ده قلبی (CO = HR × SV)</div>
+                                <div id="telemetry-co" class="text-sm font-black text-cyan-400 ltr-num">5.0 L/min</div>
+                            </div>
+                            <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                                <div class="text-[11px] text-slate-400">پیش‌بار (Preload = Stretch)</div>
+                                <div id="telemetry-preload" class="text-xs font-extrabold text-amber-400">نرمال (EDV: 120 mL)</div>
+                            </div>
+                            <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                                <div class="text-[11px] text-slate-400">پس‌بار (Afterload = Squeeze)</div>
+                                <div id="telemetry-afterload" class="text-xs font-extrabold text-purple-400">مقاومت عروقی نرمال</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Instant Pharmacology Explanation Box -->
+                    <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-4 shadow-xl space-y-3">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                            <span id="mode-explain-title" class="text-sm font-black text-rose-400">وضعیت فعلی: قلب سالم (فیزیولوژی پایه انقباض)</span>
+                            <span id="mode-survival-badge" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                EF نرمال: ۵۰ تا ۷۰٪
+                            </span>
+                        </div>
+                        <p id="mode-instant-desc" class="text-xs text-slate-200 leading-relaxed">
+                            در طول سیستول، کلسیم آزادشده از شبکه سارکوپلاسمی (SR) با سیستم اکتین-تروپونین-تروپومیوزین واکنش داده و مانع را برمی‌دارد تا اکتین و میوزین منقبض شوند. در دیاستول، پمپ SERCA کلسیم سیتوپلاسم را در سطح بسیار پایین نگه می‌دارد.
+                        </p>
+                        <div id="mode-exam-pearl" class="p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/30 text-xs text-cyan-200 leading-relaxed">
+                            <strong>نکته امتحانی (اسلاید ۱۱):</strong> پمپ SERCA یک ناقل بسیار کارآمد برداشت کلسیم در غشای شبکه سارکوپلاسمی است که در دیاستول کلسیم آزاد سیتوپلاسم را بسیار پایین نگه می‌دارد. شواهد نشان می‌دهد <strong>فعالیت SERCA در نارسایی قلبی مختل می‌شود!</strong>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- SECTION 2: PATHOPHYSIOLOGY, NYHA STAGES & COMPENSATORY VICIOUS CYCLE  -->
+        <!-- ===================================================================== -->
+        <section id="section-patho" class="hidden space-y-6">
+
+            <!-- Top Row: Epidemiology, Preload vs Afterload, High-Output Failure, Biomarker NT-proBNP -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-black text-rose-400">تعریف و مرگ‌ومیر (اسلاید ۲)</span>
+                        <i class="fa-solid fa-triangle-exclamation text-rose-500"></i>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        ناتوانی قلب در پمپاژ خون کافی برای تأمین نیازهای متابولیک پایه بدن، یا انجام آن تنها با <strong>فشار پرشدگی بالا (Elevated filling pressure)</strong>.
+                    </p>
+                    <div class="p-2 rounded-lg bg-rose-500/10 border border-rose-500/20 text-[11px] text-rose-300 font-bold">
+                        • مرگ‌ومیر ۵ ساله: حدود ۵۰٪!<br>
+                        • افزایش شیوع در افراد بالای ۶۴ سال.
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-black text-amber-400">Preload در برابر Afterload (اسلاید ۶)</span>
+                        <i class="fa-solid fa-scale-balanced text-amber-500"></i>
+                    </div>
+                    <div class="text-[11px] text-slate-300 space-y-1.5 leading-relaxed">
+                        <p><strong class="text-cyan-300">پیش‌بار (Preload = Stretch):</strong> کشش اولیه فیبرهای عضله قلب در پایان دیاستول (حجم/فشار پایان دیاستولی). افزایش در: هایپرولمی، نارسایی دریچه‌ای و HF.</p>
+                        <p><strong class="text-rose-300">پس‌بار (Afterload = Squeeze):</strong> فشار یا مقاومتی که بطن چپ برای خروج خون باید بر آن غلبه کند. افزایش در: پرفشاری خون و انقباض عروق ($\uparrow \text{Workload}$).</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-black text-emerald-400">نارسایی با برون‌ده بالا (اسلاید ۱۵)</span>
+                        <i class="fa-solid fa-gauge-high text-emerald-500"></i>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        <strong>High-Output Failure:</strong> فرم نادر که نیاز بدن آن‌قدر بالاست که حتی برون‌ده قلبی افزایش‌یافته هم کافی نیست!
+                    </p>
+                    <div class="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-[11px] text-emerald-300 font-bold">
+                        ۳ علت امتحانی: ۱) پرکاری تیروئید (Hyperthyroidism) ۲) بری‌بری (کمبود تیامین) ۳) آنمی (کم‌خونی). درمان: اصلاح علت زمینه‌ای!
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-black text-purple-400">مارکر تشخیصی و هایپرتروفی (اسلاید ۱۸-۱۹)</span>
+                        <i class="fa-solid fa-vial-circle-check text-purple-500"></i>
+                    </div>
+                    <p class="text-[11px] text-slate-300 leading-relaxed">
+                        <strong>NT-proBNP:</strong> پپتید ناتریورتیک آزادشده از قلب که به عنوان مارکر جایگزین (Surrogate marker) برای <strong>وجود و شدت نارسایی قلبی</strong> استفاده می‌شود.
+                    </p>
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        <strong>هایپرتروفی میوکارد:</strong> واضح‌ترین مکانیسم جبرانی ذاتی؛ در ابتدا مفید است اما در ادامه باعث ایسکمی و اختلال پرشدگی دیاستولی می‌شود.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Interactive Compensatory Responses Vicious Cycle & Drug Interception Map (Slide 17 & 21) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <!-- Interactive Compensatory Diagram (7 cols) -->
+                <div class="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <div>
+                            <h3 class="text-base font-extrabold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-arrows-spin text-rose-500"></i>
+                                <span>چرخه معیوب پاسخ‌های جبرانی (اسلاید ۱۷) و محل تداخل داروها</span>
+                            </h3>
+                            <p class="text-xs text-slate-400">روی هر یک از داروهای زیر کلیک کنید تا ببینید کدام شاخه از پاسخ جبرانی را مهار می‌کند:</p>
+                        </div>
+                    </div>
+
+                    <!-- Drug Interception Filter Buttons -->
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <button onclick="highlightCompPath('none')" id="comp-btn-none" class="comp-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-600 text-white">چرخه معیوب بدون دارو</button>
+                        <button onclick="highlightCompPath('bb')" id="comp-btn-bb" class="comp-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-amber-400 border border-slate-800 hover:bg-slate-800">بتابلاکرها (BB)</button>
+                        <button onclick="highlightCompPath('raas')" id="comp-btn-raas" class="comp-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-cyan-400 border border-slate-800 hover:bg-slate-800">ACEi / ARB / MRA</button>
+                        <button onclick="highlightCompPath('arni')" id="comp-btn-arni" class="comp-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-purple-400 border border-slate-800 hover:bg-slate-800">ساکوبیترین/والزارتان (ARNI)</button>
+                        <button onclick="highlightCompPath('diuretic')" id="comp-btn-diuretic" class="comp-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-emerald-400 border border-slate-800 hover:bg-slate-800">دیورتیک و SGLT2i</button>
+                    </div>
+
+                    <!-- Interactive Flowchart of Slide 17 -->
+                    <div class="bg-slate-950 rounded-xl border border-slate-800 p-4 space-y-4">
+                        <!-- Top Node: Decreased Cardiac Output -->
+                        <div class="flex justify-center">
+                            <div class="px-5 py-2.5 rounded-xl bg-rose-500/20 border-2 border-rose-500 text-rose-300 font-black text-xs md:text-sm shadow-lg">
+                                ↓ کاهش برون‌ده قلبی (↓ Cardiac Output)
+                            </div>
+                        </div>
+
+                        <!-- Two Main Branches: Sympathetic vs Renal RAAS -->
+                        <div class="grid grid-cols-2 gap-4 text-center text-xs">
+                            <!-- Left Branch: Sympathetic -->
+                            <div id="comp-branch-symp" class="space-y-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800 transition-all">
+                                <div class="p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 font-bold">
+                                    ↓ شلیک سینوس کاروتید (↓ Carotid sinus firing)
+                                </div>
+                                <i class="fa-solid fa-arrow-down text-amber-400"></i>
+                                <div class="p-2.5 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-300 font-black">
+                                    ↑ تخلیه سمپاتیک (↑ Sympathetic discharge)
+                                </div>
+                                <div class="grid grid-cols-2 gap-1.5 text-[11px]">
+                                    <div class="p-1.5 rounded bg-slate-950 text-slate-300">↑ قدرت (Force)</div>
+                                    <div class="p-1.5 rounded bg-slate-950 text-slate-300">↑ ضربان (Rate)</div>
+                                </div>
+                            </div>
+
+                            <!-- Right Branch: RAAS -->
+                            <div id="comp-branch-raas" class="space-y-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800 transition-all">
+                                <div class="p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-300 font-bold">
+                                    ↓ جریان خون کلیوی (↓ Renal blood flow)
+                                </div>
+                                <i class="fa-solid fa-arrow-down text-cyan-400"></i>
+                                <div class="p-2 rounded-lg bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 font-black">
+                                    ↑ ترشح رنین (↑ Renin release)
+                                </div>
+                                <i class="fa-solid fa-arrow-down text-cyan-400"></i>
+                                <div class="p-2 rounded-lg bg-purple-500/20 border border-purple-500/40 text-purple-300 font-black">
+                                    ↑ آنژیوتانسین II و آلدوسترون
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Outcomes: Preload, Afterload, Remodeling -->
+                        <div class="grid grid-cols-3 gap-2 text-center text-xs pt-2 border-t border-slate-800">
+                            <div id="comp-out-preload" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 font-bold text-sky-300">
+                                ↑ پیش‌بار (↑ Preload) و ادم
+                            </div>
+                            <div id="comp-out-afterload" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 font-bold text-rose-300">
+                                ↑ پس‌بار (↑ Afterload)
+                            </div>
+                            <div id="comp-out-remodel" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 font-bold text-purple-300">
+                                بازآرایی و آپوپتوز (Remodeling)
+                            </div>
+                        </div>
+
+                        <div id="comp-explain-box" class="p-3 rounded-xl bg-slate-900 border border-slate-700 text-xs text-slate-200 leading-relaxed">
+                            <strong>توضیح اسلاید ۱۷ و ۲۱:</strong> کاهش برون‌ده قلبی دو مسیر سمپاتیک و رنین-آنژیوتانسین را فعال می‌کند (که همدیگر را نیز تشدید می‌کنند). هدف‌گیری این مسیرهای غیرقلبی در درمان طولانی‌مدت نارسایی قلبی بسیار باارزش‌تر از داروهای اینوتروپ مثبت سنتی است!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column (5 cols): NYHA 4 Stages Interactive Explorer + 6 Life-Prolonging Drug Classes -->
+                <div class="lg:col-span-5 space-y-6">
+                    <!-- NYHA Stages (Slide 3) -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                        <h3 class="text-base font-extrabold text-white mb-1 flex items-center gap-2">
+                            <i class="fa-solid fa-stairs text-cyan-400"></i>
+                            <span>طبقه‌بندی ۴ مرحله‌ای نارسایی قلبی (اسلاید ۳)</span>
+                        </h3>
+                        <p class="text-xs text-slate-400 mb-3">محدودیت فعالیت بدنی و بروز خستگی، تپش قلب یا تنگی نفس:</p>
+                        <div class="space-y-2 text-xs">
+                            <div class="p-2.5 rounded-xl bg-slate-950 border-r-4 border-emerald-500">
+                                <span class="font-black text-emerald-400">مرحله I:</span> بدون محدودیت فعالیت فیزیکی. ورزش منظم باعث خستگی، تپش قلب (Palpitations) یا تنگی نفس (Dyspnea) نمی‌شود.
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-slate-950 border-r-4 border-sky-500">
+                                <span class="font-black text-sky-400">مرحله II:</span> محدودیت خفیف فعالیت فیزیکی. بدون علامت در استراحت؛ فعالیت بدنی عادی باعث خستگی، تپش قلب یا تنگی نفس می‌شود.
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-slate-950 border-r-4 border-amber-500">
+                                <span class="font-black text-amber-400">مرحله III:</span> محدودیت قابل‌توجه فعالیت فیزیکی. بدون علامت در استراحت، اما حتی فعالیت خفیف (Mild activity) علائم ایجاد می‌کند.
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-slate-950 border-r-4 border-rose-500">
+                                <span class="font-black text-rose-400">مرحله IV:</span> <strong>بروز علائم حتی در حالت استراحت (At rest)!</strong> ناتوانی در انجام هرگونه فعالیت بدنی بدون ناراحتی.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drugs that Prolong Life (Slide 21 & 63) -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                        <h3 class="text-sm md:text-base font-extrabold text-emerald-400 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-shield-heart"></i>
+                            <span>داروهایی که طول عمر را افزایش و بستری را کاهش می‌دهند (اسلاید ۲۱ و ۶۳)</span>
+                        </h3>
+                        <p class="text-xs text-slate-300 mb-3">
+                            برخلاف دیگوکسین و اینوتروپ‌ها، این ۶ گروه دارویی در نارسایی مزمن قلبی <strong>مرگ‌ومیر (Mortality) را کاهش می‌دهند</strong>:
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="p-2.5 rounded-xl bg-slate-950 border border-emerald-500/30 font-bold text-white">۱. مهارکننده‌های ACE (انالاپریل، کاپتوپریل)</div>
+                            <div class="p-2.5 rounded-xl bg-slate-950 border border-emerald-500/30 font-bold text-white">۲. مسدودکننده‌های گیرنده آنژیوتانسین (ARBs)</div>
+                            <div class="p-2.5 rounded-xl bg-slate-950 border border-emerald-500/30 font-bold text-white">۳. بتابلاکرهای خاص (کارودیلول، بیزوپرولول، متوپرولول، نبیولول)</div>
+                            <div class="p-2.5 rounded-xl bg-slate-950 border border-emerald-500/30 font-bold text-white">۴. آنتاگونیست‌های گیرنده آلدوسترون (اسپیرونولاکتون، اپلرنون)</div>
+                            <div class="p-2.5 rounded-xl bg-slate-950 border border-emerald-500/30 font-bold text-white">۵. مهارکننده نپری‌لیزین و آنژیوتانسین (ARNI: ساکوبیترین/والزارتان)</div>
+                            <div class="p-2.5 rounded-xl bg-slate-950 border border-emerald-500/30 font-bold text-white">۶. مهارکننده‌های SGLT2 (امپاگلیفلوزین، داپاگلیفلوزین)</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- SECTION 3: DIGOXIN TDM, ELECTROLYTE INTERACTION & XANTHOPSIA SIMULATOR-->
+        <!-- ===================================================================== -->
+        <section id="section-digoxin" class="hidden space-y-6">
+
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-5 pb-4 border-b border-slate-800">
+                    <div>
+                        <h2 class="text-base md:text-lg font-black text-white flex items-center gap-2">
+                            <i class="fa-solid fa-leaf text-emerald-400"></i>
+                            <span>آزمایشگاه فارماکوکینتیک، پنجره درمانی باریک و سمیت دیگوکسین (اسلایدهای ۲۵ تا ۳۴)</span>
+                        </h2>
+                        <p class="text-xs text-slate-400">برگرفته از گیاه <span class="italic text-emerald-300">Digitalis lanata</span> (گل انگشتانه سفید)؛ سایر گیاهان حاوی گلیکوزید قلبی: خرزهره (Oleander)، گل برف (Lily of the valley) و علف شیر (Milkweed)</p>
+                    </div>
+                    <span class="px-3 py-1 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-extrabold">
+                        نیمه‌عمر: ۳۶ تا ۴۰ ساعت | جذب خوراکی: ۶۵ تا ۸۰٪
+                    </span>
+                </div>
+
+                <!-- Interactive Sliders for Digoxin Serum Concentration & Electrolytes -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    
+                    <!-- Controls (6 cols) -->
+                    <div class="lg:col-span-6 space-y-5 bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-1.5">
+                                <span class="text-slate-300">۱. غلظت سرمی دیگوکسین (Serum Digoxin Level):</span>
+                                <span id="dig-conc-val" class="font-mono text-sm font-black text-emerald-400 ltr-num">0.7 ng/mL (درمانی)</span>
+                            </div>
+                            <input type="range" id="dig-conc-slider" min="0.3" max="2.2" step="0.1" value="0.7" oninput="updateDigoxinSim()" class="w-full accent-rose-500 cursor-pointer">
+                            <div class="flex justify-between text-[10px] text-slate-500 mt-1 ltr-num font-mono">
+                                <span>0.3 ng/mL</span>
+                                <span class="text-emerald-400 font-bold">پنجره درمانی: 0.5 - 0.8 ng/mL</span>
+                                <span class="text-rose-400 font-bold">&gt;1.2 ng/mL (افزایش مرگ‌ومیر!)</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs font-bold mb-1.5">
+                                <span class="text-slate-300">۲. پتاسیم سرم (رقابت مستقیم با دیگوکسین روی Na⁺/K⁺-ATPase):</span>
+                                <span id="dig-k-val" class="font-mono text-xs font-black text-cyan-400 ltr-num">4.2 mEq/L (نرمال)</span>
+                            </div>
+                            <input type="range" id="dig-k-slider" min="2.5" max="5.5" step="0.1" value="4.2" oninput="updateDigoxinSim()" class="w-full accent-cyan-500 cursor-pointer">
+                            <p class="text-[11px] text-slate-400 mt-1">
+                                <strong>نکته اسلاید ۳۱ و ۵۸:</strong> پتاسیم و دیژیتال اتصال یکدیگر به پمپ $Na^+/K^+\text{-ATPase}$ را مهار می‌کنند! مصرف دیورتیک‌های لوپ (فوروزماید) باعث دفع پتاسیم (هیپوکالمی) شده و سمیت و اتوماتیسیته دیگوکسین را به شدت افزایش می‌دهد.
+                            </p>
+                        </div>
+
+                        <!-- Electrolyte & Drug Interactions Checkboxes (Slides 32 & 34) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 border-t border-slate-800 text-xs">
+                            <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900 border border-slate-800 cursor-pointer hover:border-amber-500/50">
+                                <input type="checkbox" id="dig-hyperca" onchange="updateDigoxinSim()" class="accent-amber-500 w-4 h-4">
+                                <span><strong>هایپرکلسمی (↑ Ca²⁺):</strong> تسریع بار اضافی کلسیم داخل سلول</span>
+                            </label>
+                            <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900 border border-slate-800 cursor-pointer hover:border-rose-500/50">
+                                <input type="checkbox" id="dig-hypomg" onchange="updateDigoxinSim()" class="accent-rose-500 w-4 h-4">
+                                <span><strong>هیپومنیزمی (↓ Mg²⁺):</strong> تشدید آریتمی دیژیتال</span>
+                            </label>
+                            <label class="sm:col-span-2 flex items-center gap-2 p-2.5 rounded-xl bg-slate-900 border border-slate-800 cursor-pointer hover:border-purple-500/50">
+                                <input type="checkbox" id="dig-interact" onchange="updateDigoxinSim()" class="accent-purple-500 w-4 h-4">
+                                <span><strong>تداخلات دارویی افزاینده سطح دیگوکسین (اسلاید ۳۴):</strong> کینیدین، فلکاینید، وراپامیل، آمیودارون</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Live Toxicity Output & Xanthopsia Vision Simulator (6 cols) -->
+                    <div id="dig-vision-card" class="lg:col-span-6 bg-slate-950 border-2 border-emerald-500/40 rounded-2xl p-4 space-y-4 transition-all duration-300">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-400">وضعیت بالینی بیمار:</span>
+                                <h3 id="dig-status-title" class="text-base font-black text-emerald-400">در محدوده درمانی ایمن (۰.۵ تا ۰.۸ ng/mL)</h3>
+                            </div>
+                            <span id="dig-risk-badge" class="px-3 py-1 rounded-xl bg-emerald-500/20 text-emerald-300 text-xs font-black">خطر سمیت: پایین</span>
+                        </div>
+
+                        <!-- Simulated Patient Vision (Normal vs Xanthopsia Yellow Halos) -->
+                        <div id="xanthopsia-box" class="relative rounded-xl bg-slate-900 border border-slate-800 p-4 flex items-center justify-between overflow-hidden transition-all duration-300">
+                            <div class="space-y-1 z-10">
+                                <div class="text-xs font-extrabold text-white">شبیه‌ساز دید بیمار (تغییرات بینایی - اسلاید ۳۰ و ۳۴):</div>
+                                <p id="xanthopsia-text" class="text-xs text-slate-300">دید طبیعی؛ بدون هاله زردرنگ (Xanthopsia) یا دید برفی.</p>
+                            </div>
+                            <div id="light-bulb-sim" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700 transition-all duration-300">
+                                <i class="fa-solid fa-lightbulb text-amber-300 text-xl"></i>
+                            </div>
+                        </div>
+
+                        <!-- Organ-by-Organ Manifestations & Management (Slides 30, 33, 34) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                                <div class="font-bold text-amber-400 mb-1">۱. شایع‌ترین عارضه خارج‌قلبی (گوارشی):</div>
+                                <p class="text-slate-300 text-[11px] leading-relaxed">
+                                    بی‌اشتهایی (Anorexia)، تهوع، استفراغ و اسهال. (معمولاً فقط به <strong>کاهش دوز دارو</strong> نیاز دارد - اسلاید ۳۳).
+                                </p>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                                <div class="font-bold text-rose-400 mb-1">۲. مهم‌ترین تظاهر قلبی (آریتمی):</div>
+                                <p class="text-slate-300 text-[11px] leading-relaxed">
+                                    برادی‌کاردی، بلوک SA و AV، تاکی‌کاردی و فیبریلاسیون بطنی (VT/VF). نیازمند پایش ECG، پتاسیم و سطح سرمی دیگوکسین.
+                                </p>
+                            </div>
+                            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                                <div class="font-bold text-purple-400 mb-1">۳. عوارض CNS و غدد (اسلاید ۳۰):</div>
+                                <p class="text-slate-300 text-[11px] leading-relaxed">
+                                    گیجی (Disorientation) و توهم به‌ویژه در <strong>سالمندان</strong>؛ اختلال درک رنگ (هاله‌های زرد/Xanthopsia)؛ و <strong>ژنیکوماستی</strong> (به ندرت در مردان).
+                                </p>
+                            </div>
+                            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30">
+                                <div class="font-bold text-emerald-400 mb-1">۴. آنتی‌دوت اختصاصی مسمومیت شدید:</div>
+                                <p class="text-slate-200 text-[11px] leading-relaxed font-medium">
+                                    تجویز آنتی‌بادی‌های دیژیتال: <strong>Digoxin Immune Fab</strong> (با نام‌های تجاری <em>Digibind</em> و <em>DigiFab</em> - اسلاید ۳۴ و ۶۹) + اصلاح پتاسیم و منیزیم.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- SECTION 4: COMPREHENSIVE DRUG DATABASE & SGLT2i MNEMONIC              -->
+        <!-- ===================================================================== -->
+        <section id="section-drugs" class="hidden space-y-6">
+
+            <!-- Special Highlight: SGLT2 Inhibitors Pleiotropic Effects & ADRs Mnemonic (Slides 46 & 47) -->
+            <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-cyan-950/40 border border-cyan-500/30 rounded-2xl p-5 shadow-xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    <div class="lg:col-span-7 space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-black bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">اسلاید ۴۶ و ۴۷</span>
+                            <h3 class="text-base md:text-lg font-black text-white">مهارکننده‌های SGLT2 (امپاگلیفلوزین، داپاگلیفلوزین، کاناگلیفلوزین)</h3>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            مهار بازجذب گلوکز و سدیم در <strong>توبول پروگزیمال کلیه</strong> $\leftarrow$ افزایش دفع ادراری سدیم و گلوکز (ناتریورز و دیورز اسموتیک) $\leftarrow$ <strong>کاهش پیش‌بار (Preload)</strong>. اندیکاسیون‌ها: <strong>T2DM، نارسایی قلبی (HF) و بیماری مزمن کلیه (CKD)</strong>.
+                        </p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
+                            <div class="p-2 rounded-xl bg-slate-950 border border-slate-800 text-emerald-300 font-bold">↑ مصرف کتون و اتوفاژی</div>
+                            <div class="p-2 rounded-xl bg-slate-950 border border-slate-800 text-cyan-300 font-bold">↑ عملکرد میتوکندری و PKG</div>
+                            <div class="p-2 rounded-xl bg-slate-950 border border-slate-800 text-rose-300 font-bold">↓ بار اضافی Ca²⁺/Na⁺ و فیبروز</div>
+                            <div class="p-2 rounded-xl bg-slate-950 border border-slate-800 text-amber-300 font-bold">↓ هایپرتروفی و ↑ عملکرد دیاستولی</div>
+                        </div>
+                    </div>
+
+                    <!-- SGLT2i ADRs Mnemonic Box (Slide 47) -->
+                    <div class="lg:col-span-5 bg-slate-950 border border-amber-500/30 rounded-xl p-4 space-y-2">
+                        <div class="text-xs font-black text-amber-400 flex items-center justify-between">
+                            <span>رمز حفظ کردن عوارض گلیفلوزین‌ها (اسلاید ۴۷):</span>
+                            <span class="font-mono text-[11px] ltr-num text-amber-200">Good Drugs Keep Fluids And Nerves Down</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-1.5 text-[11px] text-slate-300">
+                            <div><strong class="text-rose-400 font-mono">G:</strong> Genital infections (عفونت تناسلی)</div>
+                            <div><strong class="text-rose-400 font-mono">D:</strong> Dehydration / DKA (دهیدراتاسیون)</div>
+                            <div><strong class="text-rose-400 font-mono">K:</strong> Ketoacidosis (کتواسیدوز)</div>
+                            <div><strong class="text-rose-400 font-mono">F:</strong> Fractures (شکستگی استخوان)</div>
+                            <div><strong class="text-rose-400 font-mono">A:</strong> Amputation risk (خطر قطع عضو)</div>
+                            <div><strong class="text-rose-400 font-mono">N:</strong> UTIs &amp; Neuropathy (عفونت ادراری)</div>
+                            <div class="col-span-2"><strong class="text-rose-400 font-mono">D:</strong> Diuresis / Polyuria (دیورز و پرادراری)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Bar for All HF Drugs -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-base font-extrabold text-white">بانک کامل داروهای نارسایی قلبی (بر اساس جداول اسلایدهای ۶۵ تا ۷۱)</h2>
+                    <p class="text-xs text-slate-400">شامل مکانیسم اثر، فارماکوکینتیک، طول اثر، عوارض جانبی اختصاصی و نام‌های تجاری</p>
+                </div>
+                <div class="flex flex-wrap gap-1.5" id="hf-drug-filters">
+                    <button onclick="filterHFDrugs('all')" data-f="all" class="hf-f-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-600 text-white">همه داروها (۱۴ گروه)</button>
+                    <button onclick="filterHFDrugs('firstline')" data-f="firstline" class="hf-f-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-emerald-400 border border-slate-800">خط اول مزمن (کاهنده مرگ‌ومیر)</button>
+                    <button onclick="filterHFDrugs('inotrope')" data-f="inotrope" class="hf-f-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-cyan-400 border border-slate-800">اینوتروپ‌های مثبت</button>
+                    <button onclick="filterHFDrugs('vasodilator')" data-f="vasodilator" class="hf-f-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-amber-400 border border-slate-800">وازودیلاتورها و نارسایی حاد</button>
+                    <button onclick="filterHFDrugs('other')" data-f="other" class="hf-f-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-purple-400 border border-slate-800">ایوابرادین، sGC و سایرین</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Drug Cards Grid -->
+            <div id="hf-drugs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Populated by JS -->
+            </div>
+
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- SECTION 5: SYSTOLIC VS DIASTOLIC TABLE (SLIDE 60) & EXAM QUIZ         -->
+        <!-- ===================================================================== -->
+        <section id="section-quiz" class="hidden space-y-6">
+
+            <!-- Table 13-4: Differences between Systolic and Diastolic Heart Failure (Slide 60) -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+                <div class="px-5 py-3.5 bg-slate-950 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                        <h3 class="text-sm md:text-base font-black text-cyan-400">جدول طلایی مقایسه نارسایی سیستولیک (HFrEF) و دیاستولیک (HFpEF) - اسلاید ۱۳، ۱۴، ۵۹ و ۶۰</h3>
+                        <p class="text-xs text-slate-400">یکی از مهم‌ترین جداول امتحانی فارماکولوژی داروسازی</p>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-bold">
+                        نارسایی دیاستولیک به اینوتروپ مثبت پاسخ مطلوبی نمی‌دهد!
+                    </span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right text-xs">
+                        <thead class="bg-slate-950/70 text-slate-400 border-b border-slate-800">
+                            <tr>
+                                <th class="p-3">متغیر یا گروه دارویی</th>
+                                <th class="p-3 text-rose-400">نارسایی قلبی سیستولیک (Systolic HF / HFrEF)</th>
+                                <th class="p-3 text-amber-400">نارسایی قلبی دیاستولیک (Diastolic HF / HFpEF)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/70 text-slate-200">
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-bold">پاتوفیزیولوژی و سن</td>
+                                <td class="p-3">کاهش قدرت پمپاژ مکانیکی (ناشی از MI)؛ حدود ۵۰٪ بیماران جوان‌تر</td>
+                                <td class="p-3">هایپرتروفی و سفت شدن میوکارد (عدم شل شدن کافی)؛ افزایش نسبت با بالا رفتن سن</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-bold">برون‌ده قلبی (Cardiac Output)</td>
+                                <td class="p-3 text-rose-300 font-bold">کاهش‌یافته (Decreased)</td>
+                                <td class="p-3 text-rose-300 font-bold">کاهش‌یافته (Decreased - به علت کاهش پرشدگی و حجم ضربه‌ای)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-bold">کسر تخلیه (Ejection Fraction)</td>
+                                <td class="p-3 text-rose-400 font-black">کاهش‌یافته به طور معنادار (EF &lt; 45% یا &lt; 50%)</td>
+                                <td class="p-3 text-emerald-400 font-black">نرمال (۵۰ تا ۷۰٪) با وجود کاهش حجم ضربه‌ای!</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-bold">دیورتیک‌ها (Diuretics)</td>
+                                <td class="p-3">کاهش علائم؛ خط اول درمان در صورت وجود ادم</td>
+                                <td class="p-3 text-amber-300 font-bold">مصرف با احتیاط (Use with caution - خطر کاهش بیش‌ازحد پرشدگی)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-bold">ACEIs / ARBs / آنتاگونیست آلدوسترون</td>
+                                <td class="p-3 text-emerald-300 font-bold">↓ کاهش مرگ‌ومیر در نارسایی مزمن قلبی</td>
+                                <td class="p-3">ممکن است مفید باشند (کمک به کاهش LVH و کنترل فشار خون)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-bold">ARNI (ساکوبیترین / والزارتان)</td>
+                                <td class="p-3 text-emerald-300 font-bold">↓ کاهش علائم، بستری، مرگ‌ومیر و ↓ NT-proBNP</td>
+                                <td class="p-3 text-emerald-300 font-bold">↓ کاهش علائم و ↓ NT-proBNP</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-bold">بتابلاکرها و ایوابرادین</td>
+                                <td class="p-3">بتابلاکر: ↓ مرگ‌ومیر؛ ایوابرادین: ↓ بستری (کاهش ضربان قلب)</td>
+                                <td class="p-3">مفید برای ↓ HR و ↓ BP (<strong>نبیولول</strong> در هر دو نوع سیستولیک و دیاستولیک مؤثر است - اسلاید ۵۹)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-bold">بلوکرهای کانال کلسیم (CCBs)</td>
+                                <td class="p-3 text-rose-400 font-bold">بدون نقش! (اثر تضعیف‌کننده قلب و تشدید نارسایی - اسلاید ۵۴)</td>
+                                <td class="p-3">مفید برای کاهش ضربان قلب (↓ HR) و کاهش فشار خون (↓ BP)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40">
+                                <td class="p-3 font-bold">دیگوکسین و اینوتروپ‌های مثبت</td>
+                                <td class="p-3">کاهش علائم و بستری مجدد</td>
+                                <td class="p-3 text-rose-400 font-bold">توصیه نمی‌شود / بدون نقش (Not recommended)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Interactive 10-Question Pharmacy Exam Self-Test -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-800">
+                    <div>
+                        <h3 class="text-base font-extrabold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-clipboard-question text-rose-400"></i>
+                            <span>آزمون خودسنجی فارماکولوژی نارسایی قلبی (۱۰ سؤال پرتکرار امتحانی)</span>
+                        </h3>
+                        <p class="text-xs text-slate-400">طراحی شده خط‌به‌خط بر اساس اسلایدهای دکتر قلی‌بیکی</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span id="quiz-score-badge" class="px-3 py-1 rounded-xl bg-rose-500/20 border border-rose-500/30 text-rose-300 text-xs font-black">
+                            امتیاز: ۰ از ۱۰
+                        </span>
+                        <button onclick="resetQuiz()" class="px-3 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 font-bold">
+                            شروع مجدد آزمون
+                        </button>
+                    </div>
+                </div>
+
+                <div id="quiz-container" class="space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-950 border-t border-slate-900 py-4 px-4 text-center text-xs text-slate-500">
+        طراحی شده برای مرور تعاملی و بصری دانشجویان داروسازی | منبع علمی: اسلایدهای فارماکولوژی داروهای نارسایی قلبی - دکتر افروز قلی‌بیکی
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- APPLICATION JAVASCRIPT LOGIC                                          -->
+    <!-- ===================================================================== -->
+    <script>
+        let currentTime = 180; // 0 to 800 ms cardiac cycle
+        let isPlaying = true;
+        let playSpeed = 0.8;
+        let currentHFMode = 'normal';
+        let activeMainTab = 'scrubber';
+
+        const hfModesData = {
+            normal: {
+                title: '۱. قلب سالم (Normal Cardiac Function)',
+                efText: '58% (نرمال: 50-70%)',
+                coText: '5.0 L/min (HR:72 × SV:70)',
+                preloadText: 'نرمال (EDV = 120 mL)',
+                afterloadText: 'مقاومت شریانی نرمال',
+                badgeText: 'EF = 70 / 120 = 58%',
+                srStoreText: 'ذخیره کلسیم داخل SR: نرمال (SERCA فعال)',
+                edv: 120,
+                esv: 50,
+                caPeak: 1.0,
+                sercaSpeed: 1.0,
+                instantDesc: 'در قلب سالم، بیش از نیمی از حجم خون بطن چپ (EDV = 120 mL) در هر ضربان به بیرون پمپ می‌شود (SV = 70 mL و EF = 58%). در دیاستول، پمپ SERCA کلسیم آزاد سیتوپلاسم را به سرعت به داخل شبکه سارکوپلاسمی برمی‌گرداند.',
+                examPearl: 'نکته امتحانی (اسلاید ۴ و ۱۱): کسر تخلیه (EF) نسبت حجم ضربه‌ای به حجم پایان دیاستولی است. در حالت طبیعی بین ۵۰ تا ۷۰٪ نوسان دارد و پمپ SERCA مسئول حفظ کلسیم آزاد سیتوپلاسم در سطح بسیار پایین در دیاستول است.'
+            },
+            systolic_hf: {
+                title: '۲. نارسایی سیستولیک قلب (Systolic Failure / HFrEF)',
+                efText: '32% (کاهش شدید < 45%)',
+                coText: '3.1 L/min (کاهش‌یافته)',
+                preloadText: '↑↑ افزایش (EDV = 160 mL)',
+                afterloadText: '↑↑ افزایش (انقباض عروقی)',
+                badgeText: 'HFrEF: EF < 45%',
+                srStoreText: 'ذخیره کلسیم داخل SR: کاهش‌یافته (اختلال SERCA)',
+                edv: 160,
+                esv: 109,
+                caPeak: 0.52,
+                sercaSpeed: 0.55,
+                instantDesc: 'در نارسایی سیستولیک (معمولاً به دنبال انفارکتوس میوکارد در ۵۰٪ بیماران جوان‌تر)، فعالیت SERCA مختل شده، پیک کلسیم سیستولی کاهش می‌یابد و قدرت پمپاژ مکانیکی (Contractility) افت می‌کند. بطن متسع شده اما کسر تخلیه به زیر ۴۵٪ سقوط می‌کند.',
+                examPearl: 'نکته امتحانی (اسلاید ۱۱ و ۱۳): در نارسایی سیستولیک، هر دو برون‌ده قلبی (CO) و کسر تخلیه (EF < 45%) به شدت کاهش می‌یابند و فعالیت پمپ SERCA مختل است.'
+            },
+            diastolic_hf: {
+                title: '۳. نارسایی دیاستولیک قلب (Diastolic Failure / HFpEF)',
+                efText: '60% (نرمال با وجود ↓ SV!)',
+                coText: '3.6 L/min (کاهش پرشدگی)',
+                preloadText: '↓ حجم پرشدگی (بطن سفت: 85 mL)',
+                afterloadText: '↑ فشار خون سیستمیک',
+                badgeText: 'HFpEF: EF نرمال',
+                srStoreText: 'تأخیر در بازجذب کلسیم و سفتی دیواره میوکارد',
+                edv: 85,
+                esv: 34,
+                caPeak: 0.85,
+                sercaSpeed: 0.45,
+                instantDesc: 'در نارسایی دیاستولیک (که با افزایش سن شایع‌تر می‌شود)، به علت هایپرتروفی و سفت شدن میوکارد، قلب نمی‌تواند در دیاستول به خوبی شل (Relax) و پر شود. بنابراین با اینکه حجم ضربه‌ای (SV) کم شده، چون EDV هم کم است، کسر تخلیه (EF) نرمال می‌ماند!',
+                examPearl: 'نکته طلایی امتحان (اسلاید ۱۴ و ۵۹): نارسایی دیاستولیک به داروهای اینوتروپ مثبت پاسخ مطلوبی نمی‌دهد! کنترل فشار خون، ACEi/ARB و بتابلاکر «نبیولول» (مؤثر در هر دو نوع سیستولیک و دیاستولیک) کاربرد دارند.'
+            },
+            digoxin: {
+                title: '۴. درمان با دیگوکسین (Cardiac Glycoside - اسلاید ۲۶ تا ۲۹)',
+                efText: '48% (افزایش اینوتروپی)',
+                coText: '4.6 L/min (بهبود SV و ↓ HR)',
+                preloadText: 'کاهش احتقان',
+                afterloadText: 'تغییر جزئی',
+                badgeText: 'پنجره درمانی: 0.5-0.8 ng/mL',
+                srStoreText: '↑↑ افزایش ذخیره کلسیم در SR و نزدیکی تروپونین C',
+                edv: 140,
+                esv: 73,
+                caPeak: 1.18,
+                sercaSpeed: 0.9,
+                instantDesc: 'دیگوکسین در غلظت درمانی به طور خفیف پمپ Na⁺/K⁺-ATPase را مهار می‌کند ← افزایش سدیم داخل سلول (↑ Na⁺) ← کاهش خروج کلسیم از طریق مبدل NCX ← افزایش کلسیم آزاد در مجاورت تروپونین C (↑ TN-C Ca²⁺ binding) و افزایش ذخیره کلسیم در SR ← افزایش قدرت انقباض (↑ Inotropy).',
+                examPearl: 'نکته امتحانی (اسلاید ۲۸ و ۲۹): دیگوکسین بستری و مرگ ناشی از نارسایی پیشرونده را کم می‌کند اما مرگ ناگهانی (Sudden death) را افزایش می‌دهد (اثر کلی بر مرگ‌ومیر ندارد). فقط در غلظت 0.5-0.8 ng/mL مفید است و بالای 1.2 ng/mL مرگ‌ومیر را بالا می‌برد!'
+            },
+            camp_inotrope: {
+                title: '۵. اینوتروپ‌های وابسته به cAMP: دوبوتامین و میلرینون (اسلاید ۳۶ و ۳۷)',
+                efText: '52% (افزایش سریع قدرت انقباض)',
+                coText: '5.2 L/min (↑↑ CO در نارسایی حاد)',
+                preloadText: '↓ کاهش فشار پرشدگی بطن',
+                afterloadText: '↓↓ وازودیلاتاسیون (به‌ویژه میلرینون)',
+                badgeText: 'فقط در نارسایی حاد (IV)',
+                srStoreText: '↑↑ cAMP ← افزایش شدید ورود و رهاسازی کلسیم',
+                edv: 135,
+                esv: 65,
+                caPeak: 1.32,
+                sercaSpeed: 1.15,
+                instantDesc: 'دوبوتامین (آگونیست انتخابی β1) سنتز cAMP را افزایش می‌دهد و میلرینون (مهارکننده PDE-3) تخریب cAMP را مهار می‌کند. افزایش cAMP باعث افزایش کلسیم داخل سلولی قلب و گشادی عروق (در میلرینون) می‌شود.',
+                examPearl: 'نکته امتحانی (اسلاید ۳۶ و ۳۷): این داروها فقط به صورت تزریقی (IV) در نارسایی حاد کاربرد دارند و در نارسایی مزمن به دلیل ایجاد تحمل (Tolerance)، عدم اثربخشی خوراکی و آریتمی‌زایی شدید (افزایش مرگ‌ومیر در مصرف مزمن میلرینون) ممنوع هستند! اینامرینون به علت ترومبوسیتوپنی و سمیت کبدی جمع‌آوری شد.'
+            },
+            levosimendan: {
+                title: '۶. لووسیمندان (Myofilament Ca²⁺ Sensitizer - اسلاید ۳۸)',
+                efText: '51% (افزایش کارایی انقباض)',
+                coText: '4.9 L/min (بهبود CO و وازودیلاتاسیون)',
+                preloadText: '↓ کاهش پیش‌بار',
+                afterloadText: '↓ گشادی عروق (مهار PDE)',
+                badgeText: 'حساس‌کننده تروپونین به کلسیم',
+                srStoreText: 'بدون ایجاد بار اضافی کلسیم (حساسیت بالای تروپونین)',
+                edv: 132,
+                esv: 65,
+                caPeak: 0.88,
+                sercaSpeed: 1.0,
+                instantDesc: 'لووسیمندان یک حساس‌کننده فیلامان‌های عضلانی به کلسیم است: ۱) سیستم تروپونین را به کلسیم حساس‌تر می‌کند (بنابراین حتی بدون افزایش شدید کلسیم آزاد، انقباض قوی رخ می‌دهد) و ۲) فسفودی‌استراز (PDE) را مهار کرده و باعث مقداری گشادی عروق می‌شود.',
+                examPearl: 'نکته امتحانی (اسلاید ۱۰، ۳۸ و ۶۲): لووسیمندان مستقیم روی کمپلکس اکتین-تروپونین-تروپومیوزین اثر می‌گذارد و در اروپا برای درمان نارسایی قلبی حاد (Acute HF) تایید شده است.'
+            },
+            gdmt: {
+                title: '۷. خط اول درمان مزمن: ACEi / ARB / ARNI + SGLT2i + MRA (اسلاید ۶۳)',
+                efText: '50% (جلوگیری از بازآرایی بطن)',
+                coText: '4.8 L/min (کاهش بار کاری قلب)',
+                preloadText: '↓↓ کاهش پیش‌بار و ادم (دیورز و وازودیلاتاسیون وریدی)',
+                afterloadText: '↓↓ کاهش پس‌بار و مقاومت محیطی',
+                badgeText: '↑ افزایش طول عمر و ↓ بستری',
+                srStoreText: 'کاهش بار اضافی Ca²⁺/Na⁺ و بهبود عملکرد SERCA و دیاستول',
+                edv: 125,
+                esv: 62,
+                caPeak: 0.95,
+                sercaSpeed: 1.05,
+                instantDesc: 'داروهای خط اول (ساکوبیترین/والزارتان یا ACEi/ARB، بتابلاکرها، مهارکننده‌های SGLT2 و اسپیرونولاکتون/اپلرنون) با تعدیل نوروهومورال، کاهش پیش‌بار و پس‌بار و مهار فیبروز و بازآرایی (Remodeling)، مارپیچ نزولی نارسایی قلبی را متوقف می‌کنند.',
+                examPearl: 'نکته امتحانی (اسلاید ۴۴ و ۶۳): مهارکننده‌های ACE (مثل انالاپریل) حتی در بیماران بدون علامت (Asymptomatic) نیز مفیدند زیرا اتساع بطن را کند می‌کنند.'
+            },
+            ivabradine: {
+                title: '۸. ایوابرادین (مهارکننده انتخابی کانال If در گره SA - اسلاید ۵۴ و ۵۵)',
+                efText: '47% (افزایش زمان پرشدگی دیاستولی)',
+                coText: '4.5 L/min (کاهش ضربان قلب بدون تضعیف انقباض)',
+                preloadText: 'بهبود پرشدگی بطن',
+                afterloadText: 'بدون اثر بر تون عروقی',
+                badgeText: 'مهار جریان پیس‌میکر If',
+                srStoreText: 'بدون اثر منفی بر کلسیم و انقباض میوکارد!',
+                edv: 130,
+                esv: 69,
+                caPeak: 0.92,
+                sercaSpeed: 0.95,
+                instantDesc: 'ایوابرادین (Corlanor) به صورت وابسته به دوز و انتخابی جریان پیس‌میکر "Funny" (کانال If) را در گره سینوسی-دهلیزی (SA node) مهار کرده و شیب دپلاریزاسیون دیاستولی را کند می‌کند. در نتیجه ضربان قلب را کاهش می‌دهد بدون اینکه اثری بر قدرت انقباض میوکارد یا تون عروقی داشته باشد!',
+                examPearl: 'نکته امتحانی (اسلاید ۵۴، ۵۵ و ۶۴): بلوکرهای کانال کلسیم (CCBs) در نارسایی سیستولیک نقشی ندارند چون انقباض قلب را تضعیف می‌کنند، اما ایوابرادین فقط ضربان قلب را کم می‌کند و در بیمارانی که ضربان قلبشان با بتابلاکر کنترل نشده، بستری را کاهش می‌دهد.'
+            }
+        };
+
+        function getCaTransient(t, peakScale, sercaSpeed) {
+            if (t < 110) return 0.08;
+            if (t >= 110 && t < 230) {
+                let p = (t - 110) / 120;
+                return 0.08 + peakScale * Math.sin(p * Math.PI / 2);
+            }
+            let decayTime = (t - 230) / (260 / sercaSpeed);
+            return 0.08 + peakScale * Math.exp(-decayTime * 2.4);
+        }
+
+        function getLVVolume(t, edv, esv, sercaSpeed) {
+            let sv = edv - esv;
+            if (t < 120) {
+                return edv;
+            } else if (t >= 120 && t < 360) {
+                // Systolic Ejection
+                let p = (t - 120) / 240;
+                let ease = 0.5 - 0.5 * Math.cos(p * Math.PI);
+                return edv - sv * ease;
+            } else if (t >= 360 && t < 430) {
+                // Isovolumetric relaxation
+                return esv;
+            } else {
+                // Diastolic Filling
+                let p = Math.min(1, ((t - 430) / 370) * Math.min(1.15, sercaSpeed + 0.25));
+                let ease = 1 - Math.pow(1 - p, 2.2);
+                return esv + sv * ease;
+            }
+        }
+
+        function drawHFScrubberCanvas() {
+            const canvas = document.getElementById('hf-scrubber-canvas');
+            if (!canvas) return;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width * window.devicePixelRatio;
+            canvas.height = rect.height * window.devicePixelRatio;
+            const ctx = canvas.getContext('2d');
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+            const w = rect.width;
+            const h = rect.height;
+            ctx.clearRect(0, 0, w, h);
+
+            const padL = 46, padR = 46, padT = 24, padB = 30;
+            const plotW = w - padL - padR;
+            const plotH = h - padT - padB;
+
+            const timeToX = (t) => padL + (t / 800) * plotW;
+            const volToY = (vol) => padT + ((175 - vol) / (175 - 25)) * plotH;
+            const caToY = (ca) => padT + ((1.45 - ca) / 1.45) * plotH;
+
+            // Phase background shading (Systole vs Diastole)
+            ctx.fillStyle = 'rgba(244, 63, 94, 0.06)';
+            ctx.fillRect(timeToX(110), padT, timeToX(380) - timeToX(110), plotH);
+            ctx.fillStyle = '#fda4af';
+            ctx.font = 'bold 11px Vazirmatn';
+            ctx.textAlign = 'center';
+            ctx.fillText('سیستول (انقباض و تخلیه خون)', (timeToX(110) + timeToX(380)) / 2, padT + 14);
+
+            ctx.fillStyle = '#7dd3fc';
+            ctx.fillText('دیاستول (برداشت کلسیم توسط SERCA و پرشدگی بطن)', (timeToX(380) + timeToX(800)) / 2, padT + 14);
+
+            const modeObj = hfModesData[currentHFMode];
+
+            // 1. Draw Normal Baseline LV Volume (Dashed Slate)
+            ctx.beginPath();
+            ctx.setLineDash([5, 4]);
+            ctx.strokeStyle = 'rgba(148, 163, 184, 0.45)';
+            ctx.lineWidth = 2;
+            for (let t = 0; t <= 800; t += 4) {
+                const x = timeToX(t);
+                const y = volToY(getLVVolume(t, 120, 50, 1.0));
+                if (t === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // 2. Draw Active Mode LV Volume Curve (Cyan/Emerald)
+            ctx.save();
+            ctx.beginPath();
+            ctx.strokeStyle = '#10b981';
+            ctx.shadowColor = '#10b981';
+            ctx.shadowBlur = 10;
+            ctx.lineWidth = 3.2;
+            for (let t = 0; t <= currentTime; t += 2) {
+                const x = timeToX(t);
+                const y = volToY(getLVVolume(t, modeObj.edv, modeObj.esv, modeObj.sercaSpeed));
+                if (t === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.restore();
+
+            // 3. Draw Active Mode Free Cytoplasmic [Ca2+] Transient Curve (Rose/Amber)
+            ctx.save();
+            ctx.beginPath();
+            ctx.strokeStyle = '#f43f5e';
+            ctx.shadowColor = '#f43f5e';
+            ctx.shadowBlur = 10;
+            ctx.lineWidth = 3.2;
+            for (let t = 0; t <= currentTime; t += 2) {
+                const x = timeToX(t);
+                const y = caToY(getCaTransient(t, modeObj.caPeak, modeObj.sercaSpeed));
+                if (t === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.restore();
+
+            // 4. Scrubber Vertical Playhead & Dots
+            const curX = timeToX(currentTime);
+            const curVol = getLVVolume(currentTime, modeObj.edv, modeObj.esv, modeObj.sercaSpeed);
+            const curCa = getCaTransient(currentTime, modeObj.caPeak, modeObj.sercaSpeed);
+
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+            ctx.lineWidth = 1.5;
+            ctx.moveTo(curX, padT);
+            ctx.lineTo(curX, h - padB);
+            ctx.stroke();
+
+            // Volume Dot
+            ctx.beginPath();
+            ctx.arc(curX, volToY(curVol), 6, 0, Math.PI * 2);
+            ctx.fillStyle = '#10b981';
+            ctx.fill();
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Ca2+ Dot
+            ctx.beginPath();
+            ctx.arc(curX, caToY(curCa), 6, 0, Math.PI * 2);
+            ctx.fillStyle = '#f43f5e';
+            ctx.fill();
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Legend Labels on Canvas
+            ctx.font = 'bold 11px Vazirmatn';
+            ctx.textAlign = 'left';
+            ctx.fillStyle = '#10b981';
+            ctx.fillText(`حجم بطن چپ: ${Math.round(curVol)} mL`, padL + 8, h - 10);
+            ctx.textAlign = 'right';
+            ctx.fillStyle = '#f43f5e';
+            ctx.fillText(`کلسیم آزاد سیتوپلاسم (Ca²⁺)`, w - padR - 8, h - 10);
+        }
+
+        function updateScrubberVisuals(t) {
+            currentTime = Number(t);
+            document.getElementById('time-scrubber').value = currentTime;
+            document.getElementById('time-readout').textContent = `${Math.round(currentTime)} ms`;
+
+            const modeObj = hfModesData[currentHFMode];
+            document.getElementById('telemetry-ef').textContent = modeObj.efText;
+            document.getElementById('telemetry-co').textContent = modeObj.coText;
+            document.getElementById('telemetry-preload').textContent = modeObj.preloadText;
+            document.getElementById('telemetry-afterload').textContent = modeObj.afterloadText;
+            document.getElementById('mode-explain-title').textContent = modeObj.title;
+            document.getElementById('mode-survival-badge').textContent = modeObj.badgeText;
+            document.getElementById('mode-instant-desc').textContent = modeObj.instantDesc;
+            document.getElementById('mode-exam-pearl').innerHTML = `<strong>نکته طلایی امتحان:</strong> ${modeObj.examPearl}`;
+            document.getElementById('svg-sr-store-text').textContent = modeObj.srStoreText;
+
+            // Mode-specific drug overlays on SVG
+            document.getElementById('svg-digoxin-tag').setAttribute('opacity', currentHFMode === 'digoxin' ? '1' : '0');
+            document.getElementById('svg-levo-badge').setAttribute('opacity', currentHFMode === 'levosimendan' ? '1' : '0');
+
+            // Reset cross-bridge step highlights
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`cb-step-${i}`).className = 'p-2 rounded-lg bg-slate-950 border border-slate-800 text-slate-400 transition-all';
+            }
+
+            const triggerCa = document.getElementById('svg-trigger-ca');
+            const ryrRelease = document.getElementById('svg-ryr-release');
+            const sercaArrows = document.getElementById('svg-serca-arrows');
+            const zLeft = document.getElementById('svg-zline-left');
+            const zRight = document.getElementById('svg-zline-right');
+            const actinLeft = document.getElementById('svg-actin-left');
+            const actinRight = document.getElementById('svg-actin-right');
+            const myosinHeads = document.getElementById('svg-myosin-heads');
+
+            triggerCa.setAttribute('opacity', '0');
+            ryrRelease.setAttribute('opacity', '0');
+            sercaArrows.setAttribute('opacity', '0');
+
+            // Calculate sarcomere contraction factor (0 = relaxed, 1 = max contracted)
+            const caLevel = getCaTransient(currentTime, modeObj.caPeak, modeObj.sercaSpeed);
+            const shiftPx = Math.min(38, Math.max(0, (caLevel - 0.08) * 32));
+
+            zLeft.setAttribute('x1', 25 + shiftPx);
+            zLeft.setAttribute('x2', 25 + shiftPx);
+            zRight.setAttribute('x1', 465 - shiftPx);
+            zRight.setAttribute('x2', 465 - shiftPx);
+            actinLeft.style.transform = `translateX(${shiftPx}px)`;
+            actinRight.style.transform = `translateX(-${shiftPx}px)`;
+            myosinHeads.style.transform = `scaleX(${1 - shiftPx * 0.004})`;
+
+            let stageText = '';
+            let stepBadge = '';
+
+            if (currentTime < 110) {
+                stageText = '۱. پایان دیاستول: کشش اولیه فیبرهای سارکومر (Preload = Stretch)';
+                stepBadge = 'گام ۱: هیدرولیز ATP (آماده اتصال)';
+                document.getElementById('cb-step-1').className = 'p-2 rounded-lg bg-cyan-950/50 border border-cyan-400 text-white font-bold';
+            } else if (currentTime >= 110 && currentTime < 220) {
+                stageText = '۲. شروع سیستول: ورود کلسیم ماشه (Trigger Ca²⁺) و باز شدن کانال‌های RyR';
+                stepBadge = 'گام ۲: اتصال Ca²⁺ به تروپونین و کنار رفتن تروپومیوزین';
+                triggerCa.setAttribute('opacity', '1');
+                ryrRelease.setAttribute('opacity', '1');
+                document.getElementById('cb-step-2').className = 'p-2 rounded-lg bg-rose-950/50 border border-rose-400 text-white font-bold';
+            } else if (currentTime >= 220 && currentTime < 380) {
+                stageText = '۳. اوج سیستول: رهاسازی ADP+P، خم شدن سر میوزین و پمپاژ خون ( غلبه بر Afterload)';
+                stepBadge = 'گام ۳: Power Stroke (لغزش اکتین روی میوزین)';
+                ryrRelease.setAttribute('opacity', '0.7');
+                document.getElementById('cb-step-3').className = 'p-2 rounded-lg bg-amber-950/50 border border-amber-400 text-white font-bold';
+            } else if (currentTime >= 380 && currentTime < 560) {
+                stageText = '۴. شروع دیاستول: اتصال ATP به سر میوزین (شل شدن) و پمپاژ کلسیم به SR توسط SERCA';
+                stepBadge = 'گام ۴: اتصال ATP و بازگشت سر میوزین به استراحت';
+                sercaArrows.setAttribute('opacity', '1');
+                document.getElementById('cb-step-4').className = 'p-2 rounded-lg bg-emerald-950/50 border border-emerald-400 text-white font-bold';
+            } else {
+                stageText = '۵. دیاستول: خروج کلسیم توسط مبدل NCX و حفظ شیب سدیم توسط پمپ Na⁺/K⁺-ATPase';
+                stepBadge = 'استراحت دیاستولی و پرشدگی بطن';
+                sercaArrows.setAttribute('opacity', '0.45');
+                document.getElementById('cb-step-1').className = 'p-2 rounded-lg bg-cyan-950/50 border border-cyan-400 text-white font-bold';
+            }
+
+            document.getElementById('current-stage-badge').textContent = stageText;
+            document.getElementById('sarcomere-step-badge').textContent = stepBadge;
+
+            drawHFScrubberCanvas();
+        }
+
+        function animateLoop() {
+            if (isPlaying && activeMainTab === 'scrubber') {
+                currentTime += playSpeed;
+                if (currentTime > 800) currentTime = 0;
+                updateScrubberVisuals(currentTime);
+            }
+            requestAnimationFrame(animateLoop);
+        }
+
+        function onScrub(val) {
+            if (isPlaying) togglePlay(false);
+            updateScrubberVisuals(val);
+        }
+
+        function togglePlay(forceState) {
+            isPlaying = typeof forceState === 'boolean' ? forceState : !isPlaying;
+            const icon = document.getElementById('play-icon');
+            icon.className = isPlaying ? 'fa-solid fa-pause text-lg' : 'fa-solid fa-play text-lg';
+        }
+
+        function setSpeed(spd) {
+            playSpeed = spd;
+            document.querySelectorAll('.speed-btn').forEach(btn => {
+                btn.className = 'speed-btn px-2 py-1 rounded text-slate-400 hover:text-white';
+            });
+            const active = document.getElementById(`speed-${spd}`);
+            if (active) active.className = 'speed-btn px-2 py-1 rounded bg-rose-500/20 text-rose-300 font-bold';
+        }
+
+        function jumpToTime(t) {
+            togglePlay(false);
+            updateScrubberVisuals(t);
+        }
+
+        function selectHFMode(mode) {
+            currentHFMode = mode;
+            document.querySelectorAll('.hf-mode-btn').forEach(btn => {
+                if (btn.dataset.mode === mode) {
+                    btn.className = 'hf-mode-btn px-3 py-2.5 rounded-xl border text-right transition-all bg-rose-500/20 border-rose-400 text-white shadow-lg';
+                } else {
+                    btn.className = 'hf-mode-btn px-3 py-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-800 text-right transition-all';
+                }
+            });
+            updateScrubberVisuals(currentTime);
+        }
+
+        function highlightCompPath(path) {
+            document.querySelectorAll('.comp-btn').forEach(b => {
+                b.className = 'comp-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800';
+            });
+            document.getElementById(`comp-btn-${path}`).className = 'comp-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-600 text-white shadow-lg';
+
+            const symp = document.getElementById('comp-branch-symp');
+            const raas = document.getElementById('comp-branch-raas');
+            const exp = document.getElementById('comp-explain-box');
+
+            symp.className = 'space-y-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800 transition-all';
+            raas.className = 'space-y-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800 transition-all';
+
+            if (path === 'bb') {
+                symp.className = 'space-y-3 p-3 rounded-xl bg-amber-950/40 border-2 border-amber-400 transition-all';
+                exp.innerHTML = `<strong class="text-amber-400">بتابلاکرها (بیزوپرولول، کارودیلول، متوپرولول و نبیولول - اسلاید ۵۲ و ۵۳):</strong> اثرات مضر غلظت‌های بالای کاتکول‌آمین‌ها (از جمله آپوپتوز)، تاکی‌کاردی شدید و فعالیت میتوژنیک (Remodeling) را مهار کرده، باعث Up-regulation گیرنده‌های بتا شده و مرگ‌ومیر را در CHF شدید پایدار کاهش می‌دهند.`;
+            } else if (path === 'raas') {
+                raas.className = 'space-y-3 p-3 rounded-xl bg-cyan-950/40 border-2 border-cyan-400 transition-all';
+                exp.innerHTML = `<strong class="text-cyan-400">مهارکننده‌های RAAS (ACEi، ARBs و اسپیرونولاکتون/اپلرنون - اسلاید ۴۲ تا ۴۵):</strong> با کاهش تشکیل یا اثر آنژیوتانسین II و آلدوسترون، هم پس‌بار (گشادی عروق) و هم پیش‌بار (کاهش احتباس آب و نمک) را کم کرده و بازآرایی طولانی‌مدت (Remodeling) قلب و عروق را مهار می‌کنند (کاهش مرگ‌ومیر).`;
+            } else if (path === 'arni') {
+                raas.className = 'space-y-3 p-3 rounded-xl bg-purple-950/40 border-2 border-purple-400 transition-all';
+                exp.innerHTML = `<strong class="text-purple-400">ساکوبیترین + والزارتان (ARNI / Entresto / Bitval - اسلاید ۵۱ و ۶۸):</strong> آنزیم اندوپپتیداز خنثی «نپری‌لیزین» (Neprilysin) مسئول تخریب BNP، ANP، برادی‌کینین و آنژیوتانسین II است. ساکوبیترین نپری‌لیزین را مهار کرده (افزایش پپتیدهای ناتریورتیک مفید) و والزارتان گیرنده AT1 آنژیوتانسین را مسدود می‌کند. نکته: ساکوبیترین فقط در ترکیب با یک ARB مصرف می‌شود!`;
+            } else if (path === 'diuretic') {
+                exp.innerHTML = `<strong class="text-emerald-400">دیورتیک‌های لوپ (فوروزماید) و مهارکننده‌های SGLT2 (اسلاید ۴۱ و ۴۶):</strong> دیورتیک‌ها هیچ اثر مستقیمی بر قدرت انقباض قلب ندارند، بلکه با کاهش احتباس آب و نمک، فشار وریدی، ادم و پیش‌بار (Preload) بطن را به سرعت کاهش می‌دهند. فوروزماید داروی انتخابی کنترل علائم و ادم است.`;
+            } else {
+                exp.innerHTML = `<strong>چرخه معیوب پاسخ‌های جبرانی (اسلاید ۱۷):</strong> افت برون‌ده قلبی باعث کاهش شلیک سینوس کاروتید (تحریک سمپاتیک) و کاهش جریان خون کلیوی (ترشح رنین و آنژیوتانسین II) می‌شود که در نهایت پیش‌بار، پس‌بار و بازآرایی بطن (Remodeling) را تشدید می‌کنند.`;
+            }
+        }
+
+        function updateDigoxinSim() {
+            const conc = parseFloat(document.getElementById('dig-conc-slider').value);
+            const kLevel = parseFloat(document.getElementById('dig-k-slider').value);
+            const hyperCa = document.getElementById('dig-hyperca').checked;
+            const hypoMg = document.getElementById('dig-hypomg').checked;
+            const drugInt = document.getElementById('dig-interact').checked;
+
+            let effectiveConc = conc + (drugInt ? 0.5 : 0);
+            let kPenalty = kLevel < 3.5 ? (3.5 - kLevel) * 0.7 : 0;
+            let riskScore = effectiveConc + kPenalty + (hyperCa ? 0.35 : 0) + (hypoMg ? 0.35 : 0);
+
+            document.getElementById('dig-conc-val').textContent = `${effectiveConc.toFixed(1)} ng/mL ${drugInt ? '(با تداخل دارویی!)' : ''}`;
+            document.getElementById('dig-k-val').textContent = `${kLevel.toFixed(1)} mEq/L ${kLevel < 3.5 ? '(هیپوکالمی خطرناک!)' : '(نرمال)'}`;
+
+            const card = document.getElementById('dig-vision-card');
+            const title = document.getElementById('dig-status-title');
+            const badge = document.getElementById('dig-risk-badge');
+            const xBox = document.getElementById('xanthopsia-box');
+            const xText = document.getElementById('xanthopsia-text');
+            const bulb = document.getElementById('light-bulb-sim');
+
+            if (riskScore <= 0.9 && effectiveConc >= 0.5 && effectiveConc <= 0.8) {
+                card.className = 'lg:col-span-6 bg-slate-950 border-2 border-emerald-500/50 rounded-2xl p-4 space-y-4 transition-all';
+                title.className = 'text-base font-black text-emerald-400';
+                title.textContent = 'محدوده درمانی بهینه (۰.۵ تا ۰.۸ ng/mL) - اثربخشی درمانی';
+                badge.className = 'px-3 py-1 rounded-xl bg-emerald-500/20 text-emerald-300 text-xs font-black';
+                badge.textContent = 'ایمن و مؤثر';
+                xBox.className = 'relative rounded-xl bg-slate-900 border border-slate-800 p-4 flex items-center justify-between';
+                bulb.className = 'w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700';
+                xText.textContent = 'دید طبیعی؛ بدون هاله زردرنگ (Xanthopsia) و بدون آریتمی.';
+            } else if (effectiveConc < 0.5 && riskScore < 0.9) {
+                card.className = 'lg:col-span-6 bg-slate-950 border-2 border-sky-500/40 rounded-2xl p-4 space-y-4 transition-all';
+                title.className = 'text-base font-black text-sky-400';
+                title.textContent = 'زیر حد درمانی (< 0.5 ng/mL)';
+                badge.className = 'px-3 py-1 rounded-xl bg-sky-500/20 text-sky-300 text-xs font-black';
+                badge.textContent = 'اثربخشی ناکافی';
+                xBox.className = 'relative rounded-xl bg-slate-900 border border-slate-800 p-4 flex items-center justify-between';
+                bulb.className = 'w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700';
+                xText.textContent = 'دید طبیعی.';
+            } else if (riskScore <= 1.35) {
+                card.className = 'lg:col-span-6 bg-slate-950 border-2 border-amber-500/60 rounded-2xl p-4 space-y-4 transition-all';
+                title.className = 'text-base font-black text-amber-400';
+                title.textContent = 'مسمومیت خفیف تا متوسط (علائم گوارشی و شروع تغییرات بینایی)';
+                badge.className = 'px-3 py-1 rounded-xl bg-amber-500/20 text-amber-300 text-xs font-black';
+                badge.textContent = 'نیازمند کاهش دوز و اصلاح K⁺';
+                xBox.className = 'relative rounded-xl bg-amber-950/30 border border-amber-500/40 p-4 flex items-center justify-between';
+                bulb.className = 'w-12 h-12 rounded-full bg-yellow-400/30 flex items-center justify-center border border-yellow-300 xanthopsia-halo';
+                xText.textContent = 'شروع اختلال درک رنگ و هاله‌های زرد دور نورها (Xanthopsia) + بی‌اشتهایی و تهوع.';
+            } else {
+                card.className = 'lg:col-span-6 bg-slate-950 border-2 border-rose-500 rounded-2xl p-4 space-y-4 transition-all glow-rose';
+                title.className = 'text-base font-black text-rose-400';
+                title.textContent = 'مسمومیت شدید دیگوکسین (> 1.2 ng/mL یا هیپوکالمی) - افزایش مرگ‌ومیر!';
+                badge.className = 'px-3 py-1 rounded-xl bg-rose-600 text-white text-xs font-black animate-pulse';
+                badge.textContent = 'تجویز فوری Digibind / DigiFab!';
+                xBox.className = 'relative rounded-xl bg-yellow-500/20 border-2 border-yellow-400 p-4 flex items-center justify-between xanthopsia-halo';
+                bulb.className = 'w-14 h-14 rounded-full bg-yellow-300 flex items-center justify-center border-2 border-white xanthopsia-halo';
+                xText.textContent = 'Xanthopsia شدید (هاله‌های زرد، دید برفی، نقاط کور، فتوفوبی) + خطر بالای VT/VF و بلوک AV!';
+            }
+        }
+
+        const hfDrugsCatalog = [
+            {
+                name: 'فوروزماید و دیورتیک‌های لوپ (Furosemide, Bumetanide, Torsemide, Ethacrynic acid)',
+                cat: 'firstline',
+                badge: 'داروی انتخابی ادم و علائم',
+                color: 'emerald',
+                simMode: 'gdmt',
+                moa: 'کاهش بازجذب NaCl و KCl در بخش ضخیم بالارونده قوس هنله (Thick ascending limb). هیچ اثر مستقیمی بر قدرت انقباض قلب ندارند؛ مکانیسم اصلی: کاهش فشار وریدی و کاهش پیش‌بار (Preload).',
+                pk: 'خوراکی و وریدی (IV)؛ طول اثر ۲ تا ۴ ساعت. نکته مهم: «اتاکرینیک اسید» سولفونامید نیست (بدون حساسیت سولفونامیدی).',
+                clinical: 'خط اول مدیریت نارسایی قلبی علامت‌دار (به‌ویژه در حضور ادم محیطی یا ریوی) در فاز حاد و مزمن.',
+                toxicity: 'هیپوولمی، هیپوکالمی (بسیار خطرناک در صورت مصرف هم‌زمان دیگوکسین!)، افت فشار ارتواستاتیک، اتوتوکسیسیتی (سمیت گوشی) و آلرژی سولفونامیدی.'
+            },
+            {
+                name: 'هیدروکلروتیازید و تیازیدها (Hydrochlorothiazide)',
+                cat: 'other',
+                badge: 'فقط نارسایی بسیار خفیف',
+                color: 'sky',
+                simMode: 'gdmt',
+                moa: 'مهار بازجذب NaCl در توبول پیچیده دیستال (DCT). اثربخشی بسیار کمتر از فوروزماید.',
+                pk: 'فقط خوراکی؛ طول اثر ۱۰ تا ۱۲ ساعت.',
+                clinical: 'نارسایی قلبی مزمن بسیار خفیف (Very mild failure)، پرفشاری خون خفیف تا متوسط و هایپرکلسیوری. کاهش مرگ‌ومیر برای آن اثبات نشده است!',
+                toxicity: 'هیپوناترمی، هیپوکالمی، هایپرگلیسمی، هایپراوریسمی، هایپرلیپیدمی و آلرژی سولفونامیدی.'
+            },
+            {
+                name: 'آنتاگونیست‌های آلدوسترون / MRA (Spironolactone, Eplerenone, Finerenone)',
+                cat: 'firstline',
+                badge: 'خط اول - ↓ مرگ‌ومیر',
+                color: 'emerald',
+                simMode: 'gdmt',
+                moa: 'مسدود کردن گیرنده‌های سیتوپلاسمی آلدوسترون (مینرالوکورتیکوئیدی) در توبول‌های جمع‌کننده کلیه ← افزایش دفع آب و نمک و کاهش بازآرایی (Remodeling) قلب.',
+                pk: 'خوراکی؛ طول اثر ۲۴ تا ۷۲ ساعت (شروع و پایان اثر آهسته).',
+                clinical: 'کاهش مرگ‌ومیر و موربیدیتی در بیماران مبتلا به نارسایی قلبی شدید که ACEi و درمان استاندارد دریافت می‌کنند.',
+                toxicity: 'هایپرکالمی! اسپیرونولاکتون (Aldactone) دارای اثرات آنتی‌آندروژنی (ژنیکوماستی) است؛ «اپلرنون» (Inspra) انتخابی‌تر بوده و فاقد اثر آنتی‌آندروژنی معنادار است. «فاینرنون» (Finerenone) احتمال کمتری برای ایجاد هایپرکالمی دارد (اسلاید ۴۲).'
+            },
+            {
+                name: 'مهارکننده‌های ACE (Captopril, Enalapril, Lisinopril, Ramipril)',
+                cat: 'firstline',
+                badge: 'خط اول - تمام مراحل HF',
+                color: 'emerald',
+                simMode: 'gdmt',
+                moa: 'مهار آنزیم مبدل آنژیوتانسین (کاهش تبدیل AI به AII) ← گشادی شریانچه‌ها و وریدها (کاهش پس‌بار و پیش‌بار)، کاهش ترشح آلدوسترون و کاهش بازآرایی طولانی‌مدت قلب و عروق.',
+                pk: 'نیمه‌عمر خوراکی ۲ تا ۴ ساعت اما به دلیل تجویز در دوزهای بالا، طول اثر ۱۲ تا ۲۴ ساعت است.',
+                clinical: 'خط اول درمان نارسایی مزمن قلبی (همراه با دیورتیک). مفید در تمام زیرگروه‌های بیماران، از بیماران کاملاً بدون علامت (Asymptomatic) تا نارسایی شدید مزمن (کند کردن اتساع بطن).',
+                toxicity: 'سرفه خشک مداوم (Incessant cough)، هایپرکالمی و آنژیوادم (Angioneurotic edema).'
+            },
+            {
+                name: 'مسدودکننده‌های گیرنده آنژیوتانسین - ARBs (Losartan, Valsartan, Candesartan)',
+                cat: 'firstline',
+                badge: 'جایگزین عدم تحمل ACEi',
+                color: 'emerald',
+                simMode: 'gdmt',
+                moa: 'آنتاگونیست رقابتی اثرات آنژیوتانسین II روی گیرنده‌های AT1. اثرات مفید مشابه مهارکننده‌های ACE و کاهش مرگ‌ومیر.',
+                pk: 'طول اثر خوراکی ۶ تا ۸ ساعت.',
+                clinical: 'در بیمارانی که به علت سرفه مداوم قادر به تحمل مهارکننده‌های ACE نیستند در نظر گرفته می‌شود.',
+                toxicity: 'هایپرکالمی و آنژیوادم (شیوع سرفه بسیار کمتر از ACEi).'
+            },
+            {
+                name: 'ساکوبیترین / والزارتان - ARNI (Entresto / Bitval 50, 100, 200)',
+                cat: 'firstline',
+                badge: 'خط اول - مهار نپری‌لیزین',
+                color: 'purple',
+                simMode: 'gdmt',
+                moa: 'ساکوبیترین آنزیم اندوپپتیداز خنثی (Neprilysin) را مهار کرده و تخریب پپتیدهای ناتریورتیک (ANP و BNP)، برادی‌کینین و... را کاهش می‌دهد؛ والزارتان گیرنده آنژیوتانسین را مسدود می‌کند.',
+                pk: 'خوراکی با طول اثر ۱۲ ساعت. نکته مهم: ساکوبیترین فقط در ترکیب با یک ARB مصرف می‌شود.',
+                clinical: 'کاهش مرگ‌ومیر، بستری مجدد، علائم و کاهش NT-proBNP در نارسایی مزمن قلبی.',
+                toxicity: 'افت فشار خون (Hypotension) و آنژیوادم.'
+            },
+            {
+                name: 'مهارکننده‌های SGLT2 (Empagliflozin, Dapagliflozin, Canagliflozin)',
+                cat: 'firstline',
+                badge: 'خط اول - گلیفلوزین‌ها',
+                color: 'cyan',
+                simMode: 'gdmt',
+                moa: 'مهار بازجذب گلوکز و سدیم در توبول پروگزیمال کلیه (ناتریورز و دیورز) ← کاهش پیش‌بار + افزایش مصرف کتون، افزایش اتوفاژی و PKG، کاهش بار Ca²⁺/Na⁺، کاهش فیبروز و بهبود عملکرد دیاستولی.',
+                pk: 'خوراکی روزانه.',
+                clinical: 'جزء ۵ ستون خط اول نارسایی قلبی، دیابت نوع ۲ (T2DM) و بیماری مزمن کلیه (CKD). کاهش مرگ‌ومیر و بستری.',
+                toxicity: 'عفونت‌های تناسلی و ادراری، دهیدراتاسیون، کتواسیدوز دیابتی (DKA)، شکستگی استخوان و خطر آمپوتاسیون (به‌ویژه کاناگلیفلوزین).'
+            },
+            {
+                name: 'بتابلاکرهای منتخب (Carvedilol, Bisoprolol, Metoprolol, Nebivolol)',
+                cat: 'firstline',
+                badge: 'خط اول - فقط ۴ بتابلاکر خاص',
+                color: 'amber',
+                simMode: 'gdmt',
+                moa: 'کاهش ضربان قلب، مهار اثرات سمی کاتکول‌آمین‌ها (آپوپتوز)، Up-regulation گیرنده‌های بتا و کاهش بازآرایی (Remodeling) از طریق مهار فعالیت میتوژنیک کاتکول‌آمین‌ها.',
+                pk: 'طول اثر خوراکی ۱۰ تا ۱۲ ساعت.',
+                clinical: 'کاهش مرگ‌ومیر در نارسایی قلبی متوسط تا شدید پایدار (Stable). نکته طلایی اسلاید ۵۹: «نبیولول» (Nebivolol) در هر دو نوع نارسایی سیستولیک و دیاستولیک مؤثر است!',
+                toxicity: 'برونکواسپاسم، برادی‌کاردی، بلوک دهلیزی-بطنی (AV block) و جبران‌زدایی حاد قلبی (در صورت شروع با دوز بالا در بیمار ناپایدار).'
+            },
+            {
+                name: 'ایوابرادین (Ivabradine - Corlanor)',
+                cat: 'other',
+                badge: 'مهارکننده انتخابی کانال If',
+                color: 'pink',
+                simMode: 'ivabradine',
+                moa: 'مهار انتخابی و وابسته به دوز جریان پیس‌میکر "Funny" (کانال If) در گره SA ← کند کردن دپلاریزاسیون دیاستولی و کاهش ضربان قلب بدون هیچ اثری بر قدرت انقباض میوکارد یا تون عروقی!',
+                pk: 'خوراکی.',
+                clinical: 'کاهش بستری در بیماران مبتلا به نارسایی قلبی با ضربان قلب بالا که با بتابلاکر کنترل نشده‌اند.',
+                toxicity: 'برادی‌کاردی و اختلالات بینایی درخشش نور.'
+            },
+            {
+                name: 'دیگوکسین (Digoxin - Lanoxin) و آنتی‌بادی DigiFab',
+                cat: 'inotrope',
+                badge: 'کنترل علائم و AF هم‌زمان با HF',
+                color: 'cyan',
+                simMode: 'digoxin',
+                moa: 'مهار پمپ Na⁺/K⁺-ATPase ← کاهش خروج کلسیم از مبدل NCX ← افزایش ذخیره کلسیم در SR و تروپونین C (اثر اینوتروپ مثبت) + اثر پاراسمپاتومیمتیک انتخابی قلب (کاهش ضربان سینوسی و هدایت AV).',
+                pk: 'جذب خوراکی ۶۵ تا ۸۰٪؛ نیمه‌عمر ۳۶ تا ۴۰ ساعت؛ دفع عمدتاً کلیوی بدون متابولیسم گسترده. پنجره درمانی باریک: 0.5-0.8 ng/mL.',
+                clinical: 'کاهش علائم و بستری مجدد در نارسایی مزمن علامت‌دار (زمانی که دیورتیک و ACEi کافی نبوده‌اند) و کنترل سرعت بطنی در فیبریلاسیون دهلیزی (AF) همراه با HF.',
+                toxicity: 'تهوع، استفراغ، اسهال، آریتمی‌های قلبی، توهم در سالمندان، دید زرد (Xanthopsia) و ژنیکوماستی. درمان سمیت شدید: Digoxin immune fab (Digibind, DigiFab).'
+            },
+            {
+                name: 'دوبوتامین و دوپامین (Dobutamine & Dopamine)',
+                cat: 'inotrope',
+                badge: 'اینوتروپ تزریقی در نارسایی حاد',
+                color: 'purple',
+                simMode: 'camp_inotrope',
+                moa: 'دوبوتامین: آگونیست انتخابی گیرنده β1 ← افزایش سنتز cAMP ← افزایش برون‌ده قلبی همراه با کاهش فشار پرشدگی بطن. دوپامین: در دوز پایین افزایش جریان خون کلیوی، در دوز بالا تحریک گیرنده‌های β و α.',
+                pk: 'فقط تزریق وریدی (IV)؛ طول اثر چند دقیقه.',
+                clinical: 'نارسایی قلبی حاد جبران‌نشده (Acute decompensated HF) و شوک کاردیوژنیک. در نارسایی مزمن به دلیل تحمل (Tolerance)، عدم جذب خوراکی و آریتمی‌زایی کاربرد ندارند.',
+                toxicity: 'آریتمی‌های قلبی و تاکی‌کاردی.'
+            },
+            {
+                name: 'میلرینون و اینامرینون (Milrinone & Inamrinone - Bipyridines)',
+                cat: 'inotrope',
+                badge: 'مهارکننده PDE-3 (اینودیلاتور)',
+                color: 'purple',
+                simMode: 'camp_inotrope',
+                moa: 'مهار آنزیم فسفودی‌استراز نوع ۳ (PDE-3) ← کاهش تخریب cAMP ← ۱) افزایش کلسیم داخل سلولی و انقباض قلب و ۲) گشادی عروق (کاهش مقاومت عروق محیطی).',
+                pk: 'فقط وریدی (IV)؛ طول اثر ۳ تا ۶ ساعت.',
+                clinical: 'فقط در نارسایی قلبی حاد! در نارسایی مزمن مرگ‌ومیر را افزایش می‌دهد.',
+                toxicity: 'میلرینون: آریتمی (سمیت کبدی و مغز استخوان کمتری دارد). اینامرینون: به علت ترومبوسیتوپنی و تغییر آنزیم‌های کبدی در آمریکا از بازار جمع‌آوری شد (اسلاید ۳۷).'
+            },
+            {
+                name: 'وازودیلاتورها: نیترات‌ها، هیدرالازین، نیتروپروساید و نسیریتاید',
+                cat: 'vasodilator',
+                badge: 'تفکیک بر اساس تنگی نفس یا خستگی',
+                color: 'amber',
+                simMode: 'gdmt',
+                moa: '• ایزوسورباید دی‌نیترات (گشادکننده وریدی / رهش NO): کاهش پیش‌بار و احتقان ریوی (مفید در بیمار با علامت اصلی تنگی نفس/Dyspnea).\n• هیدرالازین (گشادکننده شریانچه‌ای): کاهش پس‌بار و افزایش برون‌ده روبه‌جلو (مفید در بیمار با علامت اصلی خستگی/Fatigue).\n• نیتروپروساید و نسیریتاید: گشادکننده هم‌زمان ورید و شریانچه.',
+                pk: 'نیتروپروساید: وریدی (۱ تا ۲ دقیقه). نسیریتاید (BNP نوترکیب): وریدی (۱۸ دقیقه) فقط در نارسایی حاد.',
+                clinical: 'ترکیب هیدرالازین + ایزوسورباید دی‌نیترات (BiDil) مرگ‌ومیر را در بیماران آفریقایی-آمریکایی و بیماران با عدم تحمل ACEi/ARB کاهش می‌دهد.',
+                toxicity: 'هیدرالازین: تاکی‌کاردی، احتباس مایع، سندرم شبه‌لوپوس. نیتروپروساید: سمیت با سیانید و تیوسیانات. نسیریتاید (Natrecor): افت شدید فشار خون و آسیب کلیوی.'
+            },
+            {
+                name: 'محرک‌های sGC (ریوسیگوات و وریسیگوات) و بوزنتان (Endothelin inhibitor)',
+                cat: 'other',
+                badge: 'داروهای نوین اسلاید ۵۶ و ۵۷',
+                color: 'teal',
+                simMode: 'gdmt',
+                moa: '• وریسیگوات (Vericiguat) و ریوسیگوات (Riociguat): مکانیسم دوگانه: ۱) تحریک مستقیم گوانیلیل سیکلاز محلول (sGC) و افزایش cGMP و ۲) افزایش حساسیت sGC به NO درون‌زاد.\n• بوزنتان و تزوسنتان: مهارکننده‌های رقابتی اندوتلین.',
+                pk: 'خوراکی.',
+                clinical: 'وریسیگوات/ریوسیگوات در نارسایی قلبی و پرفشاری ریوی. نکته اسلاید ۵۶: نتایج کارآزمایی‌های بوزنتان در نارسایی قلبی انسانی ناامیدکننده بود و فقط برای پرفشاری ریوی (Pulmonary hypertension) تایید شده است.',
+                toxicity: 'محرک‌های sGC: افت فشار خون و منع مصرف مطلق در بارداری (Pregnancy). بوزنتان: اثرات تراتوژنیک و هپاتوتوکسیک (سمیت کبدی) قابل‌توجه.'
+            }
+        ];
+
+        function renderHFDrugCards(filter = 'all') {
+            const grid = document.getElementById('hf-drugs-grid');
+            grid.innerHTML = '';
+
+            const colorClasses = {
+                emerald: 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300',
+                sky: 'border-sky-500/40 bg-sky-500/10 text-sky-300',
+                purple: 'border-purple-500/40 bg-purple-500/10 text-purple-300',
+                cyan: 'border-cyan-500/40 bg-cyan-500/10 text-cyan-300',
+                amber: 'border-amber-500/40 bg-amber-500/10 text-amber-300',
+                pink: 'border-pink-500/40 bg-pink-500/10 text-pink-300',
+                teal: 'border-teal-500/40 bg-teal-500/10 text-teal-300'
+            };
+
+            const list = filter === 'all' ? hfDrugsCatalog : hfDrugsCatalog.filter(d => d.cat === filter);
+
+            list.forEach(d => {
+                const badgeCls = colorClasses[d.color] || colorClasses.emerald;
+                const card = document.createElement('div');
+                card.className = 'bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-5 shadow-xl flex flex-col justify-between transition-all';
+                card.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="flex items-start justify-between gap-2 border-b border-slate-800 pb-3">
+                            <h3 class="text-sm md:text-base font-black text-white leading-snug">${d.name}</h3>
+                            <span class="px-2.5 py-1 rounded-lg text-[11px] font-extrabold border ${badgeCls} shrink-0">${d.badge}</span>
+                        </div>
+                        <div class="text-xs space-y-2 leading-relaxed">
+                            <div>
+                                <span class="font-bold text-cyan-400">مکانیسم اثر: </span>
+                                <span class="text-slate-300 whitespace-pre-line">${d.moa}</span>
+                            </div>
+                            <div>
+                                <span class="font-bold text-amber-400">فارماکوکینتیک: </span>
+                                <span class="text-slate-300">${d.pk}</span>
+                            </div>
+                            <div>
+                                <span class="font-bold text-emerald-400">کاربرد بالینی: </span>
+                                <span class="text-slate-300">${d.clinical}</span>
+                            </div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <span class="font-bold text-rose-400">عوارض و نکات امتحانی: </span>
+                                <span class="text-slate-300 text-[11px]">${d.toxicity}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="jumpToScrubberMode('${d.simMode}')" class="mt-4 w-full py-2 rounded-xl bg-slate-950 hover:bg-rose-600 hover:text-white text-rose-400 border border-rose-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play"></i>
+                        <span>مشاهده اثر در اسکرابر سارکومر</span>
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterHFDrugs(f) {
+            document.querySelectorAll('.hf-f-btn').forEach(btn => {
+                if (btn.dataset.f === f) {
+                    btn.className = 'hf-f-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-600 text-white';
+                } else {
+                    btn.className = 'hf-f-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800';
+                }
+            });
+            renderHFDrugCards(f);
+        }
+
+        function jumpToScrubberMode(mode) {
+            switchMainTab('scrubber');
+            selectHFMode(mode);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        const quizQuestions = [
+            {
+                q: '۱. بر اساس اسلاید ۲۹ دکتر قلی‌بیکی، دیگوکسین در کدام غلظت سرمی اثربخشی درمانی دارد و در چه غلظتی با افزایش مرگ‌ومیر (Increased mortality) همراه است؟',
+                options: [
+                    'اثربخشی در ۰.۵ تا ۰.۸ ng/mL — افزایش مرگ‌ومیر در غلظت بالای ۱.۲ ng/mL',
+                    'اثربخشی در ۱.۵ تا ۲.۵ ng/mL — افزایش مرگ‌ومیر در بالای ۳ ng/mL',
+                    'اثربخشی در ۰.۱ تا ۰.۳ ng/mL — افزایش مرگ‌ومیر در بالای ۰.۵ ng/mL',
+                    'دیگوکسین در هر غلظتی مرگ‌ومیر کلی بیماران نارسایی قلبی را کاهش می‌دهد'
+                ],
+                answer: 0,
+                explanation: 'طبق اسلاید ۲۹، دیگوکسین تنها در غلظت سرمی ۰.۵ تا ۰.۸ ng/mL اثربخشی درمانی دارد و غلظت‌های بیشتر از ۱.۲ ng/mL با افزایش مرگ‌ومیر همراه هستند.'
+            },
+            {
+                q: '۲. کدام یک از داروهای زیر به طور انتخابی جریان پیس‌میکر "Funny" (کانال If) را در گره SA مهار کرده و ضربان قلب را بدون اثر بر قدرت انقباض میوکارد یا تون عروقی کاهش می‌دهد؟',
+                options: ['وراپامیل (Verapamil)', 'ایوابرادین (Ivabradine)', 'لووسیمندان (Levosimendan)', 'نسیریتاید (Nesiritide)'],
+                answer: 1,
+                explanation: 'طبق اسلاید ۵۵، ایوابرادین (Corlanor) به صورت وابسته به دوز کانال If را در گره SA مهار کرده و ضربان قلب را کم می‌کند بدون اینکه انقباض میوکارد را تضعیف کند (برخلاف CCBها که در نارسایی سیستولیک مضرند).'
+            },
+            {
+                q: '۳. در بیمار مبتلا به نارسایی قلبی که علامت اصلی او «تنگی نفس و احتقان ریوی به علت فشار پرشدگی بالا» است در مقایسه با بیماری که علامت اصلی او «خستگی (Fatigue) به علت افت برون‌ده بطن چپ» است، به ترتیب کدام وازودیلاتورها بیشترین کمک را می‌کنند؟ (اسلاید ۴۹)',
+                options: [
+                    'در تنگی نفس: هیدرالازین — در خستگی: نیترات طولانی‌اثر',
+                    'در تنگی نفس: گشادکننده وریدی (نیترات‌ها) — در خستگی: گشادکننده شریانچه‌ای (هیدرالازین)',
+                    'در هر دو حالت فقط بلوکر کانال کلسیم (CCB) خط اول است',
+                    'در تنگی نفس: مینوکسیدیل — در خستگی: فوروزماید'
+                ],
+                answer: 1,
+                explanation: 'طبق اسلاید ۴۹، در بیماران با فشار پرشدگی بالا که علامت اصلی آن‌ها تنگی نفس (Dyspnea) است، گشادکننده‌های وریدی مثل نیترات‌ها با کاهش پیش‌بار بیشترین کمک را می‌کنند؛ اما در بیمارانی که خستگی (Fatigue) ناشی از کمبود برون‌ده بطن چپ علامت اصلی است، گشادکننده شریانچه‌ای مثل هیدرالازین با کاهش پس‌بار مفید است.'
+            },
+            {
+                q: '۴. کدام یک از بتابلاکرهای زیر بر اساس اسلاید ۵۹ در «هر دو نوع نارسایی قلبی سیستولیک و دیاستولیک» مؤثر است؟',
+                options: ['پروپرانولول (Propranolol)', 'اسمولول (Esmolol)', 'نبیولول (Nebivolol)', 'آتنولول (Atenolol)'],
+                answer: 2,
+                explanation: 'طبق اسلاید ۵۲ و ۵۹، ۴ بتابلاکر بیزوپرولول، کارودیلول، متوپرولول و نبیولول مرگ‌ومیر را در CHF کاهش می‌دهند و در اسلاید ۵۹ تصریح شده که «نبیولول» در هر دو نارسایی سیستولیک و دیاستولیک مؤثر است.'
+            },
+            {
+                q: '۵. مکانیسم اثر «ساکوبیترین» (Sacubitril) در داروی ترکیبی Entresto / Bitval چیست؟ (اسلاید ۵۱ و ۶۸)',
+                options: [
+                    'تحریک مستقیم گوانیلیل سیکلاز محلول (sGC)',
+                    'مهار آنزیم نپری‌لیزین (Neutral endopeptidase) و جلوگیری از تخریب پپتیدهای ناتریورتیک ANP و BNP',
+                    'حساس کردن سیستم تروپونین به یون کلسیم',
+                    'مهار بازجذب گلوکز و سدیم در توبول پروگزیمال کلیه'
+                ],
+                answer: 1,
+                explanation: 'طبق اسلاید ۵۱ و ۶۸، ساکوبیترین آنزیم اندوپپتیداز خنثی (نپری‌لیزین) را که مسئول تخریب BNP و ANP است مهار می‌کند و فقط در ترکیب با والزارتان (یک ARB) استفاده می‌شود.'
+            },
+            {
+                q: '۶. چرا داروی مهارکننده PDE-3 «اینامرینون» (Inamrinone) در آمریکا از بازار دارویی جمع‌آوری شد و تفاوت آن با «میلرینون» چیست؟ (اسلاید ۳۷)',
+                options: [
+                    'به علت ایجاد سرفه خشک شدید و آنژیوادم',
+                    'به علت ایجاد ترومبوسیتوپنی (کاهش پلاکت) و تغییر آنزیم‌های کبدی؛ میلرینون سمیت مغز استخوان و کبدی کمتری دارد اما همچنان آریتمی‌زاست',
+                    'به علت ایجاد سندرم شبه‌لوپوس و سمیت با سیانید',
+                    'به علت ایجاد دید زرد (Xanthopsia) و ژنیکوماستی'
+                ],
+                answer: 1,
+                explanation: 'طبق اسلاید ۳۷، اینامرینون به علت تهوع، استفراغ، آریتمی، ترومبوسیتوپنی و تغییر آنزیم‌های کبدی جمع‌آوری شد. میلرینون احتمال کمتری برای سمیت مغز استخوان و کبد دارد اما در مصرف مزمن مرگ‌ومیر را افزایش می‌دهد.'
+            },
+            {
+                q: '۷. کدام گزینه در مورد «نارسایی قلبی با برون‌ده بالا» (High-output failure - اسلاید ۱۵) و «نارسایی دیاستولیک» (اسلاید ۱۴) صحیح است؟',
+                options: [
+                    'نارسایی با برون‌ده بالا ناشی از پرکاری تیروئید، بری‌بری و آنمی است و نارسایی دیاستولیک دارای EF نرمال بوده و به اینوتروپ‌های مثبت پاسخ مطلوبی نمی‌دهد.',
+                    'در نارسایی دیاستولیک EF همیشه کمتر از ۳۰٪ است و دیگوکسین خط اول درمان آن است.',
+                    'نارسایی با برون‌ده بالا شایع‌ترین فرم نارسایی قلبی در سالمندان است.',
+                    'در نارسایی دیاستولیک برون‌ده قلبی (CO) افزایش می‌یابد.'
+                ],
+                answer: 0,
+                explanation: 'طبق اسلایدهای ۱۴، ۱۵ و ۶۰، High-output failure فرم نادری است که از هایپرتیروئیدی، بری‌بری یا آنمی ناشی می‌شود. در نارسایی دیاستولیک، با وجود کاهش حجم ضربه‌ای و کاهش برون‌ده قلبی، EF نرمال است و به اینوتروپ‌های مثبت پاسخ خوبی نمی‌دهد.'
+            },
+            {
+                q: '۸. کدام دارو سیستم تروپونین را در فیلامان‌های عضلانی به کلسیم حساس‌تر می‌کند (Ca²⁺ sensitizer) و علاوه بر آن با مهار PDE باعث گشادی عروق نیز می‌شود؟ (اسلاید ۳۸)',
+                options: ['دوبوتامین (Dobutamine)', 'لووسیمندان (Levosimendan)', 'وریسیگوات (Vericiguat)', 'بوزنتان (Bosentan)'],
+                answer: 1,
+                explanation: 'طبق اسلاید ۱۰ و ۳۸، لووسیمندان حساس‌کننده میوفیلامان‌ها (سیستم تروپونین) به کلسیم است و همچنین با مهار فسفودی‌استراز باعث مقداری وازودیلاتاسیون می‌شود.'
+            },
+            {
+                q: '۹. کدام گروه از داروهای زیر در نارسایی مزمن قلبی مرگ‌ومیر (Mortality) را کاهش می‌دهند و کدام یک فاقد اثر آنتی‌آندروژنی (ژنیکوماستی) است؟ (اسلاید ۶۵)',
+                options: [
+                    'هیدروکلروتیازید و دیگوکسین',
+                    'اسپیرونولاکتون و اپلرنون مرگ‌ومیر را کم می‌کنند؛ اپلرنون انتخابی‌تر بوده و فاقد اثر آنتی‌آندروژنی معنادار است',
+                    'نسیریتاید و نیتروپروساید',
+                    'میلرینون و دوبوتامین'
+                ],
+                answer: 1,
+                explanation: 'طبق جدول اسلاید ۶۵، هیدروکلروتیازید، دیگوکسین و نسیریتاید مرگ‌ومیر را کاهش نمی‌دهند؛ اما اسپیرونولاکتون و اپلرنون مرگ‌ومیر را کاهش داده و اپلرنون فاقد عوارض آنتی‌آندروژنی است.'
+            },
+            {
+                q: '۱۰. در مورد داروهای «وریسیگوات / ریوسیگوات» و «بوزنتان» کدام گزینه بر اساس اسلایدهای ۵۶ و ۵۷ صحیح است؟',
+                options: [
+                    'وریسیگوات و ریوسیگوات محرک مستقیم گوانیلیل سیکلاز محلول (sGC) و افزاینده cGMP هستند و در بارداری کنترااندیکاسیون دارند؛ بوزنتان مهارکننده اندوتلین با سمیت کبدی و تراتوژنیسیته بالا است.',
+                    'بوزنتان خط اول درمان نارسایی قلبی در زنان باردار است.',
+                    'ریوسیگوات مهارکننده کانال سدیم-گلوکز در کلیه است.',
+                    'وریسیگوات آنتی‌بادی اختصاصی ضد دیگوکسین است.'
+                ],
+                answer: 0,
+                explanation: 'طبق اسلایدهای ۵۶ و ۵۷، ریوسیگوات و وریسیگوات محرک‌های دوگانه sGC هستند (افزایش cGMP) که در بارداری ممنوع‌اند. بوزنتان مهارکننده رقابتی اندوتلین است که در انسان برای HF ناامیدکننده بود و فقط در پرفشاری ریوی تایید شده و تراتوژن و هپاتوتوکسیک است.'
+            }
+        ];
+
+        let userAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((item, idx) => {
+                const qCard = document.createElement('div');
+                qCard.className = 'bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3';
+
+                const optsHtml = item.options.map((opt, oIdx) => `
+                    <button onclick="answerQuiz(${idx}, ${oIdx})" id="q-${idx}-opt-${oIdx}" class="w-full text-right p-3 rounded-xl border border-slate-800 bg-slate-900 hover:bg-slate-800 text-xs text-slate-200 transition-all flex items-center justify-between gap-2">
+                        <span>${opt}</span>
+                        <span id="q-${idx}-icon-${oIdx}" class="shrink-0"></span>
+                    </button>
+                `).join('');
+
+                qCard.innerHTML = `
+                    <div class="text-xs md:text-sm font-extrabold text-white leading-relaxed">${item.q}</div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">${optsHtml}</div>
+                    <div id="q-exp-${idx}" class="hidden p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/30 text-xs text-cyan-200 leading-relaxed">
+                        <strong>پاسخ تشریحی: </strong> ${item.explanation}
+                    </div>
+                `;
+                container.appendChild(qCard);
+            });
+        }
+
+        function answerQuiz(qIdx, selectedIdx) {
+            if (userAnswers[qIdx] !== undefined) return;
+            userAnswers[qIdx] = selectedIdx;
+
+            const correctIdx = quizQuestions[qIdx].answer;
+            quizQuestions[qIdx].options.forEach((_, oIdx) => {
+                const btn = document.getElementById(`q-${qIdx}-opt-${oIdx}`);
+                const icon = document.getElementById(`q-${qIdx}-icon-${oIdx}`);
+                if (oIdx === correctIdx) {
+                    btn.className = 'w-full text-right p-3 rounded-xl border border-emerald-500 bg-emerald-500/20 text-xs text-white font-bold flex items-center justify-between gap-2';
+                    icon.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400"></i>';
+                } else if (oIdx === selectedIdx) {
+                    btn.className = 'w-full text-right p-3 rounded-xl border border-rose-500 bg-rose-500/20 text-xs text-rose-200 font-bold flex items-center justify-between gap-2';
+                    icon.innerHTML = '<i class="fa-solid fa-circle-xmark text-rose-400"></i>';
+                }
+            });
+
+            document.getElementById(`q-exp-${qIdx}`).classList.remove('hidden');
+            updateQuizScore();
+        }
+
+        function updateQuizScore() {
+            let correct = 0;
+            Object.keys(userAnswers).forEach(qIdx => {
+                if (userAnswers[qIdx] === quizQuestions[qIdx].answer) correct++;
+            });
+            document.getElementById('quiz-score-badge').textContent = `امتیاز: ${correct} از ۱۰`;
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            updateQuizScore();
+            renderQuiz();
+        }
+
+        function switchMainTab(tabName) {
+            activeMainTab = tabName;
+            ['scrubber', 'patho', 'digoxin', 'drugs', 'quiz'].forEach(t => {
+                const sec = document.getElementById(`section-${t}`);
+                const btn = document.getElementById(`tab-btn-${t}`);
+                if (t === tabName) {
+                    sec.classList.remove('hidden');
+                    btn.className = 'main-tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition-all bg-rose-600 text-white shadow-md flex items-center gap-2';
+                } else {
+                    sec.classList.add('hidden');
+                    btn.className = 'main-tab-btn px-3 py-2 rounded-lg text-xs md:text-sm font-bold transition-all text-slate-400 hover:text-white hover:bg-slate-800 flex items-center gap-2';
+                }
+            });
+
+            if (tabName === 'scrubber') {
+                setTimeout(() => drawHFScrubberCanvas(), 40);
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            if (activeMainTab === 'scrubber') {
+                drawHFScrubberCanvas();
+            }
+        });
+
+        window.onload = function () {
+            renderHFDrugCards('all');
+            renderQuiz();
+            updateDigoxinSim();
+            updateScrubberVisuals(currentTime);
+            animateLoop();
+        };
+    </script>
+</body>
+</html>
