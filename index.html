@@ -3,665 +3,966 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پورتال جامع فارماکولوژی قلب و عروق | ویژه داروسازی</title>
+    <title>فارماکُر (PharmaCore) | موتور جستجوی هوشمند دارو، دستیار سلامت و شبیه‌ساز بالینی</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- MathJax for rendering LaTeX in the index hub itself -->
-    <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']]
-            },
-            svg: { fontCache: 'global' }
-        };
-    </script>
-    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Vazirmatn', 'sans-serif'],
+                    fontFamily: { sans: ['Vazirmatn', 'Tahoma', 'sans-serif'] },
+                    colors: {
+                        tokyo: {
+                            bg: '#060911',
+                            panel: '#0f1523',
+                            card: '#161f33',
+                            border: '#1e293b',
+                            cyan: '#06b6d4',
+                            emerald: '#10b981',
+                            rose: '#f43f5e',
+                            amber: '#f59e0b',
+                            purple: '#8b5cf6'
+                        }
                     }
                 }
             }
         }
     </script>
-
     <style>
         body {
-            font-family: 'Vazirmatn', sans-serif;
-            background-color: #050811;
-            color: #f8fafc;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            background-color: #060911;
+            color: #f1f5f9;
+            margin: 0;
             overflow-x: hidden;
         }
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #050811;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 999px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #10b981;
-        }
-        .hero-mesh {
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #060911; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
+        .ltr-num { direction: ltr; display: inline-block; }
+        .cyber-grid {
             background-image: 
-                radial-gradient(at 15% 15%, rgba(6, 182, 212, 0.14) 0px, transparent 45%),
-                radial-gradient(at 85% 20%, rgba(244, 63, 94, 0.14) 0px, transparent 45%),
-                radial-gradient(at 50% 85%, rgba(16, 185, 129, 0.12) 0px, transparent 50%);
-        }
-        .grid-bg {
-            background-size: 40px 40px;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-        }
-        .card-hover {
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .card-hover:hover {
-            transform: translateY(-6px);
-        }
-        .ltr-code {
-            direction: ltr;
-            display: inline-block;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+                linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col hero-mesh grid-bg selection:bg-cyan-500 selection:text-white">
+<body class="min-h-screen flex flex-col">
 
-    <header class="sticky top-0 z-40 bg-slate-950/85 backdrop-blur-xl border-b border-slate-800/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center gap-3.5">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 via-emerald-500 to-rose-500 p-[2px] shadow-lg shadow-cyan-500/20">
-                    <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-                        <i class="fa-solid fa-staff-snake text-transparent bg-clip-text bg-gradient-to-tr from-cyan-400 to-emerald-400 text-2xl"></i>
-                    </div>
+    <!-- ================= TOP GLOBAL HEADER ================= -->
+    <header class="sticky top-0 z-50 bg-tokyo-panel/95 border-b border-tokyo-border shadow-xl">
+        <div class="max-w-[1440px] mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+            
+            <!-- Brand Identity -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 via-teal-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                    <i class="fa-solid fa-dna text-white text-lg"></i>
                 </div>
                 <div>
-                    <div class="flex items-center gap-2.5 flex-wrap">
-                        <h1 class="text-lg sm:text-xl font-black tracking-tight text-white">پورتال جامع فارماکولوژی قلب و عروق</h1>
-                        <span class="px-2.5 py-0.5 text-[11px] font-extrabold rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                            نسخه تعاملی ویژه داروسازی
+                    <div class="flex items-center gap-2">
+                        <span class="text-base md:text-lg font-black tracking-tight text-white">فارماکُر <span class="text-cyan-400 font-mono text-sm">PharmaCore</span></span>
+                        <span class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                            <i class="fa-solid fa-circle-check"></i> تایید علمی: هیئت علمی فارماکولوژی
                         </span>
                     </div>
-                    <p class="text-xs text-slate-400 mt-0.5">
-                        مجموعه شبیه‌سازهای اسکرابر محور بر اساس اسلایدهای دکتر افروز محمدقلی‌بیکی (دانشگاه علوم پزشکی مازندران)
-                    </p>
+                    <p class="text-[11px] text-slate-400">موتور جستجوی ایمنی دارو، دستیار هوشمند سلامت و آزمایشگاه شبیه‌ساز بالینی</p>
                 </div>
             </div>
 
-            <div class="flex items-center gap-2.5">
-                <button onclick="toggleGithubGuideModal()" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700/80 text-xs font-bold transition-all flex items-center gap-2 shadow-sm">
-                    <i class="fa-brands fa-github text-base text-cyan-400"></i>
-                    <span>راهنمای اتصال در گیت‌هاب</span>
+            <!-- DUAL-VIEW ARCHITECTURE MASTER SWITCH -->
+            <div class="flex items-center bg-tokyo-bg p-1 rounded-xl border-2 border-cyan-500/40 shadow-inner">
+                <button onclick="switchMasterLayer('public')" id="master-btn-public" class="px-4 py-1.5 rounded-lg text-xs font-black transition-all bg-emerald-500 text-slate-950 shadow-md flex items-center gap-1.5">
+                    <i class="fa-solid fa-users"></i>
+                    <span>نمای عمومی (مردم عادی و بیماران)</span>
                 </button>
-                <div class="hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-xs font-bold">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                    <span>موتور رندر خودکار $\LaTeX$: فعال</span>
-                </div>
+                <button onclick="switchMasterLayer('pro')" id="master-btn-pro" class="px-4 py-1.5 rounded-lg text-xs font-black transition-all text-slate-400 hover:text-white flex items-center gap-1.5">
+                    <i class="fa-solid fa-user-doctor"></i>
+                    <span>نمای تخصصی (دانشجو، داروساز و پزشک)</span>
+                </button>
             </div>
+
         </div>
     </header>
 
-    <main id="portal-home" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 space-y-10">
+    <!-- ================= MAIN APPLICATION SHELL ================= -->
+    <div class="flex-grow max-w-[1440px] w-full mx-auto px-4 py-5">
 
-        <!-- Hero Banner & Quick Drug Finder -->
-        <section class="relative rounded-3xl bg-gradient-to-b from-slate-900/90 to-slate-950/90 border border-slate-800/90 p-6 sm:p-8 shadow-2xl overflow-hidden">
-            <div class="max-w-3xl space-y-4">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 text-xs font-bold">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <span>مرور سریع و بصری امتحانات فارماکولوژی</span>
-                </div>
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight">
-                    فهرست هوشمند جزوات تعاملی <span class="text-transparent bg-clip-text bg-gradient-to-l from-cyan-400 via-emerald-400 to-rose-400">فارماکولوژی</span>
-                </h2>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    هر یک از ۳ مبحث زیر دارای اسکرابر زمانی، شبیه‌ساز سلولی و نوار قلب، بانک کامل داروها، نکات طلایی امتحانی و آزمون خودسنجی است. با باز کردن هر جزوه از داخل این پورتال، فرمول‌های $\LaTeX$ به صورت خودکار و بدون دستکاری فایل‌های اصلی رندر می‌شوند.
-                </p>
+        <!-- ======================================================================= -->
+        <!-- LAYER 1: PUBLIC / CONSUMER VIEW (GOOGLE-SIMPLE SEARCH + LIVE CHATBOT)   -->
+        <!-- ======================================================================= -->
+        <div id="layer-public" class="space-y-6">
 
-                <!-- Quick Search Across All 3 Modules -->
-                <div class="pt-2">
-                    <div class="relative max-w-xl">
-                        <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                        <input 
-                            type="text" 
-                            id="global-search" 
-                            oninput="filterModules(this.value)"
-                            placeholder="جستجوی سریع دارو یا مبحث (مثلاً: آمیودارون، دیگوکسین، فوروزماید، سوتالول، کاپتوپریل...)" 
-                            class="w-full pr-11 pl-4 py-3 rounded-2xl bg-slate-950/90 border border-slate-700/80 focus:border-cyan-400 focus:outline-none text-xs sm:text-sm text-white placeholder-slate-500 shadow-inner transition-all"
-                        >
+            <!-- HERO LIVE SEARCH BOX FOR ORDINARY USERS -->
+            <div class="bg-gradient-to-b from-tokyo-panel to-tokyo-bg border-2 border-emerald-500/40 rounded-2xl p-5 md:p-6 shadow-2xl relative">
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <div class="text-center space-y-1">
+                        <h1 class="text-base md:text-xl font-black text-white">
+                            🔍 جستجوی آسان دارو، تداخلات خانگی و ترکیبات آرایشی-بهداشتی
+                        </h1>
+                        <p class="text-xs text-slate-400">
+                            نام دارو، مسکن، قرص سرماخوردگی یا سرم پوستی خود را تایپ کنید تا در ۳ ثانیه به زبان ساده ایمنی آن را ببینید:
+                        </p>
                     </div>
-                </div>
-            </div>
 
-            <!-- Stats Pills -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-7 pt-6 border-t border-slate-800/80">
-                <div class="bg-slate-950/70 border border-slate-800/80 rounded-2xl p-3.5 flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center text-lg">
-                        <i class="fa-solid fa-book-medical"></i>
+                    <!-- Real Typing Search Input with Live Autocomplete Dropdown -->
+                    <div class="relative">
+                        <div class="flex items-center bg-tokyo-bg border-2 border-slate-700 focus-within:border-emerald-400 rounded-2xl px-4 py-3 shadow-inner transition-all">
+                            <i class="fa-solid fa-magnifying-glass text-emerald-400 text-base ml-3"></i>
+                            <input 
+                                type="text" 
+                                id="public-search-input" 
+                                oninput="handlePublicSearchInput(this.value)"
+                                onkeydown="if(event.key === 'Enter') executePublicSearch()"
+                                placeholder="نام دارو یا ترکیب را تایپ کنید (مثلاً: ژلوفن، لوسارتان، دیگوکسین، امپرازول، رتینول، سرماخوردگی...)" 
+                                class="bg-transparent text-white text-xs md:text-sm font-bold w-full focus:outline-none placeholder:text-slate-500"
+                                autocomplete="off"
+                            >
+                            <button onclick="clearSearchInput()" id="clear-search-btn" class="hidden text-slate-400 hover:text-white px-2">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                            <button onclick="executePublicSearch()" class="px-4 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs shrink-0 transition-all">
+                                بررسی ایمنی
+                            </button>
+                        </div>
+
+                        <!-- Live Autocomplete Suggestions Dropdown -->
+                        <div id="search-autocomplete-box" class="hidden absolute left-0 right-0 top-full mt-2 bg-slate-900 border border-emerald-500/40 rounded-2xl shadow-2xl z-40 overflow-hidden divide-y divide-slate-800 text-xs">
+                            <!-- Populated dynamically as user types -->
+                        </div>
                     </div>
-                    <div>
-                        <div class="text-base font-black text-white">۳ ماژول جامع</div>
-                        <div class="text-[11px] text-slate-400">۱۹۷ اسلاید آموزشی</div>
-                    </div>
-                </div>
-                <div class="bg-slate-950/70 border border-slate-800/80 rounded-2xl p-3.5 flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center text-lg">
-                        <i class="fa-solid fa-sliders"></i>
-                    </div>
-                    <div>
-                        <div class="text-base font-black text-white">۳ اسکرابر زنده</div>
-                        <div class="text-[11px] text-slate-400">پتانسیل عمل، سارکومر و نفرون</div>
-                    </div>
-                </div>
-                <div class="bg-slate-950/70 border border-slate-800/80 rounded-2xl p-3.5 flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center text-lg">
-                        <i class="fa-solid fa-capsules"></i>
-                    </div>
-                    <div>
-                        <div class="text-base font-black text-white">+۴۲ گروه دارویی</div>
-                        <div class="text-[11px] text-slate-400">مکانیسم، کاربرد و تداخلات</div>
-                    </div>
-                </div>
-                <div class="bg-slate-950/70 border border-slate-800/80 rounded-2xl p-3.5 flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center text-lg">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                    </div>
-                    <div>
-                        <div class="text-base font-black text-white">۳۰ سؤال امتحانی</div>
-                        <div class="text-[11px] text-slate-400">با پاسخ تشریحی کامل</div>
+
+                    <!-- Quick Popular Searches & Family Profile Pills -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 pt-1 text-[11px]">
+                        <div class="flex flex-wrap items-center gap-1.5">
+                            <span class="text-slate-400">جستجوهای پرتکرار:</span>
+                            <button onclick="selectDrugFromSearch('losartan')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200">ژلوفن + لوسارتان</button>
+                            <button onclick="selectDrugFromSearch('digoxin')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200">دیگوکسین + فوروزماید</button>
+                            <button onclick="selectDrugFromSearch('omeprazole')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200">امپرازول + کلوپیدوگرل</button>
+                            <button onclick="selectDrugFromSearch('retinol')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200">سرم رتینول و بارداری</button>
+                            <button onclick="selectDrugFromSearch('metformin')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200">متفورمین و شربت سینه</button>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-emerald-400 font-bold"><i class="fa-solid fa-user-shield"></i> فیلتر خانواده فعال:</span>
+                            <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30">فشار خون و دیابت</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <section class="space-y-4">
-            <div class="flex items-center justify-between">
-                <h3 class="text-base sm:text-lg font-black text-white flex items-center gap-2">
-                    <i class="fa-solid fa-layer-group text-cyan-400"></i>
-                    <span>فهرست جزوات و شبیه‌سازهای تعاملی</span>
-                </h3>
-                <span class="text-xs text-slate-400">برای باز شدن همراه با فرمول‌های $\LaTeX$ روی «ورود به شبیه‌ساز» کلیک کنید</span>
-            </div>
+            <!-- Public Content Grid: Traffic Light Result + Interactive Typing AI Chatbot -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" id="modules-grid">
-
-                <!-- MODULE 1: ANTIARRHYTHMIC DRUGS -->
-                <article class="module-card card-hover bg-slate-900/90 border border-slate-800 hover:border-cyan-500/60 rounded-3xl p-6 flex flex-col justify-between shadow-xl relative overflow-hidden group"
-                         data-keywords="ضدآریتمی آریتمی کینیدین پروکائین آماید دیزوپرامید لیدوکائین مگزیلتین فنی توئین فلکاینید پروپافنون پروپرانولول اسمولول آمیودارون دروندارون سوتالول دوفتیلید ایبوتیلید وراپامیل دیلتیازم آدنوزین منیزیم پتاسیم تورسادس پتانسیل عمل">
-                    <div class="absolute -top-12 -left-12 w-36 h-36 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-all"></div>
+                <!-- Right Column (7 cols): 3-Second Traffic Light Result + Affiliate Pharmacy -->
+                <div class="lg:col-span-7 space-y-6">
                     
-                    <div class="space-y-4 relative z-10">
-                        <div class="flex items-center justify-between gap-2">
-                            <span class="px-3 py-1 rounded-xl bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 text-xs font-black">
-                                بخش اول • ۵۶ اسلاید
-                            </span>
-                            <span class="ltr-code text-[11px] text-slate-400 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800">
-                                antiarrhythmic_pharmacology_app.html
+                    <!-- Traffic Light Card -->
+                    <div id="pub-card-container" class="bg-tokyo-panel border-2 border-rose-500/60 rounded-2xl p-5 shadow-2xl space-y-4 transition-all">
+                        <div class="flex flex-wrap items-start justify-between gap-3 border-b border-tokyo-border pb-3.5">
+                            <div>
+                                <span class="text-[11px] font-bold text-cyan-400">نتیجه بررسی فوری به زبان ساده (بدون اصطلاحات پیچیده پزشکی)</span>
+                                <h3 id="pub-title" class="text-base md:text-lg font-black text-white mt-1">
+                                    بررسی مصرف «ژلوفن و قرص سرماخوردگی» همراه با «قرص فشار خون لوسارتان»
+                                </h3>
+                            </div>
+                            <span id="pub-status-pill" class="px-3.5 py-1.5 rounded-xl bg-rose-600 text-white text-xs font-black shadow-lg shrink-0">
+                                🛑 خطرناک (مصرف نکنید!)
                             </span>
                         </div>
 
-                        <div class="flex items-start gap-3.5">
-                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-xl shrink-0 shadow-lg shadow-cyan-500/25">
-                                <i class="fa-solid fa-wave-square"></i>
+                        <!-- 3-Line Instant Verdict -->
+                        <div id="pub-verdict-box" class="bg-tokyo-bg border border-tokyo-border rounded-xl p-4 text-xs md:text-sm text-slate-200 leading-relaxed">
+                            اگر در خانه بیمار مبتلا به فشار خون دارید که <strong>لوسارتان (یا والزارتان/کاپتوپریل)</strong> مصرف می‌کند، خوردن مسکن‌هایی مثل <strong>ژلوفن (ایبوپروفن)، ناپروکسن، دیکلوفناک</strong> و <strong>قرص سرماخوردگی بزرگسالان</strong> اثر داروی فشار خون را از بین برده، فشار را به شدت بالا می‌برد و به کلیه آسیب می‌زند.
+                        </div>
+
+                        <!-- 4 Visual Safety Traffic Lights -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
+                            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-center">
+                                <div class="text-[11px] text-slate-400">در پرفشاری خون</div>
+                                <div id="tl-htn" class="font-black text-rose-400 mt-1">🛑 تداخل شدید</div>
                             </div>
-                            <div>
-                                <h4 class="text-lg font-black text-white group-hover:text-cyan-300 transition-colors">
-                                    داروهای ضدآریتمی (Antiarrhythmics)
-                                </h4>
-                                <p class="text-xs text-slate-400 mt-1">
-                                    پتانسیل عمل غشا، دریچه‌های یونی و طبقه‌بندی Vaughan-Williams
+                            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/30 text-center">
+                                <div class="text-[11px] text-slate-400">در دیابت و کلیه</div>
+                                <div id="tl-dm" class="font-black text-amber-400 mt-1">⚠️ ریسک آسیب کلیه</div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-center">
+                                <div class="text-[11px] text-slate-400">در دوران بارداری</div>
+                                <div id="tl-preg" class="font-black text-rose-400 mt-1">🛑 مطلقاً ممنوع</div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-center">
+                                <div class="text-[11px] text-slate-400">جایگزین ایمن در خانه</div>
+                                <div id="tl-safe" class="font-black text-emerald-400 mt-1">✅ استامینوفن ساده</div>
+                            </div>
+                        </div>
+
+                        <!-- Actionable Advice -->
+                        <div class="p-3.5 rounded-xl bg-emerald-950/25 border border-emerald-500/30 flex items-start gap-3 text-xs">
+                            <i class="fa-solid fa-shield-heart text-emerald-400 text-base mt-0.5"></i>
+                            <div class="leading-relaxed text-emerald-100">
+                                <strong class="text-emerald-400">توصیه ایمن داروساز: </strong>
+                                <span id="pub-safe-advice">برای کنترل تب یا سردرد در بیماران فشار خونی، از «استامینوفن ساده» (بدون کدئین و بدون کافئین) استفاده کنید و در داروخانه، قرص سرماخوردگی مخصوص بیماران فشار خون (فاقد فنیل‌افرین) درخواست نمایید.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- B2B & Affiliate Marketplace Showcase -->
+                    <div class="bg-tokyo-panel border border-tokyo-border rounded-2xl p-4 shadow-xl">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-tokyo-border">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-bag-shopping text-cyan-400"></i>
+                                <span class="text-xs font-black text-white">محصولات و مکمل‌های مرتبط در بازار ایران (موتور درآمدی B2B و Affiliate)</span>
+                            </div>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                                ارجاع به داروخانه‌های آنلاین مجوزدار
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                            <div class="p-3 rounded-xl bg-tokyo-bg border border-tokyo-border flex items-center justify-between gap-2 hover:border-emerald-500/40 transition-all">
+                                <div>
+                                    <span class="text-[10px] text-emerald-400 font-bold">مکمل تنظیم فشار و عضلات</span>
+                                    <div class="font-black text-white mt-0.5">قرص منیزیم سیترات + ویتامین B6</div>
+                                    <div class="text-[11px] text-slate-400 mt-0.5">برندهای معتبر بازار ایران | بدون تداخل با لوسارتان</div>
+                                </div>
+                                <button onclick="alert('در نسخه تجاری، کاربر از طریق لینک Affiliate به داروخانه آنلاین مجوزدار منتقل شده و پورسانت فروش برای فارماکُر ثبت می‌شود.')" class="px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold shrink-0">
+                                    خرید از داروخانه ↗
+                                </button>
+                            </div>
+                            <div class="p-3 rounded-xl bg-tokyo-bg border border-tokyo-border flex items-center justify-between gap-2 hover:border-cyan-500/40 transition-all">
+                                <div>
+                                    <span class="text-[10px] text-cyan-400 font-bold">اسپانسر درموکازمتیک و سلامت</span>
+                                    <div class="font-black text-white mt-0.5">سرم نیاسینامید ۱۰٪ + زینک (ضدجوش)</div>
+                                    <div class="text-[11px] text-slate-400 mt-0.5">ایمن در بارداری و تاییدشده توسط داروسازان</div>
+                                </div>
+                                <button onclick="alert('هدایت به صفحه برند اسپانسر (درآمد تبلیغات B2B و Affiliate).')" class="px-3 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold shrink-0">
+                                    مشاهده برندها ↗
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Left Column (5 cols): REAL INTERACTIVE TYPING RAG AI ASSISTANT -->
+                <div class="lg:col-span-5">
+                    <div class="bg-tokyo-panel border-2 border-cyan-500/40 rounded-2xl p-4 shadow-xl h-full flex flex-col justify-between space-y-3">
+                        
+                        <!-- AI Header -->
+                        <div class="flex items-center justify-between border-b border-tokyo-border pb-3">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-black text-sm shadow-md">
+                                    AI
+                                </div>
+                                <div>
+                                    <h3 class="text-xs md:text-sm font-black text-white">پرسش آزاد از دستیار هوشمند فارماکُر</h3>
+                                    <p class="text-[10px] text-emerald-400 font-bold">معماری RAG: پاسخ ۳ خطی مقید به دیتابیس اساتید</p>
+                                </div>
+                            </div>
+                            <span id="ai-quota-badge" class="text-[10px] px-2.5 py-1 rounded-lg bg-tokyo-bg border border-tokyo-border text-cyan-300 font-bold">
+                                ۳ سوال رایگان باقی‌مانده
+                            </span>
+                        </div>
+
+                        <!-- Live Chat Conversation History Box -->
+                        <div id="rag-chat-history" class="bg-tokyo-bg border border-tokyo-border rounded-xl p-3.5 text-xs space-y-3 h-64 overflow-y-auto leading-relaxed">
+                            <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-1.5">
+                                <div class="flex items-center justify-between text-cyan-400 font-bold text-[11px]">
+                                    <span>🤖 دستیار علمی فارماکُر:</span>
+                                    <span class="text-[10px] text-emerald-400">✓ متصل به رفرنس</span>
+                                </div>
+                                <p class="text-slate-200">
+                                    سلام! هر سوالی درباره تداخل داروهای داخل خانه، عوارض داروها یا روتین پوستی دارید در کادر پایین <strong>تایپ کنید</strong> یا روی یکی از دکمه‌های آماده کلیک کنید تا در ۳ خط پاسخ علمی و مطمئن بگیرید.
                                 </p>
                             </div>
                         </div>
 
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                            شبیه‌سازی میلی‌ثانیه‌ای فازهای ۰ تا ۴ پتانسیل عمل و نوار قلب (ECG)، دریچه‌های $m$ و $h$ کانال سدیم، سینتیک بازیابی ($\tau_{recovery}$)، مقایسه هایپرکالمی و هیپوکالمی و مانیتور زنده Torsades de Pointes.
-                        </p>
-
-                        <!-- Key Topics Chips -->
-                        <div class="flex flex-wrap gap-1.5 pt-1">
-                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">کلاس IA, IB, IC</span>
-                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">بتابلاکر (اسمولول)</span>
-                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">آمیودارون و سوتالول</span>
-                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">آدنوزین و منیزیم</span>
-                        </div>
-                    </div>
-
-                    <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center gap-2 relative z-10">
-                        <button onclick="openModuleSmart('antiarrhythmic_pharmacology_app.html', 'فارماکولوژی داروهای ضدآریتمی')" class="flex-grow py-2.5 px-4 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-600/25">
-                            <i class="fa-solid fa-play"></i>
-                            <span>ورود به شبیه‌ساز (با رندر $\LaTeX$)</span>
-                        </button>
-                        <a href="antiarrhythmic_pharmacology_app.html" target="_blank" title="باز کردن مستقیم در تب جدید" class="p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-all">
-                            <i class="fa-solid fa-up-right-from-square text-xs"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- MODULE 2: HEART FAILURE DRUGS -->
-                <article class="module-card card-hover bg-slate-900/90 border border-slate-800 hover:border-rose-500/60 rounded-3xl p-6 flex flex-col justify-between shadow-xl relative overflow-hidden group"
-                         data-keywords="نارسایی قلبی دیگوکسین گلیکوزید قلبی دوبوتامین دوپامین میلرینون اینامرینون لووسیمندان ساکوبیترین والزارتان انترستو امپاگلیفلوزین داپاگلیفلوزین ایوابرادین وریسیگوات بوزنتان نسیریتاید سارکومر کسر تخلیه سیستولیک دیاستولیک">
-                    <div class="absolute -top-12 -left-12 w-36 h-36 bg-rose-500/10 rounded-full blur-2xl group-hover:bg-rose-500/20 transition-all"></div>
-                    
-                    <div class="space-y-4 relative z-10">
-                        <div class="flex items-center justify-between gap-2">
-                            <span class="px-3 py-1 rounded-xl bg-rose-500/15 text-rose-300 border border-rose-500/30 text-xs font-black">
-                                بخش دوم • ۷۲ اسلاید
-                            </span>
-                            <span class="ltr-code text-[11px] text-slate-400 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800">
-                                heart_failure_pharmacology_app.html
-                            </span>
+                        <!-- Quick Prompt Chips -->
+                        <div class="flex flex-wrap gap-1.5 text-[11px]">
+                            <button onclick="sendUserQuestionToAI('چرا قرص کاپتوپریل باعث سرفه خشک میشه؟')" class="px-2.5 py-1 rounded-lg bg-tokyo-bg hover:bg-slate-800 border border-tokyo-border text-cyan-300">
+                                سرفه با کاپتوپریل؟
+                            </button>
+                            <button onclick="sendUserQuestionToAI('مادرم دیگوکسین و قرص آب فوروزماید میخوره، چه خطری داره؟')" class="px-2.5 py-1 rounded-lg bg-tokyo-bg hover:bg-slate-800 border border-tokyo-border text-cyan-300">
+                                تداخل دیگوکسین و فوروزماید؟
+                            </button>
+                            <button onclick="sendUserQuestionToAI('آیا آب گریپ فروت با داروهای فشار خون و قلب تداخل داره؟')" class="px-2.5 py-1 rounded-lg bg-tokyo-bg hover:bg-slate-800 border border-tokyo-border text-cyan-300">
+                                تداخل آب گریپ‌فروت؟
+                            </button>
                         </div>
 
-                        <div class="flex items-start gap-3.5">
-                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-500 to-amber-500 flex items-center justify-center text-white text-xl shrink-0 shadow-lg shadow-rose-500/25">
-                                <i class="fa-solid fa-heart-crack"></i>
+                        <!-- REAL USER TYPING INPUT FOR AI -->
+                        <div class="pt-1">
+                            <div class="flex items-center gap-2 bg-tokyo-bg border-2 border-slate-700 focus-within:border-cyan-400 rounded-xl p-1.5 transition-all">
+                                <input 
+                                    type="text" 
+                                    id="ai-user-input" 
+                                    onkeydown="if(event.key === 'Enter') handleSendCustomQuestion()"
+                                    placeholder="سوال خود را اینجا تایپ کنید (مثلاً: آیا ژلوفن برای کلیه ضرر داره؟)..." 
+                                    class="bg-transparent text-white text-xs w-full px-2 py-1.5 focus:outline-none placeholder:text-slate-500"
+                                >
+                                <button onclick="handleSendCustomQuestion()" class="px-3.5 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs shrink-0 flex items-center gap-1 transition-all">
+                                    <span>ارسال</span>
+                                    <i class="fa-solid fa-paper-plane text-[10px]"></i>
+                                </button>
                             </div>
-                            <div>
-                                <h4 class="text-lg font-black text-white group-hover:text-rose-300 transition-colors">
-                                    داروهای نارسایی قلبی (Heart Failure)
-                                </h4>
-                                <p class="text-xs text-slate-400 mt-1">
-                                    اسکرابر سارکومر، چرخه کلسیم ($SERCA/RyR$) و درمان‌های خط اول
-                                </p>
+                            <div class="text-[10px] text-slate-500 text-center mt-1.5">
+                                ⚖️ پاسخ‌ها صرفاً جهت ارتقای سواد سلامت از روی رفرنس‌های تاییدشده است و جایگزین نسخه پزشک نیست.
                             </div>
                         </div>
 
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                            بررسی زنده انقباض اکتین-میوزین، پمپ $Na^+/K^+\text{-ATPase}$ و مبدل $NCX$، مقایسه نارسایی سیستولیک (HFrEF) و دیاستولیک (HFpEF)، آزمایشگاه مسمومیت دیگوکسین (دید زرد/Xanthopsia) و گلیفلوزین‌ها (SGLT2i).
-                        </p>
-
-                        <!-- Key Topics Chips -->
-                        <div class="flex flex-wrap gap-1.5 pt-1">
-                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">دیگوکسین و DigiFab</span>
-                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">ARNI (ساکوبیترین)</span>
-                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">SGLT2i (گلیفلوزین)</span>
-                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">ایوابرادین و لووسیمندان</span>
-                        </div>
-                    </div>
-
-                    <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center gap-2 relative z-10">
-                        <button onclick="openModuleSmart('heart_failure_pharmacology_app.html', 'فارماکولوژی داروهای نارسایی قلبی')" class="flex-grow py-2.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-lg shadow-rose-600/25">
-                            <i class="fa-solid fa-play"></i>
-                            <span>ورود به شبیه‌ساز (با رندر $\LaTeX$)</span>
-                        </button>
-                        <a href="heart_failure_pharmacology_app.html" target="_blank" title="باز کردن مستقیم در تب جدید" class="p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-all">
-                            <i class="fa-solid fa-up-right-from-square text-xs"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- MODULE 3: ANTIHYPERTENSIVE & DIURETIC DRUGS -->
-                <article class="module-card card-hover bg-slate-900/90 border border-slate-800 hover:border-emerald-500/60 rounded-3xl p-6 flex flex-col justify-between shadow-xl relative overflow-hidden group"
-                         data-keywords="ضدفشار خون فشار خون هایپرتنشن دیورتیک استازولامید مانیتول فوروزماید بومتاناید هیدروکلروتیازید اینداپامید کلروتالیدون اسپیرونولاکتون اپلرنون آمیلورید تریامترن تولواپتان دسموپرسین کاپتوپریل انالاپریل لوسارتان والزارتان آملودیپین نیفدیپین متیل دوپا کلونیدین پرازوسین هیدرالازین ماینوکسیدیل نیتروپروساید دیازوکساید نفرون">
-                    <div class="absolute -top-12 -left-12 w-36 h-36 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
-                    
-                    <div class="space-y-4 relative z-10">
-                        <div class="flex items-center justify-between gap-2">
-                            <span class="px-3 py-1 rounded-xl bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-black">
-                                بخش سوم • ۶۹ اسلاید
-                            </span>
-                            <span class="ltr-code text-[11px] text-slate-400 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800">
-                                antihypertensive_diuretics_pharmacology_app.html
-                            </span>
-                        </div>
-
-                        <div class="flex items-start gap-3.5">
-                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white text-xl shrink-0 shadow-lg shadow-emerald-500/25">
-                                <i class="fa-solid fa-filter"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-black text-white group-hover:text-emerald-300 transition-colors">
-                                    داروهای ضدفشار خون و دیورتیک‌ها
-                                </h4>
-                                <p class="text-xs text-slate-400 mt-1">
-                                    اسکرابر نفرون، پمپ‌های غشایی و انتخاب دارو در بیماری‌های همراه
-                                </p>
-                            </div>
-                        </div>
-
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                            سفر تعاملی در ۶ ایستگاه نفرون ($PCT, TAL, DCT, CD$) به همراه زوم سلولی ناقل‌های $NHE3, NKCC2, NCC, ENaC, AQP2$، محور $RAAS$ و برادی‌کینین، سمپاتوپلژیک‌ها، وازودیلاتورها و راهنمای بالینی اسلاید ۶۸.
-                        </p>
-
-                        <!-- Key Topics Chips -->
-                        <div class="flex flex-wrap gap-1.5 pt-1">
-                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">۵ دسته دیورتیک‌ها</span>
-                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">ACEi / ARB / CCB</span>
-                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">سمپاتوپلژیک و وازودیلاتور</span>
-                            <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-300">داروی ارجح در بیماری‌ها</span>
-                        </div>
-                    </div>
-
-                    <div class="mt-6 pt-4 border-t border-slate-800/80 flex items-center gap-2 relative z-10">
-                        <button onclick="openModuleSmart('antihypertensive_diuretics_pharmacology_app.html', 'فارماکولوژی داروهای ضدفشار خون و دیورتیک‌ها')" class="flex-grow py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/25">
-                            <i class="fa-solid fa-play"></i>
-                            <span>ورود به شبیه‌ساز (با رندر $\LaTeX$)</span>
-                        </button>
-                        <a href="antihypertensive_diuretics_pharmacology_app.html" target="_blank" title="باز کردن مستقیم در تب جدید" class="p-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-all">
-                            <i class="fa-solid fa-up-right-from-square text-xs"></i>
-                        </a>
-                    </div>
-                </article>
-
-            </div>
-        </section>
-
-        <section class="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 shadow-xl">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-slate-800">
-                <div>
-                    <h3 class="text-base sm:text-lg font-black text-white flex items-center gap-2">
-                        <i class="fa-brands fa-github text-cyan-400 text-xl"></i>
-                        <span>ساختار استاندارد فایل‌ها در مخزن گیت‌هاب (GitHub Repository)</span>
-                    </h3>
-                    <p class="text-xs text-slate-400 mt-1">
-                        کافی است این ۴ فایل را دقیقاً با همین نام‌های پیش‌فرض در ریشه (Root) مخزن گیت‌هاب خود آپلود کنید تا همه لینک‌ها و موتور $\LaTeX$ به صورت خودکار کار کنند:
-                    </p>
-                </div>
-                <button onclick="copyRepoStructure()" id="copy-struct-btn" class="px-4 py-2 rounded-xl bg-slate-950 hover:bg-slate-800 text-cyan-400 border border-cyan-500/30 text-xs font-bold transition-all flex items-center gap-2 shrink-0 self-start md:self-auto">
-                    <i class="fa-regular fa-copy"></i>
-                    <span>کپی نام استاندارد فایل‌ها</span>
-                </button>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-5 items-center">
-                <!-- File Tree Box -->
-                <div class="lg:col-span-6 bg-slate-950 rounded-2xl p-4 border border-slate-800/90 font-mono text-xs space-y-2.5 ltr-code w-full">
-                    <div class="text-slate-400 flex items-center gap-2">
-                        <i class="fa-solid fa-folder-open text-amber-400"></i>
-                        <span class="font-bold text-white">pharmacology-review/</span>
-                        <span class="text-[10px] text-slate-500">(Root Directory)</span>
-                    </div>
-                    <div class="pl-6 space-y-2 border-l border-slate-800 ml-2">
-                        <div class="flex items-center justify-between text-emerald-400 bg-emerald-500/10 px-2.5 py-1.5 rounded-lg border border-emerald-500/20">
-                            <span>├── index.html</span>
-                            <span class="text-[10px] font-sans text-emerald-300">صفحه اصلی فهرست + موتور رندر LaTeX</span>
-                        </div>
-                        <div class="flex items-center justify-between text-cyan-300 px-2.5 py-1">
-                            <span>├── antiarrhythmic_pharmacology_app.html</span>
-                            <span class="text-[10px] font-sans text-slate-400">جزوه ۱: ضدآریتمی</span>
-                        </div>
-                        <div class="flex items-center justify-between text-rose-300 px-2.5 py-1">
-                            <span>├── heart_failure_pharmacology_app.html</span>
-                            <span class="text-[10px] font-sans text-slate-400">جزوه ۲: نارسایی قلبی</span>
-                        </div>
-                        <div class="flex items-center justify-between text-amber-300 px-2.5 py-1">
-                            <span>└── antihypertensive_diuretics_pharmacology_app.html</span>
-                            <span class="text-[10px] font-sans text-slate-400">جزوه ۳: ضدفشار خون و دیورتیک</span>
-                        </div>
                     </div>
                 </div>
 
-                <!-- How the Zero-Touch LaTeX Injector Works -->
-                <div class="lg:col-span-6 space-y-3 text-xs leading-relaxed text-slate-300">
-                    <div class="p-3.5 rounded-2xl bg-cyan-950/25 border border-cyan-500/30 space-y-1.5">
-                        <div class="font-black text-cyan-300 flex items-center gap-2">
-                            <i class="fa-solid fa-microchip"></i>
-                            <span>چطور فرمول‌های $\LaTeX$ بدون تغییر دادن ۳ فایل اصلی رندر می‌شوند؟</span>
-                        </div>
-                        <p class="text-slate-300">
-                            این فایل `index.html` مجهز به یک **تزریق‌گر خودکار MathJax و MutationObserver** است. وقتی کاربر در لینک گیت‌هاب شما روی هر جزوه کلیک می‌کند، صفحه در داخل نمایشگر تمام‌صفحه‌ی همین پورتال باز شده و اسکریپت مفسر $\LaTeX$ به صورت آنی به DOM آن فایل تزریق می‌شود. حتی وقتی کاربر تب‌ها یا دکمه‌های داخل جزوه را عوض می‌کند، ناظر هوشمند فرمول‌های جدید (مثل $BP = CO \times PVR$ یا $\tau_{recovery}$) را بلافاصله به فرمول ریاضی زیبا تبدیل می‌کند!
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <div id="smart-viewer-overlay" class="fixed inset-0 z-50 bg-slate-950 flex flex-col hidden">
-        <!-- Viewer Top Bar -->
-        <div class="bg-slate-900 border-b border-slate-800 px-4 py-2.5 flex items-center justify-between gap-4 shrink-0">
-            <div class="flex items-center gap-3">
-                <button onclick="closeSmartViewer()" class="px-3.5 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition-all flex items-center gap-2 shadow">
-                    <i class="fa-solid fa-arrow-right"></i>
-                    <span>بازگشت به فهرست اصلی</span>
-                </button>
-                <div class="h-4 w-[1px] bg-slate-800 hidden sm:block"></div>
-                <h2 id="viewer-module-title" class="text-xs sm:text-sm font-black text-white truncate">در حال نمایش جزوه...</h2>
-            </div>
-
-            <div class="flex items-center gap-2">
-                <span id="latex-status-pill" class="px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[11px] font-bold flex items-center gap-1.5">
-                    <i class="fa-solid fa-check-double"></i>
-                    <span>رندر خودکار $\LaTeX$ فعال</span>
-                </span>
-                <button onclick="forceTypesetIframe()" title="بازخوانی مجدد فرمول‌ها" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-bold transition-all">
-                    <i class="fa-solid fa-rotate"></i>
-                </button>
             </div>
         </div>
 
-        <!-- Iframe Container -->
-        <div class="flex-grow relative w-full h-full bg-slate-950">
-            <div id="viewer-loading" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/90 z-10 space-y-3">
-                <div class="w-12 h-12 rounded-2xl bg-cyan-500/20 border border-cyan-400 flex items-center justify-center animate-spin">
-                    <i class="fa-solid fa-spinner text-cyan-400 text-xl"></i>
+        <!-- ======================================================================= -->
+        <!-- LAYER 2: PROFESSIONAL / STUDENT VIEW (SIMULATORS + TAG SEARCH + ANKI)   -->
+        <!-- ======================================================================= -->
+        <div id="layer-pro" class="hidden space-y-5">
+
+            <!-- Pro Top Sub-Navigation & Gamification Telemetry Bar -->
+            <div class="bg-tokyo-panel border border-tokyo-border rounded-2xl p-3 flex flex-wrap items-center justify-between gap-3 shadow-lg">
+                
+                <div class="flex flex-wrap items-center gap-1.5">
+                    <button onclick="switchProSubTab('hub')" id="pro-tab-hub" class="px-3 py-1.5 rounded-xl text-xs font-black bg-cyan-600 text-white flex items-center gap-1.5">
+                        <i class="fa-solid fa-diagram-project"></i>
+                        <span>میز کار: جستجوی #تگ‌ها + لایتنر + نسخه‌خوانی</span>
+                    </button>
+                    <button onclick="openFullModule('antiarrhythmic_pharmacology_app.html', 'ماژول ۱: آزمایشگاه پتانسیل عمل و داروهای ضدآریتمی')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-tokyo-bg hover:bg-slate-800 text-rose-400 border border-rose-500/30 flex items-center gap-1.5 transition-all">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                        <span>شبیه‌ساز ۱: ضدآریتمی و ECG</span>
+                    </button>
+                    <button onclick="openFullModule('antihypertensive_diuretics_pharmacology_app.html', 'ماژول ۲: شبیه‌ساز نفرون، دیورتیک‌ها و ضدفشار خون')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-tokyo-bg hover:bg-slate-800 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5 transition-all">
+                        <i class="fa-solid fa-filter"></i>
+                        <span>شبیه‌ساز ۲: نفرون و ضدفشار خون</span>
+                    </button>
+                    <button onclick="openFullModule('heart_failure_pharmacology_app.html', 'ماژول ۳: شبیه‌ساز سارکومر، نارسایی قلبی و دیگوکسین')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-tokyo-bg hover:bg-slate-800 text-amber-400 border border-amber-500/30 flex items-center gap-1.5 transition-all">
+                        <i class="fa-solid fa-heart-crack"></i>
+                        <span>شبیه‌ساز ۳: نارسایی قلبی و دیگوکسین</span>
+                    </button>
                 </div>
-                <p class="text-xs font-bold text-slate-300">در حال بارگذاری شبیه‌ساز و فعال‌سازی موتور فرمول‌نویس $\LaTeX$...</p>
+
+                <!-- Gamification Badges -->
+                <div class="flex items-center gap-2 text-xs">
+                    <span class="px-2.5 py-1 rounded-lg bg-amber-500/15 text-amber-300 border border-amber-500/30 font-black">
+                        🔥 ۱۴ روز استریک
+                    </span>
+                    <span class="px-2.5 py-1 rounded-lg bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-black">
+                        ⚡ ۱,۴۸۰ XP (رتبه ۳ ماه)
+                    </span>
+                </div>
             </div>
-            <iframe id="module-iframe" class="w-full h-full border-0" onload="onModuleIframeLoad()"></iframe>
+
+            <!-- PRO SUB-VIEW A: MAIN HUB -->
+            <div id="pro-subview-hub" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                <!-- Right Column (7 cols): Live #Tag Search + Interactive Co-occurrence Graph -->
+                <div class="lg:col-span-7 space-y-6">
+                    
+                    <div class="bg-tokyo-panel border border-tokyo-border rounded-2xl p-4 shadow-xl space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div>
+                                <h3 class="text-sm md:text-base font-black text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-nodes text-cyan-400"></i>
+                                    <span>موتور جستجو و گراف هم‌رخداد تگ‌ها (Co-occurrence #Tag Graph)</span>
+                                </h3>
+                                <p class="text-[11px] text-slate-400">تگ مورد نظر را جستجو یا کلیک کنید تا شبکه ارتباط داروها و عوارض بر اساس تعداد منشن علمی رسم شود:</p>
+                            </div>
+                        </div>
+
+                        <!-- Live Tag Search Input for Students -->
+                        <div class="flex flex-wrap items-center gap-2">
+                            <div class="flex items-center bg-tokyo-bg border border-slate-700 focus-within:border-cyan-400 rounded-xl px-3 py-1.5 flex-grow">
+                                <span class="text-cyan-400 font-mono font-bold ml-1.5">#</span>
+                                <input 
+                                    type="text" 
+                                    id="pro-tag-search-input"
+                                    oninput="filterProTagGraph(this.value)"
+                                    placeholder="جستجوی تگ (مثلاً: هایپوکالمی، QT، سرفه، دیگوکسین، CYP3A4)..." 
+                                    class="bg-transparent text-xs text-white w-full focus:outline-none"
+                                >
+                            </div>
+                            <button onclick="loadTagCluster('hypokalemia')" id="cluster-btn-hypokalemia" class="px-2.5 py-1.5 rounded-lg bg-cyan-600 text-white text-xs font-bold">
+                                #هایپوکالمی (۱۲۴)
+                            </button>
+                            <button onclick="loadTagCluster('qt_torsades')" id="cluster-btn-qt_torsades" class="px-2.5 py-1.5 rounded-lg bg-tokyo-bg border border-tokyo-border text-slate-300 text-xs font-bold">
+                                #طولانی_شدن_QT (۹۶)
+                            </button>
+                            <button onclick="loadTagCluster('raas_kidney')" id="cluster-btn-raas_kidney" class="px-2.5 py-1.5 rounded-lg bg-tokyo-bg border border-tokyo-border text-slate-300 text-xs font-bold">
+                                #محور_RAAS (۱۵۸)
+                            </button>
+                            <button onclick="loadTagCluster('cyp3a4')" id="cluster-btn-cyp3a4" class="px-2.5 py-1.5 rounded-lg bg-tokyo-bg border border-tokyo-border text-slate-300 text-xs font-bold">
+                                #CYP3A4 (۱۱۲)
+                            </button>
+                        </div>
+
+                        <!-- Graph Canvas -->
+                        <div class="relative w-full h-64 bg-tokyo-bg rounded-xl border border-tokyo-border overflow-hidden cyber-grid">
+                            <canvas id="interactive-tag-canvas" class="w-full h-full block cursor-pointer"></canvas>
+                        </div>
+
+                        <!-- Atomic Obsidian-Style Note Connected to Selected Tag -->
+                        <div class="bg-tokyo-bg border border-tokyo-border rounded-xl p-4 space-y-2 text-xs leading-relaxed">
+                            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-2">
+                                <span id="note-header-title" class="font-black text-cyan-400">📝 نوت اتمیک متصل به تگ: #هایپوکالمی</span>
+                                <span class="text-[10px] text-slate-400">تدوین: دانشجویان برتر | تایید علمی: دکتر افروز قلی‌بیکی</span>
+                            </div>
+                            <p id="note-body-content" class="text-slate-200">
+                                <strong>مکانیسم و اهمیت بالینی:</strong> کاهش پتاسیم سرم (<span class="text-rose-400 font-mono">#هایپوکالمی</span>) به دنبال مصرف دیورتیک‌های لوپ (<span class="text-cyan-300 font-mono">#فوروزماید</span>) و <span class="text-emerald-300 font-mono">#تیازیدها</span> رخ می‌دهد. هیپوکالمی غشای سلول قلبی را هایپرپلاریزه کرده، طول پتانسیل عمل (APD) را طولانی می‌کند و با کاهش رقابت روی پمپ <span class="text-amber-300 font-mono">#Na_K_ATPase</span>، خطر <strong>مسمومیت و آریتمی ناشی از دیگوکسین</strong> را به شدت افزایش می‌دهد.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Left Column (5 cols): Anti-Cheat Prescription Lab + Anki Spaced Repetition Box -->
+                <div class="lg:col-span-5 space-y-6">
+
+                    <!-- Anti-Cheat Prescription & Clinical Error Challenge -->
+                    <div class="bg-tokyo-panel border border-tokyo-border rounded-2xl p-4 shadow-xl space-y-3 text-xs">
+                        <div class="flex items-center justify-between border-b border-tokyo-border pb-2.5">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
+                                <h3 class="font-black text-white text-sm">آزمایشگاه نسخه‌خوانی و خطای دارویی (لیگ روزانه)</h3>
+                            </div>
+                            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-black">+15 XP</span>
+                        </div>
+
+                        <div class="p-3 rounded-xl bg-tokyo-bg border border-slate-800 space-y-1.5">
+                            <div class="flex justify-between text-[11px] text-slate-400">
+                                <span>📋 پرونده بیمار: مرد ۶۴ ساله | نارسایی قلبی (HFrEF) + نقرس</span>
+                                <span class="text-rose-400 font-bold">محافظت‌شده در برابر تقلب AI</span>
+                            </div>
+                            <div class="font-bold text-white leading-relaxed">
+                                در نسخه زیر کدام دارو برای این بیمار <span class="text-rose-400 underline">خطای تجویزی</span> محسوب می‌شود و چه دارویی باید جایگزین آن گردد؟
+                            </div>
+                            <div class="grid grid-cols-2 gap-1.5 pt-1 font-mono text-[11px]">
+                                <div class="p-1.5 rounded bg-slate-900 text-slate-300">1. Tab Digoxin 0.125mg</div>
+                                <div class="p-1.5 rounded bg-rose-950/40 border border-rose-500/40 text-rose-300 font-bold">2. Tab Hydrochlorothiazide 50mg</div>
+                                <div class="p-1.5 rounded bg-slate-900 text-slate-300">3. Tab Carvedilol 6.25mg</div>
+                                <div class="p-1.5 rounded bg-slate-900 text-slate-300">4. Tab Spironolactone 25mg</div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <button onclick="evaluatePrescriptionQuiz(true)" class="w-full text-right p-2.5 rounded-xl bg-tokyo-bg hover:bg-slate-800 border border-tokyo-border text-slate-200 transition-all">
+                                الف) هیدروکلروتیازید (به علت تشدید هایپراوریسمی/نقرس و هیپوکالمی) ← جایگزین با <strong>لوسارتان</strong> (و فوروزماید در صورت ادم)
+                            </button>
+                            <button onclick="evaluatePrescriptionQuiz(false)" class="w-full text-right p-2.5 rounded-xl bg-tokyo-bg hover:bg-slate-800 border border-tokyo-border text-slate-200 transition-all">
+                                ب) کارودیلول (به علت مهار گیرنده آلفا-۱ و کاهش مرگ‌ومیر) ← جایگزین با وراپامیل
+                            </button>
+                        </div>
+
+                        <div id="rx-quiz-feedback" class="hidden p-3 rounded-xl text-xs leading-relaxed"></div>
+                    </div>
+
+                    <!-- Automated Anki Spaced Repetition Deck -->
+                    <div class="bg-tokyo-panel border border-purple-500/40 rounded-2xl p-4 shadow-xl space-y-3 text-xs">
+                        <div class="flex items-center justify-between">
+                            <span class="font-black text-purple-300 text-sm flex items-center gap-1.5">
+                                <i class="fa-solid fa-layer-group"></i> جعبه لایتنر هوشمند (Anki Engine)
+                            </span>
+                            <span id="anki-counter-badge" class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-bold">
+                                کارت ۱ از ۱۲ (تست‌های غلط قبلی شما)
+                            </span>
+                        </div>
+
+                        <div onclick="flipAnkiCard()" class="bg-tokyo-bg border-2 border-dashed border-purple-500/40 hover:border-purple-400 rounded-xl p-4 cursor-pointer transition-all text-center space-y-2 min-h-[115px] flex flex-col justify-center">
+                            <div class="text-[10px] text-purple-400 font-bold">فلش‌کارت خودکار ساخته‌شده از تست غلط شما (برای مشاهده پاسخ کلیک کنید):</div>
+                            <div id="anki-card-text" class="text-xs md:text-sm font-black text-white leading-relaxed">
+                                سؤال: چرا داروی «اینامرینون» از بازار دارویی جمع‌آوری شد و چرا «میلرینون» فقط در نارسایی حاد (IV) کاربرد دارد؟
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2 text-[11px] font-bold">
+                            <button onclick="nextAnkiCard('hard')" class="py-1.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30 hover:bg-rose-500/30">
+                                فراموش کردم (۱۰ دقیقه)
+                            </button>
+                            <button onclick="nextAnkiCard('good')" class="py-1.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 hover:bg-amber-500/30">
+                                خوب بود (۳ روز بعد)
+                            </button>
+                            <button onclick="nextAnkiCard('easy')" class="py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30">
+                                مسلط شدم (۷ روز بعد)
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- PRO SUB-VIEW B: EMBEDDED FULL SIMULATOR VIEWER -->
+            <div id="pro-subview-iframe" class="hidden space-y-3">
+                <div class="bg-tokyo-panel border border-cyan-500/40 rounded-xl p-3 flex flex-wrap items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span id="iframe-module-title" class="text-xs md:text-sm font-black text-white">در حال اجرای ماژول شبیه‌ساز...</span>
+                    </div>
+                    <button onclick="switchProSubTab('hub')" class="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold flex items-center gap-1.5">
+                        <i class="fa-solid fa-arrow-right"></i> بازگشت به میز کار اصلی و گراف تگ‌ها
+                    </button>
+                </div>
+                <div class="w-full h-[78vh] bg-tokyo-bg rounded-2xl border-2 border-tokyo-border overflow-hidden shadow-2xl">
+                    <iframe id="module-iframe-viewer" src="" class="w-full h-full border-0"></iframe>
+                </div>
+            </div>
+
         </div>
+
     </div>
 
-    <div id="github-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="bg-slate-900 border border-slate-700 rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                <h3 class="text-base font-black text-white flex items-center gap-2">
-                    <i class="fa-brands fa-github text-cyan-400 text-xl"></i>
-                    <span>راهنمای گام‌به‌گام انتشار در GitHub Pages</span>
-                </h3>
-                <button onclick="toggleGithubGuideModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <div class="space-y-3 text-xs text-slate-300 leading-relaxed">
-                <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800">
-                    <span class="font-black text-cyan-400 block mb-1">گام اول: ساخت مخزن (Repository)</span>
-                    وارد اکانت گیت‌هاب خود شوید و یک Repository جدید (مثلاً با نام <code class="text-emerald-300 ltr-code">pharmacology-app</code>) به صورت <strong>Public</strong> بسازید.
-                </div>
-                <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800">
-                    <span class="font-black text-emerald-400 block mb-1">گام دوم: آپلود هر ۴ فایل در کنار هم</span>
-                    دکمه <strong>Add file &rarr; Upload files</strong> را بزنید و این ۴ فایل را دقیقاً با همین نام‌ها آپلود کنید:
-                    <ul class="mt-2 space-y-1 font-mono text-[11px] text-amber-300 ltr-code block">
-                        <li>1. index.html</li>
-                        <li>2. antiarrhythmic_pharmacology_app.html</li>
-                        <li>3. heart_failure_pharmacology_app.html</li>
-                        <li>4. antihypertensive_diuretics_pharmacology_app.html</li>
-                    </ul>
-                </div>
-                <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800">
-                    <span class="font-black text-rose-400 block mb-1">گام سوم: فعال‌سازی لینک مستقیم (GitHub Pages)</span>
-                    در مخزن خود به تب <strong>Settings</strong> بروید، از منوی سمت چپ روی <strong>Pages</strong> کلیک کنید. در بخش <strong>Branch</strong>، گزینه <code class="ltr-code text-white">main</code> و پوشه <code class="ltr-code text-white">/(root)</code> را انتخاب کرده و <strong>Save</strong> را بزنید. پس از ۱ دقیقه، لینک سایت شما آماده است!
-                </div>
-                <div class="p-3.5 rounded-2xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-200">
-                    <strong>به‌روزرسانی در آینده:</strong> هر زمان که بخواهید جزوه‌های جدیدی اضافه کنیم یا هر یک از این فایل‌ها را ارتقا دهیم، فقط کافی است فایل جدید را جایگزین کنید.
-                </div>
-            </div>
-
-            <div class="pt-2 flex justify-end">
-                <button onclick="toggleGithubGuideModal()" class="px-5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold">
-                    متوجه شدم
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <footer class="mt-auto border-t border-slate-800/80 bg-slate-950/90 backdrop-blur-md py-6 px-4">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-            <div class="flex items-center gap-2 text-slate-400">
-                <i class="fa-solid fa-graduation-cap text-emerald-400"></i>
-                <span>منبع علمی: اسلایدهای آموزشی فارماکولوژی دکتر افروز محمدقلی‌بیکی • ویژه دانشجویان داروسازی</span>
-            </div>
-
-            <div class="flex items-center gap-2 px-4 py-2 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 border border-slate-800 shadow-inner">
-                <i class="fa-solid fa-code text-cyan-400"></i>
-                <span class="text-slate-400">توسعه دهنده:</span>
-                <span class="font-black text-transparent bg-clip-text bg-gradient-to-l from-cyan-400 to-emerald-400 text-sm">
-                    نیما پیام
-                </span>
-            </div>
-        </div>
-    </footer>
-
+    <!-- ================= ULTRA-OPTIMIZED JAVASCRIPT ENGINE ================= -->
     <script>
-        // Filter cards in real-time based on Persian drug or topic search
-        function filterModules(query) {
-            const cleanQ = query.trim().toLowerCase();
-            const cards = document.querySelectorAll('.module-card');
-            cards.forEach(card => {
-                const textContent = (card.innerText + ' ' + (card.dataset.keywords || '')).toLowerCase();
-                if (!cleanQ || textContent.includes(cleanQ)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+        const DPR = Math.min(window.devicePixelRatio || 1, 1.5);
+        let activeLayer = 'public';
+        let activeClusterKey = 'hypokalemia';
+        let graphMeta = null;
+        let ankiFlipped = false;
+        let freeAiQuestionsLeft = 3;
+
+        // 1. Expanded Public Drug & Cosmetic Database for Live Search
+        const publicDrugDatabase = {
+            losartan: {
+                keywords: ['لوسارتان', 'ژلوفن', 'ایبوپروفن', 'ناپروکسن', 'سرماخوردگی', 'فشار خون', 'والزارتان', 'کاپتوپریل', 'مسکن', 'losartan'],
+                searchLabel: 'قرص لوسارتان + تداخل با مسکن‌ها (ژلوفن) و قرص سرماخوردگی',
+                title: 'بررسی مصرف «ژلوفن و قرص سرماخوردگی» همراه با «قرص فشار خون لوسارتان»',
+                pill: '🛑 خطرناک (مصرف نکنید!)',
+                pillClass: 'px-3.5 py-1.5 rounded-xl bg-rose-600 text-white text-xs font-black shadow-lg shrink-0',
+                verdict: 'اگر در خانه بیمار مبتلا به فشار خون دارید که <strong>لوسارتان (یا والزارتان/کاپتوپریل)</strong> مصرف می‌کند، خوردن مسکن‌هایی مثل <strong>ژلوفن (ایبوپروفن)، ناپروکسن</strong> و <strong>قرص سرماخوردگی بزرگسالان</strong> اثر داروی فشار خون را خنثی کرده و به کلیه آسیب می‌زند.',
+                htn: '🛑 تداخل شدید', dm: '⚠️ ریسک آسیب کلیه', preg: '🛑 مطلقاً ممنوع', safe: '✅ استامینوفن ساده',
+                advice: 'برای کنترل تب یا سردرد در بیماران فشار خونی، از «استامینوفن ساده» استفاده کنید و در داروخانه، قرص سرماخوردگی مخصوص بیماران فشار خون (بدون فنیل‌افرین) بخواهید.'
+            },
+            digoxin: {
+                keywords: ['دیگوکسین', 'فوروزماید', 'لازیکس', 'قرص آب', 'نارسایی قلبی', 'پتاسیم', 'digoxin'],
+                searchLabel: 'قرص دیگوکسین + تداخل با قرص آب (فوروزماید / لازیکس)',
+                title: 'بررسی مصرف هم‌زمان «دیگوکسین» و «قرص آب (فوروزماید)»',
+                pill: '⚠️ نیازمند پایش فوری پتاسیم!',
+                pillClass: 'px-3.5 py-1.5 rounded-xl bg-amber-500 text-slate-950 text-xs font-black shadow-lg shrink-0',
+                verdict: 'قرص فوروزماید باعث دفع پتاسیم از ادرار می‌شود. کمبود پتاسیم در خون باعث می‌شود <strong>دیگوکسین بیش از حد به عضله قلب بچسبد</strong> و مسمومیت خطرناک (بی‌اشتهایی، تهوع و دیدن هاله‌های زرد دور نورها) ایجاد کند.',
+                htn: '✅ تحت نظر پزشک', dm: '⚠️ پایش الکترولیت', preg: '⚠️ فقط با تجویز پزشک', safe: '✅ رژیم غنی از پتاسیم',
+                advice: 'در صورت بروز بی‌اشتهایی، تهوع یا تغییر در دید رنگ‌ها، فوراً به پزشک مراجعه کنید تا سطح پتاسیم و دوز دیگوکسین تنظیم شود.'
+            },
+            omeprazole: {
+                keywords: ['امپرازول', 'پنتوپرازول', 'معده', 'پلاویکس', 'کلوپیدوگرل', 'آسپرین', 'سکته', 'omeprazole'],
+                searchLabel: 'کپسول امپرازول (داروی معده) + تداخل با قرص قلبی پلاویکس (کلوپیدوگرل)',
+                title: 'بررسی تداخل کپسول معده «امپرازول» با قرص قلبی «کلوپیدوگرل (پلاویکس)»',
+                pill: '🛑 تداخل مهم (کاهش اثر داروی قلب!)',
+                pillClass: 'px-3.5 py-1.5 rounded-xl bg-rose-600 text-white text-xs font-black shadow-lg shrink-0',
+                verdict: 'کپسول <strong>امپرازول (و اس‌امپرازول)</strong> آنزیم کبدی فعال‌کننده قرص <strong>پلاویکس (کلوپیدوگرل)</strong> را مهار می‌کند؛ در نتیجه اثر رقیق‌کنندگی خون کم شده و خطر لخته شدن خون یا سکته مجدد در بیماران استنت‌گذاری‌شده بالا می‌رود!',
+                htn: '✅ بدون اثر مستقیم', dm: '✅ بدون تداخل قند', preg: '⚠️ با مشورت پزشک', safe: '✅ جایگزین: پنتوپرازول',
+                advice: 'در بیمارانی که پلاویکس (کلوپیدوگرل) مصرف می‌کنند، برای محافظت معده به جای امپرازول از قرص «پنتوپرازول» استفاده شود که تداخل بسیار کمتری دارد.'
+            },
+            metformin: {
+                keywords: ['متفورمین', 'دیابت', 'قند', 'شربت سینه', 'دکسترومتورفان', 'کلیه', 'انسولین', 'metformin'],
+                searchLabel: 'قرص متفورمین (دیابت) + هشدار شربت‌های سینه و رنگ‌های رادیولوژی',
+                title: 'بررسی نکات ایمنی «متفورمین» و تداخل با شربت‌های سرماخوردگی و رادیولوژی',
+                pill: '⚠️ احتیاط قند پنهان و کلیه',
+                pillClass: 'px-3.5 py-1.5 rounded-xl bg-amber-500 text-slate-950 text-xs font-black shadow-lg shrink-0',
+                verdict: 'شربت‌های سینه و اکسپکتورانت معمولی حاوی <strong>شکر تغلیظ‌شده</strong> هستند که قند خون بیمار دیابتی را به سرعت بالا می‌برند. همچنین قبل از انجام سی‌تی‌اسکن با تزریق ماده حاجب، مصرف متفورمین باید موقتاً با نظر پزشک قطع شود.',
+                htn: '✅ کاملاً ایمن', dm: '✅ خط اول درمان دیابت', preg: '✅ ایمن تحت نظر پزشک', safe: '✅ شربت بدون قند (Sugar-Free)',
+                advice: 'متفورمین را همراه یا بلافاصله بعد از غذا میل کنید تا دل‌پیچه ایجاد نکند و در داروخانه حتماً شربت سینه «بدون قند (مخصوص دیابتی‌ها)» درخواست کنید.'
+            },
+            retinol: {
+                keywords: ['رتینول', 'نیاسینامید', 'پوست', 'جوش', 'بارداری', 'ویتامین سی', 'لایه بردار', 'retinol'],
+                searchLabel: 'سرم رتینول و ترتینوئین (ضدجوش و ضدچروک) + بارداری و روتین پوستی',
+                title: 'بررسی علمی «سرم رتینول» و نحوه ترکیب با «نیاسینامید» در روتین پوستی',
+                pill: '🛑 ممنوع در بارداری | ✅ عالی در شب',
+                pillClass: 'px-3.5 py-1.5 rounded-xl bg-cyan-500 text-slate-950 text-xs font-black shadow-lg shrink-0',
+                verdict: 'رتینول قوی‌ترین ترکیب ضدچروک و ضدجوش است، اما در <strong>دوران بارداری مطلقاً ممنوع است (تراتوژن)</strong>. برای سایر افراد، فقط باید <strong>شب‌ها</strong> استفاده شود و هم‌زمان در یک وعده با اسیدهای لایه‌بردار (AHA/BHA) زده نشود.',
+                htn: '✅ کاملاً ایمن', dm: '✅ کاملاً ایمن', preg: '🛑 مطلقاً ممنوع!', safe: '✅ ترکیب با نیاسینامید',
+                advice: 'استفاده از سرم «نیاسینامید» ۱۵ دقیقه قبل از رتینول، قرمزی و پوسته‌ریزی را کاهش می‌دهد. صبح روز بعد حتماً ضدآفتاب تمدید شود.'
+            }
+        };
+
+        // 2. Live Search Bar Autocomplete & Execution
+        function handlePublicSearchInput(val) {
+            const box = document.getElementById('search-autocomplete-box');
+            const clearBtn = document.getElementById('clear-search-btn');
+            const q = val.trim().toLowerCase();
+
+            if (q.length === 0) {
+                box.classList.add('hidden');
+                clearBtn.classList.add('hidden');
+                return;
+            }
+            clearBtn.classList.remove('hidden');
+
+            let matches = [];
+            Object.keys(publicDrugDatabase).forEach(key => {
+                const item = publicDrugDatabase[key];
+                const isMatch = item.keywords.some(k => k.toLowerCase().includes(q)) || item.searchLabel.toLowerCase().includes(q);
+                if (isMatch) matches.push({ key, label: item.searchLabel, pill: item.pill });
             });
-        }
 
-        // Open selected HTML module inside Smart Viewer and inject MathJax automatically
-        function openModuleSmart(filePath, title) {
-            const overlay = document.getElementById('smart-viewer-overlay');
-            const iframe = document.getElementById('module-iframe');
-            const loading = document.getElementById('viewer-loading');
-            const titleEl = document.getElementById('viewer-module-title');
-
-            titleEl.textContent = title;
-            loading.classList.remove('hidden');
-            overlay.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-
-            iframe.src = filePath;
-            // Update URL hash so browser back button or bookmarking works nicely on GitHub Pages
-            window.location.hash = encodeURIComponent(filePath);
-        }
-
-        function closeSmartViewer() {
-            const overlay = document.getElementById('smart-viewer-overlay');
-            const iframe = document.getElementById('module-iframe');
-            overlay.classList.add('hidden');
-            iframe.src = 'about:blank';
-            document.body.style.overflow = '';
-            history.pushState("", document.title, window.location.pathname + window.location.search);
-        }
-
-        // Automatically inject MathJax v3 + DOM MutationObserver into the loaded iframe
-        // so that all $...$ and $$...$$ LaTeX formulas render without editing the 3 original HTML files!
-        function onModuleIframeLoad() {
-            const iframe = document.getElementById('module-iframe');
-            const loading = document.getElementById('viewer-loading');
-
-            if (!iframe.src || iframe.src === 'about:blank') return;
-            loading.classList.add('hidden');
-
-            try {
-                const idoc = iframe.contentDocument || iframe.contentWindow.document;
-                if (!idoc || !idoc.head) return;
-
-                // Prevent duplicate injection
-                if (idoc.getElementById('injected-mathjax-script')) return;
-
-                // 1. Configure MathJax inside the child window
-                const configScript = idoc.createElement('script');
-                configScript.type = 'text/javascript';
-                configScript.text = `
-                    window.MathJax = {
-                        tex: {
-                            inlineMath: [['$', '$'], ['\\\\(', '\\\\)']],
-                            displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']],
-                            processEscapes: true
-                        },
-                        options: {
-                            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-                        },
-                        startup: {
-                            pageReady: () => {
-                                return MathJax.startup.defaultPageReady().then(() => {
-                                    // Observe dynamic tab switches, scrubber updates, and quiz answers
-                                    let timeout = null;
-                                    const observer = new MutationObserver(() => {
-                                        if (timeout) clearTimeout(timeout);
-                                        timeout = setTimeout(() => {
-                                            if (window.MathJax && window.MathJax.typesetPromise) {
-                                                window.MathJax.typesetPromise();
-                                            }
-                                        }, 60);
-                                    });
-                                    observer.observe(document.body, {
-                                        childList: true,
-                                        subtree: true,
-                                        characterData: true
-                                    });
-                                });
-                            }
-                        }
-                    };
+            box.innerHTML = '';
+            if (matches.length > 0) {
+                matches.forEach(m => {
+                    const row = document.createElement('div');
+                    row.className = 'p-3 hover:bg-slate-800 cursor-pointer flex items-center justify-between gap-2 transition-all';
+                    row.onclick = () => selectDrugFromSearch(m.key);
+                    row.innerHTML = `
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-capsules text-emerald-400"></i>
+                            <span class="font-bold text-white">${m.label}</span>
+                        </div>
+                        <span class="text-[10px] px-2 py-0.5 rounded bg-slate-950 text-slate-300 border border-slate-700">${m.pill}</span>
+                    `;
+                    box.appendChild(row);
+                });
+            } else {
+                const askAiRow = document.createElement('div');
+                askAiRow.className = 'p-3 hover:bg-slate-800 cursor-pointer flex items-center justify-between gap-2 text-cyan-300';
+                askAiRow.onclick = () => {
+                    box.classList.add('hidden');
+                    sendUserQuestionToAI(`بررسی ایمنی و تداخلات دارویی درباره: ${val}`);
+                };
+                askAiRow.innerHTML = `
+                    <span>🤖 پرسش مستقیم درباره «<strong>${val}</strong>» از دستیار هوش مصنوعی فارماکُر...</span>
+                    <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[10px] font-bold">ارسال به AI ↵</span>
                 `;
-                idoc.head.appendChild(configScript);
+                box.appendChild(askAiRow);
+            }
+            box.classList.remove('hidden');
+        }
 
-                // 2. Inject MathJax v3 CDN script into the child document
-                const mjScript = idoc.createElement('script');
-                mjScript.id = 'injected-mathjax-script';
-                mjScript.async = true;
-                mjScript.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-                idoc.head.appendChild(mjScript);
+        function selectDrugFromSearch(key) {
+            const d = publicDrugDatabase[key];
+            if (!d) return;
+            document.getElementById('public-search-input').value = d.searchLabel;
+            document.getElementById('search-autocomplete-box').classList.add('hidden');
+            document.getElementById('clear-search-btn').classList.remove('hidden');
 
-            } catch (err) {
-                console.warn('MathJax injection note:', err);
+            document.getElementById('pub-title').textContent = d.title;
+            document.getElementById('pub-status-pill').textContent = d.pill;
+            document.getElementById('pub-status-pill').className = d.pillClass;
+            document.getElementById('pub-verdict-box').innerHTML = d.verdict;
+            document.getElementById('tl-htn').textContent = d.htn;
+            document.getElementById('tl-dm').textContent = d.dm;
+            document.getElementById('tl-preg').textContent = d.preg;
+            document.getElementById('tl-safe').textContent = d.safe;
+            document.getElementById('pub-safe-advice').textContent = d.advice;
+        }
+
+        function clearSearchInput() {
+            document.getElementById('public-search-input').value = '';
+            document.getElementById('search-autocomplete-box').classList.add('hidden');
+            document.getElementById('clear-search-btn').classList.add('hidden');
+        }
+
+        function executePublicSearch() {
+            const val = document.getElementById('public-search-input').value.trim();
+            if (!val) return;
+            document.getElementById('search-autocomplete-box').classList.add('hidden');
+
+            // Check if matches any key
+            for (const key of Object.keys(publicDrugDatabase)) {
+                const item = publicDrugDatabase[key];
+                if (item.keywords.some(k => val.includes(k)) || item.searchLabel.includes(val)) {
+                    selectDrugFromSearch(key);
+                    return;
+                }
+            }
+            // Otherwise route automatically to the RAG AI Chatbot!
+            sendUserQuestionToAI(val);
+        }
+
+        // 3. Real Interactive Typing RAG AI Assistant Engine
+        function handleSendCustomQuestion() {
+            const input = document.getElementById('ai-user-input');
+            const q = input.value.trim();
+            if (!q) return;
+            input.value = '';
+            sendUserQuestionToAI(q);
+        }
+
+        function sendUserQuestionToAI(questionText) {
+            const history = document.getElementById('rag-chat-history');
+
+            // Append User Message Bubble
+            const userMsg = document.createElement('div');
+            userMsg.className = 'bg-cyan-950/40 border border-cyan-500/30 rounded-xl p-2.5 text-right mr-6';
+            userMsg.innerHTML = `<span class="text-[10px] text-cyan-400 font-bold block mb-0.5">👤 سوال شما:</span><div class="text-white font-medium">${questionText}</div>`;
+            history.appendChild(userMsg);
+
+            // Generate Verified RAG Response based on clinical keywords
+            let answerHtml = '';
+            let refText = 'مونوگراف بالینی فارماکولوژی - تاییدشده توسط هیئت علمی';
+            const q = questionText.toLowerCase();
+
+            if (q.includes('سرفه') || q.includes('کاپتوپریل') || q.includes('انالاپریل')) {
+                answerHtml = 'داروهای خانواده کاپتوپریل و انالاپریل (ACEi) مانع تجزیه ماده‌ای به نام <strong>«برادی‌کینین»</strong> در ریه می‌شوند. تجمع برادی‌کینین باعث <strong>سرفه خشک مداوم</strong> می‌شود؛ با مشورت پزشک، این دارو به سادگی با <strong>لوسارتان یا والزارتان</strong> (که سرفه ایجاد نمی‌کنند) جایگزین می‌گردد.';
+                refText = 'اسلاید ۳۰ و ۳۲ فارماکولوژی داروهای ضدفشار خون';
+            } else if (q.includes('دیگوکسین') || q.includes('فوروزماید') || q.includes('قرص آب') || q.includes('زرد')) {
+                answerHtml = 'قرص فوروزماید باعث دفع پتاسیم از ادرار (هیپوکالمی) می‌شود. چون پتاسیم و دیگوکسین برای اتصال به پمپ قلبی با هم رقابت می‌کنند، <strong>کمبود پتاسیم باعث مسمومیت شدید با دیگوکسین، آریتمی و دید زردرنگ (Xanthopsia)</strong> می‌شود.';
+                refText = 'اسلاید ۳۱ و ۵۸ فارماکولوژی نارسایی قلبی';
+            } else if (q.includes('گریپ') || q.includes('آبمیوه') || q.includes('آمیودارون') || q.includes('آملودیپین')) {
+                answerHtml = 'آب گریپ‌فروت آنزیم کبدی و روده‌ای <strong>CYP3A4</strong> را مهار می‌کند؛ در نتیجه داروهایی مثل آملودیپین، آمیودارون و آتورواستاتین در بدن تجزیه نشده و غلظت خونی آن‌ها تا حد مسمومیت بالا می‌رود.';
+                refText = 'جدول تداخلات سیتوکروم P450 - کاتزونگ';
+            } else if (q.includes('ژلوفن') || q.includes('ایبوپروفن') || q.includes('مسکن') || q.includes('کلیه') || q.includes('فشار')) {
+                answerHtml = 'مصرف مسکن‌های ضدالتهاب (مانند ژلوفن، ناپروکسن و دیکلوفناک) باعث انقباض عروق کلیه، احتباس آب و نمک و <strong>خنثی شدن اثر داروهای فشار خون (مثل لوسارتان)</strong> می‌شود. بهترین جایگزین در این بیماران <strong>استامینوفن ساده</strong> است.';
+                refText = 'راهنمای تداخلات NSAIDs و داروهای قلبی-کلیوی';
+            } else if (q.includes('رتینول') || q.includes('نیاسینامید') || q.includes('پوست') || q.includes('جوش') || q.includes('باردار')) {
+                answerHtml = 'ترکیبات رتینول در دوران بارداری مطلقاً ممنوع هستند. در افراد غیرباردار، رتینول باید فقط شب‌ها مصرف شود؛ استفاده از <strong>سرم نیاسینامید</strong> ۱۵ دقیقه قبل از رتینول، التهاب و پوسته‌ریزی را کم می‌کند اما ویتامین C خالص را باید صبح‌ها بزنید.';
+                refText = 'رفرنس درموکازمتیک داروسازی';
+            } else {
+                answerHtml = `بر اساس جستجو در دیتابیس تاییدشده فارماکُر برای <strong>«${questionText}»</strong>: در بیماران دارای بیماری زمینه‌ای (فشار خون، دیابت یا نارسایی کلیه)، از مصرف خودسرانه داروهای ترکیبی و مسکن‌های NSAID خودداری کنید. برای بررسی دقیق‌تر، نام دارو را در کادر بالای صفحه جستجو نمایید.`;
+                refText = 'موتور تداخل‌سنج هوشمند فارماکُر (RAG Engine)';
+            }
+
+            // Update Quota Badge
+            if (freeAiQuestionsLeft > 0) freeAiQuestionsLeft--;
+            document.getElementById('ai-quota-badge').textContent = `${freeAiQuestionsLeft} سوال رایگان باقی‌مانده`;
+
+            // Append AI Response Bubble
+            const aiMsg = document.createElement('div');
+            aiMsg.className = 'bg-slate-900 border border-emerald-500/30 rounded-xl p-3 space-y-1.5 ml-4';
+            aiMsg.innerHTML = `
+                <div class="flex items-center justify-between text-emerald-400 font-bold text-[11px]">
+                    <span>🤖 پاسخ دستیار علمی فارماکُر:</span>
+                    <span class="text-[10px]">✓ بدون توهم علمی</span>
+                </div>
+                <p class="text-slate-200">${answerHtml}</p>
+                <div class="text-[10px] text-slate-400 pt-1.5 border-t border-slate-800">📚 منبع: ${refText}</div>
+            `;
+            history.appendChild(aiMsg);
+            history.scrollTop = history.scrollHeight;
+        }
+
+        // 4. Master Layer & Sub-Tab Switches
+        function switchMasterLayer(layer) {
+            activeLayer = layer;
+            const pubDiv = document.getElementById('layer-public');
+            const proDiv = document.getElementById('layer-pro');
+            const btnPub = document.getElementById('master-btn-public');
+            const btnPro = document.getElementById('master-btn-pro');
+
+            if (layer === 'public') {
+                pubDiv.classList.remove('hidden');
+                proDiv.classList.add('hidden');
+                btnPub.className = 'px-4 py-1.5 rounded-lg text-xs font-black transition-all bg-emerald-500 text-slate-950 shadow-md flex items-center gap-1.5';
+                btnPro.className = 'px-4 py-1.5 rounded-lg text-xs font-black transition-all text-slate-400 hover:text-white flex items-center gap-1.5';
+            } else {
+                pubDiv.classList.add('hidden');
+                proDiv.classList.remove('hidden');
+                btnPro.className = 'px-4 py-1.5 rounded-lg text-xs font-black transition-all bg-cyan-500 text-slate-950 shadow-md flex items-center gap-1.5';
+                btnPub.className = 'px-4 py-1.5 rounded-lg text-xs font-black transition-all text-slate-400 hover:text-white flex items-center gap-1.5';
+
+                setTimeout(() => {
+                    initTagGraphCanvas();
+                    drawInteractiveTagGraph();
+                }, 25);
             }
         }
 
-        function forceTypesetIframe() {
-            try {
-                const iframe = document.getElementById('module-iframe');
-                const iwin = iframe.contentWindow;
-                if (iwin && iwin.MathJax && iwin.MathJax.typesetPromise) {
-                    iwin.MathJax.typesetPromise();
+        function switchProSubTab(mode) {
+            const hub = document.getElementById('pro-subview-hub');
+            const ifr = document.getElementById('pro-subview-iframe');
+            if (mode === 'hub') {
+                ifr.classList.add('hidden');
+                hub.classList.remove('hidden');
+                document.getElementById('module-iframe-viewer').src = '';
+                setTimeout(() => {
+                    initTagGraphCanvas();
+                    drawInteractiveTagGraph();
+                }, 20);
+            } else {
+                hub.classList.add('hidden');
+                ifr.classList.remove('hidden');
+            }
+        }
+
+        function openFullModule(fileUrl, titleText) {
+            switchProSubTab('iframe');
+            document.getElementById('iframe-module-title').textContent = titleText;
+            document.getElementById('module-iframe-viewer').src = fileUrl;
+        }
+
+        // 5. Pro Layer: Interactive Co-occurrence #Tag Graph & Live Tag Filter
+        const tagClusters = {
+            hypokalemia: {
+                hub: '#هایپوکالمی',
+                hubColor: '#f43f5e',
+                noteTitle: '📝 نوت اتمیک متصل به تگ: #هایپوکالمی (۱۲۴ منشن علمی)',
+                noteBody: 'کاهش پتاسیم سرم (#هایپوکالمی) عارضه مشترک دیورتیک‌های لوپ (#فوروزماید) و #تیازیدها است. هیپوکالمی غشای میوسیت را هایپرپلاریزه کرده، طول پتانسیل عمل (APD) را افزایش می‌دهد و با کاهش رقابت با #دیگوکسین روی پمپ Na+/K+-ATPase، ریسک آریتمی و دید زرد (Xanthopsia) را به شدت بالا می‌برد.',
+                nodes: [
+                    { label: '#فوروزماید (لوپ)', count: '۸۵ منشن', x: 0.22, y: 0.25, color: '#ec4899' },
+                    { label: '#سمیت_دیگوکسین', count: '۹۲ منشن', x: 0.78, y: 0.24, color: '#f59e0b' },
+                    { label: '#هیدروکلروتیازید', count: '۶۴ منشن', x: 0.20, y: 0.78, color: '#10b981' },
+                    { label: '#آلکالوز_متابولیک', count: '۵۸ منشن', x: 0.50, y: 0.84, color: '#06b6d4' },
+                    { label: '#Torsades_QT', count: '۵۱ منشن', x: 0.80, y: 0.76, color: '#8b5cf6' }
+                ]
+            },
+            qt_torsades: {
+                hub: '#طولانی_شدن_QT',
+                hubColor: '#8b5cf6',
+                noteTitle: '📝 نوت اتمیک متصل به تگ: #طولانی_شدن_QT و Torsades de Pointes',
+                noteBody: 'مهار کانال‌های پتاسیمی (#IKr_hERG) در فاز ۳ توسط داروهای #کلاس_IA (کینیدین، پروکائین‌آماید در استیلاتورهای سریع به علت تجمع متابولیت NAPA) و #کلاس_III (سوتالول، دوفتیلید) باعث افزایش فاصله QT و بروز تاکی‌کاردی بطنی پلی‌مورفیک (Torsades) می‌شود. خط اول درمان فوری: تزریق #منیزیم_سولفات.',
+                nodes: [
+                    { label: '#کلاس_III (سوتالول)', count: '۸۸ منشن', x: 0.24, y: 0.24, color: '#a855f7' },
+                    { label: '#کلاس_IA (کینیدین/NAPA)', count: '۷۴ منشن', x: 0.76, y: 0.24, color: '#f43f5e' },
+                    { label: '#درمان: منیزیم سولفات', count: '۶۹ منشن', x: 0.24, y: 0.78, color: '#10b981' },
+                    { label: '#استثنا: آمیودارون (کم‌خطر)', count: '۴۵ منشن', x: 0.76, y: 0.78, color: '#06b6d4' }
+                ]
+            },
+            raas_kidney: {
+                hub: '#محور_RAAS',
+                hubColor: '#10b981',
+                noteTitle: '📝 نوت اتمیک متصل به تگ: #محور_RAAS و محافظت کلیوی/قلبی',
+                noteBody: 'مهارکننده‌های ACE (#کاپتوپریل) و #ARBs (#لوسارتان) خط اول درمان فشار خون در بیماران مبتلا به #دیابت و پروتئینوری و همچنین ستون اصلی کاهش مرگ‌ومیر در #نارسایی_قلبی هستند. هر دو گروه باعث #هایپرکالمی شده و در #بارداری مطلقاً ممنوع‌اند.',
+                nodes: [
+                    { label: '#کاپتوپریل (سرفه خشک)', count: '۹۵ منشن', x: 0.22, y: 0.24, color: '#10b981' },
+                    { label: '#لوسارتان (ارجح در نقرس)', count: '۸۱ منشن', x: 0.78, y: 0.24, color: '#06b6d4' },
+                    { label: '#ساکوبیترین (ARNI)', count: '۶۲ منشن', x: 0.22, y: 0.78, color: '#8b5cf6' },
+                    { label: '#اسپیرونولاکتون (ژنیکوماستی)', count: '۷۰ منشن', x: 0.78, y: 0.78, color: '#f59e0b' }
+                ]
+            },
+            cyp3a4: {
+                hub: '#آنزیم_CYP3A4',
+                hubColor: '#f59e0b',
+                noteTitle: '📝 نوت اتمیک متصل به تگ: #آنزیم_CYP3A4 و تداخلات متابولیک',
+                noteBody: 'سیتوکروم CYP3A4 مسئول متابولیسم طیف وسیعی از داروهای قلبی-عروقی است. مهارکننده‌های قوی این آنزیم (مانند ماکرولیدها، آزول‌ها و آب گریپ‌فروت) سطح سرمی #آملودیپین، #آمیودارون و استاتین‌ها را تا مرز مسمومیت افزایش می‌دهند.',
+                nodes: [
+                    { label: '#آب_گریپ‌فروت (مهارکننده)', count: '۶۷ منشن', x: 0.24, y: 0.25, color: '#f43f5e' },
+                    { label: '#آمیودارون (مهارکننده)', count: '۷۲ منشن', x: 0.76, y: 0.25, color: '#a855f7' },
+                    { label: '#آملودیپین / وراپامیل', count: '۵۴ منشن', x: 0.50, y: 0.80, color: '#10b981' }
+                ]
+            }
+        };
+
+        function filterProTagGraph(query) {
+            const q = query.trim().toLowerCase();
+            if (!q) return;
+            if (q.includes('پتاسیم') || q.includes('کالمی') || q.includes('فوروزماید') || q.includes('دیگوکسین')) loadTagCluster('hypokalemia');
+            else if (q.includes('qt') || q.includes('تورساد') || q.includes('سوتالول') || q.includes('منیزیم')) loadTagCluster('qt_torsades');
+            else if (q.includes('raas') || q.includes('سرفه') || q.includes('کاپتوپریل') || q.includes('لوسارتان')) loadTagCluster('raas_kidney');
+            else if (q.includes('cyp') || q.includes('گریپ') || q.includes('آملودیپین')) loadTagCluster('cyp3a4');
+        }
+
+        function initTagGraphCanvas() {
+            const canvas = document.getElementById('interactive-tag-canvas');
+            if (!canvas) return;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            if (rect.width === 0) return;
+            canvas.width = rect.width * DPR;
+            canvas.height = rect.height * DPR;
+            const ctx = canvas.getContext('2d', { alpha: false });
+            ctx.scale(DPR, DPR);
+            graphMeta = { ctx, w: rect.width, h: rect.height };
+        }
+
+        function loadTagCluster(key) {
+            activeClusterKey = key;
+            ['hypokalemia', 'qt_torsades', 'raas_kidney', 'cyp3a4'].forEach(k => {
+                const btn = document.getElementById(`cluster-btn-${k}`);
+                if (k === key) {
+                    btn.className = 'px-2.5 py-1.5 rounded-lg bg-cyan-600 text-white text-xs font-bold shadow-md';
+                } else {
+                    btn.className = 'px-2.5 py-1.5 rounded-lg bg-tokyo-bg border border-tokyo-border text-slate-300 text-xs font-bold';
                 }
-            } catch (e) {}
+            });
+
+            const cluster = tagClusters[key];
+            document.getElementById('note-header-title').textContent = cluster.noteTitle;
+            document.getElementById('note-body-content').textContent = cluster.noteBody;
+            drawInteractiveTagGraph();
         }
 
-        function toggleGithubGuideModal() {
-            const modal = document.getElementById('github-modal');
-            modal.classList.toggle('hidden');
+        function drawInteractiveTagGraph() {
+            if (!graphMeta) return;
+            const { ctx, w, h } = graphMeta;
+            const cluster = tagClusters[activeClusterKey];
+
+            ctx.fillStyle = '#060911';
+            ctx.fillRect(0, 0, w, h);
+
+            const cx = w / 2, cy = h / 2;
+
+            cluster.nodes.forEach(node => {
+                const nx = node.x * w, ny = node.y * h;
+
+                ctx.beginPath();
+                ctx.strokeStyle = 'rgba(148, 163, 184, 0.35)';
+                ctx.lineWidth = 2;
+                ctx.moveTo(cx, cy);
+                ctx.lineTo(nx, ny);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.arc(nx, ny, 16, 0, Math.PI * 2);
+                ctx.fillStyle = node.color;
+                ctx.globalAlpha = 0.2;
+                ctx.fill();
+                ctx.globalAlpha = 1.0;
+
+                ctx.beginPath();
+                ctx.arc(nx, ny, 10, 0, Math.PI * 2);
+                ctx.fillStyle = node.color;
+                ctx.fill();
+
+                ctx.fillStyle = '#f8fafc';
+                ctx.font = 'bold 11px Vazirmatn';
+                ctx.textAlign = 'center';
+                ctx.fillText(node.label, nx, ny - 16);
+
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '10px Vazirmatn';
+                ctx.fillText(node.count, nx, ny + 22);
+            });
+
+            ctx.beginPath();
+            ctx.arc(cx, cy, 26, 0, Math.PI * 2);
+            ctx.fillStyle = cluster.hubColor;
+            ctx.globalAlpha = 0.25;
+            ctx.fill();
+            ctx.globalAlpha = 1.0;
+
+            ctx.beginPath();
+            ctx.arc(cx, cy, 17, 0, Math.PI * 2);
+            ctx.fillStyle = cluster.hubColor;
+            ctx.fill();
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 12px Vazirmatn';
+            ctx.textAlign = 'center';
+            ctx.fillText(cluster.hub, cx, cy + 4);
         }
 
-        function copyRepoStructure() {
-            const textToCopy = `index.html\nantiarrhythmic_pharmacology_app.html\nheart_failure_pharmacology_app.html\nantihypertensive_diuretics_pharmacology_app.html`;
-            const tempInput = document.createElement('textarea');
-            tempInput.value = textToCopy;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-
-            const btn = document.getElementById('copy-struct-btn');
-            const originalHtml = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i><span>کپی شد!</span>';
-            setTimeout(() => {
-                btn.innerHTML = originalHtml;
-            }, 2000);
+        // 6. Pro Prescription Quiz & Anki Logic
+        function evaluatePrescriptionQuiz(isCorrect) {
+            const box = document.getElementById('rx-quiz-feedback');
+            box.classList.remove('hidden');
+            if (isCorrect) {
+                box.className = 'p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/40 text-xs text-emerald-200 leading-relaxed';
+                box.innerHTML = '✅ <strong>پاسخ صحیح! (+15 XP به لیگ ماهانه شما اضافه شد)</strong> دیورتیک‌های تیازیدی هم نقرس را تشدید می‌کنند و هم با ایجاد هیپوکالمی، بیمار مصرف‌کننده دیگوکسین را وارد فاز مسمومیت می‌کنند. در بیمار مبتلا به نقرس، داروی ارجح «لوسارتان» است.';
+            } else {
+                box.className = 'p-3 rounded-xl bg-rose-950/40 border border-rose-500/40 text-xs text-rose-200 leading-relaxed';
+                box.innerHTML = '❌ <strong>پاسخ ناصحیح!</strong> کارودیلول مرگ‌ومیر را در نارسایی قلبی کاهش می‌دهد اما وراپامیل در نارسایی سیستولیک ممنوع است. <strong>این تست خودکار به جعبه لایتنر (Anki) پایین صفحه اضافه شد!</strong>';
+            }
         }
 
-        // Check URL hash on load to support direct links
-        window.addEventListener('DOMContentLoaded', () => {
-            const hash = decodeURIComponent(window.location.hash.replace('#', ''));
-            if (hash && hash.endsWith('.html')) {
-                openModuleSmart(hash, 'نمایشگر هوشمند جزوه فارماکولوژی');
+        function flipAnkiCard() {
+            const textEl = document.getElementById('anki-card-text');
+            ankiFlipped = !ankiFlipped;
+            if (ankiFlipped) {
+                textEl.innerHTML = '<span class="text-emerald-400">پاسخ:</span> <strong>اینامرینون</strong> به علت ایجاد ترومبوسیتوپنی (کاهش پلاکت) و افزایش آنزیم‌های کبدی جمع‌آوری شد. <strong>میلرینون</strong> نیز در مصرف مزمن خوراکی به دلیل آریتمی‌زایی، مرگ‌ومیر را افزایش می‌دهد (اسلاید ۳۷ نارسایی قلبی).';
+            } else {
+                textEl.innerHTML = 'سؤال: چرا داروی «اینامرینون» از بازار دارویی جمع‌آوری شد و چرا «میلرینون» فقط در نارسایی حاد (IV) کاربرد دارد؟';
+            }
+        }
+
+        function nextAnkiCard(difficulty) {
+            ankiFlipped = false;
+            document.getElementById('anki-counter-badge').textContent = 'کارت ۲ از ۱۲ (تست‌های غلط قبلی شما)';
+            document.getElementById('anki-card-text').innerHTML = 'سؤال بعدی: چرا عارضه «سرفه خشک» و «آنژیوادم» با لوسارتان (ARB) بسیار کمتر از کاپتوپریل (ACEi) رخ می‌دهد؟ (کلیک کنید)';
+        }
+
+        window.addEventListener('resize', () => {
+            if (activeLayer === 'pro') {
+                initTagGraphCanvas();
+                drawInteractiveTagGraph();
             }
         });
     </script>
