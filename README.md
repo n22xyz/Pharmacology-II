@@ -1,2 +1,2 @@
 # Pharmacology-II
-Uni Semester 5
+PharmaCore StartUp DEMO
