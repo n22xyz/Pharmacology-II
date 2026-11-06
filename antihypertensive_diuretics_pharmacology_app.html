@@ -97,6 +97,10 @@
         .glow-emerald {
             box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.35);
         }
+
+        /* SVG figures: keep ion formulas (Na⁺, H₂O ...) in correct order inside the RTL page */
+        #macro-nephron-svg text, #cellular-zoom-svg text { unicode-bidi: plaintext; }
+        #macro-nephron-svg, #cellular-zoom-svg { display: block; }
         .ltr-num {
             direction: ltr;
             display: inline-block;
@@ -293,56 +297,64 @@
                         <!-- Interactive SVG of Full Nephron (Slide 33) -->
                         <div class="bg-slate-950 rounded-xl border border-slate-800 p-2 relative overflow-hidden bio-grid">
                             <svg id="macro-nephron-svg" viewBox="0 0 540 340" class="w-full h-auto">
-                                <!-- Cortex / Medulla Divider Line (Slide 33) -->
-                                <line x1="15" y1="165" x2="525" y2="165" stroke="#10b981" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.6"/>
-                                <text x="55" y="155" fill="#6ee7b7" font-size="11" font-weight="bold">قشر کلیه (Cortex)</text>
-                                <text x="55" y="182" fill="#38bdf8" font-size="11" font-weight="bold">مدولا (Medulla)</text>
+                                <!-- Cortex / Medulla divider -->
+                                <line x1="8" y1="168" x2="532" y2="168" stroke="#10b981" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.6"/>
+                                <text x="40" y="147" fill="#6ee7b7" font-size="11" font-weight="700" text-anchor="middle" data-w="64">قشر کلیه</text>
+                                <text x="40" y="159" fill="#6ee7b7" font-size="9" text-anchor="middle">Cortex</text>
+                                <text x="40" y="186" fill="#38bdf8" font-size="11" font-weight="700" text-anchor="middle" data-w="64">مدولا</text>
+                                <text x="40" y="198" fill="#38bdf8" font-size="9" text-anchor="middle">Medulla</text>
 
-                                <!-- 1. Glomerulus & Bowman's Capsule -->
+                                <!-- 1. Glomerulus & Bowman's capsule -->
                                 <g onclick="jumpToStation(6)" class="cursor-pointer">
-                                    <path d="M 185 30 C 155 25, 155 75, 185 70 C 170 60, 170 40, 185 30 Z" fill="#f43f5e" stroke="#fda4af" stroke-width="2.5"/>
-                                    <circle cx="165" cy="50" r="14" fill="none" stroke="#e2e8f0" stroke-width="3"/>
-                                    <text x="165" y="20" fill="#fda4af" font-size="11" font-weight="black" text-anchor="middle">گلومرول (فیلتراسیون)</text>
+                                    <circle cx="150" cy="52" r="27" fill="rgba(244,63,94,0.10)" stroke="#e2e8f0" stroke-width="3"/>
+                                    <circle cx="150" cy="52" r="15" fill="#f43f5e" stroke="#fda4af" stroke-width="2.5"/>
+                                    <path d="M 139 53 C 143 41, 151 63, 161 49" fill="none" stroke="#fecdd3" stroke-width="2" stroke-linecap="round"/>
+                                    <text x="150" y="15" fill="#fda4af" font-size="11" font-weight="800" text-anchor="middle" data-w="150">گلومرول (فیلتراسیون)</text>
                                 </g>
 
-                                <!-- 2. Proximal Convoluted Tubule (PCT - 65-70% Na+) -->
+                                <!-- 2. Proximal convoluted tubule -->
                                 <path id="path-pct" onclick="jumpToStation(24)" class="cursor-pointer transition-all"
-                                      d="M 152 50 C 125 55, 130 135, 105 135 C 80 135, 95 65, 65 70 C 40 75, 50 130, 50 165"
+                                      d="M 150 76 C 188 83, 188 116, 150 120 C 118 124, 116 150, 100 168"
                                       fill="none" stroke="#f59e0b" stroke-width="12" stroke-linecap="round"/>
-                                <text x="85" y="52" fill="#fcd34d" font-size="11" font-weight="black" text-anchor="middle">PCT (65-70% Na⁺)</text>
-                                <text x="85" y="38" fill="#fbbf24" font-size="9" font-weight="bold" text-anchor="middle">مهارکننده کربنیک انیدراز (NaHCO₃)</text>
+                                <text x="46" y="88" fill="#fcd34d" font-size="12" font-weight="800" text-anchor="middle">PCT</text>
+                                <text x="46" y="102" fill="#fcd34d" font-size="10" font-weight="700" text-anchor="middle" data-w="84">65-70% Na⁺&#8206;</text>
+                                <text x="46" y="116" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle" data-w="84">مهارکننده کربنیک</text>
+                                <text x="46" y="128" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle" data-w="84">انیدراز (NaHCO₃)</text>
 
-                                <!-- 3. Descending Limb of Loop of Henle (H2O & Osmotics) -->
+                                <!-- 3. Descending limb + thin ascending limb -->
                                 <path id="path-desc" onclick="jumpToStation(42)" class="cursor-pointer transition-all"
-                                      d="M 50 165 L 50 265 C 50 315, 165 315, 165 265 L 165 215"
+                                      d="M 100 168 L 100 258 C 100 312, 240 312, 240 258 L 240 218"
                                       fill="none" stroke="#06b6d4" stroke-width="8" stroke-linecap="round"/>
-                                <text x="108" y="325" fill="#67e8f9" font-size="11" font-weight="black" text-anchor="middle">قوس نزولی هنله (خروج H₂O - مانیتول)</text>
+                                <text x="170" y="328" fill="#67e8f9" font-size="11" font-weight="700" text-anchor="middle" data-w="230">قوس نزولی هنله (خروج H₂O - مانیتول)</text>
 
-                                <!-- 4. Thick Ascending Limb (TAL - 25% Na+, K+, 2Cl-) -->
+                                <!-- 4. Thick ascending limb -->
                                 <path id="path-tal" onclick="jumpToStation(58)" class="cursor-pointer transition-all"
-                                      d="M 165 215 L 165 110"
+                                      d="M 240 218 L 240 118"
                                       fill="none" stroke="#ec4899" stroke-width="13" stroke-linecap="round"/>
-                                <text x="235" y="195" fill="#f472b6" font-size="11" font-weight="black" text-anchor="middle">TAL (~25% Na⁺K⁺2Cl⁻)</text>
-                                <text x="235" y="210" fill="#fbcfe8" font-size="10" font-weight="bold" text-anchor="middle">دیورتیک‌های لوپ (فوروزماید)</text>
+                                <text x="352" y="192" fill="#f472b6" font-size="11" font-weight="800" text-anchor="middle" data-w="150">TAL (~25% Na⁺K⁺2Cl⁻)&#8206;</text>
+                                <text x="352" y="208" fill="#fbcfe8" font-size="10" font-weight="700" text-anchor="middle" data-w="150">دیورتیک‌های لوپ (فوروزماید)</text>
 
-                                <!-- 5. Distal Convoluted Tubule (DCT - ~5% NaCl) -->
+                                <!-- 5. Distal convoluted tubule -->
                                 <path id="path-dct" onclick="jumpToStation(76)" class="cursor-pointer transition-all"
-                                      d="M 165 110 C 165 55, 255 55, 265 115 C 275 165, 325 145, 340 95 C 355 55, 420 60, 430 115"
+                                      d="M 240 118 C 240 86, 292 84, 300 116 C 308 148, 352 148, 366 116 C 380 86, 430 90, 440 128"
                                       fill="none" stroke="#10b981" stroke-width="11" stroke-linecap="round"/>
-                                <text x="305" y="52" fill="#6ee7b7" font-size="11" font-weight="black" text-anchor="middle">DCT (~5% Na⁺Cl⁻) - تیازیدها</text>
+                                <text x="352" y="40" fill="#6ee7b7" font-size="11" font-weight="800" text-anchor="middle" data-w="150">DCT (~5% Na⁺Cl⁻)&#8206;</text>
+                                <text x="352" y="55" fill="#a7f3d0" font-size="10" font-weight="700" text-anchor="middle" data-w="150">تیازیدها (مهار NCC)</text>
 
-                                <!-- 6. Collecting Tubule & Duct (CD - 1-2% Na+, K+, H+, Aldosterone & ADH) -->
+                                <!-- 6. Collecting duct -->
                                 <path id="path-cd" onclick="jumpToStation(92)" class="cursor-pointer transition-all"
-                                      d="M 430 115 L 430 295"
+                                      d="M 440 128 L 440 296"
                                       fill="none" stroke="#8b5cf6" stroke-width="12" stroke-linecap="round"/>
-                                <text x="485" y="145" fill="#c4b5fd" font-size="10" font-weight="black" text-anchor="middle">لوله جمع‌کننده</text>
-                                <text x="485" y="160" fill="#ddd6fe" font-size="9" font-weight="bold" text-anchor="middle">(1-2% Na⁺ | آلدوسترون)</text>
-                                <text x="485" y="245" fill="#38bdf8" font-size="10" font-weight="bold" text-anchor="middle">+ ADH (بازجذب H₂O)</text>
-                                <text x="430" y="325" fill="#e2e8f0" font-size="11" font-weight="black" text-anchor="middle">↓ دفع ادرار (Urine)</text>
+                                <text x="500" y="190" fill="#c4b5fd" font-size="10" font-weight="800" text-anchor="middle" data-w="76">لوله جمع‌کننده</text>
+                                <text x="500" y="204" fill="#ddd6fe" font-size="9" font-weight="700" text-anchor="middle" data-w="76">1-2% Na⁺&#8206;</text>
+                                <text x="500" y="217" fill="#ddd6fe" font-size="9" font-weight="700" text-anchor="middle" data-w="76">آلدوسترون</text>
+                                <text x="500" y="262" fill="#38bdf8" font-size="10" font-weight="800" text-anchor="middle" data-w="76">+ ADH</text>
+                                <text x="500" y="275" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle" data-w="76">بازجذب H₂O</text>
+                                <text x="440" y="326" fill="#e2e8f0" font-size="11" font-weight="800" text-anchor="middle" data-w="120">↓ دفع ادرار (Urine)</text>
 
-                                <!-- Animated Scrubber Marker Dot on Nephron -->
-                                <circle id="nephron-marker-outer" cx="85" cy="100" r="14" fill="rgba(255,255,255,0.25)"/>
-                                <circle id="nephron-marker-dot" cx="85" cy="100" r="8" fill="#ffffff" stroke="#10b981" stroke-width="3"/>
+                                <!-- Scrubber marker (positioned on the real paths by JS) -->
+                                <circle id="nephron-marker-outer" cx="150" cy="52" r="14" fill="rgba(255,255,255,0.25)" pointer-events="none"/>
+                                <circle id="nephron-marker-dot" cx="150" cy="52" r="8" fill="#ffffff" stroke="#10b981" stroke-width="3" pointer-events="none"/>
                             </svg>
                         </div>
 
@@ -392,28 +404,27 @@
 
                         <!-- Dynamic SVG replicating Katzung/Gholibeiki Cellular Diagrams (Lumen - Cell - Interstitium/Blood) -->
                         <div class="bg-slate-950 rounded-xl border border-slate-800 p-2 relative overflow-hidden">
-                            <svg id="cellular-zoom-svg" viewBox="0 0 540 280" class="w-full h-auto">
-                                <!-- 3 Vertical Zones: Left = Lumen (Urine - Yellow), Middle = Tubular Cell (Green), Right = Interstitium/Blood (Blue) -->
-                                <rect x="0" y="0" width="165" height="280" fill="#ca8a04" opacity="0.22"/>
-                                <rect x="165" y="20" width="210" height="240" rx="18" fill="#065f46" opacity="0.45" stroke="#10b981" stroke-width="3"/>
-                                <rect x="375" y="0" width="165" height="280" fill="#0284c7" opacity="0.22"/>
+                            <svg id="cellular-zoom-svg" viewBox="0 0 540 290" class="w-full h-auto">
+                                <!-- 3 vertical zones: Lumen (yellow) | Tubular cell (green) | Interstitium/Blood (blue) -->
+                                <rect x="0" y="0" width="165" height="290" fill="#ca8a04" opacity="0.22"/>
+                                <rect x="165" y="20" width="210" height="228" rx="18" fill="#065f46" opacity="0.45" stroke="#10b981" stroke-width="3"/>
+                                <rect x="375" y="0" width="165" height="290" fill="#0284c7" opacity="0.22"/>
 
-                                <!-- Zone Headers -->
-                                <text x="82" y="22" fill="#fde047" font-size="12" font-weight="black" text-anchor="middle">لومن - ادرار (Lumen)</text>
-                                <text id="svg-cell-header" x="270" y="42" fill="#a7f3d0" font-size="12" font-weight="black" text-anchor="middle">سلول توبول پروگزیمال (PCT)</text>
-                                <text x="457" y="22" fill="#7dd3fc" font-size="12" font-weight="black" text-anchor="middle">مایع بینابینی - خون (Blood)</text>
+                                <text x="82" y="22" fill="#fde047" font-size="12" font-weight="700" text-anchor="middle" data-w="150">لومن - ادرار (Lumen)</text>
+                                <text id="svg-cell-header" x="270" y="42" fill="#a7f3d0" font-size="12" font-weight="700" text-anchor="middle" data-w="190">سلول توبول پروگزیمال (PCT)</text>
+                                <text x="457" y="22" fill="#7dd3fc" font-size="12" font-weight="700" text-anchor="middle" data-w="150">مایع بینابینی - خون (Blood)</text>
 
-                                <!-- Basolateral Na+/K+ ATPase Pump (Universal on right membrane) -->
-                                <g transform="translate(352, 72)">
-                                    <circle cx="23" cy="23" r="22" fill="#f59e0b" stroke="#fef08a" stroke-width="2"/>
-                                    <text x="23" y="26" fill="#451a03" font-size="10" font-weight="black" text-anchor="middle">ATP</text>
-                                    <path d="M -10 12 L 58 12" stroke="#fde047" stroke-width="2.5"/>
-                                    <text x="72" y="16" fill="#fde047" font-size="11" font-weight="bold">3Na⁺</text>
-                                    <path d="M 58 34 L -10 34" stroke="#c4b5fd" stroke-width="2.5"/>
-                                    <text x="-24" y="38" fill="#c4b5fd" font-size="11" font-weight="bold">2K⁺</text>
-                                </g>
+                                <!-- Basolateral Na+/K+ ATPase (common to all stations) -->
+                                <line x1="397" y1="72" x2="437" y2="72" stroke="#fde047" stroke-width="2.5"/>
+                                <polygon points="446,72 437,67.2 437,76.8" fill="#fde047"/>
+                                <line x1="446" y1="92" x2="406" y2="92" stroke="#c4b5fd" stroke-width="2.5"/>
+                                <polygon points="397,92 406,87.2 406,96.8" fill="#c4b5fd"/>
+                                <circle cx="375" cy="82" r="20" fill="#f59e0b" stroke="#fef08a" stroke-width="2"/>
+                                <text x="375" y="86" fill="#451a03" font-size="10" font-weight="800" text-anchor="middle">ATP</text>
+                                <text x="476" y="76" fill="#fde047" font-size="11" font-weight="800" text-anchor="middle">3Na⁺&#8206;</text>
+                                <text x="476" y="96" fill="#c4b5fd" font-size="11" font-weight="800" text-anchor="middle">2K⁺&#8206;</text>
 
-                                <!-- Dynamic Transporter Content Group (Populated by JS based on Scrubber Station) -->
+                                <!-- Dynamic transporters (filled by JS per station) -->
                                 <g id="svg-dynamic-transporters"></g>
                             </svg>
                         </div>
@@ -898,30 +909,87 @@
             }
         };
 
-        // Map 0..100 scrubber position to coordinates on the macro nephron SVG
+        // Map 0..100 scrubber position to a point ON the real nephron paths (so the dot never drifts off the figure)
+        let _nephronPaths = null;
+        function pointOnPath(el, p) {
+            const len = el.getTotalLength();
+            const pt = el.getPointAtLength(Math.max(0, Math.min(1, p)) * len);
+            return { x: pt.x, y: pt.y };
+        }
         function getNephronMarkerCoords(pos) {
-            if (pos < 14) {
-                return { x: 165, y: 50 }; // Glomerulus
-            } else if (pos < 34) {
-                let p = (pos - 14) / 20;
-                return { x: 145 - p * 90, y: 75 + p * 65 }; // PCT
-            } else if (pos < 50) {
-                let p = (pos - 34) / 16;
-                return { x: 50 + p * 115, y: 230 + Math.sin(p * Math.PI) * 65 }; // Loop Descending
-            } else if (pos < 66) {
-                let p = (pos - 50) / 16;
-                return { x: 165, y: 215 - p * 100 }; // TAL
-            } else if (pos < 84) {
-                let p = (pos - 66) / 18;
-                return { x: 185 + p * 230, y: 95 }; // DCT
-            } else {
-                let p = (pos - 84) / 16;
-                return { x: 430, y: 125 + p * 155 }; // Collecting Duct
+            if (!_nephronPaths) {
+                const g = id => document.getElementById(id);
+                _nephronPaths = { pct: g('path-pct'), desc: g('path-desc'), tal: g('path-tal'), dct: g('path-dct'), cd: g('path-cd') };
             }
+            const P = _nephronPaths;
+            if (pos < 14) return { x: 150, y: 52 };                       // Glomerulus (centre of Bowman's capsule)
+            if (pos < 34) return pointOnPath(P.pct,  (pos - 14) / 20);    // PCT
+            if (pos < 50) return pointOnPath(P.desc, (pos - 34) / 16);    // Descending + thin ascending limb
+            if (pos < 66) return pointOnPath(P.tal,  (pos - 50) / 16);    // TAL
+            if (pos < 84) return pointOnPath(P.dct,  (pos - 66) / 18);    // DCT
+            return pointOnPath(P.cd, (pos - 84) / 16);                     // Collecting duct
+        }
+
+        // Shrink any SVG label that would be wider than its slot (data-w) or would leave the viewBox.
+        function fitSvgTexts(svg) {
+            if (!svg) return;
+            const vb = svg.viewBox.baseVal;
+            svg.querySelectorAll('text').forEach(t => {
+                if (!t.dataset.fs) t.dataset.fs = t.getAttribute('font-size');
+                t.setAttribute('font-size', t.dataset.fs);
+                let bb;
+                try { bb = t.getBBox(); } catch (e) { return; }
+                if (!bb.width) return;
+                const cx = bb.x + bb.width / 2;
+                let limit = Math.min((cx - 3) * 2, (vb.width - 3 - cx) * 2);
+                const dw = Number(t.getAttribute('data-w')) || 0;
+                if (dw) limit = Math.min(limit, dw);
+                if (limit > 0 && bb.width > limit) {
+                    t.setAttribute('font-size', Math.max(6.5, parseFloat(t.dataset.fs) * limit / bb.width).toFixed(2));
+                }
+            });
+        }
+        function refitFigures() {
+            fitSvgTexts(document.getElementById('macro-nephron-svg'));
+            fitSvgTexts(document.getElementById('cellular-zoom-svg'));
         }
 
         // Render the exact cellular transporter diagram (Slides 37, 41, 46, 50, 61) inside #svg-dynamic-transporters
+        // ---- tiny SVG helpers so every label / arrow / transporter is placed on an explicit grid ----
+        const SV = {
+            // keep trailing superscript charges (Na⁺, Cl⁻ ...) attached to the ion inside RTL text
+            lrm: s => s.replace(/([A-Za-z0-9₀-₉²³]*[⁺⁻])/g, '$1\u200E'),
+            t(x, y, s, fill = '#fff', size = 11, weight = 700, w = 0) {
+                return `<text x="${x}" y="${y}" fill="${fill}" font-size="${size}" font-weight="${weight}" text-anchor="middle"${w ? ` data-w="${w}"` : ''}>${SV.lrm(s)}</text>`;
+            },
+            arrow(x1, y1, x2, y2, color, sw = 2.5, dash = '') {
+                const a = Math.atan2(y2 - y1, x2 - x1), L = 9, W = 4.8;
+                const bx = x2 - L * Math.cos(a), by = y2 - L * Math.sin(a);
+                const px = W * Math.sin(a), py = W * Math.cos(a);
+                return `<line x1="${x1}" y1="${y1}" x2="${bx.toFixed(1)}" y2="${by.toFixed(1)}" stroke="${color}" stroke-width="${sw}"${dash ? ` stroke-dasharray="${dash}"` : ''}/>` +
+                       `<polygon points="${x2},${y2} ${(bx + px).toFixed(1)},${(by - py).toFixed(1)} ${(bx - px).toFixed(1)},${(by + py).toFixed(1)}" fill="${color}"/>`;
+            },
+            circ(cx, cy, r, fill, label, txt, size = 10) {
+                return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" stroke="#fff" stroke-width="2"/>` +
+                       SV.t(cx, cy + size * 0.36, label, txt, size, 800, r * 2 - 4);
+            },
+            badge(cx, cy, w, h, fill, s, txt = '#fff', size = 10) {
+                return `<rect x="${cx - w / 2}" y="${cy - h / 2}" width="${w}" height="${h}" rx="6" fill="${fill}"/>` +
+                       SV.t(cx, cy + size * 0.36, s, txt, size, 800, w - 8);
+            }
+        };
+
+        // Only rebuild the zoom when the station / drug mode really changes (no flicker while the dot is sliding)
         function renderCellularZoom(pos) {
+            const st = pos < 14 ? 1 : pos < 34 ? 2 : pos < 50 ? 3 : pos < 66 ? 4 : pos < 84 ? 5 : 6;
+            const key = st + '|' + currentDrugMode;
+            if (window.__cellKey === key) return;
+            window.__cellKey = key;
+            renderCellularZoomInner(pos);
+            fitSvgTexts(document.getElementById('cellular-zoom-svg'));
+        }
+
+        function renderCellularZoomInner(pos) {
             const g = document.getElementById('svg-dynamic-transporters');
             const header = document.getElementById('svg-cell-header');
             const zoomTitle = document.getElementById('cell-zoom-title');
@@ -940,7 +1008,7 @@
 
             if (pos < 14) {
                 // STATION 1: Glomerulus, Juxtaglomerular Apparatus & Vascular Smooth Muscle
-                header.textContent = 'سلول جنب‌گلومرولی (JG) و عضله صاف عروق';
+                header.textContent = 'سلول JG و عضله صاف عروق';
                 zoomTitle.innerHTML = '<i class="fa-solid fa-microscope text-rose-400"></i><span>زوم سلولی: گلومرول، ترشح رنین و کانال کلسیم عروقی (اسلاید ۲۰ و ۲۳)</span>';
                 segBadge.textContent = 'بخش ۱: گلومرول و آرتریول کلیه';
                 reabsorbBadge.textContent = 'فیلتراسیون گلومرولی و تنظیم رنین';
@@ -950,22 +1018,22 @@
                 stPearl.innerHTML = '<strong>نکته امتحانی (اسلاید ۱۴ و ۲۱):</strong> بتابلاکرها با مهار گیرنده $\\beta_1$ کلیه ترشح رنین را مهار می‌کنند. دی‌هیدروپیریدین‌ها (آملودیپین و نیفدیپین) انتخابی عروق بوده و عارضه شاخص آن‌ها <strong>ادم قوزک پا</strong> و گرگرفتگی است.';
 
                 const blockActive = (currentDrugMode === 'raas_ccb' || currentDrugMode === 'symp');
-                g.innerHTML = `
-                    <!-- L-Type Ca2+ Channel on Vascular Smooth Muscle -->
-                    <rect x="145" y="75" width="42" height="36" rx="8" fill="#10b981" stroke="#fff" stroke-width="2"/>
-                    <text x="166" y="97" fill="#052e16" font-size="10" font-weight="black" text-anchor="middle">Ca²⁺ Ch</text>
-                    <path d="M 95 93 L 235 93" stroke="#6ee7b7" stroke-width="3"/>
-                    <text x="72" y="97" fill="#6ee7b7" font-size="12" font-weight="black">Ca²⁺</text>
-                    <text x="275" y="97" fill="#a7f3d0" font-size="11" font-weight="bold">← انقباض عروق (↑ PVR)</text>
-                    ${blockActive ? `<rect x="135" y="52" width="110" height="22" rx="6" fill="#f43f5e"/><text x="190" y="67" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">مهار توسط آملودیپین/نیفدیپین</text>` : ''}
-
-                    <!-- Beta-1 Receptor & Renin Secretion -->
-                    <circle cx="375" cy="185" r="22" fill="#38bdf8" stroke="#fff" stroke-width="2"/>
-                    <text x="375" y="189" fill="#082f49" font-size="11" font-weight="black" text-anchor="middle">گیرنده β1</text>
-                    <path d="M 340 185 L 250 185" stroke="#38bdf8" stroke-width="3"/>
-                    <text x="245" y="168" fill="#bae6fd" font-size="11" font-weight="bold" text-anchor="middle">ترشح رنین به خون (→ Ang I → Ang II)</text>
-                    ${currentDrugMode === 'symp' ? `<rect x="315" y="212" width="120" height="22" rx="6" fill="#f43f5e"/><text x="375" y="227" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">مهار توسط بتابلاکرها</text>` : ''}
-                `;
+                g.innerHTML = [
+                    SV.arrow(84, 100, 134, 100, '#6ee7b7', 3),
+                    SV.arrow(197, 100, 240, 100, '#6ee7b7', 3),
+                    '<rect x="135" y="85" width="60" height="30" rx="8" fill="#10b981" stroke="#fff" stroke-width="2"/>',
+                    SV.t(165, 104, 'Ca²⁺ Ch', '#052e16', 10, 800),
+                    SV.t(60, 104, 'Ca²⁺', '#6ee7b7', 12, 800),
+                    SV.t(305, 97, 'انقباض عروق', '#a7f3d0', 11, 700, 100),
+                    SV.t(305, 112, '(↑ PVR)', '#a7f3d0', 10, 700, 100),
+                    blockActive ? SV.badge(270, 68, 170, 22, '#f43f5e', 'مهار توسط آملودیپین/نیفدیپین') : '',
+                    SV.arrow(350, 190, 236, 190, '#38bdf8', 3),
+                    SV.circ(375, 190, 22, '#38bdf8', 'β₁', '#082f49', 13),
+                    SV.t(470, 194, 'گیرنده β1', '#bae6fd', 10, 700, 80),
+                    SV.t(290, 176, 'ترشح رنین به خون', '#bae6fd', 11, 700, 150),
+                    SV.t(290, 208, '(→ Ang I → Ang II)', '#bae6fd', 10, 700, 150),
+                    currentDrugMode === 'symp' ? SV.badge(290, 232, 140, 22, '#f43f5e', 'مهار توسط بتابلاکرها') : ''
+                ].join('');
 
             } else if (pos < 34) {
                 // STATION 2: Proximal Convoluted Tubule (PCT) - Slide 37
@@ -979,36 +1047,30 @@
                 stPearl.innerHTML = '<strong>نکته امتحانی (اسلاید ۳۸ و ۳۹):</strong> مهار استازولامید باعث دفع بی‌کربنات، <strong>قلیایی شدن ادرار</strong> (کاربرد در مسمومیت سالیسیلات‌ها، عارضه سنگ کلیه کلسیمی) و <strong>اسیدوز متابولیک</strong> می‌شود. در سیروز کبدی به علت ایجاد <strong>هایپرآمونمی</strong> ممنوع است!';
 
                 const caBlocked = (currentDrugMode === 'cai');
-                g.innerHTML = `
-                    <!-- NHE3 Antiporter on Luminal Membrane -->
-                    <circle cx="165" cy="85" r="20" fill="#d8b4fe" stroke="#fff" stroke-width="2"/>
-                    <text x="165" y="89" fill="#3b0764" font-size="10" font-weight="black" text-anchor="middle">NHE3</text>
-                    <path d="M 115 76 L 215 76" stroke="#fde047" stroke-width="2.5"/>
-                    <text x="95" y="80" fill="#fde047" font-size="11" font-weight="black">Na⁺</text>
-                    <path d="M 215 95 L 115 95" stroke="#fda4af" stroke-width="2.5"/>
-                    <text x="95" y="99" fill="#fda4af" font-size="11" font-weight="black">H⁺</text>
-
-                    <!-- H+ + HCO3- <-> H2CO3 <-> H2O + CO2 with CA boxes (Slide 37) -->
-                    <text x="82" y="132" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">HCO₃⁻ + H⁺ → H₂CO₃</text>
-                    <rect x="130" y="148" width="52" height="24" rx="5" fill="${caBlocked ? '#f43f5e' : '#fef08a'}" stroke="#000" stroke-width="1.5"/>
-                    <text x="156" y="164" fill="${caBlocked ? '#fff' : '#000'}" font-size="11" font-weight="black" text-anchor="middle">${caBlocked ? 'مهار CA!' : 'آنزیم CA'}</text>
-
-                    <text x="82" y="205" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">H₂O + CO₂</text>
-                    <path d="M 120 201 L 210 201" stroke="#a7f3d0" stroke-width="2.5" stroke-dasharray="4,3"/>
-                    <text x="260" y="205" fill="#a7f3d0" font-size="11" font-weight="bold" text-anchor="middle">CO₂ + H₂O</text>
-
-                    <rect x="235" y="148" width="52" height="24" rx="5" fill="${caBlocked ? '#f43f5e' : '#fef047'}" stroke="#000" stroke-width="1.5"/>
-                    <text x="261" y="164" fill="${caBlocked ? '#fff' : '#000'}" font-size="11" font-weight="black" text-anchor="middle">${caBlocked ? 'مهار CA!' : 'آنزیم CA'}</text>
-
-                    <!-- Basolateral HCO3- reabsorption -->
-                    <circle cx="375" cy="145" r="16" fill="#d8b4fe" stroke="#fff" stroke-width="1.5"/>
-                    <path d="M 310 145 L 430 145" stroke="#6ee7b7" stroke-width="2.5"/>
-                    <text x="465" y="149" fill="#6ee7b7" font-size="11" font-weight="bold">HCO₃⁻ به خون</text>
-                `;
+                g.innerHTML = [
+                    SV.arrow(86, 92, 142, 92, '#fde047'),
+                    SV.arrow(142, 110, 86, 110, '#fda4af'),
+                    SV.circ(165, 100, 21, '#d8b4fe', 'NHE3', '#3b0764', 10),
+                    SV.t(58, 96, 'Na⁺', '#fde047', 11, 800),
+                    SV.t(58, 114, 'H⁺', '#fda4af', 11, 800),
+                    SV.t(82, 148, 'HCO₃⁻ + H⁺ → H₂CO₃', '#fff', 10, 700, 150),
+                    `<rect x="135" y="161" width="60" height="22" rx="5" fill="${caBlocked ? '#f43f5e' : '#fef08a'}" stroke="#000" stroke-width="1.5"/>`,
+                    SV.t(165, 175, caBlocked ? 'مهار CA!' : 'آنزیم CA', caBlocked ? '#fff' : '#000', 10, 800, 52),
+                    SV.t(82, 214, 'H₂O + CO₂', '#fff', 10, 700, 100),
+                    SV.arrow(122, 210, 228, 210, '#a7f3d0', 2.5, '4,3'),
+                    SV.t(272, 214, 'CO₂ + H₂O', '#a7f3d0', 10, 700, 80),
+                    SV.arrow(270, 198, 270, 164, '#a7f3d0', 2.5),
+                    `<rect x="240" y="139" width="60" height="22" rx="5" fill="${caBlocked ? '#f43f5e' : '#fef08a'}" stroke="#000" stroke-width="1.5"/>`,
+                    SV.t(270, 153, caBlocked ? 'مهار CA!' : 'آنزیم CA', caBlocked ? '#fff' : '#000', 10, 800, 52),
+                    SV.arrow(302, 150, 446, 150, '#6ee7b7'),
+                    SV.circ(375, 150, 19, '#d8b4fe', 'NBC', '#3b0764', 9),
+                    SV.t(494, 146, 'HCO₃⁻', '#6ee7b7', 11, 800),
+                    SV.t(494, 160, 'به خون', '#6ee7b7', 10, 700, 80)
+                ].join('');
 
             } else if (pos < 50) {
                 // STATION 3: Thin Descending Limb of Loop of Henle (Osmotic Diuretics - Slides 55-57)
-                header.textContent = 'بازوی نزولی قوس هنله (Descending Limb)';
+                header.textContent = 'بازوی نزولی قوس هنله';
                 zoomTitle.innerHTML = '<i class="fa-solid fa-microscope text-cyan-400"></i><span>زوم سلولی: بازوی نزولی قوس هنله و دیورتیک‌های اسموتیک (اسلاید ۵۵ تا ۵۷)</span>';
                 segBadge.textContent = 'بخش ۳: بازوی نزولی قوس هنله';
                 reabsorbBadge.textContent = 'نفوذپذیر به آب (H₂O) | محل اثر مانیتول';
@@ -1018,22 +1080,19 @@
                 stPearl.innerHTML = '<strong>نکته امتحانی (اسلاید ۵۶ و ۵۷):</strong> کاربرد اصلی <strong>مانیتول تزریقی</strong> کاهش <strong>فشار داخل جمجمه (ادم مغزی)</strong>، گلوکوم حاد و حفظ دیورز در نارسایی کلیوی است. عوارض جانبی: <strong>هایپرناترمی و دهیدراتاسیون</strong>!';
 
                 const osmActive = (currentDrugMode === 'osmotic');
-                g.innerHTML = `
-                    <!-- Osmotic Molecules in Lumen -->
-                    <rect x="18" y="65" width="128" height="95" rx="12" fill="${osmActive ? 'rgba(6, 182, 212, 0.35)' : 'rgba(255,255,255,0.08)'}" stroke="#22d3ee" stroke-width="2"/>
-                    <text x="82" y="92" fill="#67e8f9" font-size="11" font-weight="black" text-anchor="middle">مولکول‌های مانیتول</text>
-                    <text x="82" y="112" fill="#fff" font-size="10" text-anchor="middle">بازجذب نمی‌شوند!</text>
-                    <text x="82" y="132" fill="#fde047" font-size="10" font-weight="bold" text-anchor="middle">↑ فشار اسمزی لومن</text>
-                    <text x="82" y="150" fill="#fde047" font-size="10" font-weight="bold" text-anchor="middle">نگهداری H₂O در ادرار</text>
-
-                    <!-- Water Channels -->
-                    <path d="M 145 205 L 410 205" stroke="#38bdf8" stroke-width="4" stroke-dasharray="${osmActive ? '3,6' : 'none'}"/>
-                    <text x="270" y="195" fill="#bae6fd" font-size="11" font-weight="bold" text-anchor="middle">${osmActive ? 'کاهش بازجذب آب به مدولا (دیورز اسموتیک)' : 'بازجذب اسموتیک آب (H₂O) به مدولای هایپرتونیک'}</text>
-                `;
+                g.innerHTML = [
+                    `<rect x="14" y="62" width="136" height="104" rx="12" fill="${osmActive ? 'rgba(6, 182, 212, 0.35)' : 'rgba(255,255,255,0.08)'}" stroke="#22d3ee" stroke-width="2"/>`,
+                    SV.t(82, 86, 'مولکول\u200cهای مانیتول', '#67e8f9', 11, 800, 122),
+                    SV.t(82, 106, 'بازجذب نمی\u200cشوند!', '#fff', 10, 700, 122),
+                    SV.t(82, 128, '↑ فشار اسمزی لومن', '#fde047', 10, 700, 122),
+                    SV.t(82, 148, 'نگهداری H₂O در ادرار', '#fde047', 10, 700, 122),
+                    SV.t(270, 194, osmActive ? 'کاهش بازجذب آب به مدولا (دیورز اسموتیک)' : 'بازجذب اسموتیک آب (H₂O) به مدولای هایپرتونیک', '#bae6fd', 11, 700, 330),
+                    SV.arrow(150, 208, 430, 208, '#38bdf8', 4, osmActive ? '3,6' : '')
+                ].join('');
 
             } else if (pos < 66) {
                 // STATION 4: Thick Ascending Limb (TAL) - Loop Diuretics (Slide 41)
-                header.textContent = 'بخش ضخیم بالارونده قوس هنله (TAL)';
+                header.textContent = 'بخش ضخیم بالارونده (TAL)';
                 zoomTitle.innerHTML = '<i class="fa-solid fa-microscope text-pink-400"></i><span>زوم سلولی: قوس بالارونده هنله (TAL)، کوترانسپورتر NKCC2 و Ca²⁺/Mg²⁺ (اسلاید ۴۱)</span>';
                 segBadge.textContent = 'بخش ۴: بخش ضخیم بالارونده هنله (TAL)';
                 reabsorbBadge.textContent = 'بازجذب ۲۵٪ سدیم | کوترانسپورتر Na⁺-K⁺-2Cl⁻';
@@ -1043,31 +1102,23 @@
                 stPearl.innerHTML = '<strong>نکته طلایی امتحان (اسلاید ۴۱ تا ۴۴):</strong> فوروزماید با مهار NKCC2 پتانسیل مثبت لومن را از بین برده و باعث <strong>افزایش دفع Ca²⁺ و Mg²⁺</strong> می‌شود (کاربرد در <strong>درمان هایپرکلسمی</strong>!). تداخلات جدی: ۱) <strong>کاهش دفع لیتیم و مسمومیت لیتیم</strong> ۲) تشدید <strong>سمیت شنوایی (Ototoxicity) با آمینوگلیکوزیدها</strong> ۳) تشدید هایپوکالمی با کورتیکواستروئیدها.';
 
                 const loopBlocked = (currentDrugMode === 'loop');
-                g.innerHTML = `
-                    <!-- NKCC2 Cotransporter on Luminal Membrane (Slide 41) -->
-                    <circle cx="165" cy="95" r="26" fill="${loopBlocked ? '#f43f5e' : '#fdba74'}" stroke="#fff" stroke-width="2"/>
-                    <text x="165" y="99" fill="#431407" font-size="11" font-weight="black" text-anchor="middle">NKCC2</text>
-                    <path d="M 95 78 L 225 78" stroke="#fde047" stroke-width="2.5"/>
-                    <path d="M 95 95 L 225 95" stroke="#c4b5fd" stroke-width="2.5"/>
-                    <path d="M 95 112 L 225 112" stroke="#6ee7b7" stroke-width="2.5"/>
-                    <text x="68" y="82" fill="#fde047" font-size="11" font-weight="black">Na⁺</text>
-                    <text x="68" y="99" fill="#c4b5fd" font-size="11" font-weight="black">K⁺</text>
-                    <text x="68" y="116" fill="#6ee7b7" font-size="11" font-weight="black">2Cl⁻</text>
-
-                    ${loopBlocked ? `<rect x="198" y="82" width="120" height="24" rx="6" fill="#f43f5e"/><text x="258" y="98" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">مهار توسط فوروزماید!</text>` : ''}
-
-                    <!-- K+ Back-leak & (+) Potential driving Mg2+ and Ca2+ paracellularly (Slide 41) -->
-                    <rect x="152" y="162" width="26" height="14" fill="#fff" stroke="#000"/>
-                    <path d="M 215 169 L 105 169" stroke="#c4b5fd" stroke-width="2.5"/>
-                    <text x="62" y="173" fill="#fde047" font-size="11" font-weight="black">(+) Potential</text>
-
-                    <!-- Paracellular Mg2+, Ca2+ pathway at bottom -->
-                    <path d="M 65 248 L 420 248" stroke="#38bdf8" stroke-width="3.5" stroke-dasharray="${loopBlocked ? '4,6' : 'none'}"/>
-                    <text x="65" y="236" fill="#7dd3fc" font-size="12" font-weight="black">Mg²⁺, Ca²⁺</text>
-                    <text x="275" y="238" fill="${loopBlocked ? '#fda4af' : '#bae6fd'}" font-size="10" font-weight="bold" text-anchor="middle">
-                        ${loopBlocked ? 'عدم بازجذب و دفع Ca²⁺ و Mg²⁺ در ادرار!' : 'بازجذب بین‌سلولی ناشی از پتانسیل مثبت لومن'}
-                    </text>
-                `;
+                g.innerHTML = [
+                    SV.arrow(92, 84, 140, 84, '#fde047'),
+                    SV.arrow(92, 100, 140, 100, '#c4b5fd'),
+                    SV.arrow(92, 116, 140, 116, '#6ee7b7'),
+                    SV.circ(165, 100, 26, loopBlocked ? '#f43f5e' : '#fdba74', 'NKCC2', '#431407', 10),
+                    SV.t(64, 88, 'Na⁺', '#fde047', 11, 800),
+                    SV.t(64, 104, 'K⁺', '#c4b5fd', 11, 800),
+                    SV.t(64, 120, '2Cl⁻', '#6ee7b7', 11, 800),
+                    loopBlocked ? SV.badge(275, 100, 130, 24, '#f43f5e', 'مهار توسط فوروزماید!') : '',
+                    SV.arrow(225, 170, 104, 170, '#c4b5fd'),
+                    '<rect x="152" y="163" width="26" height="14" rx="3" fill="#fff" stroke="#000" stroke-width="1.5"/>',
+                    SV.t(80, 174, 'K⁺', '#c4b5fd', 11, 800),
+                    SV.t(82, 198, '(+) Potential', '#fde047', 11, 800, 120),
+                    SV.t(82, 258, 'Mg²⁺, Ca²⁺', '#7dd3fc', 11, 800, 100),
+                    SV.t(270, 262, loopBlocked ? 'عدم بازجذب و دفع Ca²⁺ و Mg²⁺ در ادرار!' : 'بازجذب بین\u200cسلولی ناشی از پتانسیل مثبت لومن', loopBlocked ? '#fda4af' : '#bae6fd', 10, 700, 200),
+                    SV.arrow(40, 276, 470, 276, '#38bdf8', 3.5, loopBlocked ? '4,6' : '')
+                ].join('');
 
             } else if (pos < 84) {
                 // STATION 5: Distal Convoluted Tubule (DCT) - Thiazides & PTH/Ca2+ (Slide 46)
@@ -1081,36 +1132,29 @@
                 stPearl.innerHTML = '<strong>نکته فوق‌العاده مهم امتحانی (اسلاید ۴۶ تا ۴۸):</strong> برخلاف فوروزماید، تیازیدها <strong>دفع ادراری کلسیم را کاهش می‌دهند</strong> (مطلوب در <strong>پوکی استخوان</strong> و <strong>پیشگیری از سنگ کلیه کلسیمی</strong>؛ عارضه در خون: <strong>هایپرکلسمی</strong>!). همچنین در <strong>دیابت بی‌مزه نفروژنیک</strong> کاربرد دارند.';
 
                 const thzBlocked = (currentDrugMode === 'thiazide');
-                g.innerHTML = `
-                    <!-- NCC Cotransporter on Luminal Membrane (Slide 46) -->
-                    <circle cx="165" cy="88" r="24" fill="${thzBlocked ? '#f43f5e' : '#fdba74'}" stroke="#fff" stroke-width="2"/>
-                    <text x="165" y="92" fill="#431407" font-size="11" font-weight="black" text-anchor="middle">NCC</text>
-                    <path d="M 95 78 L 225 78" stroke="#fde047" stroke-width="2.5"/>
-                    <path d="M 95 98 L 225 98" stroke="#6ee7b7" stroke-width="2.5"/>
-                    <text x="68" y="82" fill="#fde047" font-size="11" font-weight="black">Na⁺</text>
-                    <text x="68" y="102" fill="#6ee7b7" font-size="11" font-weight="black">Cl⁻</text>
-
-                    ${thzBlocked ? `<rect x="198" y="76" width="125" height="24" rx="6" fill="#10b981"/><text x="260" y="92" fill="#052e16" font-size="10" font-weight="black" text-anchor="middle">مهار توسط تیازیدها!</text>` : ''}
-
-                    <!-- Ca2+ Apical Channel stimulated by PTH & Basolateral Na+/Ca2+ Exchanger (Slide 46) -->
-                    <rect x="152" y="165" width="26" height="16" fill="#fff" stroke="#000"/>
-                    <path d="M 95 173 L 220 173" stroke="#38bdf8" stroke-width="3.5"/>
-                    <text x="65" y="177" fill="#38bdf8" font-size="12" font-weight="black">Ca²⁺</text>
-
-                    <!-- PTH Receptor on Basolateral side -->
-                    <rect x="358" y="138" width="32" height="22" rx="4" fill="#e2e8f0" stroke="#000"/>
-                    <text x="374" y="153" fill="#000" font-size="10" font-weight="black" text-anchor="middle">PTH</text>
-                    <path d="M 358 149 L 195 149 L 180 165" fill="none" stroke="#fde047" stroke-width="2"/>
-
-                    <!-- Basolateral Na+/Ca2+ Exchanger -->
-                    <circle cx="375" cy="205" r="16" fill="#d8b4fe" stroke="#fff" stroke-width="1.5"/>
-                    <path d="M 310 198 L 435 198" stroke="#38bdf8" stroke-width="3"/>
-                    <text x="468" y="202" fill="#38bdf8" font-size="11" font-weight="black">↑ بازجذب Ca²⁺</text>
-                `;
+                g.innerHTML = [
+                    SV.arrow(92, 84, 139, 84, '#fde047'),
+                    SV.arrow(92, 100, 139, 100, '#6ee7b7'),
+                    SV.circ(165, 92, 24, thzBlocked ? '#f43f5e' : '#fdba74', 'NCC', '#431407', 11),
+                    SV.t(64, 88, 'Na⁺', '#fde047', 11, 800),
+                    SV.t(64, 104, 'Cl⁻', '#6ee7b7', 11, 800),
+                    thzBlocked ? SV.badge(268, 92, 120, 24, '#10b981', 'مهار توسط تیازیدها!', '#052e16') : '',
+                    SV.arrow(92, 160, 205, 160, '#38bdf8', 3.5),
+                    '<rect x="152" y="152" width="26" height="16" rx="3" fill="#fff" stroke="#000" stroke-width="1.5"/>',
+                    SV.t(64, 164, 'Ca²⁺', '#38bdf8', 12, 800),
+                    '<polyline points="359,129 205,129 192,142" fill="none" stroke="#fde047" stroke-width="2"/>',
+                    SV.arrow(192, 142, 177, 155, '#fde047', 2),
+                    '<rect x="359" y="118" width="32" height="22" rx="4" fill="#e2e8f0" stroke="#000" stroke-width="1.5"/>',
+                    SV.t(375, 133, 'PTH', '#000', 10, 800),
+                    SV.arrow(300, 200, 446, 200, '#38bdf8', 3),
+                    SV.circ(375, 200, 19, '#d8b4fe', 'NCX', '#3b0764', 9),
+                    SV.t(494, 196, '↑ بازجذب', '#38bdf8', 10, 800, 80),
+                    SV.t(494, 210, 'Ca²⁺', '#38bdf8', 11, 800)
+                ].join('');
 
             } else {
                 // STATION 6: Collecting Tubule & Duct (Principal Cell, ENaC, Aldosterone & ADH/AQP2 - Slides 50 & 61)
-                header.textContent = 'سلول اصلی لوله جمع‌کننده (Principal Cell)';
+                header.textContent = 'سلول اصلی لوله جمع\u200cکننده';
                 zoomTitle.innerHTML = '<i class="fa-solid fa-microscope text-purple-400"></i><span>زوم سلولی: لوله جمع‌کننده (CD)، کانال ENaC، آلدوسترون و گیرنده V2/AQP2 (اسلاید ۵۰ و ۶۱)</span>';
                 segBadge.textContent = 'بخش ۶: لوله جمع‌کننده ادرار (CD)';
                 reabsorbBadge.textContent = '۱ تا ۲٪ سدیم | نگهدارنده پتاسیم و ADH';
@@ -1121,35 +1165,28 @@
 
                 const ksparingActive = (currentDrugMode === 'ksparing');
                 const adhActive = (currentDrugMode === 'adh');
-                g.innerHTML = `
-                    <!-- Apical ENaC Channel & K+ Channel (Slide 50) -->
-                    <rect x="150" y="78" width="30" height="16" fill="${ksparingActive ? '#f43f5e' : '#fff'}" stroke="#000" stroke-width="1.5"/>
-                    <text x="135" y="70" fill="#fde047" font-size="11" font-weight="black">کانال ENaC</text>
-                    <path d="M 95 86 L 220 86" stroke="#fde047" stroke-width="3"/>
-                    <text x="68" y="90" fill="#fde047" font-size="11" font-weight="black">Na⁺</text>
-
-                    <!-- Intracellular Aldosterone Receptor (R) -->
-                    <circle cx="275" cy="86" r="18" fill="#f472b6" stroke="#fff" stroke-width="2"/>
-                    <text x="275" y="90" fill="#500724" font-size="11" font-weight="black" text-anchor="middle">R (Aldo)</text>
-                    <path d="M 415 86 L 295 86" stroke="#f472b6" stroke-width="2.5"/>
-                    <text x="465" y="90" fill="#fbcfe8" font-size="11" font-weight="bold">آلدوسترون</text>
-
-                    <!-- Apical K+ secretion -->
-                    <rect x="150" y="138" width="30" height="14" fill="#fff" stroke="#000"/>
-                    <path d="M 220 145 L 95 145" stroke="#c4b5fd" stroke-width="2.5"/>
-                    <text x="68" y="149" fill="#c4b5fd" font-size="11" font-weight="black">دفع K⁺</text>
-
-                    <!-- V2 Receptor -> cAMP -> AQP2 Water Channel (Slide 61) -->
-                    <circle cx="375" cy="215" r="17" fill="#38bdf8" stroke="#fff" stroke-width="2"/>
-                    <text x="375" y="219" fill="#082f49" font-size="11" font-weight="black" text-anchor="middle">V₂</text>
-                    <text x="455" y="219" fill="#7dd3fc" font-size="11" font-weight="bold">ADH (وازوپرسین)</text>
-                    <path d="M 355 215 L 250 215" stroke="#38bdf8" stroke-width="2.5"/>
-                    <text x="285" y="205" fill="#bae6fd" font-size="10" font-weight="bold">cAMP → AQP2</text>
-
-                    <rect x="150" y="206" width="30" height="16" fill="${adhActive ? '#38bdf8' : '#fff'}" stroke="#000"/>
-                    <path d="M 95 214 L 220 214" stroke="#38bdf8" stroke-width="3"/>
-                    <text x="65" y="218" fill="#7dd3fc" font-size="11" font-weight="black">H₂O (AQP2)</text>
-                `;
+                g.innerHTML = [
+                    SV.arrow(92, 86, 149, 86, '#fde047', 3),
+                    '<rect x="152" y="78" width="26" height="16" rx="3" fill="' + (ksparingActive ? '#f43f5e' : '#fff') + '" stroke="#000" stroke-width="1.5"/>',
+                    SV.t(64, 90, 'Na⁺', '#fde047', 11, 800),
+                    SV.t(82, 66, 'کانال ENaC', '#fde047', 10, 800, 100),
+                    SV.arrow(445, 128, 292, 128, '#f472b6'),
+                    SV.circ(270, 128, 20, '#f472b6', 'R', '#500724', 12),
+                    SV.t(494, 124, 'آلدوسترون', '#fbcfe8', 10, 800, 80),
+                    SV.t(270, 164, 'گیرنده آلدوسترون', '#fbcfe8', 9, 700, 100),
+                    SV.arrow(205, 172, 104, 172, '#c4b5fd'),
+                    '<rect x="152" y="165" width="26" height="14" rx="3" fill="#fff" stroke="#000" stroke-width="1.5"/>',
+                    SV.t(62, 176, 'دفع K⁺', '#c4b5fd', 11, 800, 60),
+                    SV.arrow(354, 205, 192, 205, '#38bdf8', 2.5),
+                    SV.t(273, 194, 'cAMP → AQP2', '#bae6fd', 10, 700, 120),
+                    SV.circ(375, 205, 19, '#38bdf8', 'V₂', '#082f49', 11),
+                    SV.arrow(446, 205, 396, 205, '#7dd3fc', 2.5),
+                    SV.t(494, 200, 'ADH', '#7dd3fc', 11, 800),
+                    SV.t(494, 215, '(وازوپرسین)', '#7dd3fc', 9, 700, 70),
+                    SV.arrow(60, 205, 149, 205, '#38bdf8', 3),
+                    '<rect x="152" y="197" width="26" height="16" rx="3" fill="' + (adhActive ? '#38bdf8' : '#fff') + '" stroke="#000" stroke-width="1.5"/>',
+                    SV.t(82, 192, 'H₂O (AQP2)', '#7dd3fc', 10, 800, 90)
+                ].join('');
             }
         }
 
@@ -1720,10 +1757,24 @@
             });
         }
 
+
+        // Re-fit labels when the tab becomes visible (getBBox needs a rendered SVG) and when Vazirmatn finishes loading
+        (function () {
+            const _orig = switchMainTab;
+            switchMainTab = function (tabName) {
+                _orig(tabName);
+                if (tabName === 'scrubber') requestAnimationFrame(() => { window.__cellKey = null; updateScrubberUI(currentPos); refitFigures(); });
+            };
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(() => { window.__cellKey = null; updateScrubberUI(currentPos); refitFigures(); });
+            }
+        })();
+
         window.onload = function () {
             renderDrugCatalog('all');
             renderQuiz();
             updateScrubberUI(currentPos);
+            refitFigures();
             animateLoop();
         };
     </script>
